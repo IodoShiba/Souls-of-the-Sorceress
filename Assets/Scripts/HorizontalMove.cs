@@ -2,10 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HorizontalMove : MonoBehaviour {
+public class HorizontalMove : Ability {
     [SerializeField] float speed;
     [SerializeField] KeyCode temp_rightKey;
     [SerializeField] KeyCode temp_leftKey;
+
+    public override bool Momential
+    {
+        get
+        {
+            return false;
+        }
+    }
 
     public float Speed
     {
@@ -29,7 +37,7 @@ public class HorizontalMove : MonoBehaviour {
         gameObject.transform.position += new Vector3(d * Time.deltaTime, 0, 0);
     }
 
-    void Act()
+    public override void Act()
     {
         gameObject.transform.position += new Vector3(speed*Time.deltaTime, 0, 0);
     }
