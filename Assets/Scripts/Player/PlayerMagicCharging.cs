@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PlayerStates
 {
-    public class PlayerMagicCharging : HorizontalDirectionalState
+    public class PlayerMagicCharging : HorizontalDirectionDependentState
     {
         [SerializeField] AwakeMutableObject weakMagic;
         [SerializeField] AwakeMutableObject strongMagic;
@@ -18,6 +18,17 @@ namespace PlayerStates
         {
             if (!Input.GetButton("Magical Attack"))
             {
+                GameObject magicPrefab;
+                if (chargedTime > strongMagicThresholdTime)
+                {
+                    magicPrefab = strongMagic.GetObject();
+                }
+                else
+                {
+                    magicPrefab = weakMagic.GetObject();
+                }
+                var magicInstance = Instantiate(magicPrefab, transform.position + new Vector3(dirSign * magicInitialPositionXShift, 0, 0), Quaternion.identity);
+                magicInstance.GetComponent<Rigidbody2D>().velocity = new Vector2(dirSign * _magicFlySpeed, 0);
                 return GetComponent<PlayerStates.EndOfAction>();
             }
             return null;
@@ -36,17 +47,6 @@ namespace PlayerStates
 
         public override void Terminate()
         {
-            GameObject magicPrefab;
-            if (chargedTime > strongMagicThresholdTime)
-            {
-                magicPrefab = strongMagic.GetObject();
-            }
-            else
-            {
-                magicPrefab = weakMagic.GetObject();
-            }
-            var magicInstance = Instantiate(magicPrefab, transform.position + new Vector3(dirSign * magicInitialPositionXShift, 0, 0), Quaternion.identity);
-            magicInstance.GetComponent<Rigidbody2D>().velocity = new Vector2(dirSign*_magicFlySpeed,0); 
 
             chargedTime = 0;
         }

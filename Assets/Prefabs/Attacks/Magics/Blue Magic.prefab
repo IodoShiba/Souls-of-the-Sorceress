@@ -99,7 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: a8f80134a5a59cf42b4760875fd374d1, type: 2}
+  sprite: {fileID: 0}
+  damage: 10
+  knockBackImpact: {x: 100, y: 50}
+  attackCollider: {fileID: 61376695561769668}
+  throughable: 1
   targetTag: Enemy
   lifespan: 5
 --- !u!212 &212976516588242638

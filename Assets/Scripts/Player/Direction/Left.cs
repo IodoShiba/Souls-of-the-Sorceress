@@ -22,7 +22,7 @@ namespace PlayerStates {
 
             public override State Check()
             {
-                if (Input.GetButton("Right") && !Input.GetButton("Left") && ((behavior.CurrentState is PlayerOnGround) || (behavior.CurrentState is PlayerFlying)))
+                if ((Input.GetAxis("Horizontal") > 0) && ((behavior.CurrentState is PlayerOnGround) || (behavior.CurrentState is PlayerFlying)))
                 {
                     return GetComponent<PlayerStates.Direction.Right>();
                 }

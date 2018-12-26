@@ -9,9 +9,13 @@ public class InputA : MonoBehaviour {
     
     private class ButtonTimeRecorder
     {
+        public string name;
         public float time=0;
         public bool upAtPreviousFrame = false;
         public bool startingLongDowning = false;
+        public System.Func<bool> HisGetButton = null;
+        public ButtonTimeRecorder(string name, System.Func<bool> HisGetButton = null) { this.name = name;this.HisGetButton = HisGetButton; }
+        public bool GetButton() { return HisGetButton == null ? Input.GetButton(name) : HisGetButton(); }
     }
     Dictionary<string,ButtonTimeRecorder> buttonTimeRecorders = new Dictionary<string,ButtonTimeRecorder>();
     
@@ -20,7 +24,9 @@ public class InputA : MonoBehaviour {
         buttonTimeRecorders.Clear();
         foreach(var b in monitoringButtonNames)
         {
-            buttonTimeRecorders.Add(b,new ButtonTimeRecorder());
+            var nbtr = new ButtonTimeRecorder(b);
+            nbtr.name = b;
+            buttonTimeRecorders.Add(b,nbtr);
         }
 	}
 	
@@ -38,7 +44,7 @@ public class InputA : MonoBehaviour {
                 nr.Value.startingLongDowning = false;
             }
 
-            if (Input.GetButton(nr.Key))
+            if (/*Input.GetButton(nr.Key)*/nr.Value.GetButton())
             {
                 float t0 = nr.Value.time;
                 float t1 = t0 + Time.deltaTime;
@@ -59,6 +65,11 @@ public class InputA : MonoBehaviour {
         //tx.text = "";
         //Debug end
 	}
+
+    public void InterpretAsButton(string name, System.Func<bool> cond)
+    {
+        buttonTimeRecorders.Add(name, new ButtonTimeRecorder(name, cond));
+    }
 
     private bool _MultiButtonCond(string firstButtonName, params string[] additionalButtonNames)
     {

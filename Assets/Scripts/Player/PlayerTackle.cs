@@ -7,23 +7,29 @@ namespace PlayerStates
     public class PlayerTackle : State
     {
         [SerializeField] float speed;
+        [SerializeField] float proceedDistance;
+        [SerializeField] float unguardTime;
         [SerializeField] float _motionLength;
         [SerializeField] Rigidbody2D playerRb;
         [SerializeField] Sensor wallSensor;
         private int dirSign = 0;
-        private float t=0;
+        //private float t=0;
         private Vector2 v;
         private bool initialized = false;
+        private float borderXmin = 0;
+        private float borderXmax = 0;
+        private float t = 0;
+        private bool complete = false;
+        
 
         public override State Check()
         {
             if (initialized)
             {
-                if (t > _motionLength || wallSensor.IsDetecting)
-                {
-                    playerRb.velocity = new Vector2(0, 0);
+                if (complete) {
+                    complete = false;
+                    StopCoroutine(ExecuteProceed());
                     return GetComponent<PlayerStates.PlayerOnGround>();
-                    //return GetComponent<PlayerStates.PlayerGuard>();
                 }
             }
             return null;
@@ -31,24 +37,68 @@ namespace PlayerStates
 
         public override void Initialize()
         {
+            borderXmin = transform.position.x - proceedDistance;
+            borderXmax = transform.position.x + proceedDistance;
             t = 0;
-            v= new Vector2(dirSign * speed, 0);
+            v = new Vector2(dirSign * speed, 0);
             //wallSensor.Reset();
             initialized = true;
+            complete = false;
+            StartCoroutine(ExecuteProceed());
         }
 
         public override void Execute()
         {
-            playerRb.velocity = v;
-            t += Time.deltaTime;
+            //playerRb.velocity = v;
+            //t += Time.deltaTime;
+            //float x = transform.position.x;
+            //if (/*t > _motionLength*/(x <= borderXmin || borderXmax <= x) || wallSensor.IsDetecting)
+            //{
+            //    playerRb.velocity = new Vector2(0, 0);
+                //return GetComponent<PlayerStates.PlayerGuard>();
+            //}
+        }
+
+        private IEnumerator ExecuteProceed()
+        {
+            while (true) { 
+                float x = transform.position.x;
+                if (/*t > _motionLength*/(x <= borderXmin || borderXmax <= x) || wallSensor.IsDetecting)
+                {
+                    playerRb.velocity = Vector2.zero;
+                    break;
+                    //return GetComponent<PlayerStates.PlayerGuard>();
+                }
+                playerRb.velocity = v;
+                yield return null;
+            }
+            playerRb.velocity = Vector2.zero;
+            yield return StartCoroutine(ExecuteUnguard());
+        }
+        private IEnumerator ExecuteUnguard()
+        {
+            t = 0;
+            while (true)
+            {
+                t += Time.deltaTime;
+                if (t >= unguardTime)
+                {
+                    complete = true;
+                    break;
+                }
+                yield return null;
+            }
+            yield break;
         }
 
         public override void Terminate()
         {
             wallSensor.Reset();
-            playerRb.velocity = new Vector2(0, 0);
+            //playerRb.velocity = new Vector2(0, 0);
+            borderXmin = borderXmax = 0;
             t = 0;
             initialized = false;
+            complete = false;
         }
 
         public void SetDirection(int sign)

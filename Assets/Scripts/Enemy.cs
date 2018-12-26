@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//多分後々 abstractな基底クラス になる
 public class Enemy : Mortal {
+    public EnemyManager manager;//修正すべし
     [SerializeField] Vector2 knockBackImpact;
     private Rigidbody2D rb;
     private float _protectTime;
@@ -10,6 +12,7 @@ public class Enemy : Mortal {
 
 	// Use this for initialization
 	void Start () {
+        manager.AddNewEnemy(this);
         rb = GetComponent<Rigidbody2D>();
         _randShift = Random.Range(0,(float)(2.0*System.Math.PI));
 	}
@@ -29,19 +32,20 @@ public class Enemy : Mortal {
         {
             if (health <= 0)
             {
+                manager.EnemyDying();
                 Destroy(gameObject);
             }
             transform.position += new Vector3((float)(5 * System.Math.Sin(Time.fixedTime+_randShift)), rb.velocity.y, 0) * Time.deltaTime;
         }
 	}
 
-    public override void OnAttacked(GameObject attackObj, AttackData attack)
+    public override void OnAttacked(GameObject attackObj, Attack attack)
     {
         Debug.Log("Enemy:Ahh!");
         _protectTime = 0.3f;
     }
 
-    public override Vector2 ConvertKnockDown(Vector2 given)
+    public override Vector2 ConvertDealtKnockBack(Vector2 given)
     {
         return 10 * given;
     }
@@ -54,8 +58,9 @@ public class Enemy : Mortal {
     public override void Dying()
     {
         Debug.Log("Enemy has dead.");
+        
     }
-
+    
     /*private void OnTriggerEnter2D(Collider2D collision)
     {
         if (_protectTime <= 0 && collision.transform.tag == "Attack")

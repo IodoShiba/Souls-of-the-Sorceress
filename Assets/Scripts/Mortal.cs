@@ -5,30 +5,35 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Mortal : MonoBehaviour{
     [SerializeField] protected float health;
+    [SerializeField] protected float maxHealth;
 
-    public abstract void OnAttacked(GameObject attackObj,AttackData attack);
+    public abstract void OnAttacked(GameObject attackObj,Attack attack);
     public abstract bool IsInvulnerable();
     public abstract void Dying();
     
-    public virtual float ConvertDamage(float given) {
+    public virtual float ConvertDealtDamage(float given) {
         return given;
     }
-    public virtual Vector2 ConvertKnockDown(Vector2 given)
+    public virtual Vector2 ConvertDealtKnockBack(Vector2 given)
     {
         return given;
     }
+    public virtual void ConvertDealingAttack(Attack.Parameters attackData)
+    {
+    }
 
-    public void OnAttackedInternal(GameObject attackObj,AttackData data)
+    public void _OnAttackedInternal(GameObject attackObj,Attack data)
     {
         if (!IsInvulnerable())
         {
-            health -= ConvertDamage(data.Damage);
+            OnAttacked(attackObj, data);
+            health -= ConvertDealtDamage(data.ParamsConvertedByOwner.damage);
 
-            Vector2 kb = data.KnockBackImpact;
+            Vector2 kb = data.ParamsConvertedByOwner.knockBackImpact;
             int kbdir = System.Math.Sign(transform.position.x - attackObj.transform.position.x);
             var rb = GetComponent<Rigidbody2D>();
             rb.velocity = Vector2.zero;
-            rb.AddForce(ConvertKnockDown(new Vector2(kbdir * kb.x, kb.y)));
+            rb.AddForce(ConvertDealtKnockBack(new Vector2(kbdir * kb.x, kb.y)));
 
             Debug.Log(gameObject.name + " damaged");
 
@@ -36,8 +41,6 @@ public abstract class Mortal : MonoBehaviour{
             {
                 Dying();
             }
-
-            OnAttacked(attackObj, data);
         }
     }
 }

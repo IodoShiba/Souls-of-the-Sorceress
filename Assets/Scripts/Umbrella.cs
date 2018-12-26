@@ -5,10 +5,17 @@ using UnityEngine;
 public class Umbrella : MonoBehaviour {
     Vector3 defpos;
     System.Action updateImple = null;
-	// Use this for initialization
-	void Start () {
+    [SerializeField] Color _colorOrdinary;
+    [SerializeField] Color _colorAwaken;
+    [SerializeField] Color _colorBlueAwaken;
+    // Use this for initialization
+    void Start () {
         defpos = transform.localPosition ;
-	}
+        transform.parent.GetComponent<PlayerStates.Awakening.Ordinary>().RegisterInitialize(() => GetComponent<SpriteRenderer>().color = _colorOrdinary);
+        transform.parent.GetComponent<PlayerStates.Awakening.Awaken>().RegisterInitialize(() => GetComponent<SpriteRenderer>().color = _colorAwaken);
+        transform.parent.GetComponent<PlayerStates.Awakening.BlueAwaken>().RegisterInitialize(() => GetComponent<SpriteRenderer>().color = _colorBlueAwaken);
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -27,6 +34,11 @@ public class Umbrella : MonoBehaviour {
     public void PlayerDropAttack()
     {
         transform.localPosition = new Vector3(0, -1f, defpos.z);
+    }
+
+    public void PlayerGuard()
+    {
+        transform.localPosition = new Vector3(1f, 0, defpos.z);
     }
 
     public void Default()

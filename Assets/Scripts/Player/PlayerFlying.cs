@@ -7,18 +7,19 @@ namespace PlayerStates {
     {
         [SerializeField] GroundSensor groundSensor;
         [SerializeField] InputA inputA;
+        [SerializeField] Player player;
         [SerializeField] float horizontalMoveSpeed;
         [SerializeField] float verticalMoveSpeed;
         [SerializeField] float maxFallSpeed;
         [SerializeField] float jumpMaxHeight;
-        private Rigidbody2D rb;
+        [SerializeField] Rigidbody2D rb;
         private float jumpBorder;
         private bool ableToJump;
         private bool jumping=true;
 
         private void Start()
         {
-            ableToJump = true;
+            ableToJump = false;
             rb = GetComponent<Rigidbody2D>();
         }
 
@@ -30,12 +31,12 @@ namespace PlayerStates {
         }
         public override State Check()
         {
-            if (!inputA.GetButton("Jump") && groundSensor.IsOnGround)
+            if (/*!inputA.GetButton("Jump")*/!ableToJump && groundSensor.IsOnGround)
             {
                 return GetComponent<PlayerStates.PlayerOnGround>();
             }
 
-            if (Input.GetButton("Open Umbrella"))
+            if (player.DoesUmbrellaWork()&&Input.GetButton("Open Umbrella"))
             {
                 ableToJump = false;
                 if (rb.velocity.y > 0)
@@ -52,11 +53,13 @@ namespace PlayerStates {
             
             if (inputA.GetButtonShortDownUp("Attack"))
             {
+                ableToJump = false;
                 return GetComponent<PlayerStates.PlayerAerialSlash>();
             }
 
             if (Input.GetButtonDown("Magical Attack"))
             {
+                ableToJump = false;
                 return GetComponent<PlayerStates.PlayerMagicCharging>();
             }
 
@@ -65,7 +68,18 @@ namespace PlayerStates {
 
         public override void Initialize()
         {
-
+            if (!groundSensor.IsOnGround) {
+                ableToJump = false;
+            }
+            /*if (ableToJump && Input.GetButton("Jump"))//ジャンプする
+            {
+                if (!jumping)
+                {
+                    jumpBorder = gameObject.transform.position.y + jumpMaxHeight;
+                }
+                jumping = true;
+                rb.velocity = Vector2.up * verticalMoveSpeed;
+            }*/
         }
 
         public override void Execute()
@@ -90,6 +104,7 @@ namespace PlayerStates {
             {
                 newv.x = 0;
             }
+            //newv.x = System.Math.Sign(Input.GetAxis("Horizontal"))*horizontalMoveSpeed;
 
             //ジャンプ
             if (ableToJump&&Input.GetButton("Jump"))//ジャンプする
@@ -118,6 +133,10 @@ namespace PlayerStates {
 
         public override void Terminate()
         {
+            if (jumping)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+            }
         }
     }
 }

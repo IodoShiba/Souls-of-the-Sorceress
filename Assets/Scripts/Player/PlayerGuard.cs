@@ -7,9 +7,11 @@ namespace PlayerStates
     public class PlayerGuard : State
     {
         [SerializeField] Rigidbody2D player;
+        [SerializeField] Player playerData;
+        
         public override State Check()
         {
-            if(!Input.GetButton("Open Umbrella"))
+            if(!(playerData.DoesUmbrellaWork() && Input.GetButton("Open Umbrella")))
             {
                 return GetComponent<PlayerStates.PlayerOnGround>();
             }

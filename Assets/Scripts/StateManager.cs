@@ -100,4 +100,9 @@ public class StateManager : MonoBehaviour
         targetState.InvokeInitializeCallBack();
         currentState = targetState;
     }
+
+    public bool CheckCurrent<T>() where T : State
+    {
+        return gameObject.GetComponent<T>().IsCurrent;
+    }
 }

@@ -8,7 +8,8 @@ namespace PlayerStates
     {
         [SerializeField] GroundSensor groundSensor;
         [SerializeField] InputA inputA;
-        [SerializeField] AwakeMutableObject UmbrellaUpward;
+        [SerializeField] Player player;
+        //[SerializeField] AwakeMutableObject UmbrellaUpward;
         [SerializeField] float horizontalMoveSpeed;
         [SerializeField] float maxFallSpeed;
 
@@ -24,6 +25,10 @@ namespace PlayerStates
             if (groundSensor.IsOnGround)
             {
                 return GetComponent<PlayerStates.PlayerOnGround>();
+            }
+            if (!player.DoesUmbrellaWork())
+            {
+                return GetComponent<EndOfAction>();
             }
 
             if (!Input.GetButton("Open Umbrella"))
@@ -63,7 +68,8 @@ namespace PlayerStates
             {
                 newv.x = 0;
             }
-            
+            //newv.x = System.Math.Sign(Input.GetAxis("Horizontal")) * horizontalMoveSpeed;
+
             newv.y = System.Math.Max(rb.velocity.y, -maxFallSpeed);
 
             rb.velocity = newv;

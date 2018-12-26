@@ -25,7 +25,7 @@ namespace PlayerStates
             public override State Check()
             {
                 //Debug.Log(string.Format("{0},{1}", Input.GetButton("Right") , Input.GetButton("Left")));
-                if (!Input.GetButton("Right") && Input.GetButton("Left") && ((behavior.CurrentState is PlayerOnGround )|| (behavior.CurrentState is PlayerFlying)))
+                if ((!Input.GetButton("Right") && Input.GetButton("Left") || Input.GetAxis("Horizontal") < 0) && ((behavior.CurrentState is PlayerOnGround )|| (behavior.CurrentState is PlayerFlying)))
                 {
                     return GetComponent<PlayerStates.Direction.Left>();
                 }
