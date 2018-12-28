@@ -68,9 +68,10 @@ public class Player : Mortal
         {
             if (breakRestTime <= 0) 
             {
+                breakRestTime = 0;
                 if (t > cycle)
                 {
-                    NudgeUmbrellaDurability(amount);
+                    NudgeDurability(amount);
                     t -= cycle;
                 }
                 t += Time.deltaTime;
@@ -95,7 +96,7 @@ public class Player : Mortal
         public void _Gliding() { ChangeDurabilityDifferential(1,-costOfGlidingPerSecond); }
         public void _Consuming() { ChangeDurabilityDifferential(100000,0); }
 
-        public void NudgeUmbrellaDurability(int amount) //amountの文だけ傘耐久度を変更する
+        public void NudgeDurability(int amount) //amountの文だけ傘耐久度を変更する
         {
             durability += amount;
             if (durability > maxDurability)
@@ -241,6 +242,7 @@ public class Player : Mortal
             (GetComponent<PlayerStates.PlayerGliding>().IsCurrent && r.y > 0))
         {
             guardSucceed = true;
+            GetComponent<AwakeMutableCounterAttack>().Attack(attack.Owner);
             ConsumeUmbrellaDurability(umbrellaParamaters.costOfGuard);
         }
         else
@@ -309,7 +311,7 @@ public class Player : Mortal
 
     public void Guard(bool toggle)
     {
-        guard.enabled=toggle;
+        //guard.enabled=toggle;
         guardColliderExtension.enabled = toggle;
     }
 
@@ -334,17 +336,17 @@ public class Player : Mortal
 
     public void ConsumeUmbrellaDurability(int amount) //amountの文だけ傘耐久度を消費する 転送
     {
-        umbrellaParamaters.NudgeUmbrellaDurability(-amount);
+        umbrellaParamaters.NudgeDurability(-amount);
     }
     public void RecoverUmbrellaDurability(int amount) //amountの文だけ傘耐久度を回復する 転送
     {
-        umbrellaParamaters.NudgeUmbrellaDurability(amount);
+        umbrellaParamaters.NudgeDurability(amount);
     }
     
 
     //傘が機能する(=使える=「破損」状態でない)かを返す "=>"以降の式がこの条件そのもの（同値）と考える
-    //Note: _ReturnType _Function() => _statement; で1文だけの関数を定義できる
-    public bool DoesUmbrellaWork() => umbrellaParamaters.durability >= 0;
+    //Note: _ReturnType _Function() => _statement; で1文だけの関数を定義できる これは _ReturnType _Function() {return _statement;} に等しい
+    public bool DoesUmbrellaWork() => umbrellaParamaters.breakRestTime <= 0;
     
 }
 

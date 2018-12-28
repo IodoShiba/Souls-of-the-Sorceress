@@ -30,11 +30,13 @@ public class AwakeMutableAttack : Attack
     // 自クラス内で完結する(外部のメソッドやらを参照しない)初期化処理はここで済ませたい
     new void Awake ()
     {
-        GameObject player = transform.parent.gameObject;
+        GameObject player = owner.gameObject;//transform.parent.gameObject;
         awakeMutableAttack = new StateMutable<Parameters>(player, null);
         ordinary = player.GetComponent<Ordinary>();
         awaken = player.GetComponent<Awaken>();
         blueAwaken = player.GetComponent<BlueAwaken>();
+        base.paramsRaw = new Parameters(ordinaryAttack);
+        base.paramsConvertedByOwner = new Parameters(ordinaryAttack);
         //base.Awake();
     }
 
@@ -102,6 +104,16 @@ public class AwakeMutableAttack : Attack
         if (sr != null)
         {
             sr.enabled = false;
+        }
+    }
+
+    public void AdjustAwake()
+    {
+        paramsRaw = new Parameters(awakeMutableAttack.Content);
+        if (owner)
+        {
+            paramsConvertedByOwner = new Parameters(paramsRaw);
+            owner.ConvertDealingAttack(paramsConvertedByOwner);
         }
     }
 }

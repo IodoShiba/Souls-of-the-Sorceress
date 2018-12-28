@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 1785061}
   - component: {fileID: 1785083}
   - component: {fileID: 1785056}
+  - component: {fileID: 1785084}
   - component: {fileID: 1785062}
   - component: {fileID: 1785066}
   - component: {fileID: 1785065}
@@ -486,7 +487,7 @@ MonoBehaviour:
   behaviourState: {fileID: 1785066}
   awakeningState: {fileID: 1785068}
   directionState: {fileID: 1785074}
-  guard: {fileID: 1875565767}
+  guard: {fileID: 0}
   umbrellaUpward: {fileID: 442136407}
   guardColliderExtension: {fileID: 1785056}
   _debugText: {fileID: 1506966037}
@@ -645,7 +646,7 @@ MonoBehaviour:
   groundSensor: {fileID: 992676923}
   inputA: {fileID: 1785062}
   jumpForce: {x: 150, y: 470}
-  horizontalMoveSpeed: 6
+  horizontalMoveSpeed: 8
   player: {fileID: 1785061}
 --- !u!114 &1785065
 MonoBehaviour:
@@ -1636,6 +1637,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.5}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &1785084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f9d4999fc28d84baf33bf78e6ce325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack: {fileID: 1875565767}
 --- !u!1 &7926758
 GameObject:
   m_ObjectHideFlags: 0
@@ -5218,11 +5232,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1875565765}
-  - component: {fileID: 1875565766}
-  - component: {fileID: 1875565768}
   - component: {fileID: 1875565767}
   m_Layer: 25
-  m_Name: Guard Collision
+  m_Name: Guard Data
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5242,32 +5254,6 @@ Transform:
   m_Father: {fileID: 1785059}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1875565766
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875565764}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2.4}
-  m_EdgeRadius: 0
 --- !u!114 &1875565767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5275,7 +5261,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875565764}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20a16ba780f36274f87fe7d81d3222b5, type: 3}
   m_Name: 
@@ -5290,34 +5276,18 @@ MonoBehaviour:
   ordinaryAttack:
     damage: 0
     knockBackImpact: {x: 200, y: 50}
-    attackCollider: {fileID: 1875565768}
+    attackCollider: {fileID: 0}
     throughable: 1
   awakenAttack:
     damage: 0
     knockBackImpact: {x: 200, y: 50}
-    attackCollider: {fileID: 1875565768}
+    attackCollider: {fileID: 0}
     throughable: 1
   blueAwakenAttack:
     damage: 10
     knockBackImpact: {x: 200, y: 50}
-    attackCollider: {fileID: 1875565768}
+    attackCollider: {fileID: 0}
     throughable: 1
---- !u!70 &1875565768
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1875565764}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.7, y: 0}
-  m_Size: {x: 0.8, y: 1.4}
-  m_Direction: 0
 --- !u!1 &1896432497
 GameObject:
   m_ObjectHideFlags: 0

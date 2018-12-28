@@ -33,6 +33,7 @@ public class Attack : MonoBehaviour {
     public bool Throughable { get { return throughable; } }
 
     public Parameters ParamsConvertedByOwner { get => paramsConvertedByOwner; }
+    public Mortal Owner { get => owner;}
 
     //[SerializeField] protected AttackData data;
     //[SerializeField] protected Data data;
