@@ -234,8 +234,15 @@ MonoBehaviour:
   knockBackImpact: {x: 100, y: 300}
   attackCollider: {fileID: 61791842784857472}
   throughable: 1
+  onceOnly: 0
+  initiallyActivate: 1
+  paramsRaw:
+    damage: 10
+    knockBackImpact: {x: 100, y: 300}
+    attackCollider: {fileID: 61791842784857472}
+    throughable: 1
   targetTag: Player
-  lifespan: 0
+  activeSpan: Infinity
 --- !u!255 &255723517236346946
 FixedJoint2D:
   m_ObjectHideFlags: 0

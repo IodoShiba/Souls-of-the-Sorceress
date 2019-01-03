@@ -59,7 +59,6 @@ namespace PlayerStates
 
         public override void Execute()
         {
-
             jumpInterval -= Time.deltaTime;
             int sign = 0;
             if (inputA.GetButton("Right"))
@@ -73,7 +72,6 @@ namespace PlayerStates
             //Debug.Log(System.Math.Sign(Input.GetAxis("Horizontal")).ToString()+$"({Input.GetAxis("Horizontal")})");
             //sign = System.Math.Sign(Input.GetAxis("Horizontal"));
             rb.velocity = new Vector2(sign * horizontalMoveSpeed, 0);
-            
         }
 
         public override void Terminate()

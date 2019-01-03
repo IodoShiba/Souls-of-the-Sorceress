@@ -18,7 +18,7 @@ public abstract class Mortal : MonoBehaviour{
     {
         return given;
     }
-    public virtual void ConvertDealingAttack(Attack.Parameters attackData)
+    public virtual void ConvertDealingAttack(ref Attack.Parameters attackData)
     {
     }
 

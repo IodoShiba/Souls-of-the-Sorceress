@@ -24,6 +24,8 @@ public class AwakeMutableCounterAttack : MonoBehaviour
     public void Attack(Mortal subject)
     {
         attack.AdjustAwake();
+        attack.Activate();
         subject._OnAttackedInternal(gameObject, attack);
+        attack.Inactivate();
     }
 }

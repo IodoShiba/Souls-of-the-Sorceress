@@ -5,26 +5,6 @@ using UnityEngine;
 
 public class Player : Mortal
 {
-    [System.Serializable]
-    private class AttackObject
-    {
-        [SerializeField] GameObject current;
-        [SerializeField] AwakeMutableObject prefabs;
-        private bool valid = false;
-
-        public GameObject Current
-        {
-            get
-            {
-                if (!valid)
-                {
-                    prefabs.SynchronizeWith(o => current = o);
-                    valid = true;
-                }
-                return current;
-            }
-        }
-    }
 
     /*
     メモ 
@@ -49,7 +29,7 @@ public class Player : Mortal
 
     */
     [System.Serializable]
-    private class UmbrellaParamaters
+    private class UmbrellaParameters
     {
         public int durability;
         public int maxDurability;
@@ -110,7 +90,12 @@ public class Player : Mortal
         }
     }
 
-    [SerializeField] UmbrellaParamaters umbrellaParamaters;
+    /*[System.Serializable]
+    class SelfParameters {
+        public float horizontalSpeed;
+    }*/
+    
+    [SerializeField] UmbrellaParameters umbrellaParameters;
     [SerializeField] float awakeGauge;
     [SerializeField] float awakeGaugeDecreaseSpeed;
     [SerializeField] InputA inputA;
@@ -137,13 +122,16 @@ public class Player : Mortal
     [SerializeField]bool damaged=false;
     bool dropAttacking = false;
     bool risingAttacking = false;
-    int dirSign = 1;
+    int dirSign = 1;    //自機の横方向の向きを表す符号
 
     StateMutable<float> guardDamageMultiplier = null;
     bool guardSucceed = false;
     StateMutable<float> guardKnockBackMultiplier = null;
+    StateMutable<float> horizontalSpeed = null;
     StateMutable<string> testStateMutable = null;
-    
+
+    PlayerStates.PlayerOnGround playerOnGround;
+    PlayerStates.PlayerFlying playerFlying;
 
     public float AwakeGauge
     {
@@ -153,23 +141,20 @@ public class Player : Mortal
         }
     }
 
-
-    // Use this for initialization
-    void Start()
+    private void Awake()
     {
-        inputA.InterpretAsButton("Up", () => Input.GetAxis("Vertical") > 0);
-        inputA.InterpretAsButton("Down", () => Input.GetAxis("Vertical") < 0);
-        inputA.InterpretAsButton("Right", () => Input.GetAxis("Horizontal") > 0);
-        inputA.InterpretAsButton("Left", () => Input.GetAxis("Horizontal") < 0);
-
+        //状態遷移管理用のコンポーネントの初期化
+        //これを行って初めて状態遷移が動き始める
         awakeningState.Initialize();
         behaviourState.Initialize();
         directionState.Initialize();
 
+        //namespace PlayerStates 内のクラスはプレイヤーの状態を表すStateクラスを継承したクラス
+        //_Stateのインスタンスs_.RegisterInitialize(_引数なし返り値なし関数f_) でプレイヤーの状態がsになった時に実行される関数を登録する
         GetComponent<PlayerStates.Direction.Right>().RegisterInitialize(() => { dirSign = 1; });
         GetComponent<PlayerStates.Direction.Left>().RegisterInitialize(() => { dirSign = -1; });
 
-        enemyManager.AddEnemyDyingListener(AddAwakeGauge);
+        enemyManager.AddEnemyDyingListener(AddAwakeGauge); //敵が死んだときに覚醒ゲージが1増えるようにする 引数の AddAwakeGauge はそのための関数
 
         testStateMutable = new StateMutable<string>(gameObject, "StateMutable:Other");
         testStateMutable.Assign<PlayerStates.PlayerOnGround>("StateMutable:OnGround");
@@ -177,27 +162,44 @@ public class Player : Mortal
         testStateMutable.Assign<PlayerStates.PlayerDamaged>("StateMutable:Damaged");
         testStateMutable.Assign<PlayerStates.PlayerGuard>("StateMutable:Guard");
 
-        guardDamageMultiplier = new StateMutable<float>(gameObject, 0);
-        guardDamageMultiplier.Assign<PlayerStates.Awakening.Ordinary>(0.5f);
+        //ガード成功時のダメージ倍率はプレイヤーの覚醒状態に依存する
+        //クラス StateMutable<T> は「状態に応じて中身が勝手に入れ替わる変数」のイメージ
+        guardDamageMultiplier = new StateMutable<float>(gameObject, 0); //デフォルト値を設定する　覚醒状態が「通常」でない（<=>覚醒状態は「覚醒」か「蒼覚醒」）ならばダメージ0倍（<=>無効化）
+        guardDamageMultiplier.Assign<PlayerStates.Awakening.Ordinary>(0.5f);    //覚醒状態が「通常」の時だけダメージ0.5倍
 
-        guardKnockBackMultiplier = new StateMutable<float>(gameObject, 0);
+        horizontalSpeed = new StateMutable<float>(gameObject, 0);
 
+        //guardKnockBackMultiplier = new StateMutable<float>(gameObject, 0);
+
+        //傘の耐久度周りの設定
         GetComponent<PlayerStates.PlayerTackle>().RegisterTurnAction(
-            () => {ConsumeUmbrellaDurability(umbrellaParamaters.costOfTackle); umbrellaParamaters._Consuming();},
-            umbrellaParamaters._Recovering
+            () => { ConsumeUmbrellaDurability(umbrellaParameters.costOfTackle); umbrellaParameters._Consuming(); },
+            umbrellaParameters._Recovering
             );
         GetComponent<PlayerStates.PlayerRisingAttack>().RegisterTurnAction(
-            () => { ConsumeUmbrellaDurability(umbrellaParamaters.costOfRisingAttack); umbrellaParamaters._Consuming(); },
-            umbrellaParamaters._Recovering
+            () => { ConsumeUmbrellaDurability(umbrellaParameters.costOfRisingAttack); umbrellaParameters._Consuming(); },
+            umbrellaParameters._Recovering
             );
         GetComponent<PlayerStates.PlayerGliding>().RegisterTurnAction(
-            umbrellaParamaters._Gliding,
-            umbrellaParamaters._Recovering
+            umbrellaParameters._Gliding,
+            umbrellaParameters._Recovering
             );
         GetComponent<PlayerStates.PlayerGuard>().RegisterTurnAction(
-            umbrellaParamaters._Consuming,
-            umbrellaParamaters._Recovering
+            umbrellaParameters._Consuming,
+            umbrellaParameters._Recovering
             );
+    }
+    // Use this for initialization
+    void Start()
+    {
+        //ゲームパッドのジョイスティック入力をボタンとして解釈させる
+        //これをしないとゲームパッドで落下攻撃などが上手くできなかった(PlayerSettings.Inputの設定をうまくすればこの処理要らないかもしれないが)
+        //_InputAのインスタンス_.InterpretAsButton("登録ボタン名",ボタンと解釈させたい引数なし返り値bool関数f) でfをボタン扱いできる
+        inputA.InterpretAsButton("Up", () => Input.GetAxis("Vertical") > 0);
+        inputA.InterpretAsButton("Down", () => Input.GetAxis("Vertical") < 0);
+        inputA.InterpretAsButton("Right", () => Input.GetAxis("Horizontal") > 0);
+        inputA.InterpretAsButton("Left", () => Input.GetAxis("Horizontal") < 0);
+
 
     }
 
@@ -205,45 +207,48 @@ public class Player : Mortal
     // Update is called once per frame
     void Update()
     {
+        //現在、プレイヤーは被ダメージ状態から抜けた時点で体力が0以下だと消滅する
         if (health <= 0&&!damaged)
         {
             Destroy(gameObject);
         }
 
+        //状態遷移管理用のコンポーネントは内部にUpdate()を持たないため、外部から毎フレームExecute()を呼ぶ必要がある
         awakeningState.Execute();
         directionState.Execute();
-        var v = transform.localScale;
 
-        if (!(awakeningState.CurrentState is PlayerStates.Awakening.Ordinary))
+        //覚醒時に覚醒ゲージを減らす処理
+        if (!(awakeningState.CurrentState is PlayerStates.Awakening.Ordinary)) 
         {
             awakeGauge -= awakeGaugeDecreaseSpeed * Time.deltaTime;
             awakeGauge = System.Math.Max(awakeGauge, 0);
-            Debug.Log(awakeGauge);
         }
+
         behaviourState.Execute();
-        umbrellaParamaters.Update();
+
+        umbrellaParameters.Update();
 
         _debugText.text = 
             //$"A:Move Left, D:Move Right, Space:Jump, H:Attack, J:Magic Attack, K:Open Umbrella, L:Awake\n"+
             $"Health:{health}/{maxHealth}\n" +
-            $"Umbrella Durability:{(DoesUmbrellaWork()?$"{umbrellaParamaters.durability}/{umbrellaParamaters.maxDurability}":$"(Recover in {umbrellaParamaters.breakRestTime} seconds)")}\n" +
+            $"Umbrella Durability:{(DoesUmbrellaWork()?$"{umbrellaParameters.durability}/{umbrellaParameters.maxDurability}":$"(Recover in {umbrellaParameters.breakRestTime} seconds)")}\n" +
             $"Awake Gauge:{awakeGauge} (0.5 ≦ this value < 1 : Awake, this value = 1 : Blue Awake)\n" +
             $"testStateMutable=={testStateMutable.Content}\n"+
             $"guardDamageMultiplier=={guardDamageMultiplier.Content}";
     }
 
-    public override void OnAttacked(GameObject attackObj, Attack attack)
+    public override void OnAttacked(GameObject attackObj, Attack attack) //攻撃されたときにAttackから（間接的に）実行される関数
     {
         Vector3 selfP = transform.position;
         Vector2 r = attackObj.transform.position - selfP;
         guardSucceed = false;
         
-        if((GetComponent<PlayerStates.PlayerGuard>().IsCurrent && dirSign * r.x > 0)||
-            (GetComponent<PlayerStates.PlayerGliding>().IsCurrent && r.y > 0))
+        if((GetComponent<PlayerStates.PlayerGuard>().IsCurrent && dirSign * r.x > 0)|| //地上ガード時のガード成否判定
+            (GetComponent<PlayerStates.PlayerGliding>().IsCurrent && r.y > 0)) //滑空時のガード成否判定
         {
             guardSucceed = true;
-            GetComponent<AwakeMutableCounterAttack>().Attack(attack.Owner);
-            ConsumeUmbrellaDurability(umbrellaParamaters.costOfGuard);
+            GetComponent<AwakeMutableCounterAttack>().Attack(attack.Owner); //ガード成功時の反撃　AwakeMutableCounterAttackはプレイヤーの覚醒状態によって反撃内容が変わる反撃用のコンポーネント
+            ConsumeUmbrellaDurability(umbrellaParameters.costOfGuard);
         }
         else
         {
@@ -256,7 +261,7 @@ public class Player : Mortal
         }
     }
 
-    public override bool IsInvulnerable()
+    public override bool IsInvulnerable() //無敵判定用の関数 これがtrueを返す間は被ダメージ処理自体が行われない
     {
         return 
             damaged || 
@@ -265,7 +270,7 @@ public class Player : Mortal
             GetComponent<PlayerStates.PlayerTackle>().IsCurrent;
     }
 
-    public override float ConvertDealtDamage(float given)
+    public override float ConvertDealtDamage(float given) //受けたダメージの変換関数
     {
         if ((GetComponent<PlayerStates.PlayerGuard>().IsCurrent || GetComponent<PlayerStates.PlayerGliding>().IsCurrent) && guardSucceed)
         {
@@ -274,7 +279,7 @@ public class Player : Mortal
         return given;
     }
 
-    public override Vector2 ConvertDealtKnockBack(Vector2 given)
+    public override Vector2 ConvertDealtKnockBack(Vector2 given) //受けたノックバックの変換関数
     {
         if ((GetComponent<PlayerStates.PlayerGuard>().IsCurrent || GetComponent<PlayerStates.PlayerGliding>().IsCurrent) && guardSucceed)
         {
@@ -283,7 +288,7 @@ public class Player : Mortal
         return given;
     }
 
-    public override void ConvertDealingAttack(Attack.Parameters attackData)
+    public override void ConvertDealingAttack(ref Attack.Parameters attackData) //プレイヤーが与える攻撃の変換用関数 傘破損時に自機の攻撃力を半減させる処理などはここに書く
     {
         if (!DoesUmbrellaWork())
         {
@@ -291,12 +296,12 @@ public class Player : Mortal
         }
     }
 
-    public override void Dying()
+    public override void Dying() //体力がなくなると呼ばれる関数　今はガバ実装
     {
         Debug.Log("Player has dead.");
     }
 
-    public void AddAwakeGauge()
+    public void AddAwakeGauge() //外部から覚醒ゲージを1増やす関数
     {
         if (GetComponent<PlayerStates.Awakening.Ordinary>().IsCurrent)
         {
@@ -304,7 +309,7 @@ public class Player : Mortal
         }
     }
 
-    public void ChangeDirection(int sign)
+    public void ChangeDirection(int sign) //方向転換用の関数　dirSignもこの中で変更してもよいかもしれない
     {
         transform.localScale = new Vector3(sign, 1, 1);
     }
@@ -317,10 +322,11 @@ public class Player : Mortal
 
     public void Gliding(bool toggle)
     {
-        umbrellaUpward.enabled = toggle;
-        
+        //umbrellaUpward.enabled = toggle;
+        if (toggle) { umbrellaUpward.Activate(); } else { umbrellaUpward.Inactivate(); }
     }
 
+    //StateクラスにIsCurrentプロパティがなかった時代の名残
     public void Damaged(bool toggle)
     {
         damaged = toggle;
@@ -336,109 +342,18 @@ public class Player : Mortal
 
     public void ConsumeUmbrellaDurability(int amount) //amountの文だけ傘耐久度を消費する 転送
     {
-        umbrellaParamaters.NudgeDurability(-amount);
+        umbrellaParameters.NudgeDurability(-amount);
     }
     public void RecoverUmbrellaDurability(int amount) //amountの文だけ傘耐久度を回復する 転送
     {
-        umbrellaParamaters.NudgeDurability(amount);
+        umbrellaParameters.NudgeDurability(amount);
     }
     
 
     //傘が機能する(=使える=「破損」状態でない)かを返す "=>"以降の式がこの条件そのもの（同値）と考える
     //Note: _ReturnType _Function() => _statement; で1文だけの関数を定義できる これは _ReturnType _Function() {return _statement;} に等しい
-    public bool DoesUmbrellaWork() => umbrellaParamaters.breakRestTime <= 0;
+    public bool DoesUmbrellaWork() => umbrellaParameters.breakRestTime <= 0;
     
 }
 
-/*public class Player : MonoBehaviour {
-    [SerializeField] InputA inputA;
-    [SerializeField] StateManager behaviourState;
-    [SerializeField] StateManager awakeningState;
-    [SerializeField] StateManager directionState;
-    [SerializeField] float health;
-    [SerializeField] float umbrellaDurability;
-    [SerializeField] float awakeGauge;
-    [SerializeField] float awakeGaugeDecreaseSpeed;
-    [SerializeField] GameObject umbrellaForward;
-    [SerializeField] GameObject umbrellaUpward;
-    [SerializeField] UnityEngine.UI.Text _debugText;
 
-    [System.Serializable]
-    private class Command
-    {
-        [SerializeField] public string buttonName;
-        //[SerializeField] public Ability ability;
-        [SerializeField] public bool momential;
-        [SerializeField] public UnityEngine.Events.UnityEvent func = new UnityEngine.Events.UnityEvent();
-    }
-    [SerializeField] List<Command> commands;
-
-    public float AwakeGauge
-    {
-        get
-        {
-            return awakeGauge;
-        }
-    }
-
-
-    // Use this for initialization
-    void Start () {
-        awakeningState.Initialize();
-        behaviourState.Initialize();
-        directionState.Initialize();
-	}
-
-	
-	// Update is called once per frame
-	void Update () {
-        awakeningState.Execute();
-        directionState.Execute();
-        var v = transform.localScale;
-        
-        if(!(awakeningState.CurrentState is PlayerStates.Awakening.Ordinary) )
-        {
-            awakeGauge -= awakeGaugeDecreaseSpeed * Time.deltaTime;
-            awakeGauge = System.Math.Max(awakeGauge, 0);
-            Debug.Log(awakeGauge);
-        }
-        behaviourState.Execute();
-
-        _debugText.text = $"Health:{health}\nUmbrella Durability:{umbrellaDurability}\nAwake Gauge:{awakeGauge}";
-    }
-
-    private void OnTriggerEnter2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "Enemy Attack")
-        {
-            Vector2 selfVel = GetComponent<Rigidbody2D>().velocity;
-            float rv = collider.gameObject.GetComponent<Rigidbody2D>().velocity.x - selfVel.x;
-            health -= 10;
-            if (!umbrellaForward.activeInHierarchy || selfVel.x * rv > 0)
-            {
-                //GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 300));
-                var c = GetComponent<PlayerStates.PlayerDamaged>();
-                c.TeachCollision(collider);
-                if (!(behaviourState.CurrentState is PlayerStates.PlayerDamaged))
-                {
-                    behaviourState.ManuallyChange(c);
-                }
-            }
-        }
-    }
-
-    public void ChangeDirection(int sign)
-    {
-        transform.localScale = new Vector3(sign, 1, 1);
-    }
-
-    public void Guard(bool toggle)
-    {
-        umbrellaForward.SetActive(toggle);
-    }
-
-    public void Gliding(bool toggle)
-    {
-        umbrellaUpward.SetActive(toggle);
-    }
-}*/

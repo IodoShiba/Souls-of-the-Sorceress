@@ -14,31 +14,88 @@ namespace PlayerStates {
         [SerializeField] float jumpMaxHeight;
         [SerializeField] Rigidbody2D rb;
         private float jumpBorder;
-        private bool ableToJump;
-        private bool jumping=true;
+        //private bool ableToJump;
+        //private bool jumping=true;
+        Vector2 newv;
+
+        abstract class JumpState
+        {
+            public readonly string name;
+            protected PlayerFlying owner;
+
+            public JumpState(PlayerFlying owner,string name) { this.owner = owner;this.name = name; }
+            public abstract JumpState Check();
+            public abstract void Execute();
+        }
+        private JumpState jumpState = null; //nullは「未定」の意
+
+        class Jumping : JumpState
+        {
+            private float jumpBorder;
+            public Jumping(PlayerFlying owner) : base(owner,nameof(Jumping))
+            {
+                jumpBorder = owner.gameObject.transform.position.y + owner.jumpMaxHeight;
+            }
+
+            public override JumpState Check()
+            {
+                if (Input.GetButtonUp("Jump") || (owner.transform.position.y > jumpBorder))//ジャンプやめる条件
+                {
+                    return new NotJumping(owner);
+                }
+                return null;
+            }
+            public override void Execute()
+            {
+                owner.newv.y = owner.verticalMoveSpeed;
+            }
+        }
+
+        class NotJumping : JumpState
+        {
+            public NotJumping(PlayerFlying owner) : base(owner,nameof(NotJumping)) { }
+            public override JumpState Check()
+            {
+                return null;
+            }
+            public override void Execute()
+            {
+                owner.newv.y = System.Math.Max(owner.rb.velocity.y, -owner.maxFallSpeed);
+            }
+        }
 
         private void Start()
         {
-            ableToJump = false;
+            //ableToJump = false;
             rb = GetComponent<Rigidbody2D>();
         }
 
-        private void Update()
-        {
-            if (!ableToJump&& groundSensor.IsOnGround) {
-                ableToJump = true;
-            }
-        }
         public override State Check()
         {
-            if (/*!inputA.GetButton("Jump")*/!ableToJump && groundSensor.IsOnGround)
+            bool onGround;
+            if (groundSensor.IsOnGround)
+            {
+                if (jumpState == null)
+                {
+                    onGround = !Input.GetButton("Jump");
+                }
+                else
+                {
+                    onGround = jumpState.name != nameof(Jumping);//ジャンプしている間は地面センサーが地面を検知しても空中に居る扱い
+                }
+            }
+            else
+            {
+                onGround = false;
+            }
+            if (onGround)
             {
                 return GetComponent<PlayerStates.PlayerOnGround>();
             }
 
             if (player.DoesUmbrellaWork()&&Input.GetButton("Open Umbrella"))
             {
-                ableToJump = false;
+                //ableToJump = false;
                 if (rb.velocity.y > 0)
                 {
                     rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -53,13 +110,13 @@ namespace PlayerStates {
             
             if (inputA.GetButtonShortDownUp("Attack"))
             {
-                ableToJump = false;
+                //ableToJump = false;
                 return GetComponent<PlayerStates.PlayerAerialSlash>();
             }
 
             if (Input.GetButtonDown("Magical Attack"))
             {
-                ableToJump = false;
+                //ableToJump = false;
                 return GetComponent<PlayerStates.PlayerMagicCharging>();
             }
 
@@ -68,18 +125,14 @@ namespace PlayerStates {
 
         public override void Initialize()
         {
-            if (!groundSensor.IsOnGround) {
-                ableToJump = false;
-            }
-            /*if (ableToJump && Input.GetButton("Jump"))//ジャンプする
+            if (groundSensor.IsOnGround && Input.GetButton("Jump"))
             {
-                if (!jumping)
-                {
-                    jumpBorder = gameObject.transform.position.y + jumpMaxHeight;
-                }
-                jumping = true;
-                rb.velocity = Vector2.up * verticalMoveSpeed;
-            }*/
+                jumpState = new Jumping(this);
+            }
+            else
+            {
+                jumpState = new NotJumping(this);
+            }
         }
 
         public override void Execute()
@@ -88,7 +141,6 @@ namespace PlayerStates {
 
             bool r = false;
             bool l = false;
-            Vector2 newv;
             newv.x = newv.y = 0;
 
             //横移動
@@ -104,28 +156,14 @@ namespace PlayerStates {
             {
                 newv.x = 0;
             }
-            //newv.x = System.Math.Sign(Input.GetAxis("Horizontal"))*horizontalMoveSpeed;
 
-            //ジャンプ
-            if (ableToJump&&Input.GetButton("Jump"))//ジャンプする
+            JumpState next;
+            while ((next = jumpState.Check()) != null)
             {
-                if (!jumping)
-                {
-                    jumpBorder = gameObject.transform.position.y + jumpMaxHeight;
-                }
-                jumping = true;
-                newv.y = verticalMoveSpeed;
+                jumpState = next;
             }
-            else//ジャンプしない
-            {
-                jumping = false;
-                newv.y = System.Math.Max(rb.velocity.y, -maxFallSpeed);
-            }
-            if ((Input.GetButtonUp("Jump")&& rb.velocity.y>0) || (transform.position.y > jumpBorder && jumping))//ジャンプやめる
-            {
-                newv.y = 0;
-                ableToJump = false;
-            }
+            jumpState.Execute();
+            Debug.Log(jumpState.name);
 
             rb.velocity = newv;
             //Debug.Log(rb.velocity.y);
@@ -133,10 +171,13 @@ namespace PlayerStates {
 
         public override void Terminate()
         {
-            if (jumping)
-            {
-                rb.velocity = new Vector2(rb.velocity.x, 0);
-            }
+            jumpState = null;
+        }
+
+        public string CurrentJumpState()
+        {
+            return jumpState.name;
         }
     }
 }
+

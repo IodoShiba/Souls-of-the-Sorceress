@@ -5,20 +5,35 @@ using UnityEngine;
 public class Umbrella : MonoBehaviour {
     Vector3 defpos;
     System.Action updateImple = null;
+    [SerializeField] Player player;
     [SerializeField] Color _colorOrdinary;
     [SerializeField] Color _colorAwaken;
     [SerializeField] Color _colorBlueAwaken;
+    SpriteRenderer spriteRenderer = null;
+
     // Use this for initialization
     void Start () {
         defpos = transform.localPosition ;
-        transform.parent.GetComponent<PlayerStates.Awakening.Ordinary>().RegisterInitialize(() => GetComponent<SpriteRenderer>().color = _colorOrdinary);
-        transform.parent.GetComponent<PlayerStates.Awakening.Awaken>().RegisterInitialize(() => GetComponent<SpriteRenderer>().color = _colorAwaken);
-        transform.parent.GetComponent<PlayerStates.Awakening.BlueAwaken>().RegisterInitialize(() => GetComponent<SpriteRenderer>().color = _colorBlueAwaken);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        transform.parent.GetComponent<PlayerStates.Awakening.Ordinary>().RegisterInitialize(() => spriteRenderer.color = _colorOrdinary);
+        transform.parent.GetComponent<PlayerStates.Awakening.Awaken>().RegisterInitialize(() => spriteRenderer.color = _colorAwaken);
+        transform.parent.GetComponent<PlayerStates.Awakening.BlueAwaken>().RegisterInitialize(() => spriteRenderer.color = _colorBlueAwaken);
 
     }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+        Color color = spriteRenderer.color;
+        if (player.DoesUmbrellaWork())
+        {
+            color.a = 1;
+        }
+        else
+        {
+            color.a = 0.2f;
+        }
+        spriteRenderer.color = color;
     }
 
     public void PlayerGliding()

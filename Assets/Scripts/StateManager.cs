@@ -43,7 +43,7 @@ public class StateManager : MonoBehaviour
                 currentState = nns;
             }
             currentState.Initialize();
-            currentState.InvokeInitializeCallBack();
+            currentState._InvokeInitializeCallBack();
         }
     }
 
@@ -58,7 +58,7 @@ public class StateManager : MonoBehaviour
             }
             else
             {
-                currentState.InvokeTerminateCallBack();
+                currentState._InvokeTerminateCallBack();
                 currentState.Terminate();
                 State nns = null;
                 while ((nns = ns.Check()) != null)
@@ -66,7 +66,7 @@ public class StateManager : MonoBehaviour
                     ns = nns;
                 }
                 ns.Initialize();
-                ns.InvokeInitializeCallBack();
+                ns._InvokeInitializeCallBack();
                 currentState = ns;
             }
         }
@@ -89,7 +89,7 @@ public class StateManager : MonoBehaviour
 
     public void ManuallyChange(State targetState)
     {
-        currentState.InvokeTerminateCallBack();
+        currentState._InvokeTerminateCallBack();
         currentState.Terminate();
         State nns = null;
         while ((nns = targetState.Check()) != null)
@@ -97,7 +97,7 @@ public class StateManager : MonoBehaviour
             targetState = nns;
         }
         targetState.Initialize();
-        targetState.InvokeInitializeCallBack();
+        targetState._InvokeInitializeCallBack();
         currentState = targetState;
     }
 
