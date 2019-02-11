@@ -13,10 +13,19 @@ namespace PlayerStates
         private float jumpInterval = 0;
         private Rigidbody2D rb;
         private readonly float jumpIntervalDefault = 0.03f;
+        private HorizontalMove hm;
+        private HorizontalMove.VelocityShift vs;
+        private int formerDirSign = 0;
+
+        private void Awake()
+        {
+            hm = player.gameObject.GetComponent<HorizontalMove>();
+        }
 
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
+            vs = hm.CreateVelocityShift(horizontalMoveSpeed,4);
         }
 
         public override State Check()
@@ -69,9 +78,11 @@ namespace PlayerStates
             {
                 sign -= 1;
             }
-            //Debug.Log(System.Math.Sign(Input.GetAxis("Horizontal")).ToString()+$"({Input.GetAxis("Horizontal")})");
-            //sign = System.Math.Sign(Input.GetAxis("Horizontal"));
-            rb.velocity = new Vector2(sign * horizontalMoveSpeed, 0);
+
+            //rb.velocity = Vector2.right * sign * horizontalMoveSpeed;//new Vector2(sign * horizontalMoveSpeed, 0);
+            vs.velocity = sign * horizontalMoveSpeed;
+            vs.Update();
+            formerDirSign = sign;
         }
 
         public override void Terminate()

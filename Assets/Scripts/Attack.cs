@@ -24,6 +24,7 @@ public class Attack : MonoBehaviour {
     [SerializeField] protected bool throughable;
     [SerializeField] protected bool onceOnly;
     [SerializeField] protected bool initiallyActivate;
+    [SerializeField] protected Attack followingAttack;
     
     public float Damage { get { return damage; } }
     public Vector2 KnockBackImpact { get { return knockBackImpact; } }

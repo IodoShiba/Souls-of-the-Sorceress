@@ -10,22 +10,18 @@ namespace PlayerStates
         {
             [SerializeField] InputA inputA;
             [SerializeField] Player player;
+            [SerializeField] ActionAwake playerAwake;
             bool initialized = false;
-            // Use this for initialization
-            void Start()
-            {
-
-            }
-
-            // Update is called once per frame
-            void Update()
-            {
-
-            }
 
             public override State Check()
             {
+                /*
                 if (initialized && (inputA.GetButtonShortDownUp("Awake") || player.AwakeGauge <= 0))
+                {
+                    return GetComponent<Ordinary>();
+                }
+                */
+                if (initialized && !playerAwake.IsActing)
                 {
                     return GetComponent<Ordinary>();
                 }

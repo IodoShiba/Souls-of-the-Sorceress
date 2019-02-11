@@ -228,14 +228,14 @@ MonoBehaviour:
   attackCollider: {fileID: 61074474207612290}
   throughable: 0
   onceOnly: 1
-  initiallyActivate: 0
+  initiallyActivate: 1
+  targetTag: Enemy
+  activeSpan: 5
   paramsRaw:
-    damage: 0
+    damage: 5
     knockBackImpact: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
-  targetTag: Enemy
-  activeSpan: 5
 --- !u!114 &114553777242403738
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -39,18 +39,18 @@ public class Enemy : Mortal {
         }
 	}
 
-    public override void OnAttacked(GameObject attackObj, Attack attack)
+    protected override void OnAttacked(GameObject attackObj, Attack attack)
     {
         Debug.Log("Enemy:Ahh!");
         _protectTime = 0.3f;
     }
 
-    public override Vector2 ConvertDealtKnockBack(Vector2 given)
+    protected override Vector2 ConvertDealtKnockBack(Vector2 given)
     {
         return 10 * given;
     }
 
-    public override bool IsInvulnerable()
+    protected override bool IsInvulnerable()
     {
         return _protectTime > 0;
     }

@@ -10,21 +10,12 @@ namespace PlayerStates
         {
             [SerializeField] InputA inputA;
             [SerializeField] Player player;
+            [SerializeField] ActionAwake playerAwake;
             bool initialized = false;
-            // Use this for initialization
-            void Start()
-            {
-
-            }
-
-            // Update is called once per frame
-            void Update()
-            {
-
-            }
 
             public override State Check()
             {
+                /*
                 if (initialized&&inputA.GetButtonShortDownUp("Awake"))
                 {
                     if (player.AwakeGauge >= 1.0)
@@ -34,6 +25,17 @@ namespace PlayerStates
                     else if (player.AwakeGauge >= 0.5)
                     {
                         return GetComponent<PlayerStates.Awakening.Awaken>();
+                    }
+                }
+                */
+                if (initialized)
+                {
+                    switch (playerAwake.AwakeGrade)
+                    {
+                        case ActionAwake.AwakeGrades.awaken:
+                            return GetComponent<PlayerStates.Awakening.Awaken>();
+                        case ActionAwake.AwakeGrades.blueAwaken:
+                            return GetComponent<PlayerStates.Awakening.BlueAwaken>();
                     }
                 }
                 return null;

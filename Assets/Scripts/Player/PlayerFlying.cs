@@ -163,7 +163,7 @@ namespace PlayerStates {
                 jumpState = next;
             }
             jumpState.Execute();
-            Debug.Log(jumpState.name);
+            //Debug.Log(jumpState.name);
 
             rb.velocity = newv;
             //Debug.Log(rb.velocity.y);

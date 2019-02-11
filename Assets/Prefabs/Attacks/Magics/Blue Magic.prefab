@@ -147,11 +147,11 @@ MonoBehaviour:
   attackCollider: {fileID: 61376695561769668}
   throughable: 1
   onceOnly: 1
-  initiallyActivate: 0
-  paramsRaw:
-    damage: 0
-    knockBackImpact: {x: 0, y: 0}
-    attackCollider: {fileID: 0}
-    throughable: 0
+  initiallyActivate: 1
   targetTag: Enemy
   activeSpan: 5
+  paramsRaw:
+    damage: 15
+    knockBackImpact: {x: 200, y: 166}
+    attackCollider: {fileID: 0}
+    throughable: 0

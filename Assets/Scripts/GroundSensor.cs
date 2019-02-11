@@ -6,6 +6,7 @@ public class GroundSensor : MonoBehaviour
 {
     private bool isOnGround=false;
     public string groundTagName;
+    //private GroundData groundDataStandingOn;
 
     public bool IsOnGround
     {

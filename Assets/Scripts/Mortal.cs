@@ -7,14 +7,14 @@ public abstract class Mortal : MonoBehaviour{
     [SerializeField] protected float health;
     [SerializeField] protected float maxHealth;
 
-    public abstract void OnAttacked(GameObject attackObj,Attack attack);
-    public abstract bool IsInvulnerable();
+    protected abstract void OnAttacked(GameObject attackObj,Attack attack);
+    protected abstract bool IsInvulnerable();
     public abstract void Dying();
-    
-    public virtual float ConvertDealtDamage(float given) {
+
+    protected virtual float ConvertDealtDamage(float given) {
         return given;
     }
-    public virtual Vector2 ConvertDealtKnockBack(Vector2 given)
+    protected virtual Vector2 ConvertDealtKnockBack(Vector2 given)
     {
         return given;
     }
