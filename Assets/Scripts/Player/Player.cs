@@ -14,7 +14,7 @@ public class Player : Mortal
     {
         endOfAction=0,
         onGround,
-        flying,
+        flying/*,
         gliding,
         risingAttack,
         dropAttack,
@@ -25,7 +25,7 @@ public class Player : Mortal
         smashSlash,
         aerialSlash,
         magicCharging,
-        damaged
+        damaged*/
     }
     /*
     メモ 
@@ -55,113 +55,6 @@ public class Player : Mortal
         protected Player player;
         public StateOption(Player player) { this.player = player; }
     }
-
-    [System.Serializable]
-    class FlyingOption : StateOption
-    {
-        [SerializeField] GroundSensor groundSensor;
-        [SerializeField] float horizontalMoveSpeed;
-        [SerializeField] float maxFallSpeed;
-        [SerializeField] float jumpSpeed;
-        [SerializeField] float jumpMaxHeight;
-        [SerializeField] Rigidbody2D rb;
-        private Vector2 newv;
-
-        public FlyingOption(Player player) : base(player) { }
-
-        abstract class JumpState
-        {
-            public readonly string name;
-            protected FlyingOption owner;
-
-            public JumpState(FlyingOption owner, string name) { this.owner = owner; this.name = name; }
-            public abstract JumpState Check();
-            public abstract void Execute();
-        }
-        private JumpState jumpState = null; //nullは「未定」の意
-
-        class Jumping : JumpState
-        {
-            private float jumpBorder;
-            public Jumping(FlyingOption owner) : base(owner, nameof(Jumping))
-            {
-                jumpBorder = owner.player.gameObject.transform.position.y + owner.jumpMaxHeight;
-            }
-
-            public override JumpState Check()
-            {
-                if (Input.GetButtonUp("Jump") || (owner.player.transform.position.y > jumpBorder))//ジャンプやめる条件
-                {
-                    return new NotJumping(owner);
-                }
-                return null;
-            }
-            public override void Execute()
-            {
-                owner.newv.y = owner.jumpSpeed;
-            }
-        }
-
-        class NotJumping : JumpState
-        {
-            public NotJumping(FlyingOption owner) : base(owner, nameof(NotJumping)) { }
-            public override JumpState Check()
-            {
-                return null;
-            }
-            public override void Execute()
-            {
-                owner.newv.y = System.Math.Max(owner.rb.velocity.y, -owner.maxFallSpeed);
-            }
-        }
-
-        public void Initialize()
-        {
-            if (groundSensor.IsOnGround && Input.GetButton("Jump"))
-            {
-                jumpState = new Jumping(this);
-            }
-            else
-            {
-                jumpState = new NotJumping(this);
-            }
-        }
-        public void Execute()
-        {
-            bool r = false;
-            bool l = false;
-            newv.x = newv.y = 0;
-
-            //横移動
-            if (r = Input.GetButton("Right"))
-            {
-                newv.x += horizontalMoveSpeed;
-            }
-            if (l = Input.GetButton("Left"))
-            {
-                newv.x -= horizontalMoveSpeed;
-            }
-            if (!(r || l))
-            {
-                newv.x = 0;
-            }
-
-            JumpState next;
-            while ((next = jumpState.Check()) != null)
-            {
-                jumpState = next;
-            }
-            jumpState.Execute();
-            //Debug.Log(jumpState.name);
-
-            rb.velocity = newv;
-        }
-        public void Terminate()
-        {
-            jumpState = null;
-        }
-    }
-    
     [SerializeField] UmbrellaParameters umbrellaParameters;
     [SerializeField] float awakeGauge;
     [SerializeField] float awakeGaugeDecreaseSpeed;
@@ -177,7 +70,7 @@ public class Player : Mortal
     [SerializeField] AwakeMutableAttack umbrellaUpward;
     [SerializeField] Collider2D guardColliderExtension;
     [SerializeField] GroundSensor groundSensor;
-    [SerializeField] FlyingOption flyingOption;
+    [SerializeField] Jump jumpAbility;
     [SerializeField] UnityEngine.UI.Text _debugText;
 
     [System.Serializable]
@@ -259,62 +152,16 @@ public class Player : Mortal
 
                 .ConnectState((int)BehaviourStates.onGround)
                     .To((int)BehaviourStates.flying, () => { return !groundSensor.IsOnGround; })
-                    .To((int)BehaviourStates.flying, () => { return Input.GetButtonDown("Jump"); })
-                    .To((int)BehaviourStates.verticalSlash, () => { return Input.GetButtonDown("Attack"); })
-                    .To((int)BehaviourStates.magicCharging, () => { return Input.GetButtonDown("Magical Attack"); })
-                    .To((int)BehaviourStates.guard, () => { return DoesUmbrellaWork() && Input.GetButton("Open Umbrella"); })
+                    .To((int)BehaviourStates.flying, () => { return jumpAbility.Activated; })
 
                 .ConnectState((int)BehaviourStates.flying)
-                    .To((int)BehaviourStates.onGround, () => { return false;/*保留*/ })
-                    .To((int)BehaviourStates.gliding, () => { return DoesUmbrellaWork() && Input.GetButton("Open Umbrella"); })
-                    .To((int)BehaviourStates.dropAttack, () => { return inputA.GetMultiButtonDown("Attack", "Down"); })
-                    .To((int)BehaviourStates.aerialSlash, () => { return inputA.GetButtonShortDownUp("Attack"); })
-                    .To((int)BehaviourStates.magicCharging, () => { return Input.GetButtonDown("Magical Attack"); })
-
-                .ConnectState((int)BehaviourStates.gliding)
-                    .To((int)BehaviourStates.onGround, () => { return groundSensor.IsOnGround; })
-                    .To((int)BehaviourStates.endOfAction, () => { return !DoesUmbrellaWork(); })
-                    .To((int)BehaviourStates.flying, () => { return !Input.GetButton("Open Umbrella"); })
-                    .To((int)BehaviourStates.risingAttack, () => { return Input.GetButtonDown("Attack"); })
-
-                .ConnectState((int)BehaviourStates.risingAttack)
-                    .To((int)BehaviourStates.gliding, () => { return false;/*保留*/ })
-
-                .ConnectState((int)BehaviourStates.dropAttack)
-                    .To((int)BehaviourStates.onGround, () => { return groundSensor.IsOnGround; })
-
-                .ConnectState((int)BehaviourStates.guard)
-                    .To((int)BehaviourStates.onGround, () => { return !(DoesUmbrellaWork() && Input.GetButton("Open Umbrella")); })
-                    .To((int)BehaviourStates.tackle, () => { return Input.GetButtonDown("Attack"); })
-
-                .ConnectState((int)BehaviourStates.tackle)
-                    .To((int)BehaviourStates.onGround, () => { return false;/*保留*/ })
-
-                .ConnectState((int)BehaviourStates.verticalSlash)
-                    .To((int)BehaviourStates.endOfAction, () => { return false;/*保留*/ })
-                    .To((int)BehaviourStates.returnSlash, () => { return false;/*保留*/ })
-
-                .ConnectState((int)BehaviourStates.returnSlash)
-                    .To((int)BehaviourStates.endOfAction, () => { return false;/*保留*/ })
-                    .To((int)BehaviourStates.smashSlash, () => { return false;/*保留*/ })
-
-                .ConnectState((int)BehaviourStates.smashSlash)
-                    .To((int)BehaviourStates.endOfAction, () => { return false;/*保留*/ })
-
-                .ConnectState((int)BehaviourStates.aerialSlash)
-                    .To((int)BehaviourStates.endOfAction, () => { return false/*t > _motionLength || groundSensor.IsOnGround*/;/*保留*/ })
-
-                .ConnectState((int)BehaviourStates.magicCharging)
-                    .To((int)BehaviourStates.endOfAction, () => { return false;/*保留*/ })
-
-                .ConnectState((int)BehaviourStates.damaged)
-                    .To((int)BehaviourStates.endOfAction, () => { return false;/*保留*/ })
+                    .To((int)BehaviourStates.onGround, () => { return !jumpAbility.Activated && groundSensor.IsOnGround; })
                 ;
         }
+        
 
-        behaviourState2.RegisterInitialize((int)BehaviourStates.flying, flyingOption.Initialize);
-        behaviourState2.RegisterExecute((int)BehaviourStates.flying, flyingOption.Execute);
-        behaviourState2.RegisterTerminate((int)BehaviourStates.flying, flyingOption.Terminate);
+        behaviourState2.EndDefineAll();
+        behaviourState2.Activate(0);
     }
     
     // Update is called once per frame
@@ -344,6 +191,7 @@ public class Player : Mortal
             umbrellaParameters._DebugOutput() +
             actionAwake._DebugOutput() +
             $"testStateMutable=={testStateMutable.Content}\n"+
+            $"behaviourState2.CurrentStateName=={behaviourState2.CurrentStateName}\n" +
             $"guardDamageMultiplier=={guardDamageMultiplier.Content}";
     }
 

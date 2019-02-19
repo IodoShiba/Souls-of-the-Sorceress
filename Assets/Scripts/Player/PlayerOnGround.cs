@@ -14,7 +14,7 @@ namespace PlayerStates
         private Rigidbody2D rb;
         private readonly float jumpIntervalDefault = 0.03f;
         private HorizontalMove hm;
-        private HorizontalMove.VelocityShift vs;
+        //private HorizontalMove.VelocityShift vs;
         private int formerDirSign = 0;
 
         private void Awake()
@@ -25,7 +25,7 @@ namespace PlayerStates
         private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
-            vs = hm.CreateVelocityShift(horizontalMoveSpeed,4);
+            //vs = hm.CreateVelocityShift(horizontalMoveSpeed,4);
         }
 
         public override State Check()
@@ -63,7 +63,7 @@ namespace PlayerStates
 
         public override void Initialize()
         {
-            rb.velocity = Vector2.zero;
+            //rb.velocity = Vector2.zero;
         }
 
         public override void Execute()
@@ -80,8 +80,8 @@ namespace PlayerStates
             }
 
             //rb.velocity = Vector2.right * sign * horizontalMoveSpeed;//new Vector2(sign * horizontalMoveSpeed, 0);
-            vs.velocity = sign * horizontalMoveSpeed;
-            vs.Update();
+            //vs.velocity = sign * horizontalMoveSpeed;
+            //vs.Update();
             formerDirSign = sign;
         }
 

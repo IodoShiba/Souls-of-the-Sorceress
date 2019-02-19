@@ -1,9 +1,60 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using static System.Math;
 
+[RequireComponent(typeof(Rigidbody2D))]
+public class HorizontalMove : Ability , ActorVelocity.VelocityShifter
+{
+    [SerializeField] float moveSpeed;
+    [SerializeField, FormerlySerializedAs("MaxPushForceMagnitude")] float maxPushForceMagnitude;
+    [SerializeField] float maxStopForceMagnitude;
+    [SerializeField] Rigidbody2D targetRigidbody;
 
+    int sign = 0;
+
+    private void FixedUpdate()
+    {
+        float maxForceMagnitude = sign == 0 ? maxStopForceMagnitude : maxPushForceMagnitude;
+        /*
+        float accelaration = Max(-MaxAccelarationMagnitude, Min(sign * moveSpeed - targetRigidbody.velocity.x, MaxAccelarationMagnitude));
+        Vector2 pushForce = (targetRigidbody.mass * accelaration * Vector2.right) / Time.deltaTime;*/
+        float f = Max(-maxForceMagnitude, Min(
+                        targetRigidbody.mass * (sign * moveSpeed - targetRigidbody.velocity.x) / Time.deltaTime,
+                        maxForceMagnitude));
+        targetRigidbody.AddForce(f*Vector2.right);
+    }
+    
+    public override void Activate()
+    {
+        return;
+    }
+
+    public override bool ContinueCheck(bool ordered)
+    {
+        return ordered;
+    }
+
+    public override void OnActivated(bool ordered)
+    {
+        sign = Sign(Input.GetAxisRaw("Horizontal"));
+    }
+    
+
+    public override void OnEnd()
+    {
+        sign = 0;
+    }
+
+    public Vector2 GetVelocity()
+    {
+        return sign * moveSpeed * Vector2.right;
+    }
+}
+
+/*
 [RequireComponent(typeof(Rigidbody2D))]
 public class HorizontalMove : MonoBehaviour {
     public class VelocityShift
@@ -81,3 +132,4 @@ public class HorizontalMove : MonoBehaviour {
     
     public VelocityShift CreateVelocityShift(float maxVelocity, float dragAccelaration = float.PositiveInfinity) { return new VelocityShift(this, maxVelocity,dragAccelaration); }
 }
+*/

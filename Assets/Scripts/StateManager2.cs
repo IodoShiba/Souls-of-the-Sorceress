@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class StateManager2 : MonoBehaviour
 {
     [System.Serializable]
-    private class State
+    protected class State
     {
         private class Branch
         {
@@ -51,7 +51,7 @@ public class StateManager2 : MonoBehaviour
             }
         }
 
-        public State(int selfIndex) { this.selfIndex = selfIndex; }
+        public State(int selfIndex,string name="") { this.selfIndex = selfIndex;this.name = name; }
 
         public State ConnectedTo(int targetStateIndex, System.Func<bool> condition)
         {
@@ -144,10 +144,11 @@ public class StateManager2 : MonoBehaviour
         }
     }
 
-    [SerializeField] string name;
-    [SerializeField] private List<State> states = null;//new List<State>();
+    [SerializeField] protected string name;
+    [SerializeField] protected List<State> states = null;//new List<State>();
+    [SerializeField] UnityEngine.Events.UnityEvent stateChangeCallbacks;
     private State currentState;
-    private bool activated = false;
+    protected bool activated = false;
 
     public int CurrentStateIndex
     {
@@ -165,7 +166,7 @@ public class StateManager2 : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected void Start()
     {
         currentState = states[0];
     }
@@ -190,6 +191,10 @@ public class StateManager2 : MonoBehaviour
     {
         states[targetStateIndex].RegisterTerminate(listener);
     }
+    public void RegisterStateChangeCallback(UnityAction listener)
+    {
+        stateChangeCallbacks.AddListener(listener);
+    }
 
     public void Execute()
     {
@@ -203,6 +208,7 @@ public class StateManager2 : MonoBehaviour
                 jumpTo = currentState.JumpCheck();
             } while (jumpTo != -1);
             currentState.Initialize();
+            stateChangeCallbacks.Invoke();
         }
         currentState.Execute();
     }
@@ -240,6 +246,14 @@ public class StateManager2 : MonoBehaviour
         return this;
     }
     
+    public void EndDefineAll()
+    {
+        for(int i=0; i < states.Count; ++i)
+        {
+            states[i].EndDefine();
+        }
+    }
+
     public class StateMutable2<T>
     {
         public StateMutable2(StateManager2 target, T defaultObj)

@@ -1,84 +1,59 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static System.Math;
 
-public class Jump : Ability {
-    [SerializeField,Range(100,3000)] float power;
-    [SerializeField] KeyCode temp_Key;
-    [SerializeField] GameObject groundSensor;
-    [SerializeField] string groundTagName;
-    private bool jumpable = false;
-    public override bool Momential
-    {
-        get
-        {
-            return true;
-        }
-    }
+public class Jump : Ability
+{
+    [SerializeField] float jumpSpeed;
+    [SerializeField] float maxPushForceMagnitude;
+    [SerializeField] float maxJumpHeight;
+    [SerializeField] Rigidbody2D targetRigidbody;
+    float jumpBorder;
+    Transform targetTransform;
+    bool activated = false;
+    float f;
+    float t = 0;
+
+    public bool Activated { get => activated;}
+    
     // Use this for initialization
-    private void Start()
+    private void Awake()
     {
-        var c=groundSensor.AddComponent<GroundSensor>();
-        c.setJumpable = this.SetJumpable;
-        c.groundTagName = this.groundTagName;
-        c.enabled = true;
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        if (jumpable && Input.GetKeyDown(temp_Key))
-        {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, power));
-            jumpable = false;
-        }
-    }
-    private void SetJumpable(bool b) { jumpable = b; }
-    public override void Act()
-    {
-        if (jumpable && Input.GetKeyDown(temp_Key))
-        {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, power));
-            jumpable = false;
-        }
+        targetTransform = targetRigidbody.transform;
     }
 
-    private class GroundSensor : MonoBehaviour
+    public override void Activate()
     {
-        public System.Action<bool> setJumpable;
-        public string groundTagName;
+        jumpBorder = targetTransform.position.y + maxJumpHeight;
+        activated = true;
+    }
 
-        private void OnTriggerStay2D(Collider2D collision)
-        {
-            if (collision.gameObject.tag == groundTagName) { 
-                setJumpable(true);
-            }
-        }
-        private void OnTriggerExit2D(Collider2D collision)
-        {
-            if (collision.gameObject.tag == groundTagName)
-            {
-                setJumpable(false);
-            }
-        }
+    public override bool ContinueUnderBlocked => true;
+
+    public override bool ContinueCheck(bool ordered)
+    {
+        return ordered && targetTransform.position.y < jumpBorder && !(t > 0.01 && targetRigidbody.velocity.y <= 0);
+    }
+
+    public override void OnActivated(bool ordered)
+    {
+        f = Min(targetRigidbody.mass * (jumpSpeed - targetRigidbody.velocity.y) / Time.deltaTime,
+                        maxPushForceMagnitude);
+        t += Time.deltaTime;
+        Debug.Log("Jumping"+activated);
+    }
+
+    public override void OnEnd()
+    {
+        t = 0;
+        activated = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if (!activated) { return; }
+        targetRigidbody.AddForce(f * Vector2.up);
     }
 }
-/*public class Jump : Ability
-{
-    [SerializeField, Range(100, 3000)] float power;
-    public override bool Momential
-    {
-        get
-        {
-            return true;
-        }
-    }
-    // Use this for initialization
-    private void Start()
-    {
-    }
-    public override void Act()
-    {
-        gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, power));
-    }
-    
-}*/

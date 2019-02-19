@@ -17,7 +17,7 @@ namespace PlayerStates {
         //private bool ableToJump;
         //private bool jumping=true;
         Vector2 newv;
-
+        /*
         abstract class JumpState
         {
             public readonly string name;
@@ -47,7 +47,7 @@ namespace PlayerStates {
             }
             public override void Execute()
             {
-                owner.newv.y = owner.verticalMoveSpeed;
+                owner.newv.y = owner.rb.velocity.y;//verticalMoveSpeed;
             }
         }
 
@@ -62,7 +62,7 @@ namespace PlayerStates {
             {
                 owner.newv.y = System.Math.Max(owner.rb.velocity.y, -owner.maxFallSpeed);
             }
-        }
+        }*/
 
         private void Start()
         {
@@ -71,7 +71,7 @@ namespace PlayerStates {
         }
 
         public override State Check()
-        {
+        {/*
             bool onGround;
             if (groundSensor.IsOnGround)
             {
@@ -91,7 +91,7 @@ namespace PlayerStates {
             if (onGround)
             {
                 return GetComponent<PlayerStates.PlayerOnGround>();
-            }
+            }*/
 
             if (player.DoesUmbrellaWork()&&Input.GetButton("Open Umbrella"))
             {
@@ -125,6 +125,7 @@ namespace PlayerStates {
 
         public override void Initialize()
         {
+            /*
             if (groundSensor.IsOnGround && Input.GetButton("Jump"))
             {
                 jumpState = new Jumping(this);
@@ -133,12 +134,13 @@ namespace PlayerStates {
             {
                 jumpState = new NotJumping(this);
             }
+            */
         }
 
         public override void Execute()
         {
             //Debug.Log("Flying");
-
+            /*
             bool r = false;
             bool l = false;
             newv.x = newv.y = 0;
@@ -165,19 +167,22 @@ namespace PlayerStates {
             jumpState.Execute();
             //Debug.Log(jumpState.name);
 
-            rb.velocity = newv;
+            rb.velocity = Vector2.up * newv.y + Vector2.right * rb.velocity.x;
+            //rb.velocity = newv;
             //Debug.Log(rb.velocity.y);
+            */
         }
 
         public override void Terminate()
         {
-            jumpState = null;
+            //jumpState = null;
         }
-
+        /*
         public string CurrentJumpState()
         {
             return jumpState.name;
         }
+        */
     }
 }
 
