@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 1785084}
   - component: {fileID: 1785091}
   - component: {fileID: 1785089}
+  - component: {fileID: 1785055}
   - component: {fileID: 1785087}
   - component: {fileID: 1785090}
   - component: {fileID: 1785062}
@@ -148,6 +149,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1785055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1785054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97fd7b9659197794f98460653c259565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: Behaviour States
+  states:
+  - name: On ground
+    initializeActions:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    executionActions:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    terminateActions:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  - name: Flying
+    initializeActions:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    executionActions:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+    terminateActions:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  stateChangeCallbacks:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  groundSensor: {fileID: 992676923}
 --- !u!70 &1785056
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -721,7 +774,7 @@ MonoBehaviour:
     whenStateIs: Base
     abilities:
     - {fileID: 1785087}
-    dependentStateManager: {fileID: 0}
+    dependentStateManager: {fileID: 1785055}
     subAbilitySets:
     - whenStateIs: On ground
       abilities:

@@ -25,8 +25,10 @@ public abstract class Ability : MonoBehaviour {
 [System.Serializable]
 public abstract class Ability : MonoBehaviour
 {
-    public virtual HashSet<System.Type> MayBeCanceledBy() { return null; }
-    public virtual HashSet<System.Type> ParallelizableWith() { return null; }
+    public interface Following<FollowingAbility> where FollowingAbility : Ability { }
+
+    public virtual HashSet<System.Type> MayBeRestrictedBy() { return null; }
+    //public virtual HashSet<System.Type> ParallelizableWith() { return null; }
     public virtual bool ContinueUnderBlocked => false;
     //public virtual bool IsExclusive() => true;
     public virtual void Activate() { }
@@ -34,3 +36,17 @@ public abstract class Ability : MonoBehaviour
     public virtual void OnActivated(bool ordered) { }
     public virtual void OnEnd() { }
 }
+
+[System.Serializable]
+public abstract class BasicAbility : Ability {
+    
+}
+
+[System.Serializable]
+public abstract class ArtsAbility : Ability { }
+
+[System.Serializable]
+public abstract class OneShotArtsAbility : ArtsAbility { }
+
+[System.Serializable]
+public abstract class ChargeableArtsAbility : ArtsAbility { }

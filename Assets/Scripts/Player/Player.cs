@@ -106,7 +106,7 @@ public class Player : Mortal
         //状態遷移管理用のコンポーネントの初期化
         //これを行って初めて状態遷移が動き始める
         awakeningState.Initialize();
-        behaviourState.Initialize();
+        //behaviourState.Initialize();
         directionState.Initialize();
 
         //namespace PlayerStates 内のクラスはプレイヤーの状態を表すStateクラスを継承したクラス
@@ -115,13 +115,13 @@ public class Player : Mortal
         GetComponent<PlayerStates.Direction.Left>().RegisterInitialize(() => { dirSign = -1; });
 
         //enemyManager.AddEnemyDyingListener(AddAwakeGauge); //敵が死んだときに覚醒ゲージが1増えるようにする 引数の AddAwakeGauge はそのための関数
-
+        /*
         testStateMutable = new StateMutable<string>(gameObject, "StateMutable:Other");
         testStateMutable.Assign<PlayerStates.PlayerOnGround>("StateMutable:OnGround");
         testStateMutable.Assign<PlayerStates.PlayerFlying>("StateMutable:Flying");
         testStateMutable.Assign<PlayerStates.PlayerDamaged>("StateMutable:Damaged");
         testStateMutable.Assign<PlayerStates.PlayerGuard>("StateMutable:Guard");
-
+        */
         //ガード成功時のダメージ倍率はプレイヤーの覚醒状態に依存する
         //クラス StateMutable<T> は「状態に応じて中身が勝手に入れ替わる変数」のイメージ
         guardDamageMultiplier = new StateMutable<float>(gameObject, 0); //デフォルト値を設定する　覚醒状態が「通常」でない（<=>覚醒状態は「覚醒」か「蒼覚醒」）ならばダメージ0倍（<=>無効化）
@@ -144,6 +144,7 @@ public class Player : Mortal
         inputA.InterpretAsButton("Left", () => Input.GetAxis("Horizontal") < 0);
 
         //State遷移関係を構築
+        /*
         {
             behaviourState2
                 .ConnectState((int)BehaviourStates.endOfAction)
@@ -162,6 +163,7 @@ public class Player : Mortal
 
         behaviourState2.EndDefineAll();
         behaviourState2.Activate(0);
+        */
     }
     
     // Update is called once per frame
@@ -182,7 +184,7 @@ public class Player : Mortal
             actionAwake.Action();
         }
 
-        behaviourState.Execute();
+        //behaviourState.Execute();
         //umbrellaParameters.Update();
 
         _debugText.text =
@@ -190,8 +192,8 @@ public class Player : Mortal
             $"Health:{health}/{maxHealth}\n" +
             umbrellaParameters._DebugOutput() +
             actionAwake._DebugOutput() +
-            $"testStateMutable=={testStateMutable.Content}\n"+
-            $"behaviourState2.CurrentStateName=={behaviourState2.CurrentStateName}\n" +
+            //$"testStateMutable=={testStateMutable.Content}\n"+
+            //$"behaviourState2.CurrentStateName=={behaviourState2.CurrentStateName}\n" +
             $"guardDamageMultiplier=={guardDamageMultiplier.Content}";
     }
 
@@ -200,7 +202,7 @@ public class Player : Mortal
         Vector3 selfP = transform.position;
         Vector2 r = attackObj.transform.position - selfP;
         guardSucceed = false;
-        
+        /*
         if((GetComponent<PlayerStates.PlayerGuard>().IsCurrent && dirSign * r.x > 0)|| //地上ガード時のガード成否判定
             (GetComponent<PlayerStates.PlayerGliding>().IsCurrent && r.y > 0)) //滑空時のガード成否判定
         {
@@ -217,33 +219,34 @@ public class Player : Mortal
             {
                 behaviourState.ManuallyChange(c);
             }
-        }
+        }*/
     }
 
     protected override bool IsInvulnerable() //無敵判定用の関数 これがtrueを返す間は被ダメージ処理自体が行われない
     {
-        return 
-            damaged || 
-            dropAttacking || 
-            risingAttacking || 
-            GetComponent<PlayerStates.PlayerTackle>().IsCurrent;
+        return
+            damaged ||
+            dropAttacking ||
+            risingAttacking;// || 
+            //GetComponent<PlayerStates.PlayerTackle>().IsCurrent;
     }
 
     protected override float ConvertDealtDamage(float given) //受けたダメージの変換関数
     {
+        /*
         if ((GetComponent<PlayerStates.PlayerGuard>().IsCurrent || GetComponent<PlayerStates.PlayerGliding>().IsCurrent) && guardSucceed)
         {
             return given * guardDamageMultiplier.Content;
-        }
+        }*/
         return given;
     }
 
     protected override Vector2 ConvertDealtKnockBack(Vector2 given) //受けたノックバックの変換関数
-    {
+    {/*
         if ((GetComponent<PlayerStates.PlayerGuard>().IsCurrent || GetComponent<PlayerStates.PlayerGliding>().IsCurrent) && guardSucceed)
         {
             return Vector2.zero;
-        }
+        }*/
         return given;
     }
 

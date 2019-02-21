@@ -150,7 +150,7 @@ public class ActorBehaviours : MonoBehaviour
 
         public void ConstructPriorTo(Dictionary<System.Type, _AbilityMediator> allMediator)
         {
-            HashSet<System.Type> mayBeCanceledBy = target.MayBeCanceledBy();
+            HashSet<System.Type> mayBeCanceledBy = target.MayBeRestrictedBy();
             if (mayBeCanceledBy != null)
             {
                 foreach (var st in mayBeCanceledBy)

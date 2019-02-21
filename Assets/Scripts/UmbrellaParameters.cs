@@ -27,6 +27,7 @@ public class UmbrellaParameters : MonoBehaviour
 
     private void Start()
     {
+        /*
         _playerObj.GetComponent<PlayerStates.PlayerTackle>().RegisterTurnAction(
             () => { NudgeDurability(-CostOfTackle); _Consuming(); },
             _Recovering
@@ -43,6 +44,7 @@ public class UmbrellaParameters : MonoBehaviour
             _Consuming,
             _Recovering
             );
+            */
     }
 
     private void Update()
