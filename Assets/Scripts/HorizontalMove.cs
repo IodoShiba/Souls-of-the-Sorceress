@@ -6,12 +6,15 @@ using UnityEngine.Serialization;
 using static System.Math;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class HorizontalMove : Ability , ActorVelocity.VelocityShifter
+public class HorizontalMove : BasicAbility , ActorVelocity.VelocityShifter
 {
     [SerializeField] float moveSpeed;
     [SerializeField, FormerlySerializedAs("MaxPushForceMagnitude")] float maxPushForceMagnitude;
     [SerializeField] float maxStopForceMagnitude;
     [SerializeField] Rigidbody2D targetRigidbody;
+
+    //一時的に配置したフィールドであり、じき消す（PlayerManualAI.cs参照）
+    [SerializeField] AI _ai;
 
     int sign = 0;
 
@@ -27,23 +30,23 @@ public class HorizontalMove : Ability , ActorVelocity.VelocityShifter
         targetRigidbody.AddForce(f*Vector2.right);
     }
     
-    public override void Activate()
+    public override void ActivateImple()
     {
         return;
     }
 
-    public override bool ContinueCheck(bool ordered)
+    public override bool CanContinue(bool ordered)
     {
         return ordered;
     }
 
-    public override void OnActivated(bool ordered)
+    public override void OnActive(bool ordered)
     {
-        sign = Sign(Input.GetAxisRaw("Horizontal"));
+        sign = _ai._Sign;
     }
     
 
-    public override void OnEnd()
+    public override void OnEndImple()
     {
         sign = 0;
     }

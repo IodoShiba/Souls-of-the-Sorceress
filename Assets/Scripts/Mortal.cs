@@ -6,39 +6,40 @@ using UnityEngine;
 public abstract class Mortal : MonoBehaviour{
     [SerializeField] protected float health;
     [SerializeField] protected float maxHealth;
+    [SerializeField] UnityEngine.Events.UnityEvent dyingCallbacks;
+    [SerializeField] Rigidbody2D selfRigidbody;
 
-    protected abstract void OnAttacked(GameObject attackObj,Attack attack);
+    protected abstract void OnAttacked(GameObject attackObj,AttackInHitbox attack);
     protected abstract bool IsInvulnerable();
     public abstract void Dying();
-
-    protected virtual float ConvertDealtDamage(float given) {
-        return given;
-    }
-    protected virtual Vector2 ConvertDealtKnockBack(Vector2 given)
-    {
-        return given;
-    }
-    public virtual void ConvertDealingAttack(ref Attack.Parameters attackData)
+    
+    public virtual void ConvertDealingAttack(AttackInHitbox.AttackData attackData)
     {
     }
+    protected virtual void ConvertDealtAttack(AttackInHitbox.AttackData dealt)
+    {
 
-    public void _OnAttackedInternal(GameObject attackObj,Attack data)
+    }
+
+    public void _OnAttackedInternal(GameObject attackObj,AttackInHitbox data)
     {
         if (!IsInvulnerable())
         {
             OnAttacked(attackObj, data);
-            health -= ConvertDealtDamage(data.ParamsConvertedByOwner.damage);
-
-            Vector2 kb = data.ParamsConvertedByOwner.knockBackImpact;
             int kbdir = System.Math.Sign(transform.position.x - attackObj.transform.position.x);
-            var rb = GetComponent<Rigidbody2D>();
-            rb.velocity = Vector2.zero;
-            rb.AddForce(ConvertDealtKnockBack(new Vector2(kbdir * kb.x, kb.y)));
+            data.ParamsConvertedByOwner.knockBackImpact.x *= kbdir;
+            ConvertDealtAttack(data.ParamsConvertedByOwner);
+
+            health -= data.ParamsConvertedByOwner.damage;
+            
+            selfRigidbody.velocity = Vector2.zero;
+            selfRigidbody.AddForce(data.ParamsConvertedByOwner.knockBackImpact);
 
             Debug.Log(gameObject.name + " damaged");
 
             if (health <= 0)
             {
+                dyingCallbacks.Invoke();
                 Dying();
             }
         }

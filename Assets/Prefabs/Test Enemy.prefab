@@ -49,8 +49,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 30
   maxHealth: 100
+  dyingCallbacks:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  selfRigidbody: {fileID: 50437514900522962}
   manager: {fileID: 0}
-  knockBackImpact: {x: 1500, y: 1000}
 --- !u!212 &212918986082494864
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -230,19 +235,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 114042541557569660}
-  damage: 10
-  knockBackImpact: {x: 100, y: 300}
-  attackCollider: {fileID: 61791842784857472}
-  throughable: 1
   onceOnly: 0
   initiallyActivate: 1
-  paramsRaw:
+  targetTag: Player
+  activeSpan: Infinity
+  attackDataPrototype:
     damage: 10
     knockBackImpact: {x: 100, y: 300}
     attackCollider: {fileID: 61791842784857472}
     throughable: 1
-  targetTag: Player
-  activeSpan: Infinity
 --- !u!255 &255723517236346946
 FixedJoint2D:
   m_ObjectHideFlags: 0

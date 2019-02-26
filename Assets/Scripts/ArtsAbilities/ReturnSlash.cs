@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 namespace PlayerStates
 {
     public class PlayerReturnSlash : State
@@ -40,5 +40,40 @@ namespace PlayerStates
         {
             t = 0;
         }
+    }
+}
+*/
+public class ReturnSlash : ArtsAbility
+{
+    [SerializeField] float hopImpact;
+    [SerializeField] float _motionLength;
+    [SerializeField] AttackInHitbox attack;
+    [SerializeField] Umbrella umbrella;
+    [SerializeField] Rigidbody2D playerRb;
+    float t = 0;
+
+    public override bool CanContinue(bool ordered)
+    {
+        return t < _motionLength;
+    }
+
+    public override void ActivateImple()
+    {
+        attack.Activate();
+        umbrella.StartCoroutineForEvent("PlayerReturnSlash");
+        t = 0;
+        playerRb.AddForce(new Vector2(0, hopImpact));
+    }
+
+    public override void OnActive(bool ordered)
+    {
+        t += Time.deltaTime;
+    }
+
+    public override void OnEndImple()
+    {
+        umbrella.StopCoroutine("PlayerReturnSlash");
+        umbrella.Default();
+        t = 0;
     }
 }

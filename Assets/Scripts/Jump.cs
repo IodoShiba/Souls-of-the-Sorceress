@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static System.Math;
 
-public class Jump : Ability
+public class Jump : BasicAbility
 {
     [SerializeField] float jumpSpeed;
     [SerializeField] float maxPushForceMagnitude;
@@ -12,11 +12,8 @@ public class Jump : Ability
     [SerializeField] Rigidbody2D targetRigidbody;
     float jumpBorder;
     Transform targetTransform;
-    bool activated = false;
     float f;
     float t = 0;
-
-    public bool Activated { get => activated;}
     
     // Use this for initialization
     private void Awake()
@@ -24,36 +21,34 @@ public class Jump : Ability
         targetTransform = targetRigidbody.transform;
     }
 
-    public override void Activate()
+    public override void ActivateImple()
     {
         jumpBorder = targetTransform.position.y + maxJumpHeight;
-        activated = true;
     }
 
     public override bool ContinueUnderBlocked => true;
 
-    public override bool ContinueCheck(bool ordered)
+    public override bool CanContinue(bool ordered)
     {
         return ordered && targetTransform.position.y < jumpBorder && !(t > 0.01 && targetRigidbody.velocity.y <= 0);
     }
 
-    public override void OnActivated(bool ordered)
+    public override void OnActive(bool ordered)
     {
         f = Min(targetRigidbody.mass * (jumpSpeed - targetRigidbody.velocity.y) / Time.deltaTime,
                         maxPushForceMagnitude);
         t += Time.deltaTime;
-        Debug.Log("Jumping"+activated);
+        Debug.Log("Jumping"+Activated);
     }
 
-    public override void OnEnd()
+    public override void OnEndImple()
     {
         t = 0;
-        activated = false;
     }
 
     private void FixedUpdate()
     {
-        if (!activated) { return; }
+        if (!Activated) { return; }
         targetRigidbody.AddForce(f * Vector2.up);
     }
 }

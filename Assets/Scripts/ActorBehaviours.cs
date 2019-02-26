@@ -1,11 +1,360 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 #if UNITY_EDITOR
 using UnityEditor;
 using static UnityEditor.EditorGUILayout;
 #endif
 
+public abstract class ActorBehaviours : MonoBehaviour
+{
+    protected class AbilityMed
+    {
+        public ActorBehaviours owner;
+        public Ability target;
+        private List<Condition> conditions = new List<Condition>();
+        private float lastCompletedTime;
+        private bool isCompletedLastTime = false;
+        private bool activated = false;
+
+        public bool Activated { get => activated;}
+        public float LastCompletedTime { get => lastCompletedTime;}
+        public bool IsCompletedLastTime { get => isCompletedLastTime;}
+
+        public bool Attempt() {
+            bool cond = conditions.TrueForAll(c => c.Call()) && target.IsAvailable();
+            if (cond)
+            {
+                target.Activate();
+                activated = true;
+            }
+            return cond;
+        }
+
+        public bool OnActive(bool ordered)
+        {
+            bool stillActivated = false;
+            if (activated)
+            {
+                if (stillActivated = target.CanContinue(ordered)) 
+                {
+                    target.OnActive(ordered);
+                }
+                else
+                {
+                    Inactivate(true);
+                }
+            }
+            return stillActivated;
+        }
+
+        public void Inactivate() { Inactivate(false); }
+
+        private void Inactivate(bool completed)
+        {
+            target.OnEnd();
+            if (completed) {
+                lastCompletedTime = Time.time;
+            }
+            isCompletedLastTime = completed;
+            activated = false;
+        }
+
+        public AbilityMed(ActorBehaviours owner,Ability target)
+        {
+            this.owner = owner;
+            this.target = target;
+            lastCompletedTime = float.MinValue;
+        }
+        
+        public void AddCondition(Condition item)
+        {
+            conditions.Add(item);
+        }
+
+        public FollowCondition Follow<AbilityType>(float followingActivateTimeLimit) where AbilityType : Ability
+        {
+            var am = owner.Allow<AbilityType>();
+            var fc0 = new FollowCondition(null, this, 0);
+            var fc1 = new FollowCondition(this, am, followingActivateTimeLimit);
+            this.conditions.Add(fc0);
+            am.conditions.Add(fc1);
+            new FollowCondition.FollowInstructor(am, fc0, fc1);
+            return fc1;
+        }
+        
+    }
+
+    protected class Condition : System.IDisposable
+    {
+        protected System.Func<bool> cond;
+        bool calledResult;
+        float lastCalled;
+        ActorBehaviours owner;
+
+        public Condition(ActorBehaviours owner, System.Func<bool> cond)
+        {
+            this.owner = owner;
+            this.cond = cond;
+            owner.settingConditions.Add(this);
+            lastCalled = Time.time;
+        }
+
+        public Condition(System.Func<bool> cond)
+        {
+            this.cond = cond;
+            lastCalled = Time.time;
+        }
+
+        public Func<bool> Cond { get => cond;}
+        public bool IsCalledResultObsolete { get => lastCalled != Time.time;}
+
+        public bool Call()
+        {
+            if (IsCalledResultObsolete)
+            {
+                lastCalled = Time.time;
+                return calledResult = cond();
+            }
+            else
+            {
+                return calledResult;
+            }
+        }
+
+        void System.IDisposable.Dispose()
+        {
+            owner.lastEscapedCondition = owner.settingConditions[owner.settingConditions.Count - 1];
+            owner.settingConditions.RemoveAt(owner.settingConditions.Count - 1);
+        }
+
+        public Condition MakeDenial()
+        {
+            if (owner!=null)
+            {
+                return new Condition(owner, () => !Call());
+            }
+            else
+            {
+                return new Condition(() => !Call());
+            }
+        }
+
+        public Condition MakeDenial(ActorBehaviours owner)
+        {
+            return new Condition(owner, () => !Call());
+        }
+    }
+
+    protected class FollowCondition : Condition
+    {
+        private FollowInstructor instructor;
+        private Func<bool> isWaitingInput;
+        private bool entitled = false;
+        private AbilityMed owner;
+
+        public FollowCondition(AbilityMed basis, AbilityMed owner, float followingActivateTimeLimit)
+            :base(() => false)
+        {
+            if (basis == null)
+            {
+                isWaitingInput = () => true;
+                base.cond = () => { instructor.StartCombo(); return entitled; };
+            }
+            else
+            {
+                isWaitingInput = () => Time.time < basis.LastCompletedTime + followingActivateTimeLimit;
+                base.cond = () =>
+                {
+                    instructor.UpdateEntitles();
+                    return entitled;
+                };
+            }
+            this.owner = owner;
+        }
+        
+        public FollowCondition Follow<AbilityType>(float followingActivateTimeLimit) where AbilityType : Ability
+        {
+            return instructor.Follow<AbilityType>(followingActivateTimeLimit);
+        }
+
+        public class FollowInstructor
+        {
+            AbilityMed lastAm;
+            List<FollowCondition> fcs = new List<FollowCondition>();
+            int entitledIndex = 0;
+            float comboStartedTime = 0;
+            float lastUpdateTime = float.MinValue;
+
+            public FollowInstructor(AbilityMed last, FollowCondition first, FollowCondition second)
+            {
+                this.lastAm = last;
+                fcs.Add(first);
+                fcs.Add(second);
+                first.entitled = true;
+                first.instructor = second.instructor = this;
+            }
+
+            public FollowCondition Follow<AbilityType>(float followingActivateTimeLimit) where AbilityType : Ability
+            {
+                var newAm = lastAm.owner.Allow<AbilityType>();
+                var newFc = new FollowCondition(lastAm, newAm, followingActivateTimeLimit);
+                newFc.instructor = this;
+                newAm.AddCondition(newFc);
+                fcs.Add(newFc);
+
+                lastAm = newAm;
+                return newFc;
+            }
+
+            public void UpdateEntitles()
+            {
+                if (Time.time == lastUpdateTime) { return; }
+                lastUpdateTime = Time.time;
+
+                int formerEntitledIndex = entitledIndex;
+                while (entitledIndex < fcs.Count && fcs[entitledIndex].owner.LastCompletedTime > comboStartedTime)
+                {
+                    entitledIndex++;
+                    if(entitledIndex >= fcs.Count)
+                    {
+                        entitledIndex = 0;
+                        break;
+                    }
+                }
+
+                if (!(fcs[entitledIndex].isWaitingInput()&&lastAm.owner.lastDisabledTime<=comboStartedTime))
+                {
+                    entitledIndex = 0;
+                }
+                fcs[formerEntitledIndex].entitled = false;
+                fcs[entitledIndex].entitled = true;
+            }
+
+            public void StartCombo()
+            {
+                UpdateEntitles();
+                if (entitledIndex == 0)
+                {
+                    comboStartedTime = Time.time;
+                }
+            }
+        }
+    }
+
+    [SerializeField] AI ai;
+    Dictionary<System.Type, AbilityMed> allAbilities = new Dictionary<System.Type, AbilityMed>();
+    List<AbilityMed> basicAbilityMeds = new List<AbilityMed>();
+    AbilityMed currentArtMed;
+    HashSet<System.Type> currentDecisions = new HashSet<System.Type>();
+    PassiveBehaviour[] passiveBehaviours;
+
+    List<Condition> settingConditions = new List<Condition>();
+    Condition lastEscapedCondition = null;
+    float lastDisabledTime = -1;
+
+    protected Condition IfScope(System.Func<bool> condf) {
+        lastEscapedCondition = null;
+        return new Condition(this, condf);
+    }
+    protected Condition ElseScope() {
+        if (lastEscapedCondition!=null)
+        {
+            return lastEscapedCondition.MakeDenial();
+        }
+        else
+        {
+            throw new InvalidOperationException();
+        }
+    }
+    protected Condition Deny(Condition condition) => condition.MakeDenial(this);
+
+    protected abstract void Structure();
+
+    private void Start()
+    {
+        passiveBehaviours = GetComponents<PassiveBehaviour>();
+        Structure();
+        settingConditions = null;
+    }
+
+    private void Update()
+    {
+        ai.AskDecision(currentDecisions);
+
+        foreach(var am in basicAbilityMeds)
+        {
+            if (am.Activated)
+            {
+                am.OnActive(currentDecisions.Contains(am.target.GetType()));
+            }
+            else
+            {
+                if (currentDecisions.Contains(am.target.GetType()))
+                {
+                    am.Attempt();
+                }
+            }
+        }
+
+        currentDecisions.RemoveWhere(t => !typeof(ArtsAbility).IsAssignableFrom(t));
+
+        if (currentArtMed == null)
+        {
+            foreach (var t in currentDecisions)
+            {
+                var abm = allAbilities[t];
+                if (abm.Attempt())
+                {
+                    currentArtMed = abm;
+                    //if (currentArtMed != null) { break; }
+                }
+            }
+        }
+        else
+        {
+            if (!currentArtMed.OnActive(currentDecisions.Contains(currentArtMed.GetType())))
+            {
+                currentArtMed = null;
+            }
+            basicAbilityMeds.ForEach(m => m.Inactivate());
+        }
+
+        currentDecisions.Clear();
+
+        Debug.Log(Input.GetButton("Jump"));
+    }
+
+    protected AbilityMed Allow<AbilityType>() where AbilityType : Ability
+    {
+        Ability ability = GetComponent<AbilityType>();
+        AbilityMed newAbilityMed = new AbilityMed(this, ability);
+
+        allAbilities.Add(ability.GetType(), newAbilityMed);
+
+        foreach (var c in settingConditions)
+        {
+            newAbilityMed.AddCondition(c);
+        }
+
+        if (typeof(BasicAbility).IsAssignableFrom(typeof(AbilityType)))
+        {
+            basicAbilityMeds.Add(newAbilityMed);
+        }
+
+        return newAbilityMed;
+    }
+
+    private void OnDisable()
+    {
+        lastDisabledTime = Time.time;
+    }
+}
+
+
+
+/*
 public class ActorBehaviours : MonoBehaviour
 {
 
@@ -29,12 +378,12 @@ public class ActorBehaviours : MonoBehaviour
             if (abilities.Count > 0)
             {
                 realAbilities = new HashSet<Ability>(abilities);//new Dictionary<string, Skill>();
-                /*
-                foreach (var s in skills)
-                {
-                    realSkills.Add(s.GetType().Name, s);
-                }
-                */
+                
+                //foreach (var s in skills)
+                //{
+                //    realSkills.Add(s.GetType().Name, s);
+                //}
+                
             }
 
             if (subAbilitySets.Count > 0)
@@ -322,12 +671,12 @@ public class ActorBehaviours : MonoBehaviour
             ap.Value.Update();
         }
     }
-    /*
-    public void UpdateAvailableAbilities()
-    {
-        //availableAbilities = baseAbilitySet.GetAvailableAbilities();
-    }
-    */
+    
+    //public void UpdateAvailableAbilities()
+    //{
+    //    //availableAbilities = baseAbilitySet.GetAvailableAbilities();
+    //}
+    
     
 #if UNITY_EDITOR
     [CustomEditor(typeof(ActorBehaviours))]
@@ -433,3 +782,4 @@ public class ActorBehaviours : MonoBehaviour
 #endif
 
 }
+*/

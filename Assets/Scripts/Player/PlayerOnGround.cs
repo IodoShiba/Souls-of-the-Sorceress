@@ -44,7 +44,7 @@ namespace PlayerStates
 
             if (Input.GetButtonDown("Attack"))
             {
-                return GetComponent<PlayerStates.PlayerVerticalSlash>();
+                //return GetComponent<PlayerStates.PlayerVerticalSlash>();
             }
 
             if(Input.GetButtonDown("Magical Attack"))

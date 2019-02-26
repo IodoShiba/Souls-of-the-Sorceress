@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CounterAttack : MonoBehaviour
 {
-    [SerializeField] Attack attack;
+    [SerializeField] AttackInHitbox attack;
     private List<Mortal> subjects = new List<Mortal>();
 
     public void AddSubjects(Mortal subject)

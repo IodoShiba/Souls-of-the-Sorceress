@@ -36,3 +36,33 @@ namespace PlayerStates {
         }
     }
 }
+
+public class AerialSlash : ArtsAbility
+{
+    [SerializeField] float _motionLength;
+    [SerializeField] Rigidbody2D playerRb;
+    [SerializeField] GroundSensor groundSensor;
+    [SerializeField] AttackInHitbox attack;
+    [SerializeField] Umbrella umbrella;
+    float t = 0;
+    public override bool CanContinue(bool ordered)
+    {
+        return t < _motionLength && !groundSensor.IsOnGround;
+    }
+    public override void ActivateImple()
+    {
+        attack.Activate();
+        umbrella.StartCoroutineForEvent("PlayerAerialSlash");
+        t = 0;
+    }
+    public override void OnActive(bool ordered)
+    {
+        t += Time.deltaTime;
+    }
+    public override void OnEndImple()
+    {
+        umbrella.StopCoroutine("PlayerAerialSlash");
+        umbrella.Default();
+        t = 0;
+    }
+}
