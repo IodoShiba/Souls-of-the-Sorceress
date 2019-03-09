@@ -44,7 +44,7 @@ public class AttackInHitbox : MonoBehaviour {
     public Collider2D AttackCollider { get { return convertedAttackData.attackCollider; } }
     public bool Throughable { get { return convertedAttackData.throughable; } }
 
-    public AttackData ParamsConvertedByOwner { get => convertedAttackData; }
+    public AttackData ParamsConvertedByOwner { get => new AttackData(convertedAttackData); }
     public Mortal Owner { get => owner;}
     
     [SerializeField,TagField] string targetTag;
@@ -78,7 +78,7 @@ public class AttackInHitbox : MonoBehaviour {
         GameObject hit = collider.gameObject;
         if (hit.tag == targetTag)
         {
-            hit.GetComponent<Mortal>()._OnAttackedInternal(gameObject,this);
+            hit.GetComponent<Mortal>()._OnAttackedInternal(gameObject,this.ParamsConvertedByOwner);
             if (!this.Throughable)
             {
                 if (onceOnly)

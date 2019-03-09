@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour {
 
     [SerializeField] EnemyManager _manager;
-    [SerializeField] GameObject enemyPrefab;
+    [SerializeField] Enemy enemyPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +19,7 @@ public class EnemySpawner : MonoBehaviour {
 
     void Spawn()
     {
-        Instantiate(enemyPrefab, transform.position, Quaternion.identity).GetComponent<Enemy>().manager = _manager;
+        //Instantiate(enemyPrefab, transform.position, Quaternion.identity).GetComponent<Enemy>().manager = _manager;
+        _manager.Summon(enemyPrefab, transform.position, Quaternion.identity);
     }
 }

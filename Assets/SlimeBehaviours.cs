@@ -1,12 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static ActorBehaviour;
 
-public class WalkingMashBehaviours : ActorBehavioursManager
+public class SlimeBehaviours : ActorBehaviour.ActorBehavioursManager
 {
     protected override void Structure()
     {
-        Allow<HorizontalMove>();
+        Allow<Spike>();
     }
 }

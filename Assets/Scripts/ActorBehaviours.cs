@@ -6,7 +6,7 @@ using System;
 using UnityEditor;
 using static UnityEditor.EditorGUILayout;
 #endif
-
+/*
 public abstract class ActorBehaviours : MonoBehaviour
 {
     protected class AbilityMed
@@ -244,7 +244,7 @@ public abstract class ActorBehaviours : MonoBehaviour
     }
 
     [SerializeField] AI ai;
-    Dictionary<System.Type, AbilityMed> allAbilities = new Dictionary<System.Type, AbilityMed>();
+    Dictionary<System.Type, AbilityMed> allAbilityMeds = new Dictionary<System.Type, AbilityMed>();
     List<AbilityMed> basicAbilityMeds = new List<AbilityMed>();
     AbilityMed currentArtMed;
     HashSet<System.Type> currentDecisions = new HashSet<System.Type>();
@@ -304,7 +304,7 @@ public abstract class ActorBehaviours : MonoBehaviour
         {
             foreach (var t in currentDecisions)
             {
-                var abm = allAbilities[t];
+                var abm = allAbilityMeds[t];
                 if (abm.Attempt())
                 {
                     currentArtMed = abm;
@@ -331,7 +331,7 @@ public abstract class ActorBehaviours : MonoBehaviour
         Ability ability = GetComponent<AbilityType>();
         AbilityMed newAbilityMed = new AbilityMed(this, ability);
 
-        allAbilities.Add(ability.GetType(), newAbilityMed);
+        allAbilityMeds.Add(ability.GetType(), newAbilityMed);
 
         foreach (var c in settingConditions)
         {
@@ -351,7 +351,7 @@ public abstract class ActorBehaviours : MonoBehaviour
         lastDisabledTime = Time.time;
     }
 }
-
+*/
 
 
 /*

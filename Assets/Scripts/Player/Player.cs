@@ -135,7 +135,7 @@ public class Player : Mortal
             $"guardDamageMultiplier=={guardDamageMultiplier.Content}";
     }
 
-    protected override void OnAttacked(GameObject attackObj, AttackInHitbox attack) //攻撃されたときにAttackから（間接的に）実行される関数
+    protected override void OnAttacked(GameObject attackObj, AttackInHitbox.AttackData attack) //攻撃されたときにAttackから（間接的に）実行される関数
     {
         Vector3 selfP = transform.position;
         Vector2 r = attackObj.transform.position - selfP;

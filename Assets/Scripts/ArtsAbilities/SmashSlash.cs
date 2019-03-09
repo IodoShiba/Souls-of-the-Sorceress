@@ -42,24 +42,24 @@ public class SmashSlash : ArtsAbility
     [SerializeField] Umbrella umbrella;
     float t = 0;
 
-    public override bool CanContinue(bool ordered)
+    protected override bool CanContinue(bool ordered)
     {
         return t < _motionLength;
     }
 
-    public override void ActivateImple()
+    protected override void ActivateImple()
     {
         attack.Activate();
         umbrella.StartCoroutineForEvent("PlayerSmashSlash");
         t = 0;
     }
 
-    public override void OnActive(bool ordered)
+    protected override void OnActive(bool ordered)
     {
         t += Time.deltaTime;
     }
 
-    public override void OnEndImple()
+    protected override void OnEndImple()
     {
         umbrella.StopCoroutine("PlayerSmashSlash");
         umbrella.Default();

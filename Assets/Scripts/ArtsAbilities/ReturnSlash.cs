@@ -52,12 +52,12 @@ public class ReturnSlash : ArtsAbility
     [SerializeField] Rigidbody2D playerRb;
     float t = 0;
 
-    public override bool CanContinue(bool ordered)
+    protected override bool CanContinue(bool ordered)
     {
         return t < _motionLength;
     }
 
-    public override void ActivateImple()
+    protected override void ActivateImple()
     {
         attack.Activate();
         umbrella.StartCoroutineForEvent("PlayerReturnSlash");
@@ -65,12 +65,12 @@ public class ReturnSlash : ArtsAbility
         playerRb.AddForce(new Vector2(0, hopImpact));
     }
 
-    public override void OnActive(bool ordered)
+    protected override void OnActive(bool ordered)
     {
         t += Time.deltaTime;
     }
 
-    public override void OnEndImple()
+    protected override void OnEndImple()
     {
         umbrella.StopCoroutine("PlayerReturnSlash");
         umbrella.Default();

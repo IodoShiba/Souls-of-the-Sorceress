@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using static ActorBehaviour;
 
-public class ElementBehaviours : ActorBehavioursManager
+public class HugeMashBehaviours : ActorBehavioursManager
 {
     protected override void Structure()
     {
         Allow<HorizontalMove>();
-        Allow<ShootBullet>();
+        Allow<Summon>();
     }
 }

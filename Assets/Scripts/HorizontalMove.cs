@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 using static System.Math;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class HorizontalMove : BasicAbility , ActorVelocity.VelocityShifter
+public class HorizontalMove : BasicAbility , ActorVelocity.VelocityShifter , ActorBehaviour.IParamableWith<int>
 {
     [SerializeField] float moveSpeed;
     [SerializeField, FormerlySerializedAs("MaxPushForceMagnitude")] float maxPushForceMagnitude;
@@ -30,23 +30,22 @@ public class HorizontalMove : BasicAbility , ActorVelocity.VelocityShifter
         targetRigidbody.AddForce(f*Vector2.right);
     }
     
-    public override void ActivateImple()
+    protected override void ActivateImple()
     {
         return;
     }
 
-    public override bool CanContinue(bool ordered)
+    protected override bool CanContinue(bool ordered)
     {
         return ordered;
     }
 
-    public override void OnActive(bool ordered)
+    protected override void OnActive(bool ordered)
     {
-        sign = _ai._Sign;
     }
     
 
-    public override void OnEndImple()
+    protected override void OnEndImple()
     {
         sign = 0;
     }
@@ -54,6 +53,12 @@ public class HorizontalMove : BasicAbility , ActorVelocity.VelocityShifter
     public Vector2 GetVelocity()
     {
         return sign * moveSpeed * Vector2.right;
+    }
+
+    public ActorBehaviour SetParams(int value)
+    {
+        sign = value;
+        return this;
     }
 }
 

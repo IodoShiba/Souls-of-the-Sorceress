@@ -21,19 +21,19 @@ public class Jump : BasicAbility
         targetTransform = targetRigidbody.transform;
     }
 
-    public override void ActivateImple()
+    protected override void ActivateImple()
     {
         jumpBorder = targetTransform.position.y + maxJumpHeight;
     }
 
     public override bool ContinueUnderBlocked => true;
 
-    public override bool CanContinue(bool ordered)
+    protected override bool CanContinue(bool ordered)
     {
         return ordered && targetTransform.position.y < jumpBorder && !(t > 0.01 && targetRigidbody.velocity.y <= 0);
     }
 
-    public override void OnActive(bool ordered)
+    protected override void OnActive(bool ordered)
     {
         f = Min(targetRigidbody.mass * (jumpSpeed - targetRigidbody.velocity.y) / Time.deltaTime,
                         maxPushForceMagnitude);
@@ -41,7 +41,7 @@ public class Jump : BasicAbility
         Debug.Log("Jumping"+Activated);
     }
 
-    public override void OnEndImple()
+    protected override void OnEndImple()
     {
         t = 0;
     }

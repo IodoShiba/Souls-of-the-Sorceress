@@ -30,6 +30,13 @@ public class EnemyManager : MonoBehaviour {
         StartCoroutine( RemoveDead() );
     }
 
+    public Enemy Summon(Enemy target,Vector3 position,Quaternion quaternion)
+    {
+        var r = Instantiate(target, position, quaternion);
+        r.manager = this;
+        return r;
+    }
+
     public void AddNewEnemy(Enemy enemy)
     {
         if(enemy == null) { return; }

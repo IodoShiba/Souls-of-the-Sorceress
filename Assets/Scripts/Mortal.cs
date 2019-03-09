@@ -9,7 +9,7 @@ public abstract class Mortal : MonoBehaviour{
     [SerializeField] UnityEngine.Events.UnityEvent dyingCallbacks;
     [SerializeField] Rigidbody2D selfRigidbody;
 
-    protected abstract void OnAttacked(GameObject attackObj,AttackInHitbox attack);
+    protected abstract void OnAttacked(GameObject attackObj,AttackInHitbox.AttackData attack);
     protected abstract bool IsInvulnerable();
     public abstract void Dying();
     
@@ -21,19 +21,19 @@ public abstract class Mortal : MonoBehaviour{
 
     }
 
-    public void _OnAttackedInternal(GameObject attackObj,AttackInHitbox data)
+    public void _OnAttackedInternal(GameObject attackObj,AttackInHitbox.AttackData data)
     {
         if (!IsInvulnerable())
         {
             OnAttacked(attackObj, data);
             int kbdir = System.Math.Sign(transform.position.x - attackObj.transform.position.x);
-            data.ParamsConvertedByOwner.knockBackImpact.x *= kbdir;
-            ConvertDealtAttack(data.ParamsConvertedByOwner);
+            data.knockBackImpact.x *= kbdir;
+            ConvertDealtAttack(data);
 
-            health -= data.ParamsConvertedByOwner.damage;
+            health -= data.damage;
             
             selfRigidbody.velocity = Vector2.zero;
-            selfRigidbody.AddForce(data.ParamsConvertedByOwner.knockBackImpact);
+            selfRigidbody.AddForce(data.knockBackImpact);
 
             Debug.Log(gameObject.name + " damaged");
 

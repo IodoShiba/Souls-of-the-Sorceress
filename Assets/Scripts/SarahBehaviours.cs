@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using static ActorBehaviour;
 
-public class SarahBehaviours : ActorBehaviours
+public class SarahBehaviours : ActorBehavioursManager
 {
     [SerializeField] float maxIntervalOfTripleAttack;
     [SerializeField] GroundSensor groundSensor;
@@ -21,7 +22,7 @@ public class SarahBehaviours : ActorBehaviours
         FollowCondition smashSlashWaitingCond = triples.Follow<SmashSlash>(maxIntervalOfTripleAttack);
         using (ElseScope())
         {
-            using (Deny(smashSlashWaitingCond))
+            using (DenyIfScope(smashSlashWaitingCond))
             {
                 Allow<AerialSlash>();
             }

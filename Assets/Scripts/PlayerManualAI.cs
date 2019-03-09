@@ -5,44 +5,53 @@ using static System.Math;
 
 public abstract class AI : MonoBehaviour
 {
-    //_（アンダースコア）から始まるこれら2メンバーはAbilityにActorの向きの情報を与える上手い方法が現時点で無いがために作られた
-    //AIにActorの向きの情報を持たせるのは論外な設計だから
-    //これは修正して消す
-    protected int _sign = 0;
-    public int _Sign { get => _sign; }
-
-    protected HashSet<System.Type> decisions;
-    public void AskDecision(HashSet<System.Type> decisions) {
-        this.decisions = decisions;
-        Brain();
-    }
-    protected void Decide<AbilityType>() where AbilityType : Ability
-    {
-        this.decisions.Add(typeof(AbilityType));
-    }
-    protected abstract void Brain();
+    
+    public abstract void AskDecision();
+    
 }
 
 public class PlayerManualAI : AI
 {
+    HorizontalMove horizontalMove;
+    Jump jump;
+    VerticalSlash verticalSlash;
+    ReturnSlash returnSlash;
+    SmashSlash smashSlash;
+    AerialSlash aerialSlash;
 
-    protected override void Brain()
+    private void Awake()
     {
-        _sign = 0;
+        horizontalMove = GetComponent<HorizontalMove>();
+        jump = GetComponent<Jump>();
+        verticalSlash = GetComponent<VerticalSlash>();
+        returnSlash = GetComponent<ReturnSlash>();
+        smashSlash = GetComponent<SmashSlash>();
+        aerialSlash = GetComponent<AerialSlash>();
+    }
+
+    public override void AskDecision()
+    {
+        int _sign = 0;
         if((_sign = Sign(Input.GetAxisRaw("Horizontal"))) != 0)
         {
-            Decide<HorizontalMove>();
+            //Decide<HorizontalMove>();
+            horizontalMove.SetParams(_sign).SendSignal();
         }
         if (Input.GetButton("Jump"))
         {
-            Decide<Jump>();
+            //Decide<Jump>();
+            jump.SendSignal();
         }
         if (Input.GetButtonDown("Attack"))
         {
-            Decide<VerticalSlash>();
-            Decide<ReturnSlash>();
-            Decide<SmashSlash>();
-            Decide<AerialSlash>();
+            //Decide<VerticalSlash>();
+            //Decide<ReturnSlash>();
+            //Decide<SmashSlash>();
+            //Decide<AerialSlash>();
+            verticalSlash.SendSignal();
+            returnSlash.SendSignal();
+            smashSlash.SendSignal();
+            aerialSlash.SendSignal();
         }
     }
 }

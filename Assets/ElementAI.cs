@@ -11,20 +11,28 @@ public class ElementAI : AI
     [SerializeField] Player player;
     [SerializeField] ShootBullet _shootBullet;
     float t = 0;
-    protected override void Brain()
+
+    HorizontalMove horizontalMove;
+    ShootBullet shootBullet;
+
+    private void Awake()
+    {
+        horizontalMove = GetComponent<HorizontalMove>();
+        shootBullet = GetComponent<ShootBullet>();
+    }
+
+    public override void AskDecision()
     {
         float d = player.transform.position.x - transform.position.x;
         if (minChaseGap < Abs(d) && Abs(d) < maxChaseGap) 
         {
-            _sign = System.Math.Sign(player.transform.position.x - transform.position.x);
-            Decide<HorizontalMove>();
+            horizontalMove.SetParams(System.Math.Sign(player.transform.position.x - transform.position.x)).SendSignal();
         }
 
         t += Time.deltaTime;
         if (t > shootCycle)
         {
-            _shootBullet.direction = player.transform.position - transform.position;
-            Decide<ShootBullet>();
+            _shootBullet.SetParams(player.transform.position - transform.position).SendSignal();
             t -= shootCycle;
         }
     }

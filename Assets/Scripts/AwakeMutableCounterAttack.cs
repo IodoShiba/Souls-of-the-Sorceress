@@ -17,7 +17,7 @@ public class AwakeMutableCounterAttack : MonoBehaviour
         attack.AdjustAwake();
         foreach (var s in subjects)
         {
-            s._OnAttackedInternal(gameObject, attack);
+            s._OnAttackedInternal(gameObject, attack.ParamsConvertedByOwner);
         }
     }
 
@@ -25,7 +25,7 @@ public class AwakeMutableCounterAttack : MonoBehaviour
     {
         attack.AdjustAwake();
         attack.Activate();
-        subject._OnAttackedInternal(gameObject, attack);
+        subject._OnAttackedInternal(gameObject, attack.ParamsConvertedByOwner);
         attack.Inactivate();
     }
 }
