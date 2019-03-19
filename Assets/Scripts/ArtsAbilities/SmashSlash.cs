@@ -47,7 +47,7 @@ public class SmashSlash : ArtsAbility
         return t < _motionLength;
     }
 
-    protected override void ActivateImple()
+    protected override void OnInitialize()
     {
         attack.Activate();
         umbrella.StartCoroutineForEvent("PlayerSmashSlash");
@@ -59,7 +59,7 @@ public class SmashSlash : ArtsAbility
         t += Time.deltaTime;
     }
 
-    protected override void OnEndImple()
+    protected override void OnTerminate()
     {
         umbrella.StopCoroutine("PlayerSmashSlash");
         umbrella.Default();

@@ -49,7 +49,7 @@ public class AerialSlash : ArtsAbility
     {
         return t < _motionLength && !groundSensor.IsOnGround;
     }
-    protected override void ActivateImple()
+    protected override void OnInitialize()
     {
         attack.Activate();
         umbrella.StartCoroutineForEvent("PlayerAerialSlash");
@@ -59,7 +59,7 @@ public class AerialSlash : ArtsAbility
     {
         t += Time.deltaTime;
     }
-    protected override void OnEndImple()
+    protected override void OnTerminate()
     {
         umbrella.StopCoroutine("PlayerAerialSlash");
         umbrella.Default();

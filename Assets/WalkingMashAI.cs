@@ -21,7 +21,8 @@ public class WalkingMashAI : AI
         Vector2 vector = playerTransform.position - transform.position;
         if (minChaseRadius < vector.magnitude && vector.magnitude < maxChaseRadius)
         {
-            horizontalMove.SetParams(System.Math.Sign(vector.x)).SendSignal();
+            horizontalMove.SetParams(System.Math.Sign(vector.x));
+            horizontalMove.SendSignal();
         }
     }
 }

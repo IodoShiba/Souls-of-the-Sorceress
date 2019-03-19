@@ -36,13 +36,13 @@ public class Enemy : Mortal {
         }
 	}
 
-    protected override void OnAttacked(GameObject attackObj, AttackInHitbox.AttackData attack)
+    protected override void OnAttacked(GameObject attackObj, AttackData attack)
     {
         Debug.Log("Enemy:Ahh!");
         _protectTime = 0.3f;
     }
     
-    protected override void ConvertDealtAttack(AttackInHitbox.AttackData dealt)
+    protected override void ConvertDealtAttack(AttackData dealt)
     {
         dealt.knockBackImpact *= 10;
     }

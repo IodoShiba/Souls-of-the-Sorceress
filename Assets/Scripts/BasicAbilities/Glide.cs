@@ -38,7 +38,7 @@ namespace PlayerStates
 
             if (Input.GetButtonDown("Attack"))
             {
-                return GetComponent<PlayerStates.PlayerRisingAttack>();
+                //return GetComponent<PlayerStates.PlayerRisingAttack>();
             }
 
             return null;
@@ -79,5 +79,41 @@ namespace PlayerStates
         public override void Terminate()
         {
         }
+    }
+}
+
+public class Glide : BasicAbility
+{
+    [SerializeField] Player player;
+    [SerializeField] float horizontalMoveSpeed;
+    [SerializeField] float maxFallSpeed;
+    [SerializeField] Umbrella umbrella;
+    [SerializeField] GroundSensor groundSensor;
+    [SerializeField] HorizontalMove horizontalMove;
+
+    private Rigidbody2D rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
+    private void FixedUpdate()
+    {
+        if (Activated) { rb.AddForce(Vector2.up * (rb.mass * (System.Math.Max(rb.velocity.y, -maxFallSpeed) - rb.velocity.y) / Time.deltaTime)); }
+    }
+
+    protected override bool CanContinue(bool ordered)
+    {
+        return ordered && !groundSensor.IsOnGround && player.DoesUmbrellaWork();
+    }
+    protected override void OnInitialize()
+    {
+        umbrella.PlayerGliding();
+        horizontalMove.moveSpeed = horizontalMoveSpeed;
+    }
+    protected override void OnTerminate()
+    {
+        umbrella.Default();
+        horizontalMove.ResetSpeed();
     }
 }

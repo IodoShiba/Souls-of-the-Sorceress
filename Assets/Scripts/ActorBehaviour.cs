@@ -2,23 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEditor;
 /*
 public abstract class Ability : MonoBehaviour {
-    public abstract bool Momential
-    {
-        get;
-    }
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+public abstract bool Momential
+{
+get;
+}
+// Use this for initialization
+void Start () {
 
-    public abstract void Act();
+}
+
+// Update is called once per frame
+void Update () {
+
+}
+
+public abstract void Act();
 }
 */
 
@@ -26,7 +27,16 @@ public abstract class Ability : MonoBehaviour {
 public abstract class ActorBehaviour : MonoBehaviour
 {
     public interface Following<FollowingAbility> where FollowingAbility : ActorBehaviour { }
-    public interface IParamableWith<T> { ActorBehaviour SetParams(T value); }
+
+    public interface IParallelizableWith<T> where T : ActorBehaviour { }
+    public interface IMayBeCanceledBy { }
+    public interface IMayBeCancelledBy<T> : IMayBeCanceledBy where T : ActorBehaviour { }
+
+    public interface IParamableWith<T> { void SetParams(T value); }
+    public interface IParamableWith<T1,T2> { void SetParams(T1 v1,T2 v2); }
+    public interface IParamableWith<T1, T2,T3> { void SetParams(T1 v1, T2 v2, T3 v3); }
+    public interface IParamableWith<T1, T2, T3,T4> { void SetParams(T1 v1, T2 v2, T3 v3, T4 v4); }
+
     bool activated = false;
     public virtual HashSet<System.Type> MayBeRestrictedBy() { return null; }
     //public virtual HashSet<System.Type> ParallelizableWith() { return null; }
@@ -36,12 +46,12 @@ public abstract class ActorBehaviour : MonoBehaviour
 
     //public virtual bool IsExclusive() => true;
     public virtual bool IsAvailable() { return true; }
-    private void Activate() { activated = true; ActivateImple(); }
-    protected virtual void ActivateImple() { }
+    private void Activate() { activated = true; OnInitialize(); }
+    protected virtual void OnInitialize() { }
     protected abstract bool CanContinue(bool ordered);
     protected virtual void OnActive(bool ordered) { }
-    protected void OnEnd() { activated = false;OnEndImple(); }
-    protected virtual void OnEndImple() { }
+    protected void Terminate() { activated = false;OnTerminate(); }
+    protected virtual void OnTerminate() { }
 
     public void SendSignal() { owner.SendSignal(selfId); }
 
@@ -85,9 +95,33 @@ public abstract class ActorBehaviour : MonoBehaviour
         
         protected class BehaviourMed
         {
+            private class ConditionSet
+            {
+                //このリストのうち添え字の小さいstricrsCount個の要素はBehaviourの発動と継続に必要な条件(hard condition)、
+                //それ以外は発動のみに必要な条件(soft condition)として扱われる。
+                List<ActivateCondition> conditions = new List<ActivateCondition>();
+                int hardConditionsCount = 0;
+                public void AddCondition(ActivateCondition item, bool isHard = false) {
+                    conditions.Insert(isHard ? hardConditionsCount++ : conditions.Count, item);
+                }
+                public bool CanActivate() => conditions.TrueForAll(c => c.Call());
+                public bool CanContinue()
+                {
+                    for(int i = 0; i < hardConditionsCount; ++i)
+                    {
+                        if (!conditions[i].Call())
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            }
+
             public ActorBehavioursManager owner;
             public ActorBehaviour target;
-            private List<Condition> conditions = new List<Condition>();
+            //private List<ActivateCondition> conditions = new List<ActivateCondition>();
+            private ConditionSet conditionSet = new ConditionSet();
             private float lastCompletedTime;
             private bool isCompletedLastTime = false;
             //private bool activated = false;
@@ -118,7 +152,7 @@ public abstract class ActorBehaviour : MonoBehaviour
 
             public bool Attempt()
             {
-                bool cond = conditions.TrueForAll(c => c.Call()) && target.IsAvailable();
+                bool cond = conditionSet.CanActivate() && target.IsAvailable();
                 if (cond)
                 {
                     target.Activate();
@@ -148,13 +182,15 @@ public abstract class ActorBehaviour : MonoBehaviour
 
             private void Inactivate(bool completed)
             {
-                target.OnEnd();
+                if (target.activated)
+                {
+                    target.Terminate();
+                }
                 if (completed)
                 {
                     lastCompletedTime = Time.time;
                 }
                 isCompletedLastTime = completed;
-                //activated = false;
             }
 
             public BehaviourMed(ActorBehavioursManager owner, ActorBehaviour target)
@@ -180,9 +216,9 @@ public abstract class ActorBehaviour : MonoBehaviour
                 lastCompletedTime = float.MinValue;
             }
 
-            public void AddCondition(Condition item)
+            public void AddCondition(ActivateCondition item,bool isHard=false)
             {
-                conditions.Add(item);
+                conditionSet.AddCondition(item,isHard);
             }
 
             public FollowCondition Follow<AbilityType>(float followingActivateTimeLimit) where AbilityType : Ability
@@ -190,8 +226,10 @@ public abstract class ActorBehaviour : MonoBehaviour
                 var am = owner.Allow<AbilityType>();
                 var fc0 = new FollowCondition(null, this, 0);
                 var fc1 = new FollowCondition(this, am, followingActivateTimeLimit);
-                this.conditions.Add(fc0);
-                am.conditions.Add(fc1);
+                //this.conditions.Add(fc0);
+                //am.conditions.Add(fc1);
+                this.conditionSet.AddCondition(fc0);
+                am.conditionSet.AddCondition(fc1);
                 new FollowCondition.FollowInstructor(am, fc0, fc1);
                 return fc1;
             }
@@ -199,41 +237,25 @@ public abstract class ActorBehaviour : MonoBehaviour
         }
         
 
-        protected class Condition : System.IDisposable
+        protected class ActivateCondition : System.IDisposable
         {
             protected System.Func<bool> cond;
             bool calledResult;
             float lastCalled;
             ActorBehavioursManager owner;
 
-            public Condition( System.Func<bool> cond, ActorBehavioursManager owner=null)
+            public ActivateCondition( System.Func<bool> cond, ActorBehavioursManager owner=null)
             {
                 this.owner = owner;
                 this.cond = cond;
                 if(owner !=null) owner.settingConditions.Add(this);
                 lastCalled = Time.time;
             }
-            /*
-            public Condition(System.Func<bool> cond)
-            {
-                this.cond = cond;
-                lastCalled = Time.time;
-            }
-            */
             public Func<bool> Cond { get => cond; }
-            public bool IsCalledResultObsolete { get => lastCalled != Time.time; }
 
             public bool Call()
             {
-                if (IsCalledResultObsolete)
-                {
-                    lastCalled = Time.time;
-                    return calledResult = cond();
-                }
-                else
-                {
-                    return calledResult;
-                }
+                return cond();
             }
 
             void System.IDisposable.Dispose()
@@ -242,18 +264,18 @@ public abstract class ActorBehaviour : MonoBehaviour
                 owner.settingConditions.RemoveAt(owner.settingConditions.Count - 1);
             }
 
-            public Condition MakeDenial()
+            public ActivateCondition MakeDenial()
             {
-                return new Condition( () => !Call(), this.owner);
+                return new ActivateCondition( () => !Call(), this.owner);
             }
 
-            public Condition MakeDenial(ActorBehavioursManager owner)
+            public ActivateCondition MakeDenial(ActorBehavioursManager owner)
             {
-                return new Condition(() => !Call(), owner);
+                return new ActivateCondition(() => !Call(), owner);
             }
         }
 
-        protected class FollowCondition : Condition
+        protected class FollowCondition : ActivateCondition
         {
             private FollowInstructor instructor;
             private Func<bool> isWaitingInput;
@@ -355,25 +377,25 @@ public abstract class ActorBehaviour : MonoBehaviour
         List<BehaviourMed> basicAbilityMeds = new List<BehaviourMed>();
         List<BehaviourMed> artsAbilityMeds = new List<BehaviourMed>();
         List<BehaviourMed> passiveBehaviourMeds = new List<BehaviourMed>();
-        BehaviourMed currentArtMed;
         int currentArtMedIndex = -1;
         HashSet<System.Type> currentDecisions = new HashSet<System.Type>();
         //List<PassiveBehaviour> passiveBehaviours = new List<PassiveBehaviour>();
 
-        List<Condition> settingConditions = new List<Condition>();
-        Condition lastEscapedCondition = null;
+        List<ActivateCondition> settingConditions = new List<ActivateCondition>();
+        ActivateCondition lastEscapedCondition = null;
         float lastDisabledTime = -1;
+        bool anyPassiveActive = false;
 
-        protected Condition IfScope(System.Func<bool> condf)
+        protected ActivateCondition IfScope(System.Func<bool> condf)
         {
             lastEscapedCondition = null;
-            return new Condition(condf, this);
+            return new ActivateCondition(condf, this);
         }
-        protected Condition IfScope(Condition condition)
+        protected ActivateCondition IfScope(ActivateCondition condition)
         {
             return IfScope(condition.Call);
         }
-        protected Condition ElseScope()
+        protected ActivateCondition ElseScope()
         {
             if (lastEscapedCondition != null)
             {
@@ -384,7 +406,7 @@ public abstract class ActorBehaviour : MonoBehaviour
                 throw new InvalidOperationException();
             }
         }
-        protected Condition DenyIfScope(Condition condition) => condition.MakeDenial(this);
+        protected ActivateCondition DenyIfScope(ActivateCondition condition) => condition.MakeDenial(this);
 
         protected abstract void Structure();
 
@@ -396,7 +418,8 @@ public abstract class ActorBehaviour : MonoBehaviour
             {
                 new BehaviourMed(this, pb);
             }
-            settingConditions.Add(new Condition(() => passiveBehaviourMeds.TrueForAll(pbm => !pbm.IsTargetActivated)));
+            settingConditions.Add(new ActivateCondition(() => passiveBehaviourMeds.TrueForAll(pbm => !pbm.IsTargetActivated)));
+            settingConditions.Add(new ActivateCondition(() => !anyPassiveActive));
             Structure();
             settingConditions = null;
         }
@@ -405,9 +428,19 @@ public abstract class ActorBehaviour : MonoBehaviour
         {
             ai.AskDecision();
 
-            passiveBehaviourMeds.ForEach(pbm => pbm.Update());
-            basicAbilityMeds.ForEach(bam => bam.Update());
-            
+            anyPassiveActive = false;
+            passiveBehaviourMeds.ForEach(
+                pbm => {
+                    pbm.Update();
+                    anyPassiveActive = anyPassiveActive || pbm.IsTargetActivated;
+                });
+            if (anyPassiveActive)
+            {
+                basicAbilityMeds.ForEach(m => m.Inactivate());
+                artsAbilityMeds.ForEach(m => m.Inactivate());
+                currentArtMedIndex = -1;
+            }
+
             if(currentArtMedIndex == -1)
             {
                 for(int i=0; i < artsAbilityMeds.Count; ++i)
@@ -427,10 +460,10 @@ public abstract class ActorBehaviour : MonoBehaviour
                 }
                 basicAbilityMeds.ForEach(m => m.Inactivate());
             }
+            
+            basicAbilityMeds.ForEach(bam => bam.Update());
 
             allAbilityMeds.ForEach(am => am.ResetSignal());
-
-            Debug.Log(Input.GetButton("Jump"));
         }
 
         protected BehaviourMed Allow<AbilityType>() where AbilityType : Ability
@@ -463,10 +496,13 @@ public abstract class Ability : ActorBehaviour { }
 public abstract class PassiveBehaviour : ActorBehaviour { }
 
 [System.Serializable]
-public abstract class BasicAbility : Ability { }
+public abstract class BasicAbility : Ability ,
+    ActorBehaviour.IMayBeCancelledBy<ArtsAbility>,
+    ActorBehaviour.IMayBeCancelledBy<PassiveBehaviour> { }
 
 [System.Serializable]
-public abstract class ArtsAbility : Ability
+public abstract class ArtsAbility : Ability, 
+    ActorBehaviour.IMayBeCancelledBy<PassiveBehaviour>
 {
     public virtual IEnumerator<Type> ParallerizableBasics() { yield return null; }
 }

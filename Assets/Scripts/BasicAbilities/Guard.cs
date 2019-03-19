@@ -36,3 +36,36 @@ namespace PlayerStates
         }
     }
 }
+
+//Playerに依存しないように書き直す
+public class Guard : BasicAbility
+{
+    [SerializeField] Rigidbody2D player;
+    [SerializeField] Player playerData;
+    [SerializeField] Collider2D extensionCollider;
+    [SerializeField] AttackInHitbox knockbackAttack;
+    [SerializeField] Umbrella umbrella;
+
+    protected override bool CanContinue(bool ordered)
+    {
+        return ordered && playerData.DoesUmbrellaWork();
+    }
+    protected override void OnInitialize()
+    {
+        extensionCollider.enabled = true;
+        knockbackAttack.Activate();
+        umbrella.PlayerGuard();
+    }
+
+    protected override void OnActive(bool ordered)
+    {
+        player.velocity = new Vector2(0, 0);
+    }
+
+    protected override void OnTerminate()
+    {
+        extensionCollider.enabled = false;
+        knockbackAttack.Inactivate();
+        umbrella.Default();
+    }
+}

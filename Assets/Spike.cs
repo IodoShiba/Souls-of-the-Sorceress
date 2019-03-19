@@ -18,7 +18,7 @@ public class Spike : ArtsAbility
         spikeSpriteRenderer.enabled = true;
     }
 
-    protected override void OnEndImple()
+    protected override void OnTerminate()
     {
         spikeAttack.Inactivate();
         spikeSpriteRenderer.enabled = false;

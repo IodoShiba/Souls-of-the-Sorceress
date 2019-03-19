@@ -8,19 +8,24 @@ using static System.Math;
 [RequireComponent(typeof(Rigidbody2D))]
 public class HorizontalMove : BasicAbility , ActorVelocity.VelocityShifter , ActorBehaviour.IParamableWith<int>
 {
-    [SerializeField] float moveSpeed;
-    [SerializeField, FormerlySerializedAs("MaxPushForceMagnitude")] float maxPushForceMagnitude;
+    [SerializeField] public float moveSpeed;
+    [SerializeField] float maxPushForceMagnitude;
     [SerializeField] float maxStopForceMagnitude;
     [SerializeField] Rigidbody2D targetRigidbody;
+    Mortal selfMortal;
 
-    //一時的に配置したフィールドであり、じき消す（PlayerManualAI.cs参照）
-    [SerializeField] AI _ai;
-
+    float defaultMoveSpeed;
     int sign = 0;
+
+    private void Start()
+    {
+        defaultMoveSpeed = moveSpeed;
+        selfMortal = GetComponent<Mortal>();
+    }
 
     private void FixedUpdate()
     {
-        float maxForceMagnitude = sign == 0 ? maxStopForceMagnitude : maxPushForceMagnitude;
+        float maxForceMagnitude = (sign == 0 ? maxStopForceMagnitude : maxPushForceMagnitude) * (selfMortal.Activated ? 0 : 1);
         /*
         float accelaration = Max(-MaxAccelarationMagnitude, Min(sign * moveSpeed - targetRigidbody.velocity.x, MaxAccelarationMagnitude));
         Vector2 pushForce = (targetRigidbody.mass * accelaration * Vector2.right) / Time.deltaTime;*/
@@ -28,9 +33,10 @@ public class HorizontalMove : BasicAbility , ActorVelocity.VelocityShifter , Act
                         targetRigidbody.mass * (sign * moveSpeed - targetRigidbody.velocity.x) / Time.deltaTime,
                         maxForceMagnitude));
         targetRigidbody.AddForce(f*Vector2.right);
+        if (sign != 0) sign = 0;
     }
     
-    protected override void ActivateImple()
+    protected override void OnInitialize()
     {
         return;
     }
@@ -45,7 +51,7 @@ public class HorizontalMove : BasicAbility , ActorVelocity.VelocityShifter , Act
     }
     
 
-    protected override void OnEndImple()
+    protected override void OnTerminate()
     {
         sign = 0;
     }
@@ -55,11 +61,12 @@ public class HorizontalMove : BasicAbility , ActorVelocity.VelocityShifter , Act
         return sign * moveSpeed * Vector2.right;
     }
 
-    public ActorBehaviour SetParams(int value)
+    public void SetParams(int value)
     {
         sign = value;
-        return this;
     }
+
+    public void ResetSpeed() { moveSpeed = defaultMoveSpeed; }
 }
 
 /*

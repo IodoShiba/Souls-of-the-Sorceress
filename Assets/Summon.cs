@@ -21,7 +21,7 @@ public class Summon : ArtsAbility
         return false;
     }
 
-    protected override void ActivateImple()
+    protected override void OnInitialize()
     {
         foreach(var r in summonPositions)
         {

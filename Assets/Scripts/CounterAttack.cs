@@ -16,12 +16,16 @@ public class CounterAttack : MonoBehaviour
     {
         foreach(var s in subjects)
         {
-            s._OnAttackedInternal(gameObject, attack.ParamsConvertedByOwner);
+            //s._OnAttackedInternal(gameObject, attack.ParamsConvertedByOwner);
+            s.SetParams(gameObject, attack.ParamsConvertedByOwner, null);
+            s.SendSignal();
         }
     }
 
     public void Attack(Mortal subject)
     {
-        subject._OnAttackedInternal(gameObject, attack.ParamsConvertedByOwner);
+        //subject._OnAttackedInternal(gameObject, attack.ParamsConvertedByOwner);
+        subject.SetParams(gameObject, attack.ParamsConvertedByOwner, null);
+        subject.SendSignal();
     }
 }

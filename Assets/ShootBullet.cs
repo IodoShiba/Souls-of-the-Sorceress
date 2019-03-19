@@ -12,14 +12,13 @@ public class ShootBullet : ArtsAbility,ActorBehaviour.IParamableWith<Vector2>
     {
         return false;
     }
-    protected override void ActivateImple()
+    protected override void OnInitialize()
     {
         var newRb2d = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         newRb2d.velocity = direction.normalized * speed;
     }
-    public ActorBehaviour SetParams(Vector2 value)
+    public void SetParams(Vector2 value)
     {
         direction = value;
-        return this;
     }
 }

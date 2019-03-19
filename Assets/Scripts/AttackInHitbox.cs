@@ -6,36 +6,8 @@ using UnityEngine.Serialization;
 [System.Serializable]
 public class AttackInHitbox : MonoBehaviour {
 
-    [System.Serializable]
-    public class AttackData
-    {
-        public float damage;
-        public Vector2 knockBackImpact;
-        public Collider2D attackCollider;
-        public bool throughable;
-
-        public AttackData(float damage, Vector2 knockBackImpact, Collider2D attackCollider, bool throughable)
-        {
-            this.damage = damage;
-            this.knockBackImpact = knockBackImpact;
-            this.attackCollider = attackCollider;
-            this.throughable = throughable;
-        }
-
-        public AttackData(AttackData original)
-        {
-            this.damage = original.damage;
-            this.knockBackImpact = original.knockBackImpact;
-            this.attackCollider = original.attackCollider;
-            this.throughable = original.throughable;
-        }
-        
-    }
+    
     [SerializeField] protected Mortal owner;
-    //[SerializeField] protected float damage;
-    //[SerializeField] protected Vector2 knockBackImpact;
-    //[SerializeField] protected Collider2D attackCollider;
-    //[SerializeField] protected bool throughable;
     [SerializeField] protected bool onceOnly;
     [SerializeField] protected bool initiallyActivate;
     
@@ -44,7 +16,7 @@ public class AttackInHitbox : MonoBehaviour {
     public Collider2D AttackCollider { get { return convertedAttackData.attackCollider; } }
     public bool Throughable { get { return convertedAttackData.throughable; } }
 
-    public AttackData ParamsConvertedByOwner { get => new AttackData(convertedAttackData); }
+    public AttackData ParamsConvertedByOwner { get => new AttackData(convertedAttackData); }//不自然
     public Mortal Owner { get => owner;}
     
     [SerializeField,TagField] string targetTag;
@@ -55,6 +27,7 @@ public class AttackInHitbox : MonoBehaviour {
     [SerializeField,FormerlySerializedAs("paramsRaw")]
     protected AttackData attackDataPrototype;
     protected AttackData convertedAttackData;
+    
 
     protected void Awake()
     {
@@ -78,17 +51,22 @@ public class AttackInHitbox : MonoBehaviour {
         GameObject hit = collider.gameObject;
         if (hit.tag == targetTag)
         {
-            hit.GetComponent<Mortal>()._OnAttackedInternal(gameObject,this.ParamsConvertedByOwner);
-            if (!this.Throughable)
+            Mortal mortal = hit.GetComponent<Mortal>();
+            mortal.SetParams(gameObject, this.ParamsConvertedByOwner, result => { if (result) HitProcess(); } );
+            mortal.SendSignal();
+        }
+    }
+    public void HitProcess()
+    {
+        if (!this.Throughable)
+        {
+            if (onceOnly)
             {
-                if (onceOnly)
-                {
-                    Destroy(gameObject);
-                }
-                else
-                {
-                    Inactivate();
-                }
+                Destroy(gameObject);
+            }
+            else
+            {
+                Inactivate();
             }
         }
     }
@@ -123,6 +101,7 @@ public class AttackInHitbox : MonoBehaviour {
     {
         SetDependentsEnable(false);
     }
+
     
     IEnumerator Clock()
     {
@@ -142,4 +121,31 @@ public class AttackInHitbox : MonoBehaviour {
             Inactivate();
         }
     }
+}
+[System.Serializable]
+public class AttackData
+{
+    public float damage;
+    public Vector2 knockBackImpact;
+    public Collider2D attackCollider;
+    public bool throughable;
+
+    public AttackData() { damage = 0; knockBackImpact = Vector2.zero;attackCollider = null; throughable = false; }
+
+    public AttackData(float damage, Vector2 knockBackImpact, Collider2D attackCollider, bool throughable)
+    {
+        this.damage = damage;
+        this.knockBackImpact = knockBackImpact;
+        this.attackCollider = attackCollider;
+        this.throughable = throughable;
+    }
+
+    public AttackData(AttackData original)
+    {
+        this.damage = original.damage;
+        this.knockBackImpact = original.knockBackImpact;
+        this.attackCollider = original.attackCollider;
+        this.throughable = original.throughable;
+    }
+
 }

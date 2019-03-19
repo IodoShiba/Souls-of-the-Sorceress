@@ -26,13 +26,15 @@ public class ElementAI : AI
         float d = player.transform.position.x - transform.position.x;
         if (minChaseGap < Abs(d) && Abs(d) < maxChaseGap) 
         {
-            horizontalMove.SetParams(System.Math.Sign(player.transform.position.x - transform.position.x)).SendSignal();
+            horizontalMove.SetParams(System.Math.Sign(player.transform.position.x - transform.position.x));
+            horizontalMove.SendSignal();
         }
 
         t += Time.deltaTime;
         if (t > shootCycle)
         {
-            _shootBullet.SetParams(player.transform.position - transform.position).SendSignal();
+            _shootBullet.SetParams(player.transform.position - transform.position);
+            _shootBullet.SendSignal();
             t -= shootCycle;
         }
     }

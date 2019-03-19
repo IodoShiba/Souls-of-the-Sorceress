@@ -96,19 +96,6 @@ public class Player : Mortal
         //guardKnockBackMultiplier = new StateMutable<float>(gameObject, 0);
         
     }
-    // Use this for initialization
-    void Start()
-    {
-        //ゲームパッドのジョイスティック入力をボタンとして解釈させる
-        //これをしないとゲームパッドで落下攻撃などが上手くできなかった(PlayerSettings.Inputの設定をうまくすればこの処理要らないかもしれないが)
-        //_InputAのインスタンス_.InterpretAsButton("登録ボタン名",ボタンと解釈させたい引数なし返り値bool関数f) でfをボタン扱いできる
-        inputA.InterpretAsButton("Up", () => Input.GetAxis("Vertical") > 0);
-        inputA.InterpretAsButton("Down", () => Input.GetAxis("Vertical") < 0);
-        inputA.InterpretAsButton("Right", () => Input.GetAxis("Horizontal") > 0);
-        inputA.InterpretAsButton("Left", () => Input.GetAxis("Horizontal") < 0);
-        
-    }
-    
     // Update is called once per frame
     void Update()
     {
@@ -135,11 +122,15 @@ public class Player : Mortal
             $"guardDamageMultiplier=={guardDamageMultiplier.Content}";
     }
 
-    protected override void OnAttacked(GameObject attackObj, AttackInHitbox.AttackData attack) //攻撃されたときにAttackから（間接的に）実行される関数
+    protected override void OnAttacked(GameObject attackObj,AttackData attack) //攻撃されたときにAttackから（間接的に）実行される関数
     {
         Vector3 selfP = transform.position;
         Vector2 r = attackObj.transform.position - selfP;
         guardSucceed = false;
+    }
+    protected override void ConvertDealtAttack(AttackData dealt)
+    {
+        base.ConvertDealtAttack(dealt);
     }
 
     protected override bool IsInvulnerable() //無敵判定用の関数 これがtrueを返す間は被ダメージ処理自体が行われない
@@ -150,7 +141,7 @@ public class Player : Mortal
             risingAttacking;
     }
 
-    public override void ConvertDealingAttack(AttackInHitbox.AttackData attackData) //プレイヤーが与える攻撃の変換用関数 傘破損時に自機の攻撃力を半減させる処理などはここに書く
+    public override void ConvertDealingAttack(AttackData attackData) //プレイヤーが与える攻撃の変換用関数 傘破損時に自機の攻撃力を半減させる処理などはここに書く
     {
         if (!DoesUmbrellaWork())
         {

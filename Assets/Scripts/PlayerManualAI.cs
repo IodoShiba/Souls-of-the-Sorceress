@@ -12,21 +12,41 @@ public abstract class AI : MonoBehaviour
 
 public class PlayerManualAI : AI
 {
+    [SerializeField] InputA inputA;
+
     HorizontalMove horizontalMove;
     Jump jump;
+    Guard guard;
     VerticalSlash verticalSlash;
     ReturnSlash returnSlash;
     SmashSlash smashSlash;
     AerialSlash aerialSlash;
+    Glide glide;
+    RisingAttack risingAttack;
+    DropAttack dropAttack;
 
     private void Awake()
     {
         horizontalMove = GetComponent<HorizontalMove>();
         jump = GetComponent<Jump>();
+        guard = GetComponent<Guard>();
         verticalSlash = GetComponent<VerticalSlash>();
         returnSlash = GetComponent<ReturnSlash>();
         smashSlash = GetComponent<SmashSlash>();
         aerialSlash = GetComponent<AerialSlash>();
+        glide = GetComponent<Glide>();
+        risingAttack = GetComponent<RisingAttack>();
+        dropAttack = GetComponent<DropAttack>();
+    }
+    private void Start()
+    {
+        //ゲームパッドのジョイスティック入力をボタンとして解釈させる
+        //これをしないとゲームパッドで落下攻撃などが上手くできなかった(PlayerSettings.Inputの設定をうまくすればこの処理要らないかもしれないが)
+        //_InputAのインスタンス_.InterpretAsButton("登録ボタン名",ボタンと解釈させたい引数なし返り値bool関数f) でfをボタン扱いできる
+        inputA.InterpretAsButton("Up", () => Input.GetAxisRaw("Vertical") > 0);
+        inputA.InterpretAsButton("Down", () => Input.GetAxisRaw("Vertical") < 0);
+        inputA.InterpretAsButton("Right", () => Input.GetAxisRaw("Horizontal") > 0);
+        inputA.InterpretAsButton("Left", () => Input.GetAxisRaw("Horizontal") < 0);
     }
 
     public override void AskDecision()
@@ -34,24 +54,36 @@ public class PlayerManualAI : AI
         int _sign = 0;
         if((_sign = Sign(Input.GetAxisRaw("Horizontal"))) != 0)
         {
-            //Decide<HorizontalMove>();
-            horizontalMove.SetParams(_sign).SendSignal();
+            horizontalMove.SetParams(_sign);
+            horizontalMove.SendSignal();
         }
         if (Input.GetButton("Jump"))
         {
-            //Decide<Jump>();
             jump.SendSignal();
         }
+
+        if(Input.GetButton("Open Umbrella"))
+        {
+            glide.SendSignal();
+            guard.SendSignal();
+        }
+
         if (Input.GetButtonDown("Attack"))
         {
-            //Decide<VerticalSlash>();
-            //Decide<ReturnSlash>();
-            //Decide<SmashSlash>();
-            //Decide<AerialSlash>();
-            verticalSlash.SendSignal();
-            returnSlash.SendSignal();
-            smashSlash.SendSignal();
-            aerialSlash.SendSignal();
+            if (Input.GetButton("Open Umbrella"))
+            {
+                //tackle.SendSignal();
+                risingAttack.SendSignal();
+            }
+            else
+            {
+                verticalSlash.SendSignal();
+                returnSlash.SendSignal();
+                smashSlash.SendSignal();
+                aerialSlash.SendSignal();
+            }
         }
+
+        if (inputA.GetMultiButtonDown("Attack", "Down")) { dropAttack.SendSignal(); }
     }
 }

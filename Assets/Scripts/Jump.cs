@@ -21,7 +21,7 @@ public class Jump : BasicAbility
         targetTransform = targetRigidbody.transform;
     }
 
-    protected override void ActivateImple()
+    protected override void OnInitialize()
     {
         jumpBorder = targetTransform.position.y + maxJumpHeight;
     }
@@ -41,7 +41,7 @@ public class Jump : BasicAbility
         Debug.Log("Jumping"+Activated);
     }
 
-    protected override void OnEndImple()
+    protected override void OnTerminate()
     {
         t = 0;
     }
