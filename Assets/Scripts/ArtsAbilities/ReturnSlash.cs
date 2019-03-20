@@ -52,7 +52,7 @@ public class ReturnSlash : ArtsAbility
     [SerializeField] Rigidbody2D playerRb;
     float t = 0;
 
-    protected override bool CanContinue(bool ordered)
+    protected override bool ShouldContinue(bool ordered)
     {
         return t < _motionLength;
     }
@@ -72,6 +72,7 @@ public class ReturnSlash : ArtsAbility
 
     protected override void OnTerminate()
     {
+        attack.Inactivate();
         umbrella.StopCoroutine("PlayerReturnSlash");
         umbrella.Default();
         t = 0;

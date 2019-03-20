@@ -49,7 +49,7 @@ public class VerticalSlash : ArtsAbility
     [SerializeField] Umbrella umbrella;
     float t = 0;
 
-    protected override bool CanContinue(bool ordered)
+    protected override bool ShouldContinue(bool ordered)
     {
         return t < _motionLength;
     }
@@ -68,6 +68,7 @@ public class VerticalSlash : ArtsAbility
 
     protected override void OnTerminate()
     {
+        attack.Inactivate();
         umbrella.StopCoroutine("PlayerVerticalSlash");
         umbrella.Default();
         t = 0;

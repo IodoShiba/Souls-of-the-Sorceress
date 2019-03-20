@@ -16,7 +16,7 @@ public class Summon : ArtsAbility
     [SerializeField] EnemyManager _manager;
     [SerializeField] List<SummonPositionParameter> summonPositions;
 
-    protected override bool CanContinue(bool ordered)
+    protected override bool ShouldContinue(bool ordered)
     {
         return false;
     }

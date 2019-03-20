@@ -60,7 +60,7 @@ public class RisingAttack : ArtsAbility
         rb = GetComponent<Rigidbody2D>();
     }
     
-    protected override bool CanContinue(bool ordered)
+    protected override bool ShouldContinue(bool ordered)
     {
         return t <= _motionLength;
     }

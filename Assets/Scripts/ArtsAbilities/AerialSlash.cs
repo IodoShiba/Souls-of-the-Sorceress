@@ -45,7 +45,7 @@ public class AerialSlash : ArtsAbility
     [SerializeField] AttackInHitbox attack;
     [SerializeField] Umbrella umbrella;
     float t = 0;
-    protected override bool CanContinue(bool ordered)
+    protected override bool ShouldContinue(bool ordered)
     {
         return t < _motionLength && !groundSensor.IsOnGround;
     }
@@ -61,6 +61,7 @@ public class AerialSlash : ArtsAbility
     }
     protected override void OnTerminate()
     {
+        attack.Inactivate();
         umbrella.StopCoroutine("PlayerAerialSlash");
         umbrella.Default();
         t = 0;

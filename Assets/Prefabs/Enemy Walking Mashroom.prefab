@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 6891321230494324961}
   - component: {fileID: 6891321230494324963}
   - component: {fileID: 6891321230494324956}
+  - component: {fileID: 3628215078390612390}
   m_Layer: 24
   m_Name: Enemy Walking Mashroom
   m_TagString: Enemy
@@ -177,7 +178,6 @@ MonoBehaviour:
   maxPushForceMagnitude: 100
   maxStopForceMagnitude: 100
   targetRigidbody: {fileID: 6891321230494324967}
-  _ai: {fileID: 6891321230494324962}
 --- !u!114 &6891321230494324956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +198,21 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 6891321230494324967}
+  dealtAttackConverters: []
   manager: {fileID: 0}
+--- !u!114 &3628215078390612390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891321230494324964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ec2773f0e06364c8d5029661dd9f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dealingAttackConverters: []
 --- !u!1 &6891321231477494689
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,6 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 6891321230494324956}
+  _oowner: {fileID: 3628215078390612390}
   onceOnly: 0
   initiallyActivate: 1
   targetTag: Player
@@ -279,3 +294,5 @@ MonoBehaviour:
     knockBackImpact: {x: 1000, y: 400}
     attackCollider: {fileID: 6891321231477494684}
     throughable: 1
+    hitstopSpan: 0
+  dealingAttackConverters: []

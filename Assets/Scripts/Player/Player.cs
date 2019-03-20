@@ -8,6 +8,7 @@ using UnityEngine;
 //・攻撃を与える
 //・攻撃を受ける
 //・状態遷移を構築する
+[DisallowMultipleComponent]
 public class Player : Mortal
 {
     enum BehaviourStates : int
@@ -50,7 +51,7 @@ public class Player : Mortal
     [SerializeField] StateManager awakeningState;
     [SerializeField] StateManager directionState;
     [SerializeField] ActionAwake actionAwake;
-    [SerializeField] AwakeMutableAttack umbrellaUpward;
+    [SerializeField] AttackInHitbox umbrellaUpward;
     [SerializeField] Collider2D guardColliderExtension;
     [SerializeField] GroundSensor groundSensor;
     [SerializeField] Jump jumpAbility;
@@ -141,13 +142,13 @@ public class Player : Mortal
             risingAttacking;
     }
 
-    public override void ConvertDealingAttack(AttackData attackData) //プレイヤーが与える攻撃の変換用関数 傘破損時に自機の攻撃力を半減させる処理などはここに書く
-    {
-        if (!DoesUmbrellaWork())
-        {
-            attackData.damage *= 0.5f;
-        }
-    }
+    //public override void ConvertDealingAttack(AttackData attackData) //プレイヤーが与える攻撃の変換用関数 傘破損時に自機の攻撃力を半減させる処理などはここに書く
+    //{
+    //    if (!DoesUmbrellaWork())
+    //    {
+    //        attackData.damage *= 0.5f;
+    //    }
+    //}
 
     public override void Dying() //体力がなくなると呼ばれる関数　今はガバ実装
     {

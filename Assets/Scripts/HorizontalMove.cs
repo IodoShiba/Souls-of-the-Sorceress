@@ -16,6 +16,7 @@ public class HorizontalMove : BasicAbility , ActorVelocity.VelocityShifter , Act
 
     float defaultMoveSpeed;
     int sign = 0;
+    
 
     private void Start()
     {
@@ -25,6 +26,7 @@ public class HorizontalMove : BasicAbility , ActorVelocity.VelocityShifter , Act
 
     private void FixedUpdate()
     {
+        if (!Activated) sign = 0;
         float maxForceMagnitude = (sign == 0 ? maxStopForceMagnitude : maxPushForceMagnitude) * (selfMortal.Activated ? 0 : 1);
         /*
         float accelaration = Max(-MaxAccelarationMagnitude, Min(sign * moveSpeed - targetRigidbody.velocity.x, MaxAccelarationMagnitude));
@@ -33,7 +35,6 @@ public class HorizontalMove : BasicAbility , ActorVelocity.VelocityShifter , Act
                         targetRigidbody.mass * (sign * moveSpeed - targetRigidbody.velocity.x) / Time.deltaTime,
                         maxForceMagnitude));
         targetRigidbody.AddForce(f*Vector2.right);
-        if (sign != 0) sign = 0;
     }
     
     protected override void OnInitialize()
@@ -41,7 +42,7 @@ public class HorizontalMove : BasicAbility , ActorVelocity.VelocityShifter , Act
         return;
     }
 
-    protected override bool CanContinue(bool ordered)
+    protected override bool ShouldContinue(bool ordered)
     {
         return ordered;
     }

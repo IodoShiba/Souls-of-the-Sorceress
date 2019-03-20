@@ -7,7 +7,7 @@ public class Spike : ArtsAbility
     [SerializeField]AttackInHitbox spikeAttack;
     [SerializeField] SpriteRenderer spikeSpriteRenderer;
 
-    protected override bool CanContinue(bool ordered)
+    protected override bool ShouldContinue(bool ordered)
     {
         return ordered;
     }

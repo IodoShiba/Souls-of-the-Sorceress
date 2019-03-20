@@ -102,7 +102,7 @@ public class Glide : BasicAbility
         if (Activated) { rb.AddForce(Vector2.up * (rb.mass * (System.Math.Max(rb.velocity.y, -maxFallSpeed) - rb.velocity.y) / Time.deltaTime)); }
     }
 
-    protected override bool CanContinue(bool ordered)
+    protected override bool ShouldContinue(bool ordered)
     {
         return ordered && !groundSensor.IsOnGround && player.DoesUmbrellaWork();
     }

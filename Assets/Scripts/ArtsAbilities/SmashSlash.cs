@@ -42,7 +42,7 @@ public class SmashSlash : ArtsAbility
     [SerializeField] Umbrella umbrella;
     float t = 0;
 
-    protected override bool CanContinue(bool ordered)
+    protected override bool ShouldContinue(bool ordered)
     {
         return t < _motionLength;
     }
@@ -61,6 +61,7 @@ public class SmashSlash : ArtsAbility
 
     protected override void OnTerminate()
     {
+        attack.Inactivate();
         umbrella.StopCoroutine("PlayerSmashSlash");
         umbrella.Default();
         t = 0;

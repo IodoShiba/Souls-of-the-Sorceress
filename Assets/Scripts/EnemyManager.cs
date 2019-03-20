@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class EnemyManager : MonoBehaviour {
 
     private List<Enemy> enemies = new List<Enemy>();
     private int aliveCount;
+    static private EnemyManager instance;
 
     private List<System.Action> enemyDyingListeners = new List<System.Action>();
+
+    public static EnemyManager Instance { get => instance; }
 
     IEnumerator RemoveDead()
     {
@@ -23,6 +27,11 @@ public class EnemyManager : MonoBehaviour {
             }
             yield return new WaitForSeconds(10);
         }
+    }
+
+    private void Awake()
+    {
+        instance = this;
     }
 
     private void Start()
@@ -57,4 +66,5 @@ public class EnemyManager : MonoBehaviour {
             f();
         }
     }
+    
 }

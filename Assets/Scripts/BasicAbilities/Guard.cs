@@ -46,7 +46,7 @@ public class Guard : BasicAbility
     [SerializeField] AttackInHitbox knockbackAttack;
     [SerializeField] Umbrella umbrella;
 
-    protected override bool CanContinue(bool ordered)
+    protected override bool ShouldContinue(bool ordered)
     {
         return ordered && playerData.DoesUmbrellaWork();
     }

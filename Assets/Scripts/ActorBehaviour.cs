@@ -48,7 +48,7 @@ public abstract class ActorBehaviour : MonoBehaviour
     public virtual bool IsAvailable() { return true; }
     private void Activate() { activated = true; OnInitialize(); }
     protected virtual void OnInitialize() { }
-    protected abstract bool CanContinue(bool ordered);
+    protected abstract bool ShouldContinue(bool ordered);
     protected virtual void OnActive(bool ordered) { }
     protected void Terminate() { activated = false;OnTerminate(); }
     protected virtual void OnTerminate() { }
@@ -101,8 +101,8 @@ public abstract class ActorBehaviour : MonoBehaviour
                 //それ以外は発動のみに必要な条件(soft condition)として扱われる。
                 List<ActivateCondition> conditions = new List<ActivateCondition>();
                 int hardConditionsCount = 0;
-                public void AddCondition(ActivateCondition item, bool isHard = false) {
-                    conditions.Insert(isHard ? hardConditionsCount++ : conditions.Count, item);
+                public void AddCondition(ActivateCondition item) {
+                    conditions.Insert(item.IsHard ? hardConditionsCount++ : conditions.Count, item);
                 }
                 public bool CanActivate() => conditions.TrueForAll(c => c.Call());
                 public bool CanContinue()
@@ -166,13 +166,16 @@ public abstract class ActorBehaviour : MonoBehaviour
                 bool stillActivated = false;
                 if (target.activated)
                 {
-                    if (stillActivated = target.CanContinue(ordered))
+                    bool completed = false;
+                    if ((completed = conditionSet.CanContinue()) && target.ShouldContinue(ordered))
                     {
                         target.OnActive(ordered);
+                        stillActivated = true;
                     }
                     else
                     {
-                        Inactivate(true);
+                        //completedはAbilityが正常に終了した（→true）か、外的要因によって中断された（→false）かを表す
+                        Inactivate(completed);
                     }
                 }
                 return stillActivated;
@@ -216,9 +219,9 @@ public abstract class ActorBehaviour : MonoBehaviour
                 lastCompletedTime = float.MinValue;
             }
 
-            public void AddCondition(ActivateCondition item,bool isHard=false)
+            public void AddCondition(ActivateCondition item)
             {
-                conditionSet.AddCondition(item,isHard);
+                conditionSet.AddCondition(item);
             }
 
             public FollowCondition Follow<AbilityType>(float followingActivateTimeLimit) where AbilityType : Ability
@@ -240,18 +243,21 @@ public abstract class ActorBehaviour : MonoBehaviour
         protected class ActivateCondition : System.IDisposable
         {
             protected System.Func<bool> cond;
-            bool calledResult;
-            float lastCalled;
+            bool isHard;
+            //bool calledResult;
+            //float lastCalled;
             ActorBehavioursManager owner;
 
-            public ActivateCondition( System.Func<bool> cond, ActorBehavioursManager owner=null)
+            public ActivateCondition(System.Func<bool> cond, ActorBehavioursManager owner = null, bool isHard = false)
             {
                 this.owner = owner;
                 this.cond = cond;
                 if(owner !=null) owner.settingConditions.Add(this);
-                lastCalled = Time.time;
+                this.isHard = isHard;
+                //lastCalled = Time.time;
             }
             public Func<bool> Cond { get => cond; }
+            public bool IsHard { get => isHard; }
 
             public bool Call()
             {
@@ -266,12 +272,12 @@ public abstract class ActorBehaviour : MonoBehaviour
 
             public ActivateCondition MakeDenial()
             {
-                return new ActivateCondition( () => !Call(), this.owner);
+                return new ActivateCondition( () => !Call(), this.owner,this.isHard);
             }
 
             public ActivateCondition MakeDenial(ActorBehavioursManager owner)
             {
-                return new ActivateCondition(() => !Call(), owner);
+                return new ActivateCondition(() => !Call(), owner,this.isHard);
             }
         }
 
@@ -386,10 +392,10 @@ public abstract class ActorBehaviour : MonoBehaviour
         float lastDisabledTime = -1;
         bool anyPassiveActive = false;
 
-        protected ActivateCondition IfScope(System.Func<bool> condf)
+        protected ActivateCondition IfScope(System.Func<bool> condf,bool isHard=false)
         {
             lastEscapedCondition = null;
-            return new ActivateCondition(condf, this);
+            return new ActivateCondition(condf, this,isHard);
         }
         protected ActivateCondition IfScope(ActivateCondition condition)
         {
@@ -418,8 +424,8 @@ public abstract class ActorBehaviour : MonoBehaviour
             {
                 new BehaviourMed(this, pb);
             }
-            settingConditions.Add(new ActivateCondition(() => passiveBehaviourMeds.TrueForAll(pbm => !pbm.IsTargetActivated)));
-            settingConditions.Add(new ActivateCondition(() => !anyPassiveActive));
+            //settingConditions.Add(new ActivateCondition(() => passiveBehaviourMeds.TrueForAll(pbm => !pbm.IsTargetActivated)));
+            settingConditions.Add(new ActivateCondition(() => !anyPassiveActive, this, true));
             Structure();
             settingConditions = null;
         }

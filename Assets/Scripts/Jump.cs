@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using static System.Math;
 
+//原因不明の動作不良の疑いあり
+//動作不良の内容…たまに十分な高さまでジャンプしなかったり、高くジャンプしすぎたりする
+//再現ができず、原因の検証ができていない
 public class Jump : BasicAbility
 {
     [SerializeField] float jumpSpeed;
@@ -28,7 +31,7 @@ public class Jump : BasicAbility
 
     public override bool ContinueUnderBlocked => true;
 
-    protected override bool CanContinue(bool ordered)
+    protected override bool ShouldContinue(bool ordered)
     {
         return ordered && targetTransform.position.y < jumpBorder && !(t > 0.01 && targetRigidbody.velocity.y <= 0);
     }

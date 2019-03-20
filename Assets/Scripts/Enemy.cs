@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //多分後々 abstractな基底クラス になる
+[DisallowMultipleComponent]
 public class Enemy : Mortal {
     public EnemyManager manager;//修正すべし
     private Rigidbody2D rb;
@@ -10,6 +11,7 @@ public class Enemy : Mortal {
 
 	// Use this for initialization
 	void Start () {
+        if (manager == null) manager = EnemyManager.Instance;
         manager.AddNewEnemy(this);
         rb = GetComponent<Rigidbody2D>();
 	}

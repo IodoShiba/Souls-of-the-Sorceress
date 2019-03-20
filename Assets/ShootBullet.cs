@@ -8,7 +8,7 @@ public class ShootBullet : ArtsAbility,ActorBehaviour.IParamableWith<Vector2>
     public float speed;
     private Vector2 direction;
 
-    protected override bool CanContinue(bool ordered)
+    protected override bool ShouldContinue(bool ordered)
     {
         return false;
     }

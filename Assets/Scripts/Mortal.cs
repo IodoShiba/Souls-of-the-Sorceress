@@ -2,31 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D)),DisallowMultipleComponent]
 public abstract class Mortal : PassiveBehaviour, ActorBehaviour.IParamableWith<GameObject, AttackData,System.Action<bool>>
 {
     [SerializeField] protected float health;
     [SerializeField] protected float maxHealth;
     [SerializeField] UnityEngine.Events.UnityEvent dyingCallbacks;
     [SerializeField] Rigidbody2D selfRigidbody;
-    [SerializeField] AttackData argAttackData = new AttackData();
-    [SerializeField] GameObject argObj;
+    [SerializeField] List<AttackConverter> dealtAttackConverters;
+
+    AttackData argAttackData = new AttackData();
+    GameObject argObj;
+    System.Action<bool> argSucceedCallback;
     float leftStunTime = 0;
-    System.Action<bool> succeedCallback;
 
     protected abstract void OnAttacked(GameObject attackObj,AttackData attack);
     protected abstract bool IsInvulnerable();
     public abstract void Dying();
     
-    public virtual void ConvertDealingAttack(AttackData attackData)
-    {
-    }
+    //public virtual void ConvertDealingAttack(AttackData attackData)
+    //{
+    //}
     protected virtual void ConvertDealtAttack(AttackData dealt)
     {
-
+        dealtAttackConverters.TrueForAll(dac => dac.Convert(dealt));
     }
     
-    protected override bool CanContinue(bool ordered)
+    protected override bool ShouldContinue(bool ordered)
     {
         leftStunTime -= Time.deltaTime;
         if (leftStunTime < 0)
@@ -42,22 +44,26 @@ public abstract class Mortal : PassiveBehaviour, ActorBehaviour.IParamableWith<G
         _OnAttackedInternal(argObj, argAttackData);
     }
 
-    private void _OnAttackedInternal(GameObject attackerObj, AttackData data)
+    private void _OnAttackedInternal(GameObject attackerObj, AttackData givenData)
     {
         if (!IsInvulnerable())
         {
-            OnAttacked(attackerObj, data);
+            OnAttacked(attackerObj, givenData);
             int kbdir = System.Math.Sign(transform.position.x - attackerObj.transform.position.x);
-            data.knockBackImpact.x *= kbdir;
-            ConvertDealtAttack(data);
+            givenData.knockBackImpact.x *= kbdir;
+            //ConvertDealtAttack(data);
+            if (!dealtAttackConverters.TrueForAll(dac => dac.Convert(givenData)))
+            {
+                if (argSucceedCallback != null) argSucceedCallback(false);
+            }
 
-            health -= data.damage;
+            health -= givenData.damage;
 
             //フィールドに昇格する　要修正
             leftStunTime = 0.3f;
 
             selfRigidbody.velocity = Vector2.zero;
-            selfRigidbody.AddForce(data.knockBackImpact);
+            selfRigidbody.AddForce(givenData.knockBackImpact);
 
             Debug.Log(gameObject.name + " damaged");
 
@@ -66,24 +72,25 @@ public abstract class Mortal : PassiveBehaviour, ActorBehaviour.IParamableWith<G
                 dyingCallbacks.Invoke();
                 Dying();
             }
-            if (succeedCallback != null)
+
+            if (argSucceedCallback != null)
             {
-                succeedCallback(true);
+                argSucceedCallback(true);
             }
         }
-        else
+        else if (argSucceedCallback != null)
         {
-            if (succeedCallback != null)
-            {
-                succeedCallback(false);
-            }
+            argSucceedCallback(false);
         }
+            
+        
     }
 
     public void SetParams(GameObject argObj, AttackData argAttackData, System.Action<bool> succeedCallback)
     {
         this.argObj = argObj;
-        this.argAttackData = argAttackData;
-        this.succeedCallback = succeedCallback;
+        //this.argAttackData = argAttackData;
+        AttackData.DeepCopy(this.argAttackData, argAttackData);
+        this.argSucceedCallback = succeedCallback;
     }
 }
