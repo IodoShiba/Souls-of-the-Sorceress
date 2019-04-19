@@ -125,7 +125,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -283,16 +283,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 6891321230494324956}
-  _oowner: {fileID: 3628215078390612390}
+  owner: {fileID: 0}
   onceOnly: 0
   initiallyActivate: 1
   targetTag: Player
   activeSpan: Infinity
   attackDataPrototype:
     damage: 10
-    knockBackImpact: {x: 1000, y: 400}
+    knockBackImpact: {x: 500, y: 200}
     attackCollider: {fileID: 6891321231477494684}
     throughable: 1
     hitstopSpan: 0
-  dealingAttackConverters: []
+  attackConvertersOnActivate: []
+  attackConvertersOnHit: []

@@ -24,6 +24,7 @@ public class PlayerManualAI : AI
     Glide glide;
     RisingAttack risingAttack;
     DropAttack dropAttack;
+    Tackle tackle;
 
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class PlayerManualAI : AI
         glide = GetComponent<Glide>();
         risingAttack = GetComponent<RisingAttack>();
         dropAttack = GetComponent<DropAttack>();
+        tackle = GetComponent<Tackle>();
     }
     private void Start()
     {
@@ -72,7 +74,7 @@ public class PlayerManualAI : AI
         {
             if (Input.GetButton("Open Umbrella"))
             {
-                //tackle.SendSignal();
+                tackle.SendSignal();
                 risingAttack.SendSignal();
             }
             else

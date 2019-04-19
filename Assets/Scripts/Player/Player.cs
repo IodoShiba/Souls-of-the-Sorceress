@@ -129,10 +129,10 @@ public class Player : Mortal
         Vector2 r = attackObj.transform.position - selfP;
         guardSucceed = false;
     }
-    protected override void ConvertDealtAttack(AttackData dealt)
-    {
-        base.ConvertDealtAttack(dealt);
-    }
+    //protected override void ConvertDealtAttack(AttackData dealt)
+    //{
+    //    base.ConvertDealtAttack(dealt);
+    //}
 
     protected override bool IsInvulnerable() //無敵判定用の関数 これがtrueを返す間は被ダメージ処理自体が行われない
     {

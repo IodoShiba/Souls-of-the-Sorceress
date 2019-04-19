@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [System.Serializable]
 public class AttackInHitbox : MonoBehaviour
@@ -174,5 +177,33 @@ public class AttackData
 public abstract class AttackConverter : MonoBehaviour
 {
     public abstract bool Convert(AttackData value);
-    
+    public interface UsingPhaseSpecifier { }
+    public interface OnAttackActivate : UsingPhaseSpecifier { }
+    public interface OnGiveAttack : UsingPhaseSpecifier { }
+    public interface OnReceiveAttack : UsingPhaseSpecifier { }
 }
+
+
+//AttackConverterの使用タイミングを型レベルで指定するよう変更するときに備えたクラス
+public abstract class AttackConverter<UsingPhase> where UsingPhase : AttackConverter.UsingPhaseSpecifier
+{
+
+}
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(AttackConverter)),CanEditMultipleObjects]
+public class AttackConverterEditorView : UnityEditor.Editor
+{
+    AttackConverter _target;
+    private void OnEnable()
+    {
+       _target = (AttackConverter)target;
+    }
+
+    public override void OnInspectorGUI()
+    {
+
+        base.OnInspectorGUI();
+    }
+}
+#endif

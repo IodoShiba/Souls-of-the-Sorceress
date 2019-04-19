@@ -18,7 +18,7 @@ public class SarahBehaviours : ActorBehavioursManager
         {
             Allow<Jump>();
             Allow<Guard>();
-            //Allow<Tackle>();
+            Allow<Tackle>();
             triples = Allow<VerticalSlash>().Follow<ReturnSlash>(maxIntervalOfTripleAttack);
         }
         FollowCondition smashSlashWaitingCond = triples.Follow<SmashSlash>(maxIntervalOfTripleAttack);

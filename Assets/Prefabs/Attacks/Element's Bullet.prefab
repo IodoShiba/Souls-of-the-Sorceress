@@ -10,13 +10,17 @@ GameObject:
   m_Component:
   - component: {fileID: 8104706950811349039}
   - component: {fileID: 8104706950811349037}
-  - component: {fileID: 8104706950811349036}
   - component: {fileID: 9004923433284265342}
   - component: {fileID: 1904868358951468108}
   - component: {fileID: 185701759397724862}
+  - component: {fileID: 7155526383585071991}
+  - component: {fileID: 3890719905783342961}
+  - component: {fileID: 7340004956999325703}
+  - component: {fileID: 4039749190968329392}
+  - component: {fileID: 175180784554663720}
   m_Layer: 21
   m_Name: Element's Bullet
-  m_TagString: Enemy Attack
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,28 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8104706950811349036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8104706950811349038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  owner: {fileID: 0}
-  onceOnly: 1
-  initiallyActivate: 1
-  targetTag: Player
-  activeSpan: 10
-  attackDataPrototype:
-    damage: 5
-    knockBackImpact: {x: 200, y: 100}
-    attackCollider: {fileID: 9004923433284265342}
-    throughable: 0
 --- !u!61 &9004923433284265342
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -165,3 +147,87 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTagName: Ground
+--- !u!114 &7155526383585071991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8104706950811349038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cb1ac6de0b0f0d46a7b8c3689d8c891, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
+  maxHealth: 5
+  dyingCallbacks:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  selfRigidbody: {fileID: 1904868358951468108}
+  dealtAttackConverters: []
+--- !u!114 &3890719905783342961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8104706950811349038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 7340004956999325703}
+  onceOnly: 1
+  initiallyActivate: 1
+  targetTag: Player
+  activeSpan: 0
+  attackDataPrototype:
+    damage: 10
+    knockBackImpact: {x: 100, y: 100}
+    attackCollider: {fileID: 9004923433284265342}
+    throughable: 0
+    hitstopSpan: 0
+  attackConvertersOnActivate: []
+  attackConvertersOnHit: []
+--- !u!114 &7340004956999325703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8104706950811349038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ec2773f0e06364c8d5029661dd9f6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dealingAttackConverters: []
+--- !u!114 &4039749190968329392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8104706950811349038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fa7e1f398d5f334599d713aa94843b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ai: {fileID: 175180784554663720}
+--- !u!114 &175180784554663720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8104706950811349038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ef45153c8e2734439b05fb8d2175f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

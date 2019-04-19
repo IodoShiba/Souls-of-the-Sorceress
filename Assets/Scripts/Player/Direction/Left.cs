@@ -7,11 +7,14 @@ namespace PlayerStates {
         public class Left : State
         {
             [SerializeField] StateManager behavior;
+            HorizontalMove _horizontalMove;
             bool initialized =false;
+
+            HorizontalMove horizontalMove { get => _horizontalMove != null ? _horizontalMove : _horizontalMove = GetComponent<HorizontalMove>(); }
             // Use this for initialization
             void Start()
             {
-
+                _horizontalMove = GetComponent<HorizontalMove>();
             }
 
             // Update is called once per frame
@@ -22,7 +25,7 @@ namespace PlayerStates {
 
             public override State Check()
             {
-                if ((Input.GetAxis("Horizontal") > 0))// && ((behavior.CurrentState is PlayerOnGround) || (behavior.CurrentState is PlayerFlying)))
+                if (horizontalMove.Sign == 1)//((Input.GetAxis("Horizontal") > 0))// && ((behavior.CurrentState is PlayerOnGround) || (behavior.CurrentState is PlayerFlying)))
                 {
                     return GetComponent<PlayerStates.Direction.Right>();
                 }

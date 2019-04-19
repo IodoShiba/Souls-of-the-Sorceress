@@ -44,10 +44,6 @@ public class Enemy : Mortal {
         _protectTime = 0.3f;
     }
     
-    protected override void ConvertDealtAttack(AttackData dealt)
-    {
-        dealt.knockBackImpact *= 10;
-    }
 
     protected override bool IsInvulnerable()
     {

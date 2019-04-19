@@ -38,11 +38,13 @@ public abstract class ActorBehaviour : MonoBehaviour
     public interface IParamableWith<T1, T2, T3,T4> { void SetParams(T1 v1, T2 v2, T3 v3, T4 v4); }
 
     bool activated = false;
+    bool signaled = false;
     public virtual HashSet<System.Type> MayBeRestrictedBy() { return null; }
     //public virtual HashSet<System.Type> ParallelizableWith() { return null; }
     public virtual bool ContinueUnderBlocked => false;
 
     public bool Activated { get => activated;}
+    public bool Signaled { get => signaled; }
 
     //public virtual bool IsExclusive() => true;
     public virtual bool IsAvailable() { return true; }
@@ -53,7 +55,8 @@ public abstract class ActorBehaviour : MonoBehaviour
     protected void Terminate() { activated = false;OnTerminate(); }
     protected virtual void OnTerminate() { }
 
-    public void SendSignal() { owner.SendSignal(selfId); }
+    public void SendSignal() { signaled = true; }//owner.SendSignal(selfId); }
+    //public void ResetSignal() { signaled = false; }
 
     ActorBehavioursManager owner;
     int selfId = -1;
@@ -125,25 +128,25 @@ public abstract class ActorBehaviour : MonoBehaviour
             private float lastCompletedTime;
             private bool isCompletedLastTime = false;
             //private bool activated = false;
-            private bool signaled = false;
+            //private bool signaled = false;
 
             public bool IsTargetActivated { get => target.Activated; }
             public float LastCompletedTime { get => lastCompletedTime; }
             public bool IsCompletedLastTime { get => isCompletedLastTime; }
-            public bool Signaled { get => signaled; }
+            public bool TargetSignaled { get => target.signaled; }
 
-            public void SendSignal() { signaled = true; }
-            public void ResetSignal() { signaled = false; }
+            //public void SendSignal() { signaled = true; }
+            public void ResetSignal() { target.signaled = false; }//signaled = false; }
 
             public void Update()
             {
                 if (IsTargetActivated)
                 {
-                    OnActive(Signaled);
+                    OnActive(TargetSignaled);
                 }
                 else
                 {
-                    if (Signaled)
+                    if (TargetSignaled)
                     {
                         Attempt();
                     }
@@ -427,6 +430,16 @@ public abstract class ActorBehaviour : MonoBehaviour
             //settingConditions.Add(new ActivateCondition(() => passiveBehaviourMeds.TrueForAll(pbm => !pbm.IsTargetActivated)));
             settingConditions.Add(new ActivateCondition(() => !anyPassiveActive, this, true));
             Structure();
+            var c = new ActivateCondition(() => artsAbilityMeds.TrueForAll(aam => !aam.IsTargetActivated), null, true);
+            foreach (var bam in basicAbilityMeds)
+            {
+                bam.AddCondition(c);
+            }
+            var cc = new ActivateCondition(() => currentArtMedIndex == -1, null, false);
+            foreach (var aam in artsAbilityMeds)
+            {
+                aam.AddCondition(cc);
+            }
             settingConditions = null;
         }
 
@@ -440,33 +453,21 @@ public abstract class ActorBehaviour : MonoBehaviour
                     pbm.Update();
                     anyPassiveActive = anyPassiveActive || pbm.IsTargetActivated;
                 });
-            if (anyPassiveActive)
+            //if (anyPassiveActive)
+            //{
+            //    currentArtMedIndex = -1;
+            //}
+            int i = 0;
+            for(; i < artsAbilityMeds.Count; ++i)
             {
-                basicAbilityMeds.ForEach(m => m.Inactivate());
-                artsAbilityMeds.ForEach(m => m.Inactivate());
-                currentArtMedIndex = -1;
+                artsAbilityMeds[i].Update();
+                if (artsAbilityMeds[i].IsTargetActivated)
+                {
+                    currentArtMedIndex = i;
+                }
             }
+            if (i == artsAbilityMeds.Count) { currentArtMedIndex = -1; }
 
-            if(currentArtMedIndex == -1)
-            {
-                for(int i=0; i < artsAbilityMeds.Count; ++i)
-                {
-                    if (artsAbilityMeds[i].Signaled && artsAbilityMeds[i].Attempt())
-                    {
-                        currentArtMedIndex = i;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                if (!artsAbilityMeds[currentArtMedIndex].OnActive(artsAbilityMeds[currentArtMedIndex].Signaled))
-                {
-                    currentArtMedIndex = -1;
-                }
-                basicAbilityMeds.ForEach(m => m.Inactivate());
-            }
-            
             basicAbilityMeds.ForEach(bam => bam.Update());
 
             allAbilityMeds.ForEach(am => am.ResetSignal());
@@ -489,10 +490,10 @@ public abstract class ActorBehaviour : MonoBehaviour
             lastDisabledTime = Time.time;
         }
 
-        public void SendSignal(int id)
-        {
-            allAbilityMeds[id].SendSignal();
-        }
+        //public void SendSignal(int id)
+        //{
+        //    allAbilityMeds[id].SendSignal();
+        //}
     }
 
 }

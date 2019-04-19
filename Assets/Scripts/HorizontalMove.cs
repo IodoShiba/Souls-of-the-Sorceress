@@ -16,7 +16,14 @@ public class HorizontalMove : BasicAbility , ActorVelocity.VelocityShifter , Act
 
     float defaultMoveSpeed;
     int sign = 0;
-    
+
+    public int Sign
+    { get
+        {
+            if (!Activated) { sign = 0; }
+            return sign;
+        }
+    }
 
     private void Start()
     {

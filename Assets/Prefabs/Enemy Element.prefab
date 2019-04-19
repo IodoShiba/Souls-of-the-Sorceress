@@ -124,7 +124,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -153,12 +153,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 964724003723573773}
-  argAttackData:
-    damage: 0
-    knockBackImpact: {x: 0, y: 0}
-    attackCollider: {fileID: 0}
-    throughable: 0
-  argObj: {fileID: 0}
+  dealtAttackConverters: []
   manager: {fileID: 0}
 --- !u!114 &964724003723573770
 MonoBehaviour:

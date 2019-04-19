@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D)),DisallowMultipleComponent]
-public abstract class Mortal : PassiveBehaviour, ActorBehaviour.IParamableWith<GameObject, AttackData,System.Action<bool>>
+public class Mortal : PassiveBehaviour, ActorBehaviour.IParamableWith<GameObject, AttackData, System.Action<bool>>
 {
     [SerializeField] protected float health;
     [SerializeField] protected float maxHealth;
@@ -16,14 +16,14 @@ public abstract class Mortal : PassiveBehaviour, ActorBehaviour.IParamableWith<G
     System.Action<bool> argSucceedCallback;
     float leftStunTime = 0;
 
-    protected abstract void OnAttacked(GameObject attackObj,AttackData attack);
-    protected abstract bool IsInvulnerable();
-    public abstract void Dying();
+    protected virtual void OnAttacked(GameObject attackObj,AttackData attack) { }
+    protected virtual bool IsInvulnerable() { return false; }
+    public virtual void Dying() { Destroy(gameObject); }
     
     //public virtual void ConvertDealingAttack(AttackData attackData)
     //{
     //}
-    protected virtual void ConvertDealtAttack(AttackData dealt)
+    protected void ConvertDealtAttack(AttackData dealt)
     {
         dealtAttackConverters.TrueForAll(dac => dac.Convert(dealt));
     }
