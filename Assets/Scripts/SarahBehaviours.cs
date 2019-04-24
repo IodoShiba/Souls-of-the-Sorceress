@@ -12,6 +12,7 @@ public class SarahBehaviours : ActorBehavioursManager
     protected override void Structure()
     {
         Allow<HorizontalMove>();
+        Allow<PassPlatform>();
 
         FollowCondition triples = null;
         using (IfScope(() => groundSensor.IsOnGround))//new Condition(this, () => groundSensor.IsOnGround))

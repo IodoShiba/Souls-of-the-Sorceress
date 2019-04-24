@@ -21,6 +21,7 @@ public class TreeTile : ParticularRuleTile
             void SetRule(int[] vs2)
             {
                 TilingRule target = new TilingRule();
+                target.m_ColliderType = Tile.ColliderType.Grid;
                 for (int i = 0; i < neighborCount; ++i)
                 {
                     target.m_Neighbors[i] = vs2[i];

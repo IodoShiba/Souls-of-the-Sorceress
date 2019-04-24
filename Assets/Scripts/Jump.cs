@@ -13,6 +13,7 @@ public class Jump : BasicAbility
     [SerializeField] float maxPushForceMagnitude;
     [SerializeField] float maxJumpHeight;
     [SerializeField] Rigidbody2D targetRigidbody;
+    //private CompatibilitySoftPlatform softPlatform;
     float jumpBorder;
     Transform targetTransform;
     float f;
@@ -22,14 +23,17 @@ public class Jump : BasicAbility
     private void Awake()
     {
         targetTransform = targetRigidbody.transform;
+        //softPlatform = GetComponent<CompatibilitySoftPlatform>();
     }
 
     protected override void OnInitialize()
     {
         jumpBorder = targetTransform.position.y + maxJumpHeight;
+        //if (softPlatform != null) softPlatform.GoThrough = true;
     }
 
     public override bool ContinueUnderBlocked => true;
+
 
     protected override bool ShouldContinue(bool ordered)
     {
@@ -47,6 +51,7 @@ public class Jump : BasicAbility
     protected override void OnTerminate()
     {
         t = 0;
+        //if (softPlatform != null) softPlatform.GoThrough = false;
     }
 
     private void FixedUpdate()

@@ -15,6 +15,7 @@ public class PlayerManualAI : AI
     [SerializeField] InputA inputA;
 
     HorizontalMove horizontalMove;
+    PassPlatform passPlatform;
     Jump jump;
     Guard guard;
     VerticalSlash verticalSlash;
@@ -29,6 +30,7 @@ public class PlayerManualAI : AI
     private void Awake()
     {
         horizontalMove = GetComponent<HorizontalMove>();
+        passPlatform = GetComponent<PassPlatform>();
         jump = GetComponent<Jump>();
         guard = GetComponent<Guard>();
         verticalSlash = GetComponent<VerticalSlash>();
@@ -58,6 +60,10 @@ public class PlayerManualAI : AI
         {
             horizontalMove.SetParams(_sign);
             horizontalMove.SendSignal();
+        }
+        if (Input.GetAxisRaw("Vertical") < -0.3)
+        {
+            passPlatform.SendSignal();
         }
         if (Input.GetButton("Jump"))
         {
