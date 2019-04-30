@@ -114,13 +114,16 @@ public class Player : Mortal
         {
             actionAwake.Action();
         }
-        
-        _debugText.text =
-            //$"A:Move Left, D:Move Right, Space:Jump, H:Attack, J:Magic Attack, K:Open Umbrella, L:Awake\n"+
-            $"Health:{health}/{maxHealth}\n" +
-            umbrellaParameters._DebugOutput() +
-            actionAwake._DebugOutput() +
-            $"guardDamageMultiplier=={guardDamageMultiplier.Content}";
+
+        if (_debugText != null)
+        {
+            _debugText.text =
+                //$"A:Move Left, D:Move Right, Space:Jump, H:Attack, J:Magic Attack, K:Open Umbrella, L:Awake\n"+
+                $"Health:{health}/{maxHealth}\n" +
+                umbrellaParameters._DebugOutput() +
+                actionAwake._DebugOutput() +
+                $"guardDamageMultiplier=={guardDamageMultiplier.Content}";
+        }
     }
 
     protected override void OnAttacked(GameObject attackObj,AttackData attack) //攻撃されたときにAttackから（間接的に）実行される関数
