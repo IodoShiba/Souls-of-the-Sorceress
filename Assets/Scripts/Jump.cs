@@ -18,7 +18,11 @@ public class Jump : BasicAbility
     Transform targetTransform;
     float f;
     float t = 0;
-    
+    bool isAvailable = true;
+    public override bool IsAvailable()
+    {
+        return isAvailable;
+    }
     // Use this for initialization
     private void Awake()
     {
@@ -50,13 +54,20 @@ public class Jump : BasicAbility
 
     protected override void OnTerminate()
     {
+        isAvailable = false;
         t = 0;
         //if (softPlatform != null) softPlatform.GoThrough = false;
     }
 
     private void FixedUpdate()
     {
-        if (!Activated) { return; }
-        targetRigidbody.AddForce(f * Vector2.up);
+        if (Activated)
+        {
+            targetRigidbody.AddForce(f * Vector2.up);
+        }
+        else if (!isAvailable && targetRigidbody.velocity.y <= 0) 
+        {
+            isAvailable = true;
+        }
     }
 }
