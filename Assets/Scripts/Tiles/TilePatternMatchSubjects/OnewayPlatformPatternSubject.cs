@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class OnewayPlatformPatternSubject : TilePatternMappingSubject
+public class OnewayPlatformPatternSubject : TilePattermMappingSubjectVector3IntShape
 {
     public override void Initialize(Tilemap tilemap, Vector3Int position, Vector3Int size)
     {
