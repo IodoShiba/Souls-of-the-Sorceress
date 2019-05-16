@@ -22,14 +22,15 @@ public abstract class TilePatternMapper<ShapeExpressionType,SpecifiedSubjectType
     private Action<Vector2Int> setChecked;//(Vector2 position) {checkedFlags[position.y - ][position.x] }
     private Func<Vector2Int, bool> getChecked;
 
-    protected Action<Vector2Int> SetChecked { get => setChecked; }
-    public Func<Vector2Int, bool> GetChecked { get => getChecked; set => getChecked = value; }
+    public bool GetChecked(in Vector2Int position) => getChecked(position);
+    protected void SetChecked(in Vector2Int position) => setChecked(position);
+
 
     private List<(Vector3Int position, ShapeExpressionType shape)> Search()
     {
         BoundsInt b = tilemap.cellBounds;
-        Debug.Log(b);
-        Debug.Log(b.yMin);
+        //Debug.Log(b);
+        //Debug.Log(b.yMin);
         checkedFlags = new bool[b.size.y, b.size.x];
 
         for(int y = 0; y<b.size.y;++y)
@@ -57,7 +58,6 @@ public abstract class TilePatternMapper<ShapeExpressionType,SpecifiedSubjectType
             {
                 if (!GetChecked((Vector2Int)cpos) && Match(tilemap, cpos, out findShape)) 
                 {
-                    Debug.Log(cpos);
                     finds.Add((cpos, findShape));
                 }
                 SetChecked((Vector2Int)cpos);

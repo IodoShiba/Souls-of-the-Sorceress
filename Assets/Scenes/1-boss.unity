@@ -1461,7 +1461,7 @@ TilemapCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1299793170}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1475,7 +1475,7 @@ PlatformEffector2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1299793170}
-  m_Enabled: 1
+  m_Enabled: 0
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
@@ -1529,7 +1529,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b098c4bcb2667f4b97c4b0d407e95c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  subjectPrefab: {fileID: 0}
+  subjectPrefab: {fileID: 6765616167291660954, guid: 5215e9d558795b44b860a9b66b82c597,
+    type: 3}
   targets:
   - {fileID: 11400000, guid: a4f1314cb3b4dc84281f39d72c4a30bf, type: 2}
   - {fileID: 11400000, guid: c08fe23c808b29c488a80adf07e27144, type: 2}
