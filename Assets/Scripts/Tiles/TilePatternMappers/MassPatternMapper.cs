@@ -13,6 +13,13 @@ public class MassPatternMapper : TilePatternMapperRegionPathsIntShape,ISerializa
     Tilemap _tilemap;
     Dictionary<List<Vector3Int>, RegionPathsInt> outForRegionPaths = new Dictionary<List<Vector3Int>, RegionPathsInt>();
     List<List<Vector3Int>> unresolvedInners = new List<List<Vector3Int>>();
+
+    protected override void ReleaseAtEndOfSearch()
+    {
+        Debug.Log(unresolvedInners.Count);
+        outForRegionPaths = null;
+        unresolvedInners = null;
+    }
     bool Check(Vector3Int pos) { return hs_targets.Contains(_tilemap.GetTile(pos)); }
     public override bool Match(Tilemap tilemap, Vector3Int targetPos, out RegionPathsInt paths)
     {
@@ -35,7 +42,6 @@ public class MassPatternMapper : TilePatternMapperRegionPathsIntShape,ISerializa
 
         this._tilemap = tilemap;
         List<Vector3Int> detectedPath;
-        List<List<Vector3Int>> detectedPaths;
 
         paths = null;
 

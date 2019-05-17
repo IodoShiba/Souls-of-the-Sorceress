@@ -16,6 +16,8 @@ public abstract class TilePatternMapper<ShapeExpressionType,SpecifiedSubjectType
     public abstract bool Match(Tilemap tilemap, Vector3Int targetPos, out ShapeExpressionType findSize);
     public abstract Vector3 ShapeToInstantiatePosition(Tilemap tilemap ,Vector3Int position,ShapeExpressionType shape);
 
+    protected virtual void ReleaseAtEndOfSearch() { }
+
     [SerializeField] SpecifiedSubjectType subjectPrefab;
     Tilemap tilemap;
     private bool[,] checkedFlags;
@@ -63,6 +65,7 @@ public abstract class TilePatternMapper<ShapeExpressionType,SpecifiedSubjectType
                 SetChecked((Vector2Int)cpos);
             }
         }
+        ReleaseAtEndOfSearch();
         return finds;
     }
 
