@@ -14,8 +14,9 @@ public class Mortal : PassiveBehaviour, ActorBehaviour.IParamableWith<GameObject
     AttackData argAttackData = new AttackData();
     GameObject argObj;
     System.Action<bool> argSucceedCallback;
-    float leftStunTime = 0;
-
+    float leftStunTime = 0.3f;
+    [SerializeField,UnityEngine.Serialization.FormerlySerializedAs("leftStunTime")] float initialStunTime = 0.3f;
+    
     protected virtual void OnAttacked(GameObject attackObj,AttackData attack) { }
     protected virtual bool IsInvulnerable() { return false; }
     public virtual void Dying() { Destroy(gameObject); }
@@ -59,8 +60,7 @@ public class Mortal : PassiveBehaviour, ActorBehaviour.IParamableWith<GameObject
 
             health -= givenData.damage;
 
-            //フィールドに昇格する　要修正
-            leftStunTime = 0.3f;
+            leftStunTime = initialStunTime;
 
             selfRigidbody.velocity = Vector2.zero;
             selfRigidbody.AddForce(givenData.knockBackImpact);
@@ -89,8 +89,8 @@ public class Mortal : PassiveBehaviour, ActorBehaviour.IParamableWith<GameObject
     public void SetParams(GameObject argObj, AttackData argAttackData, System.Action<bool> succeedCallback)
     {
         this.argObj = argObj;
-        //this.argAttackData = argAttackData;
         AttackData.DeepCopy(this.argAttackData, argAttackData);
         this.argSucceedCallback = succeedCallback;
+        if (Activated) { _OnAttackedInternal(argObj, argAttackData); }
     }
 }

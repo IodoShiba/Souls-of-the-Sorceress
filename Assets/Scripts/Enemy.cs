@@ -47,7 +47,7 @@ public class Enemy : Mortal {
 
     protected override bool IsInvulnerable()
     {
-        return _protectTime > 0;
+        return false;//_protectTime > 0;
     }
 
     public override void Dying()
