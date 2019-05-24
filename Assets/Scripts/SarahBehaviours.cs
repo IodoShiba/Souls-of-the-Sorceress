@@ -4,37 +4,37 @@ using UnityEngine;
 using System;
 using static ActorBehaviour;
 
-public class SarahBehaviours : ActorBehavioursManager
-{
-    [SerializeField] float maxIntervalOfTripleAttack;
-    [SerializeField] GroundSensor groundSensor;
+//public class SarahBehaviours : ActorBehavioursManager
+//{
+//    [SerializeField] float maxIntervalOfTripleAttack;
+//    [SerializeField] GroundSensor groundSensor;
 
-    protected override void Structure()
-    {
-        Allow<HorizontalMove>();
-        Allow<PassPlatform>();
+//    protected override void Structure()
+//    {
+//        Allow<HorizontalMove>();
+//        Allow<PassPlatform>();
 
-        FollowCondition triples = null;
-        using (IfScope(() => groundSensor.IsOnGround))//new Condition(this, () => groundSensor.IsOnGround))
-        {
-            Allow<Jump>();
-            Allow<Guard>();
-            Allow<Tackle>();
-            triples = Allow<VerticalSlash>().Follow<ReturnSlash>(maxIntervalOfTripleAttack);
-        }
-        FollowCondition smashSlashWaitingCond = triples.Follow<SmashSlash>(maxIntervalOfTripleAttack);
-        using (ElseScope())
-        {
-            Allow<Glide>();
+//        FollowCondition triples = null;
+//        using (IfScope(() => groundSensor.IsOnGround))//new Condition(this, () => groundSensor.IsOnGround))
+//        {
+//            Allow<Jump>();
+//            Allow<Guard>();
+//            Allow<Tackle>();
+//            triples = Allow<VerticalSlash>().Follow<ReturnSlash>(maxIntervalOfTripleAttack);
+//        }
+//        FollowCondition smashSlashWaitingCond = triples.Follow<SmashSlash>(maxIntervalOfTripleAttack);
+//        using (ElseScope())
+//        {
+//            Allow<Glide>();
 
-            Allow<DropAttack>();
-            using (DenyIfScope(smashSlashWaitingCond))
-            {
-                Allow<AerialSlash>();
-            }
-            Allow<RisingAttack>();
-        }
-    }
-}
+//            Allow<DropAttack>();
+//            using (DenyIfScope(smashSlashWaitingCond))
+//            {
+//                Allow<AerialSlash>();
+//            }
+//            Allow<RisingAttack>();
+//        }
+//    }
+//}
 
 

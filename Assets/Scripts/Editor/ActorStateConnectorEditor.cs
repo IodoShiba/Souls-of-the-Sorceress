@@ -52,6 +52,5 @@ public class ActorStateConectorEditor : Editor
 
 }
 
-[CustomEditor(typeof(TestActorRepresenter))]
-public class TestActrRepresenterEditor : ActorStateConectorEditor { }
+
 

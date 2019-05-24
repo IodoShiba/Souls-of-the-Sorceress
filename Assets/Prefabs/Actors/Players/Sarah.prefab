@@ -3,8 +3,7 @@
 --- !u!1 &8916380848524203185
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1678311527970370, guid: 501b977c0c61eb3479d02e2313b09101,
-    type: 2}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
@@ -24,8 +23,7 @@ GameObject:
 --- !u!4 &8916380849796070452
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4301161592082944, guid: 501b977c0c61eb3479d02e2313b09101,
-    type: 2}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916380848524203185}
@@ -160,20 +158,11 @@ GameObject:
   - component: {fileID: 8916380848889061144}
   - component: {fileID: 8916380848889061139}
   - component: {fileID: 8916380848889061095}
-  - component: {fileID: 8916380848889061120}
+  - component: {fileID: 8916380848890831846}
   - component: {fileID: 8916380848889061179}
   - component: {fileID: 8916380848889061147}
   - component: {fileID: 8916380848889061149}
   - component: {fileID: 8916380848889061094}
-  - component: {fileID: 8916380848889061133}
-  - component: {fileID: 8916380848889061132}
-  - component: {fileID: 8916380848889061123}
-  - component: {fileID: 8916380848889061134}
-  - component: {fileID: 8916380848889061143}
-  - component: {fileID: 8916380848889061135}
-  - component: {fileID: 8916380848889061136}
-  - component: {fileID: 8916380848889061137}
-  - component: {fileID: 8916380848889061148}
   - component: {fileID: 8916380848889061122}
   - component: {fileID: 8916380848889061128}
   - component: {fileID: 8916380848889061131}
@@ -305,6 +294,7 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 8916380848889061125}
   dealtAttackConverters: []
+  initialStunTime: 0.3
   umbrellaParameters: {fileID: 8916380848891301902}
   inputA: {fileID: 8916380848889061122}
   enemyManager: {fileID: 0}
@@ -470,7 +460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputA: {fileID: 8916380848889061122}
---- !u!114 &8916380848889061120
+--- !u!114 &8916380848890831846
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -479,12 +469,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 8916380848889061178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab230f97be6063348b736608f91b1d01, type: 3}
+  m_Script: {fileID: 11500000, guid: ed4b52c2915e6c64cbc263dc86f3c250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ai: {fileID: 8916380848889061095}
-  maxIntervalOfTripleAttack: 0.3
-  groundSensor: {fileID: 8916380849072566239}
+  sarahDefault:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+  verticalSlash:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+  returnSmash:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+  smashSlash:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+  aerialSlash:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
 --- !u!114 &8916380848889061179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -585,155 +587,6 @@ MonoBehaviour:
   maxPushForceMagnitude: 300
   maxJumpHeight: 3
   targetRigidbody: {fileID: 8916380848889061125}
---- !u!114 &8916380848889061133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d950d23371d5fe7478bd6d77dd13df4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _motionLength: 0.2
-  attack: {fileID: 8916380849465762211}
-  umbrella: {fileID: 8916380848891301901}
---- !u!114 &8916380848889061132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 731d2bed17cc47942943cb893772ad1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hopImpact: 300
-  _motionLength: 0.2
-  attack: {fileID: 8916380850370461321}
-  umbrella: {fileID: 8916380848891301901}
-  playerRb: {fileID: 8916380848889061125}
---- !u!114 &8916380848889061123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6f7e5c1863a6114489602326bb2dc53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _motionLength: 0.2
-  attack: {fileID: 8916380849248469449}
-  umbrella: {fileID: 8916380848891301901}
---- !u!114 &8916380848889061134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcc47ea21fcf0c647a78bbd68548c13e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _motionLength: 0.3
-  playerRb: {fileID: 8916380848889061125}
-  groundSensor: {fileID: 8916380849072566239}
-  attack: {fileID: 8916380849515846539}
-  umbrella: {fileID: 8916380848891301901}
---- !u!114 &8916380848889061143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890a5575726f8284ab7517839a0e53e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 8916380848889061121}
-  horizontalMoveSpeed: 6
-  maxFallSpeed: 2
-  umbrella: {fileID: 8916380848891301901}
-  groundSensor: {fileID: 8916380849072566239}
-  horizontalMove: {fileID: 8916380848889061147}
---- !u!114 &8916380848889061135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80c6f68b2bc20614191be6abc07b15ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  risingSpeed: 24
-  _motionLength: 0.3
-  attack: {fileID: 8916380850513594275}
-  umbrella: {fileID: 8916380848891301901}
---- !u!114 &8916380848889061136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6c8d84a50516e743a2d50b064773018, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropSpeed: 24
-  maxMotionLength: 2
-  attack: {fileID: 8916380849653747854}
-  groundSensor: {fileID: 8916380849072566239}
-  umbrella: {fileID: 8916380848891301901}
---- !u!114 &8916380848889061137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bca2fa5ccee2f5448ae9c52292080d73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 8916380848889061125}
-  playerData: {fileID: 8916380848889061121}
-  extensionCollider: {fileID: 8916380848889061124}
-  knockbackAttack: {fileID: 8916380850362335010}
-  umbrella: {fileID: 8916380848891301901}
---- !u!114 &8916380848889061148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d505dee4403d84bbd0f3c49b8ff5c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 24
-  proceedDistance: 6
-  unguardTime: 0.5
-  playerRb: {fileID: 8916380848889061125}
-  wallSensor: {fileID: 0}
 --- !u!114 &8916380848889061122
 MonoBehaviour:
   m_ObjectHideFlags: 0
