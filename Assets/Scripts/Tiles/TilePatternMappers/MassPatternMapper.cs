@@ -39,6 +39,19 @@ public class MassPatternMapper : TilePatternMapperRegionPathsIntShape,ISerializa
         //
         //  境界部分に十字になるような部分を含む領域はその交差点で２つの領域に分割できるので検出する領域は境界に十字を含まないとする
 
+        // Memo
+        // 領域は開領域（境界を含まない）　よって十字クロスに見える場所で二分される
+        // 斜め45度の坂道を考えてこれを拡張したいが、坂を考えると縦横のみで成り立っていた信念が成り立たなくなる
+        // ・一つの格子点に複数の「領域の左下角」が存在しうる
+        //
+        //    :\###|---/#
+        //    :  \#| /###
+        //    :----X====:    <-このようなことがありうる
+        //    :    :    :
+        //    :----:----:
+        //
+        // 分かること
+        // ・各格子点に接続する頂点はせいぜい8つ　各象限に1本ずつまでと、軸方向のみ
 
         this._tilemap = tilemap;
         List<Vector3Int> detectedPath;
@@ -121,7 +134,7 @@ public class MassPatternMapper : TilePatternMapperRegionPathsIntShape,ISerializa
                 }
                 break;
 
-            default://走査する領域はその境界が交わらない閉領域であるため回転角の和は+-360度以外はありえない
+            default://走査する領域はその境界が交わらない領域であるため回転角の和は+-360度以外はありえない
                 throw new System.InvalidProgramException($"{nameof(edgeRotationMass)} cant be {edgeRotationMass} : it must be +-360. Something wrong is in the program.");
             
         }
