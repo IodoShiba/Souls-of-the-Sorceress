@@ -158,7 +158,11 @@ GameObject:
   - component: {fileID: 8916380848889061144}
   - component: {fileID: 8916380848889061139}
   - component: {fileID: 8916380848889061095}
+  - component: {fileID: 4325353825048437118}
+  - component: {fileID: 7184598500640157805}
   - component: {fileID: 8916380848890831846}
+  - component: {fileID: 3289781965317027910}
+  - component: {fileID: 1353951183406726685}
   - component: {fileID: 8916380848889061179}
   - component: {fileID: 8916380848889061147}
   - component: {fileID: 8916380848889061149}
@@ -268,7 +272,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 4
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 539c780704303c84b96f6ceae3168579, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -287,24 +291,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1000
   maxHealth: 1000
+  isInvulnerable: 0
   dyingCallbacks:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 8916380848889061125}
+  dealingAttackConverters: []
   dealtAttackConverters: []
   initialStunTime: 0.3
   umbrellaParameters: {fileID: 8916380848891301902}
-  inputA: {fileID: 8916380848889061122}
-  enemyManager: {fileID: 0}
   awakeningState: {fileID: 8916380848889061128}
   directionState: {fileID: 8916380848889061142}
   actionAwake: {fileID: 8916380848889061092}
   umbrellaUpward: {fileID: 0}
   guardColliderExtension: {fileID: 8916380848889061124}
-  groundSensor: {fileID: 8916380849072566239}
-  jumpAbility: {fileID: 8916380848889061094}
   _debugText: {fileID: 0}
   damaged: 0
 --- !u!114 &8916380848889061138
@@ -460,6 +462,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputA: {fileID: 8916380848889061122}
+--- !u!114 &4325353825048437118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4c1c480dfcd2b489bfa7155b61bbc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateConnector: {fileID: 8916380848890831846}
+  mortal: {fileID: 8916380848889061121}
+--- !u!114 &7184598500640157805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99c8b6417c17fee48805ac96ecdb9728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  joyDirectionKeyRadiusThreshold: 0.5
 --- !u!114 &8916380848890831846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,21 +501,140 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b52c2915e6c64cbc263dc86f3c250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  commands: {fileID: 7184598500640157805}
+  groundSensor: {fileID: 8916380849072566239}
   sarahDefault:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
+    commands: {fileID: 7184598500640157805}
+    horizontalMove:
+      method: {fileID: 3289781965317027910}
+      fields:
+        maxSpeed: 8
+        pushForceMagnitude: 100
+        stopForceMagnitude: 200
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.9982829
+            inSlope: -6.1870217
+            outSlope: -6.1870217
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.044911936
+          - serializedVersion: 3
+            time: 0.18267518
+            value: -0.015916467
+            inSlope: -1.6507514
+            outSlope: -1.6507514
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.24021606
+          - serializedVersion: 3
+            time: 0.5939588
+            value: -0.4056789
+            inSlope: -0.24970157
+            outSlope: -0.24970157
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.66292655
+            outWeight: 0.7549567
+          - serializedVersion: 3
+            time: 0.9855652
+            value: -0.45129204
+            inSlope: -0.011692719
+            outSlope: -0.011692719
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 1
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    jump:
+      method: {fileID: 1353951183406726685}
+      fields:
+        jumpHeight: 3
+        jumpForce: 300
+        jumpUpSpeed: 10
   verticalSlash:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
-  returnSmash:
+    commands: {fileID: 7184598500640157805}
+    verticalSlashAttack: {fileID: 8916380849465762211}
+    receptionStartTime: 0.13
+    umbrella: {fileID: 8916380848891301901}
+  returnSlash:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
+    commands: {fileID: 7184598500640157805}
+    retuenSlashAttack: {fileID: 8916380850370461321}
+    receptionStartTime: 0.13
+    jumpUpImpulse: {x: 0, y: 15}
+    selfRigidBody: {fileID: 8916380848889061125}
+    umbrella: {fileID: 8916380848891301901}
   smashSlash:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
+    commands: {fileID: 7184598500640157805}
+    smashSlashAttack: {fileID: 8916380849248469449}
+    umbrella: {fileID: 8916380848891301901}
   aerialSlash:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
+    commands: {fileID: 7184598500640157805}
+    aerialSlashAttack: {fileID: 8916380849515846539}
+    umbrella: {fileID: 8916380848891301901}
+    groundSensor: {fileID: 0}
+  guard:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    commands: {fileID: 7184598500640157805}
+  tackle:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    commands: {fileID: 7184598500640157805}
+  risingAttack:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    commands: {fileID: 7184598500640157805}
+  dropAttack:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    commands: {fileID: 7184598500640157805}
+  glide:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    commands: {fileID: 7184598500640157805}
+--- !u!114 &3289781965317027910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cadb6fc697b13c54eb0e3327a63b3926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1353951183406726685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f36d7676470be5d4b83f1d35d4bdfd33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundSensor: {fileID: 8916380849072566239}
 --- !u!114 &8916380848889061179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,7 +694,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d902d5b5d9c72641bc3a2ac62dd47c0, type: 3}
   m_Name: 
@@ -578,7 +726,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ecfee0287e814d4c92652734598d48d, type: 3}
   m_Name: 
@@ -1560,7 +1708,7 @@ MonoBehaviour:
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
-  activeSpan: 0
+  activeSpan: 0.4
   attackDataPrototype:
     damage: 0
     knockBackImpact: {x: 0, y: 0}
@@ -1771,7 +1919,7 @@ MonoBehaviour:
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
-  activeSpan: 0
+  activeSpan: 0.4
   attackDataPrototype:
     damage: 0
     knockBackImpact: {x: 0, y: 0}
@@ -2600,7 +2748,7 @@ MonoBehaviour:
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
-  activeSpan: 0
+  activeSpan: 0.4
   attackDataPrototype:
     damage: 0
     knockBackImpact: {x: 0, y: 0}

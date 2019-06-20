@@ -10,7 +10,7 @@ using static ActorState;
 public class ActorStateConectorEditor : Editor
 {
     ActorStateConnector _target;
-    ActorStateConnector Target { get => _target == null ? (_target = (target as ActorStateConnector)) : _target; }
+    protected ActorStateConnector Target { get => _target == null ? (_target = (target as ActorStateConnector)) : _target; }
 
     public override void OnInspectorGUI()
     {
@@ -44,14 +44,16 @@ public class ActorStateConectorEditor : Editor
             }
             GUI.backgroundColor = defcol;
         }
-        if (GUILayout.Button("Set Game Object and Representer"))
+        if (GUILayout.Button("Set GameObject,Representer and other Essentials"))
         {
             foreach (FieldInfo fi in fieldg.Where(g => g.Key).First())
             {
-                var go = serializedObject.FindProperty(fi.Name).FindPropertyRelative("gameObject");
+                var sp = serializedObject.FindProperty(fi.Name);
+                var go = sp.FindPropertyRelative("gameObject");
                 go.objectReferenceValue = Target.gameObject;
-                var ar = serializedObject.FindProperty(fi.Name).FindPropertyRelative("connector");
+                var ar = sp.FindPropertyRelative("connector");
                 ar.objectReferenceValue = Target;
+                SetEssentials(sp);
                 serializedObject.ApplyModifiedProperties();
             }
             EditorUtility.SetDirty(Target);
@@ -60,6 +62,7 @@ public class ActorStateConectorEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 
+    protected virtual void SetEssentials(SerializedProperty stateProp) { }
 }
 
 

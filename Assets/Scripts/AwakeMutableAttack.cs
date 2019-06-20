@@ -40,9 +40,9 @@ public class AwakeMutableAttack : AttackConverter
 
     public override bool Convert(AttackData value)
     {
-        if (ordinary.IsCurrent) {AttackData.DeepCopy(value,ordinaryAttack); }
-        else if (awaken.IsCurrent) { AttackData.DeepCopy(value, awakenAttack);}
-        else if (blueAwaken.IsCurrent) { AttackData.DeepCopy(value, blueAwakenAttack); }
+        if (ordinary.IsCurrent) {AttackData.Copy(value,ordinaryAttack); }
+        else if (awaken.IsCurrent) { AttackData.Copy(value, awakenAttack);}
+        else if (blueAwaken.IsCurrent) { AttackData.Copy(value, blueAwakenAttack); }
         return true;
     }
 }

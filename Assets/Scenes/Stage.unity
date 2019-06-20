@@ -130,7 +130,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8916380848890831844}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848890831847}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19f3529071d6684468cc6df34f08946b, type: 3}
@@ -2281,7 +2281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.69, y: 12.030001, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 584196039}
@@ -3345,6 +3345,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 932e2c19ad0f8db40ba340a6ddd5065e, type: 3}
+--- !u!114 &750707009 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8916380849072566239, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8916380848890831844}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81053ec959e7dbc46a4b7ae6a8516768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &780671531
 GameObject:
   m_ObjectHideFlags: 0
@@ -3724,6 +3736,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1008393800}
   - component: {fileID: 1008393799}
+  - component: {fileID: 1008393801}
   m_Layer: 0
   m_Name: EnemyManager
   m_TagString: Untagged
@@ -3757,6 +3770,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1008393801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008393798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6d1aef7cf5d7e14ebd8a7ffdc394f44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1013939617
 GameObject:
   m_ObjectHideFlags: 0
@@ -4039,12 +4064,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 120
   maxHealth: 120
+  isInvulnerable: 0
   dyingCallbacks:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 1073469328}
+  dealingAttackConverters: []
   dealtAttackConverters: []
   initialStunTime: 0.3
   manager: {fileID: 1008393799}
@@ -10251,24 +10278,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1000
   maxHealth: 1000
+  isInvulnerable: 0
   dyingCallbacks:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 3473617832704484568}
+  dealingAttackConverters: []
   dealtAttackConverters: []
   initialStunTime: 0.3
   umbrellaParameters: {fileID: 3473617832702634963}
-  inputA: {fileID: 3473617832704484575}
-  enemyManager: {fileID: 1008393799}
   awakeningState: {fileID: 3473617832704484565}
   directionState: {fileID: 3473617832704484555}
   actionAwake: {fileID: 3473617832704484665}
   umbrellaUpward: {fileID: 0}
   guardColliderExtension: {fileID: 3473617832704484569}
-  groundSensor: {fileID: 3473617833326285826}
-  jumpAbility: {fileID: 3473617832704484667}
   _debugText: {fileID: 1506966037}
   damaged: 0
 --- !u!114 &3473617832704484574
@@ -11569,138 +11594,28 @@ PrefabInstance:
       objectReference: {fileID: 1008393799}
     - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
-      propertyPath: groundSensor
-      value: 
-      objectReference: {fileID: 8916380848890831845}
+      propertyPath: sarahDefault.jump.fields.jumpUpSpeed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
-      propertyPath: sarahDefault.gameObject
-      value: 
-      objectReference: {fileID: 8916380848890831847}
+      propertyPath: sarahDefault.jump.fields.jumpForce
+      value: 300
+      objectReference: {fileID: 0}
     - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
-      propertyPath: sarahDefault.connector
-      value: 
-      objectReference: {fileID: 8916380848890831846}
+      propertyPath: sarahDefault.jump.fields.jumpHeight
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
-      propertyPath: verticalSlash.gameObject
+      propertyPath: aerialSlash.groundSensor
       value: 
-      objectReference: {fileID: 8916380848890831847}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+      objectReference: {fileID: 750707009}
+    - target: {fileID: 8916380849515846539, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
-      propertyPath: verticalSlash.connector
-      value: 
-      objectReference: {fileID: 8916380848890831846}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: returnSmash.gameObject
-      value: 
-      objectReference: {fileID: 8916380848890831847}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: returnSmash.connector
-      value: 
-      objectReference: {fileID: 8916380848890831846}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: smashSlash.gameObject
-      value: 
-      objectReference: {fileID: 8916380848890831847}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: smashSlash.connector
-      value: 
-      objectReference: {fileID: 8916380848890831846}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: aerialSlash.gameObject
-      value: 
-      objectReference: {fileID: 8916380848890831847}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: aerialSlash.connector
-      value: 
-      objectReference: {fileID: 8916380848890831846}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: guard.gameObject
-      value: 
-      objectReference: {fileID: 8916380848890831847}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: guard.connector
-      value: 
-      objectReference: {fileID: 8916380848890831846}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: tackle.gameObject
-      value: 
-      objectReference: {fileID: 8916380848890831847}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: tackle.connector
-      value: 
-      objectReference: {fileID: 8916380848890831846}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: risingAttack.gameObject
-      value: 
-      objectReference: {fileID: 8916380848890831847}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: risingAttack.connector
-      value: 
-      objectReference: {fileID: 8916380848890831846}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: dropAttack.gameObject
-      value: 
-      objectReference: {fileID: 8916380848890831847}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: dropAttack.connector
-      value: 
-      objectReference: {fileID: 8916380848890831846}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: glide.gameObject
-      value: 
-      objectReference: {fileID: 8916380848890831847}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: glide.connector
-      value: 
-      objectReference: {fileID: 8916380848890831846}
+      propertyPath: activeSpan
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 004a550fc633f6b48a28890fc9bbc1c7, type: 3}
---- !u!114 &8916380848890831845 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8916380849072566239, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 8916380848890831844}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81053ec959e7dbc46a4b7ae6a8516768, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8916380848890831846 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 8916380848890831844}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848890831847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed4b52c2915e6c64cbc263dc86f3c250, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &8916380848890831847 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8916380848889061178, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 8916380848890831844}
-  m_PrefabAsset: {fileID: 0}

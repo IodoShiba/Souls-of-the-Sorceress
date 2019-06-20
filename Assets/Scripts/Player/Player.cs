@@ -40,25 +40,15 @@ public class Player : Mortal
 
     */
 
-    [System.Serializable]
-    class StateOption {
-        protected Player player;
-        public StateOption(Player player) { this.player = player; }
-    }
     [SerializeField] UmbrellaParameters umbrellaParameters;
-    [SerializeField] InputA inputA;
-    [SerializeField] EnemyManager enemyManager;
     [SerializeField] StateManager awakeningState;
     [SerializeField] StateManager directionState;
     [SerializeField] ActionAwake actionAwake;
     [SerializeField] AttackInHitbox umbrellaUpward;
     [SerializeField] Collider2D guardColliderExtension;
-    [SerializeField] GroundSensor groundSensor;
-    [SerializeField] Jump jumpAbility;
     [SerializeField] UnityEngine.UI.Text _debugText;
-    
+    [SerializeField, DisabledField] bool damaged = false;
 
-    [SerializeField]bool damaged=false;
     bool dropAttacking = false;
     bool risingAttacking = false;
     int dirSign = 1;    //自機の横方向の向きを表す符号
@@ -128,16 +118,11 @@ public class Player : Mortal
 
     protected override void OnAttacked(GameObject attackObj,AttackData attack) //攻撃されたときにAttackから（間接的に）実行される関数
     {
-        Vector3 selfP = transform.position;
-        Vector2 r = attackObj.transform.position - selfP;
         guardSucceed = false;
     }
-    //protected override void ConvertDealtAttack(AttackData dealt)
-    //{
-    //    base.ConvertDealtAttack(dealt);
-    //}
 
-    protected override bool IsInvulnerable() //無敵判定用の関数 これがtrueを返す間は被ダメージ処理自体が行われない
+
+    protected override bool _IsInvulnerable() //無敵判定用の関数 これがtrueを返す間は被ダメージ処理自体が行われない
     {
         return
             damaged ||
@@ -145,13 +130,6 @@ public class Player : Mortal
             risingAttacking;
     }
 
-    //public override void ConvertDealingAttack(AttackData attackData) //プレイヤーが与える攻撃の変換用関数 傘破損時に自機の攻撃力を半減させる処理などはここに書く
-    //{
-    //    if (!DoesUmbrellaWork())
-    //    {
-    //        attackData.damage *= 0.5f;
-    //    }
-    //}
 
     public override void Dying() //体力がなくなると呼ばれる関数　今はガバ実装
     {

@@ -16,7 +16,9 @@ namespace ActorStateUtility {
         readonly ActorState[] states;
         int i = 0;
 
-        public ChainAttackStream(float chainWaitSpan,params ActorState[] states)
+        public bool IsRecepting { get => isRecepting; }
+
+        public ChainAttackStream(float chainWaitSpan, params ActorState[] states)
         {
             this.chainWaitSpan = chainWaitSpan;
             this.states = states;
@@ -46,6 +48,7 @@ namespace ActorStateUtility {
         /// </summary>
         public void StartReception()
         {
+            if (isRecepting) return;
             waitTimeLimit = Time.time + chainWaitSpan;
             isRecepting = true;
         }
@@ -66,4 +69,6 @@ namespace ActorStateUtility {
         /// <returns>与えられた関数が真のときに状態を遷移させようとする関数</returns>
         public System.Func<ActorState> ProceedsWhen(System.Func<bool> condf) => () => condf() ? TryProceed() : null;
     }
+
+
 }

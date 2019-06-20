@@ -10,6 +10,7 @@ public class Umbrella : MonoBehaviour {
     [SerializeField] Color _colorAwaken;
     [SerializeField] Color _colorBlueAwaken;
     SpriteRenderer spriteRenderer = null;
+    string coroutineName;
 
     // Use this for initialization
     void Start () {
@@ -58,7 +59,18 @@ public class Umbrella : MonoBehaviour {
 
     public void Default()
     {
+        if (!string.IsNullOrEmpty(coroutineName))
+        {
+            StopCoroutine(coroutineName);
+            coroutineName = null;
+        }
         transform.localPosition = defpos;
+    }
+
+    public void StartMotion(string name)
+    {
+        StartCoroutine(name);
+        coroutineName = name;
     }
 
     IEnumerator PlayerVerticalSlash()

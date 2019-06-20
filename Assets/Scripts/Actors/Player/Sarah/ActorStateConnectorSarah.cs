@@ -4,7 +4,9 @@ using UnityEngine;
 using ActorStateUtility;
 using ActorCommanderUtility;
 using System;
+using UniRx;
 
+/*
 namespace ActorCommanderUtility
 {
     /// <summary>
@@ -149,69 +151,18 @@ namespace ActorCommanderUtility
         }
     }
 }
-
+*/
 namespace ActorSarah
 {
-    public abstract class PlayerCommander : MonoBehaviour
-    {
-
-        private AnalogueExpressions direction = new AnalogueExpressions();
-        private BoolExpressions attack = new BoolExpressions();
-        private BoolExpressions openUmbrella = new BoolExpressions();
-        private BoolExpressions awakeButton = new BoolExpressions();
-        private BoolExpressions analogueUp = new BoolExpressions();
-        private BoolExpressions analogueDown = new BoolExpressions();
-        private MultiPushExpressions downAttackMultiPush;
-
-        private void Awake()
-        {
-            downAttackMultiPush = new MultiPushExpressions(.2f, analogueDown, attack);
-        }
-        public AnalogueExpressions Direction { get => direction;  }
-        public BoolExpressions Attack { get => attack; }
-        public BoolExpressions OpenUmbrella { get => openUmbrella; }
-        public BoolExpressions AwakeButton { get => awakeButton; }
-        public BoolExpressions AnalogueUp { get => analogueUp; }
-        public BoolExpressions AnalogueDown { get => analogueDown; }
-        public MultiPushExpressions DownAttackMultiPush { get => downAttackMultiPush; }
-
-        public abstract void Decide();
-
-    }
-
-    public class PlayerInputCommander : PlayerCommander
-    {
-        [SerializeField] float joyDirectionKeyRadiusThreshold;
-
-        public override void Decide()
-        {
-            Vector2 joyIn;
-            Direction.Evaluate(joyIn = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
-            Attack.Evaluate(Input.GetButton("Attack"));
-            OpenUmbrella.Evaluate(Input.GetButton("Open Umbrella"));
-            AwakeButton.Evaluate(Input.GetButton("Awake"));
-            AnalogueUp.Evaluate(joyIn.y > joyDirectionKeyRadiusThreshold);
-            AnalogueDown.Evaluate(joyIn.y < -joyDirectionKeyRadiusThreshold);
-
-            Direction.Update();
-            Attack.Update();
-            OpenUmbrella.Update();
-            AwakeButton.Update();
-            AnalogueUp.Update();
-            AnalogueDown.Update();
-            DownAttackMultiPush.Update();
-        }
-    }
 
     public class ActorStateConnectorSarah : ActorState.ActorStateConnector
     {
-        //[SerializeField] AI ai;
         [SerializeField] PlayerCommander commands;
         [SerializeField] GroundSensor groundSensor;
         
         [SerializeField] SarahDefault sarahDefault;
         [SerializeField] VerticalSlash verticalSlash;
-        [SerializeField] ReturnSmash returnSmash;
+        [SerializeField] ReturnSmash returnSlash;
         [SerializeField] SmashSlash smashSlash;
         [SerializeField] AerialSlash aerialSlash;
         [SerializeField] Guard guard;
@@ -226,13 +177,17 @@ namespace ActorSarah
 
         protected override void BuildStateConnection()
         {
-            tripleSlashAttackStream = new ChainAttackStream(.4f, new ActorState[] { verticalSlash, returnSmash, smashSlash });
-
-            //ConnectState(() =>  (groundSensor.IsOnGround && Input.GetButtonGetButtonDown("Attack")) ? tripleSlashAttackStream.TryProceed() : null);
-            ConnectStateFromDefault(tripleSlashAttackStream.ProceedsWhen(() => groundSensor.IsOnGround && commands.Attack.IsDown));
+            Func<ActorState> proceedFunc;
+            ConnectStateFromDefault(
+                proceedFunc = 
+                (tripleSlashAttackStream = new ChainAttackStream(.4f, new ActorState[] { verticalSlash, returnSlash, smashSlash }))
+                .ProceedsWhen(() => groundSensor.IsOnGround && commands.Attack.IsDown));
             ConnectStateFromDefault(
                 () => !groundSensor.IsOnGround && commands.Attack.IsDown,
                 aerialSlash);
+
+            ConnectState(proceedFunc, verticalSlash);
+            ConnectState(tripleSlashAttackStream.ProceedsWhen(() => (groundSensor.IsOnGround || tripleSlashAttackStream.IsRecepting) && commands.Attack.IsDown), returnSlash);
 
             ConnectStateFromDefault(
                 () => groundSensor.IsOnGround && commands.OpenUmbrella.IsDown,
@@ -251,6 +206,10 @@ namespace ActorSarah
             
         }
 
+        protected override void BeforeStateUpdate()
+        {
+            commands.Decide();
+        }
         protected override void OnChangeState(ActorState next, bool isNormalTermination)
         {
             if (!isNormalTermination) { tripleSlashAttackStream.Reset(); }
@@ -259,45 +218,154 @@ namespace ActorSarah
         [System.Serializable]
         public class SarahDefault : Default
         {
-            [DisabledField]
-            public PlayerCommander commands;
+            [DisabledField] public PlayerCommander commands;
+            [SerializeField] ActorFunction.HorizontalMove horizontalMove;
+            [SerializeField] ActorFunction.Jump jump;
             public ChainAttackStream attackStream;
+            ActorStateConnectorSarah connectorSarah;
 
+            public ActorStateConnectorSarah ConnectorSarah
+            {
+                get => connectorSarah == null ?
+                    (connectorSarah = Connector as ActorStateConnectorSarah) :
+                    connectorSarah;
+            }
+
+            protected override void OnInitialize()
+            {
+                Debug.Log("State Changed : Default");
+                ConnectorSarah.tripleSlashAttackStream.StartReception();
+            }
             public override void OnActive()
             {
-                base.OnActive();
+                horizontalMove.Update(System.Math.Sign(commands.Directional.Evaluation.x));
+                jump.Update(commands.Jump.Evaluation);
             }
         }
 
         [System.Serializable]
         private class SarahState : ActorState
         {
-            [DisabledField]
-            public PlayerCommander commands;
+            ActorStateConnectorSarah connectorSarah;
+
+            public ActorStateConnectorSarah ConnectorSarah
+            {
+                get => connectorSarah == null ?
+                    (connectorSarah = Connector as ActorStateConnectorSarah) :
+                    connectorSarah;
+            }
+
+            [DisabledField] public PlayerCommander commands;
         }
 
         [System.Serializable]
         private class VerticalSlash : SarahState
         {
+            [SerializeField] AttackInHitbox verticalSlashAttack;
+            [SerializeField] float receptionStartTime;
+            [SerializeField] Umbrella umbrella;
+            IodoShiba.Utilities.ManualClock receptionStartClock = new IodoShiba.Utilities.ManualClock();
 
+            protected override bool ShouldCotinue() => verticalSlashAttack.IsAttackActive;
+            protected override void OnInitialize()
+            {
+                receptionStartClock.Reset();
+                Debug.Log("State Changed : Vertical Slash");
+                verticalSlashAttack.Activate();
+                umbrella.StartMotion("Player"+nameof(VerticalSlash));
+            }
+
+            public override void OnActive()
+            {
+                receptionStartClock.Update();
+                if(!ConnectorSarah.tripleSlashAttackStream.IsRecepting && receptionStartClock.Clock > receptionStartTime)
+                {
+                    ConnectorSarah.tripleSlashAttackStream.StartReception();
+                }
+            }
+            protected override void OnTerminate(bool isNormal)
+            {
+                receptionStartClock.Reset();
+                umbrella.Default();
+                verticalSlashAttack.Inactivate();
+            }
         }
 
         [System.Serializable]
         private class ReturnSmash : SarahState
         {
+            [SerializeField] AttackInHitbox retuenSlashAttack;
+            [SerializeField] float receptionStartTime;
+            [SerializeField] Vector2 jumpUpImpulse;
+            [SerializeField] Rigidbody2D selfRigidBody;
+            [SerializeField] Umbrella umbrella;
+            IodoShiba.Utilities.ManualClock receptionStartClock = new IodoShiba.Utilities.ManualClock();
 
+            protected override bool ShouldCotinue() => retuenSlashAttack.IsAttackActive;
+            protected override void OnInitialize()
+            {
+                Debug.Log("State Changed : Return Slash");
+                retuenSlashAttack.Activate();
+                selfRigidBody.AddForce(jumpUpImpulse, ForceMode2D.Impulse);
+                umbrella.StartMotion("Player" + nameof(ReturnSlash));
+            }
+            public override void OnActive()
+            {
+                receptionStartClock.Update();
+                if (!ConnectorSarah.tripleSlashAttackStream.IsRecepting && receptionStartClock.Clock > receptionStartTime)
+                {
+                    ConnectorSarah.tripleSlashAttackStream.StartReception();
+                }
+            }
+            protected override void OnTerminate(bool isNormal)
+            {
+                receptionStartClock.Reset();
+                umbrella.Default();
+                retuenSlashAttack.Inactivate();
+            }
         }
 
         [System.Serializable]
         private class SmashSlash : SarahState
         {
+            [SerializeField] AttackInHitbox smashSlashAttack;
+            [SerializeField] Umbrella umbrella;
 
+            protected override bool ShouldCotinue() => smashSlashAttack.IsAttackActive;
+            protected override void OnInitialize()
+            {
+                Debug.Log("State Changed : Smash Slash");
+                smashSlashAttack.Activate();
+                umbrella.StartMotion("Player" + nameof(SmashSlash));
+            }
+            protected override void OnTerminate(bool isNormal)
+            {
+                umbrella.Default();
+                smashSlashAttack.Inactivate();
+            }
         }
 
         [System.Serializable]
         private class AerialSlash : SarahState
         {
+            [SerializeField] AttackInHitbox aerialSlashAttack;
+            [SerializeField] Umbrella umbrella;
+            [SerializeField] GroundSensor groundSensor;
 
+            protected override bool ShouldCotinue() => aerialSlashAttack.IsAttackActive && !groundSensor.IsOnGround;
+
+            protected override void OnInitialize()
+            {
+                Debug.Log("State Changed : Aerial Slash");
+                aerialSlashAttack.Activate();
+                umbrella.StartMotion("Player" + nameof(AerialSlash));
+            }
+
+            protected override void OnTerminate(bool isNormal)
+            {
+                umbrella.Default();
+                aerialSlashAttack.Inactivate();
+            }
         }
 
         [System.Serializable]

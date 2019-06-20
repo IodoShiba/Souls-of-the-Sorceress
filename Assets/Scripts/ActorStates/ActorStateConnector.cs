@@ -13,7 +13,7 @@ public class ActorState
     /// <summary>
     /// Actorの状態の接続と遷移を担う抽象コンポーネント
     /// </summary>
-    public abstract class ActorStateConnector : MonoBehaviour
+    public abstract class ActorStateConnector : MonoBehaviour , IodoShiba.Utilities.IManualUpdate
     {
 
 
@@ -49,6 +49,8 @@ public class ActorState
 
         private void Awake()
         {
+            GetComponent<Actor>().MortalUpdate = ManualUpdate;
+
             _defaultState = DefaultState;
             BuildStateConnection();
             current = _defaultState;
@@ -60,8 +62,24 @@ public class ActorState
         /// </summary>
         protected virtual void BuildStateConnection() { }
 
-        private void Update()
+        //private void Update()
+        //{
+        //    //BeforeStateUpdate();
+        //    //ActorState next = Current.NextState();//nullはDefaultStateに戻れという意味とする
+        //    //if (next == Current)
+        //    //{
+        //    //    Current.OnActive();
+        //    //}
+        //    //else
+        //    //{
+        //    //    if (next == null) { next = DefaultState; }
+        //    //    ChangeState(next,true);
+        //    //}
+        //}
+
+        public void ManualUpdate()
         {
+            BeforeStateUpdate();
             ActorState next = Current.NextState();//nullはDefaultStateに戻れという意味とする
             if (next == Current)
             {
@@ -70,9 +88,10 @@ public class ActorState
             else
             {
                 if (next == null) { next = DefaultState; }
-                ChangeState(next,true);
+                ChangeState(next, true);
             }
         }
+        protected virtual void BeforeStateUpdate() { }
 
         /// <summary>
         /// Stateを外部から強制的に変更する
@@ -115,6 +134,9 @@ public class ActorState
     List<System.Func<ActorState>> nextStateCandidateFuncs = new List<System.Func<ActorState>>();
     [DisabledField,SerializeField] GameObject gameObject;
     [SerializeField, DisabledField] ActorStateConnector connector;
+
+    public GameObject GameObject { get => gameObject; }
+    public ActorStateConnector Connector { get => connector; }
 
 
     //public string Name { get => name; set => name = value; }
