@@ -24,17 +24,11 @@ public class AwakeMutableAttack : AttackConverter
         ordinary = player.GetComponent<Ordinary>();
         awaken = player.GetComponent<Awaken>();
         blueAwaken = player.GetComponent<BlueAwaken>();
-        //ordinary.RegisterInitialize(() => { attackDataPrototype = ordinaryAttack; });
-        //awaken.RegisterInitialize(() => { attackDataPrototype = awakenAttack; });
-        //blueAwaken.RegisterInitialize(() => { attackDataPrototype = blueAwakenAttack; });
         AdjustAwake();
     }
 
     public void AdjustAwake()
     {
-        //if(ordinary.IsCurrent) { attackDataPrototype = ordinaryAttack; }
-        //else if (awaken.IsCurrent) { attackDataPrototype = awakenAttack; }
-        //else if (blueAwaken.IsCurrent) { attackDataPrototype = blueAwakenAttack; }
         
     }
 

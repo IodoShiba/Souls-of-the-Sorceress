@@ -15,10 +15,12 @@ namespace ActorSarah
         private BoolExpressions analogueUp = new BoolExpressions();
         private BoolExpressions analogueDown = new BoolExpressions();
         private MultiPushExpressions downAttackMultiPush;
+        private MultiPushExpressions upAttackMultiPush;
 
         private void Awake()
         {
             downAttackMultiPush = new MultiPushExpressions(.2f, analogueDown, attack);
+            upAttackMultiPush= new MultiPushExpressions(.2f, analogueUp, attack);
         }
         public AnalogueExpressions Directional { get => directional; }
         public BoolExpressions Attack { get => attack; }
@@ -28,6 +30,7 @@ namespace ActorSarah
         public BoolExpressions AnalogueUp { get => analogueUp; }
         public BoolExpressions AnalogueDown { get => analogueDown; }
         public MultiPushExpressions DownAttackMultiPush { get => downAttackMultiPush; }
+        public MultiPushExpressions UpAttackMultiPush { get => upAttackMultiPush; }
 
         public abstract void Decide();
 

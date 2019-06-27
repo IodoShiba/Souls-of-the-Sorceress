@@ -3,18 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D)),DisallowMultipleComponent]
-public class Mortal : MonoBehaviour,IodoShiba.Utilities.IManualUpdate
+public class Mortal : MonoBehaviour,IodoShiba.ManualUpdateClass.IManualUpdate
 {
     public class DealtAttackInfo
     {
         public Mortal attacker;
         public AttackData attackData;
+        public Vector2 relativePosition;
 
-        public DealtAttackInfo(Mortal attacker, AttackData attackData)
+        public DealtAttackInfo(Mortal attacker, AttackData attackData,Vector2 relativePosition)
         {
             this.attacker = attacker;
             this.attackData = attackData;
+            this.relativePosition = relativePosition;
         }
+    }
+
+    public class Viewer : MonoBehaviour
+    {
+        [SerializeField] Mortal target;
+        protected float Health { get => target.health; }
+        protected float MaxHealth { get => target.maxHealth; }
     }
 
     [SerializeField] protected float health;
@@ -24,7 +33,7 @@ public class Mortal : MonoBehaviour,IodoShiba.Utilities.IManualUpdate
     [SerializeField] Rigidbody2D selfRigidbody;
     [SerializeField] List<AttackConverter> dealingAttackConverters;
     [SerializeField] List<AttackConverter> dealtAttackConverters;
-    [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("leftStunTime")] float initialStunTime = 0.3f;
+    [SerializeField] float initialStunTime = 0.3f;
 
     AttackData argAttackData = new AttackData();
     GameObject argObj;
@@ -37,14 +46,13 @@ public class Mortal : MonoBehaviour,IodoShiba.Utilities.IManualUpdate
     public bool IsInvulnerable { get => isInvulnerable; set => isInvulnerable = value; }
     public Actor Actor { get => actor == null ? (actor = GetComponent<Actor>()) : actor; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Actor.MortalUpdate = ManualUpdate;
     }
     protected virtual void OnAttacked(GameObject attackObj,AttackData attack) { }
-    protected virtual bool _IsInvulnerable() { return isInvulnerable; }
 
-    protected virtual void OnTriedAttack(in Mortal attacker, AttackData dealt) { }
+    protected virtual void OnTriedAttack(Mortal attacker, AttackData dealt, in Vector2 relativePosition) { }
 
     public virtual void Dying() { Destroy(gameObject); }
 
@@ -59,90 +67,70 @@ public class Mortal : MonoBehaviour,IodoShiba.Utilities.IManualUpdate
     }
     
 
-    private void _OnAttackedInternal(GameObject attackerObj, AttackData givenData)
-    {
-        if (!_IsInvulnerable())
-        {
-            OnAttacked(attackerObj, givenData);
-            int kbdir = System.Math.Sign(transform.position.x - attackerObj.transform.position.x);
-            givenData.knockBackImpact.x *= kbdir;
-
-            if (!dealtAttackConverters.TrueForAll(dac => dac.Convert(givenData)))
-            {
-                if (argSucceedCallback != null) argSucceedCallback(false);
-            }
-
-            health -= givenData.damage;
-
-            leftStunTime = initialStunTime;
-
-            selfRigidbody.velocity = Vector2.zero;
-            selfRigidbody.AddForce(givenData.knockBackImpact);
-
-            Debug.Log(gameObject.name + " damaged");
-
-            if (health <= 0)
-            {
-                dyingCallbacks.Invoke();
-                Dying();
-            }
-
-            if (argSucceedCallback != null)
-            {
-                argSucceedCallback(true);
-            }
-        }
-        else if (argSucceedCallback != null)
-        {
-            argSucceedCallback(false);
-        }
-            
-        
-    }
-
     public void TryAttack(GameObject argObj, AttackData argAttackData, System.Action<bool> succeedCallback)
     {
         this.argObj = argObj;
         AttackData.Copy(this.argAttackData, argAttackData);
         this.argSucceedCallback = succeedCallback;
     }
-    public void TryAttack(Mortal attacker, AttackData argAttackData)
+    public void TryAttack(Mortal attacker, AttackData argAttackData,in Vector2 relativePosition)
     {
-        OnTriedAttack(attacker, argAttackData);
+        OnTriedAttack(attacker, argAttackData, relativePosition);
 
         if (isInvulnerable) { return; }
 
         if (dealtAttackCount >= dealtAttackInfos.Count)
         {
-            dealtAttackInfos.Add(new DealtAttackInfo(attacker, new AttackData(argAttackData)));
+            dealtAttackInfos.Add(new DealtAttackInfo(attacker, new AttackData(argAttackData), relativePosition));
         }
         else if (dealtAttackInfos[dealtAttackCount] == null)
         {
-            dealtAttackInfos[dealtAttackCount] = new DealtAttackInfo(attacker, new AttackData(argAttackData));
+            dealtAttackInfos[dealtAttackCount] = new DealtAttackInfo(attacker, new AttackData(argAttackData), relativePosition);
         }
         else
         {
             dealtAttackInfos[dealtAttackCount].attacker = attacker;
             AttackData.Copy(dealtAttackInfos[dealtAttackCount].attackData, argAttackData);
+            dealtAttackInfos[dealtAttackCount].relativePosition = relativePosition;
         }
         dealtAttackCount++;
     }
 
     public void ManualUpdate()
     {
-        AttackData result = new AttackData();
+        if (dealtAttackCount == 0) { return; }
 
-        for (int i = 0; i < dealtAttackCount; ++i)
+        float rxsum = 0;
+        AttackData result = new AttackData();
+        for (int i = 0; i < dealtAttackCount; ++i) //1フレームの間に与えられた複数の攻撃と相対座標を統合する
         {
-            dealtAttackConverters.ForEach(dac => dac.Convert(dealtAttackInfos[i].attackData));
-            result.damage += dealtAttackInfos[i].attackData.damage;
-            result.knockBackImpact += dealtAttackInfos[i].attackData.knockBackImpact;
+            dealtAttackConverters.ForEach(dac => dac.Convert(dealtAttackInfos[i].attackData));//攻撃の変換
+            result.damage += dealtAttackInfos[i].attackData.damage;//ダメージ
+            result.knockBackImpulse
+                += new Vector2(
+                    -Mathf.Sign(dealtAttackInfos[i].relativePosition.x)*dealtAttackInfos[i].attackData.knockBackImpulse.x,
+                    dealtAttackInfos[i].attackData.knockBackImpulse.y);//ノックバック
+
             if(result.hitstopSpan < dealtAttackInfos[i].attackData.hitstopSpan)
             {
                 result.hitstopSpan = dealtAttackInfos[i].attackData.hitstopSpan;
-            }
+            }//ヒットストップ
+            rxsum += dealtAttackInfos[i].relativePosition.x;
         }
-        dealtAttackCount = 0;
+        dealtAttackCount = 0;//攻撃を全て統合したのでカウンターを0にし、与えられた攻撃を忘却する
+
+        if (result.damage <= 0 && result.knockBackImpulse.magnitude < 0.01) { return; }//攻撃が無意味ならば処理を中断
+
+        health -= result.damage; //体力を減算する
+        selfRigidbody.velocity = Vector2.zero; //Actorの動きを止める
+        selfRigidbody.AddForce(
+            result.knockBackImpulse,
+            ForceMode2D.Force); //ノックバックを与える
+
+        //ヒットストップを与える（未実装）
+
+        actor.OnAttacked.Invoke();//被攻撃時のコールバック関数を呼び出し
+        
         
     }
 }

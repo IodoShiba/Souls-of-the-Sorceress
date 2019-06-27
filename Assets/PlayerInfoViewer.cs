@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInfoViewer : MonoBehaviour
+public class PlayerInfoViewer : Player.Viewer
 {
     [SerializeField, Range(0, 1)] float health;
     [SerializeField, Range(0, 1)] float awake;
@@ -36,6 +36,7 @@ public class PlayerInfoViewer : MonoBehaviour
 
     private void UpdateHealth()
     {
+        health = Health / MaxHealth;
         _healthSlider.value = health;
     }
 }

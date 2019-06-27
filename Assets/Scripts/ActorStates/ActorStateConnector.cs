@@ -13,7 +13,7 @@ public class ActorState
     /// <summary>
     /// Actorの状態の接続と遷移を担う抽象コンポーネント
     /// </summary>
-    public abstract class ActorStateConnector : MonoBehaviour , IodoShiba.Utilities.IManualUpdate
+    public abstract class ActorStateConnector : MonoBehaviour , IodoShiba.ManualUpdateClass.IManualUpdate
     {
 
 
@@ -47,9 +47,9 @@ public class ActorState
 
         //public Default DefaultState { get => defaultState; }
 
-        private void Awake()
+        protected virtual void Awake()
         {
-            GetComponent<Actor>().MortalUpdate = ManualUpdate;
+            GetComponent<Actor>().StateConnectorUpdate = ManualUpdate;
 
             _defaultState = DefaultState;
             BuildStateConnection();
@@ -61,21 +61,6 @@ public class ActorState
         /// TODO:ConnectState()やConnectAsSkill()を羅列してStateの接続を構築する
         /// </summary>
         protected virtual void BuildStateConnection() { }
-
-        //private void Update()
-        //{
-        //    //BeforeStateUpdate();
-        //    //ActorState next = Current.NextState();//nullはDefaultStateに戻れという意味とする
-        //    //if (next == Current)
-        //    //{
-        //    //    Current.OnActive();
-        //    //}
-        //    //else
-        //    //{
-        //    //    if (next == null) { next = DefaultState; }
-        //    //    ChangeState(next,true);
-        //    //}
-        //}
 
         public void ManualUpdate()
         {
@@ -98,8 +83,9 @@ public class ActorState
         /// </summary>
         /// <param name="actorState">変更先のState</param>
         /// <returns></returns>
-        public bool Interrupt(ActorState actorState)
+        public bool InterruptWith(ActorState actorState)
         {
+            if (current.IsResistibleTo(actorState.GetType())) { return false; }
             ChangeState(actorState,false);
             return true;
         }
@@ -123,25 +109,41 @@ public class ActorState
         protected virtual void OnChangeState(ActorState next, bool isNormalTermination)
         {
         }
+
     }
+
 
 
     //MEMO:
     //
     //
 
-    //string name;
     List<System.Func<ActorState>> nextStateCandidateFuncs = new List<System.Func<ActorState>>();
     [DisabledField,SerializeField] GameObject gameObject;
     [SerializeField, DisabledField] ActorStateConnector connector;
 
+    bool isCurrent = false;
     public GameObject GameObject { get => gameObject; }
     public ActorStateConnector Connector { get => connector; }
+    public bool IsCurrent { get => isCurrent; set => isCurrent = value; }
 
 
     //public string Name { get => name; set => name = value; }
 
+    /// <summary>
+    /// 特定の条件を満たしたときにこの状態から与えた状態へ遷移するようにする
+    /// </summary>
+    /// <param name="flagfunc">条件を表すbool(void)型関数</param>
+    /// <param name="to">遷移先のAcotrState</param>
     public void Connect(System.Func<bool> flagfunc, ActorState to) { nextStateCandidateFuncs.Add(() => flagfunc() ? to : null); }
+
+    /// <summary>
+    /// この関数の遷移先を表す関数を追加し、この状態から次の状態への遷移関係を作る
+    /// </summary>
+    /// <param name="branchFunc">
+    /// 遷移先のActorStateを返すActorState(void)型関数
+    /// この関数がnull以外のActorStateを返した場合に状態はその返り値のActorStateへ遷移する
+    /// </param>
     public void Connect(Func<ActorState> branchFunc) { nextStateCandidateFuncs.Add(branchFunc); }
 
     protected virtual bool IsAvailable() => true;
@@ -165,22 +167,50 @@ public class ActorState
 
     public void _OnInitialize()
     {
-
+        isCurrent = true;
         OnInitialize();
     }
 
+    /// <summary>
+    /// このStateの開始時に呼ばれる仮想メソッド
+    /// 開始処理を記述する
+    /// </summary>
     protected virtual void OnInitialize() { }
 
-    public virtual void OnActive() { }
+    /// <summary>
+    /// Actorがこの「状態」である間毎フレーム呼び出される仮想メソッド
+    /// </summary>
+    protected virtual void OnActive() { }
 
     public void _OnTerminate(bool isNormal)
     {
+        isCurrent = false;
         OnTerminate(isNormal);
     }
 
+    /// <summary>
+    /// このStateの終了時に呼ばれる仮想メソッド
+    /// 終了処理を記述する
+    /// </summary>
+    /// <param name="isNormal">
+    /// Stateの終了が中断でない通常の条件によるものか(通常：ShouldCotinue()がfalseを返してDefaultに遷移する or State遷移の条件を満たして次のStateに遷移する)</param>
     protected virtual void OnTerminate(bool isNormal) { }
 
+    /// <summary>
+    /// Stateを継続するかどうか返す仮想メソッド　OnActive()の前に呼ばれる
+    /// </summary>
+    /// <returns>Stateを継続するかどうか　trueで継続する</returns>
     protected virtual bool ShouldCotinue() => false;
+
+    /// <summary>
+    /// ActorStateConnector.InterruptWith()が呼び出されたときに呼び出される仮想メソッド
+    /// InterruptWith()に渡された引数のAcotrStateによって自ら（ActorState）が中断されるのを拒める場合trueを返す
+    /// デフォルトでは常にfalseを返す（他のあらゆるActorStateによって中断できる意を表す）
+    /// </summary>
+    /// <param name="actorStateType">中断に使われるActorStateの型オブジェクト</param>
+    /// <returns>ActorStateConnector.InterruptWith()による中断を拒否できるか否か</returns>
+    public virtual bool IsResistibleTo(System.Type actorStateType) => false;
+
 }
 
 

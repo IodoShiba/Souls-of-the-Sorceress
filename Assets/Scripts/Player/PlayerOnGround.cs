@@ -55,7 +55,7 @@ namespace PlayerStates
             if (player.DoesUmbrellaWork() && Input.GetButton("Open Umbrella")) 
             {
                 rb.velocity = new Vector2(0, 0);
-                return GetComponent<PlayerStates.PlayerGuard>();
+                //return GetComponent<PlayerStates.PlayerGuard>();
             }
 
             return null;

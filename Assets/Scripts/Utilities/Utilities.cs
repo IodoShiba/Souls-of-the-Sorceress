@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IodoShiba
 {
-    namespace Utilities
+    namespace ManualUpdateClass
     {
         public class ManualClock
         {
@@ -29,6 +29,34 @@ namespace IodoShiba
         public interface IManualUpdate
         {
             void ManualUpdate();
+        }
+
+        public interface IManualInitialize
+        {
+            void ManualInitialize();
+        }
+    }
+
+    namespace RigidbodySetVelocity
+    {
+        public static class RigidbodySetVelocityExtension
+        {
+            public static void SetVelocityX(this Rigidbody2D rigidbody,float velocity,float maxForce)
+            {
+                float f =
+                    Mathf.Clamp(rigidbody.mass * (velocity - rigidbody.velocity.x) / Time.deltaTime,
+                    -maxForce,
+                    maxForce);
+                rigidbody.AddForce(f * Vector2.right);
+            }
+            public static void SetVelocityY(this Rigidbody2D rigidbody,float velocity,float maxForce)
+            {
+                float f =
+                   Mathf.Clamp(rigidbody.mass * (velocity - rigidbody.velocity.y) / Time.deltaTime,
+                   -maxForce,
+                   maxForce);
+                rigidbody.AddForce(f * Vector2.up);
+            }
         }
     }
 }

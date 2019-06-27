@@ -15,14 +15,14 @@ namespace ActorFunction
         public MethodType Method { get => method; }
         public FieldsType Fields { get => fields; protected set => fields = value; }
 
-        public void CallableUpdate() { method.CallableUpdate(fields); }
+        public void ManualUpdate() { method.ManualUpdate(fields); }
     }
 
     public class ActorFunctionFields { }
 
     public abstract class ActorFunctionMethod<FieldSetType> : MonoBehaviour where FieldSetType : ActorFunctionFields
     {
-        public abstract void CallableUpdate(in FieldSetType fields);
+        public abstract void ManualUpdate(in FieldSetType fields);
     }
 }
 

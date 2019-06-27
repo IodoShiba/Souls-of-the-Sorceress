@@ -10,13 +10,14 @@ public class ActorManager : MonoBehaviour
 
     public static ActorManager Instance { get => instance; }
 
-    ActorManager() { if (instance == null) instance = this; }
+    public ActorManager() { if (instance == null) instance = this; }
     private void Awake()
     {
         if (instance != null && this != instance)
         {
             Debug.LogError($"{this.GetType().Name} cannot exist double or more in one scene. GameObject '{name}' has been Deleted because it has second {this.GetType().Name}.");
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            return;
         }
     }
 
@@ -25,7 +26,9 @@ public class ActorManager : MonoBehaviour
     {
         foreach(var a in actors)
         {
+            
             a.ManualUpdate();
+            
         }
     }
 

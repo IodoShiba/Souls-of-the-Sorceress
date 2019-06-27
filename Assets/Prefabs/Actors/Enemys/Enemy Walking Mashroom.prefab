@@ -192,13 +192,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 30
   maxHealth: 30
+  isInvulnerable: 0
   dyingCallbacks:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 6891321230494324967}
+  dealingAttackConverters: []
   dealtAttackConverters: []
+  initialStunTime: 0.3
   manager: {fileID: 0}
 --- !u!114 &3628215078390612390
 MonoBehaviour:
@@ -283,14 +286,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
+  owner: {fileID: 3628215078390612390}
   onceOnly: 0
   initiallyActivate: 1
   targetTag: Player
   activeSpan: Infinity
   attackDataPrototype:
     damage: 10
-    knockBackImpact: {x: 500, y: 200}
+    knockBackImpulse: {x: 500, y: 200}
     attackCollider: {fileID: 6891321231477494684}
     throughable: 1
     hitstopSpan: 0

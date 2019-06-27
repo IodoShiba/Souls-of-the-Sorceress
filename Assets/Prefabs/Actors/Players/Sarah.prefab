@@ -75,19 +75,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 0
-    knockBackImpact: {x: 200, y: 50}
+    knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 8916380848524203196}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 0
-    knockBackImpact: {x: 200, y: 50}
+    knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 8916380848524203196}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 10
-    knockBackImpact: {x: 200, y: 50}
+    knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 8916380848524203196}
     throughable: 1
     hitstopSpan: 0
@@ -124,14 +124,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
   activeSpan: 0
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -150,21 +150,19 @@ GameObject:
   - component: {fileID: 8916380848889061126}
   - component: {fileID: 8916380848889061125}
   - component: {fileID: 8916380848889061121}
-  - component: {fileID: 8916380848889061138}
   - component: {fileID: 8916380848889061092}
   - component: {fileID: 8916380848889061151}
-  - component: {fileID: 8916380848889061145}
   - component: {fileID: 8916380848889061124}
   - component: {fileID: 8916380848889061144}
   - component: {fileID: 8916380848889061139}
-  - component: {fileID: 8916380848889061095}
   - component: {fileID: 4325353825048437118}
   - component: {fileID: 7184598500640157805}
   - component: {fileID: 8916380848890831846}
   - component: {fileID: 3289781965317027910}
   - component: {fileID: 1353951183406726685}
-  - component: {fileID: 8916380848889061179}
-  - component: {fileID: 8916380848889061147}
+  - component: {fileID: 2312274154079463536}
+  - component: {fileID: 4249487242134317880}
+  - component: {fileID: 4299200908901914630}
   - component: {fileID: 8916380848889061149}
   - component: {fileID: 8916380848889061094}
   - component: {fileID: 8916380848889061122}
@@ -307,21 +305,11 @@ MonoBehaviour:
   actionAwake: {fileID: 8916380848889061092}
   umbrellaUpward: {fileID: 0}
   guardColliderExtension: {fileID: 8916380848889061124}
+  connectorSarah: {fileID: 8916380848890831846}
+  directionable: {fileID: 4249487242134317880}
+  guard: {fileID: 2312274154079463536}
   _debugText: {fileID: 0}
   damaged: 0
---- !u!114 &8916380848889061138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92ec2773f0e06364c8d5029661dd9f6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dealingAttackConverters: []
 --- !u!114 &8916380848889061092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -365,22 +353,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 1.4}
   m_EdgeRadius: 0.3
---- !u!70 &8916380848889061145
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
-  m_Size: {x: 1, y: 2}
-  m_Direction: 0
 --- !u!70 &8916380848889061124
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -411,11 +383,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseAttack:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 0}
   convertMode: 1
   dealingAttackConverters: []
 --- !u!114 &8916380848889061139
@@ -433,35 +405,22 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 0
-    knockBackImpact: {x: 100, y: 50}
+    knockBackImpulse: {x: 100, y: 50}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
   awakenAttack:
     damage: 0
-    knockBackImpact: {x: 100, y: 50}
+    knockBackImpulse: {x: 100, y: 50}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 0
-    knockBackImpact: {x: 100, y: 50}
+    knockBackImpulse: {x: 100, y: 50}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 10
---- !u!114 &8916380848889061095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 361eb3ac83abb314990a12027512f4b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputA: {fileID: 8916380848889061122}
 --- !u!114 &4325353825048437118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,8 +433,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d4c1c480dfcd2b489bfa7155b61bbc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateConnector: {fileID: 8916380848890831846}
-  mortal: {fileID: 8916380848889061121}
+  onAttacked:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &7184598500640157805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -503,6 +465,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   commands: {fileID: 7184598500640157805}
   groundSensor: {fileID: 8916380849072566239}
+  direction: {fileID: 4249487242134317880}
+  currentStateName: 
   sarahDefault:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
@@ -558,9 +522,10 @@ MonoBehaviour:
     jump:
       method: {fileID: 1353951183406726685}
       fields:
-        jumpHeight: 3
+        jumpHeight: 2
         jumpForce: 300
-        jumpUpSpeed: 10
+        jumpUpSpeed: 15
+    directionable: {fileID: 4249487242134317880}
   verticalSlash:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
@@ -589,27 +554,129 @@ MonoBehaviour:
     commands: {fileID: 7184598500640157805}
     aerialSlashAttack: {fileID: 8916380849515846539}
     umbrella: {fileID: 8916380848891301901}
-    groundSensor: {fileID: 0}
+    groundSensor: {fileID: 8916380849072566239}
   guard:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
     commands: {fileID: 7184598500640157805}
+    extraCollider: {fileID: 8916380848889061124}
+    umbrella: {fileID: 8916380848891301901}
+    direction: {fileID: 4249487242134317880}
+    guard:
+      method: {fileID: 2312274154079463536}
+      fields:
+        multiplier: 0.5
+        degreeRangeStart: -90
+        degreeRangeWidth: 180
   tackle:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
     commands: {fileID: 7184598500640157805}
+    distance: 6
+    speed: 18
+    umbrella: {fileID: 8916380848891301901}
+    attack: {fileID: 8916380848965055384}
+    velocityAdjuster:
+      method: {fileID: 4299200908901914630}
+      fields:
+        maxForce: {x: 600, y: 0}
+        velocity: {x: 18, y: 0}
+        activeX: 1
+        activeY: 0
+    direction: {fileID: 4249487242134317880}
+    onChangeStateCallbacks:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8916380848889061121}
+          m_MethodName: set_IsInvulnerable
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8916380848889061178}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: ActorSarah.ActorStateConnectorSarah+Tackle+StateChangeEvent, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   risingAttack:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
     commands: {fileID: 7184598500640157805}
+    riseHeight: 6
+    abilityTime: 0.6
+    attack: {fileID: 8916380850513594275}
+    velocityAdjuster:
+      method: {fileID: 4299200908901914630}
+      fields:
+        maxForce: {x: 10, y: 500}
+        velocity: {x: 0, y: 40}
+        activeX: 1
+        activeY: 1
+    umbrella: {fileID: 8916380848891301901}
   dropAttack:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
     commands: {fileID: 7184598500640157805}
+    abilityTime: 2
+    attack: {fileID: 8916380849653747854}
+    velocityAdjuster:
+      method: {fileID: 4299200908901914630}
+      fields:
+        maxForce: {x: 200, y: 200}
+        velocity: {x: 0, y: -30}
+        activeX: 1
+        activeY: 1
+    groundSensor: {fileID: 8916380849072566239}
+    umbrella: {fileID: 8916380848891301901}
   glide:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
     commands: {fileID: 7184598500640157805}
+    fallSpeed: 0
+    groundSensor: {fileID: 8916380849072566239}
+    umbrella: {fileID: 8916380848891301901}
+    velocityAdjuster:
+      method: {fileID: 4299200908901914630}
+      fields:
+        maxForce: {x: 0, y: 300}
+        velocity: {x: 0, y: -1}
+        activeX: 0
+        activeY: 1
+    horizontalMove:
+      method: {fileID: 3289781965317027910}
+      fields:
+        maxSpeed: 6
+        pushForceMagnitude: 300
+        stopForceMagnitude: 100
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    guard:
+      method: {fileID: 2312274154079463536}
+      fields:
+        multiplier: 0
+        degreeRangeStart: 0
+        degreeRangeWidth: 180
+  smashed:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    horizontalMove: {fileID: 3289781965317027910}
 --- !u!114 &3289781965317027910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -635,7 +702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundSensor: {fileID: 8916380849072566239}
---- !u!114 &8916380848889061179
+--- !u!114 &2312274154079463536
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -644,50 +711,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 8916380848889061178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97fd7b9659197794f98460653c259565, type: 3}
+  m_Script: {fileID: 11500000, guid: bca2fa5ccee2f5448ae9c52292080d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: Behaviour States
-  states:
-  - name: On ground
-    initializeActions:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    executionActions:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    terminateActions:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - name: Flying
-    initializeActions:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    executionActions:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    terminateActions:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  stateChangeCallbacks:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  groundSensor: {fileID: 8916380849072566239}
---- !u!114 &8916380848889061147
+  activated: 0
+--- !u!114 &4249487242134317880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b3db35e113ab9248af73ae37de07636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4299200908901914630
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -696,13 +736,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8916380848889061178}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d902d5b5d9c72641bc3a2ac62dd47c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 890a5575726f8284ab7517839a0e53e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
-  maxPushForceMagnitude: 500
-  maxStopForceMagnitude: 200
-  targetRigidbody: {fileID: 8916380848889061125}
 --- !u!114 &8916380848889061149
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1353,19 +1389,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpact: {x: 1000, y: 200}
+    knockBackImpulse: {x: 1000, y: 200}
     attackCollider: {fileID: 8916380848965055379}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpact: {x: 1400, y: 280}
+    knockBackImpulse: {x: 1400, y: 280}
     attackCollider: {fileID: 8916380848965055387}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
-    knockBackImpact: {x: 1600, y: 320}
+    knockBackImpulse: {x: 1600, y: 320}
     attackCollider: {fileID: 8916380848965055386}
     throughable: 1
     hitstopSpan: 0
@@ -1381,14 +1417,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
   activeSpan: 0.4
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -1414,7 +1450,7 @@ MonoBehaviour:
   activeSpan: 0
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -1676,19 +1712,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849248469455}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849248469460}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849248469451}
     throughable: 1
     hitstopSpan: 0
@@ -1704,14 +1740,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
   activeSpan: 0.4
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -1887,19 +1923,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849465762222}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849465762218}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849465762217}
     throughable: 1
     hitstopSpan: 0
@@ -1915,14 +1951,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
   activeSpan: 0.4
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -2110,19 +2146,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpact: {x: 0, y: -1000}
+    knockBackImpulse: {x: 0, y: -1000}
     attackCollider: {fileID: 8916380849515846537}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpact: {x: 0, y: -1333}
+    knockBackImpulse: {x: 0, y: -1333}
     attackCollider: {fileID: 8916380849515846550}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
-    knockBackImpact: {x: 0, y: -1666}
+    knockBackImpulse: {x: 0, y: -1666}
     attackCollider: {fileID: 8916380849515846549}
     throughable: 1
     hitstopSpan: 0
@@ -2138,14 +2174,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
-  activeSpan: 0
+  activeSpan: 0.4
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -2291,19 +2327,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpact: {x: 0, y: -1800}
+    knockBackImpulse: {x: 0, y: -1800}
     attackCollider: {fileID: 8916380849653747852}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpact: {x: 0, y: -2400}
+    knockBackImpulse: {x: 0, y: -2400}
     attackCollider: {fileID: 8916380849653747849}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
-    knockBackImpact: {x: 0, y: -3000}
+    knockBackImpulse: {x: 0, y: -3000}
     attackCollider: {fileID: 8916380849653747848}
     throughable: 1
     hitstopSpan: 0
@@ -2319,14 +2355,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
   activeSpan: 0
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -2479,19 +2515,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 0
-    knockBackImpact: {x: 200, y: 50}
+    knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 0}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 0
-    knockBackImpact: {x: 200, y: 50}
+    knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 0}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 10
-    knockBackImpact: {x: 200, y: 50}
+    knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 0}
     throughable: 1
     hitstopSpan: 0
@@ -2507,14 +2543,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
   activeSpan: 0
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -2540,7 +2576,7 @@ MonoBehaviour:
   activeSpan: 0
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -2716,19 +2752,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380850370461327}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380850370461332}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380850370461323}
     throughable: 1
     hitstopSpan: 0
@@ -2744,14 +2780,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
   activeSpan: 0.4
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -2897,19 +2933,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpact: {x: 100, y: 1000}
+    knockBackImpulse: {x: 100, y: 1000}
     attackCollider: {fileID: 8916380850513594286}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpact: {x: 130, y: 1300}
+    knockBackImpulse: {x: 130, y: 1300}
     attackCollider: {fileID: 8916380850513594282}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
-    knockBackImpact: {x: 160, y: 1600}
+    knockBackImpulse: {x: 160, y: 1600}
     attackCollider: {fileID: 8916380850513594281}
     throughable: 1
     hitstopSpan: 0
@@ -2925,14 +2961,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
   activeSpan: 0
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0

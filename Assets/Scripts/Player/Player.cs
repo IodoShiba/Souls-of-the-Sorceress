@@ -17,6 +17,8 @@ public class Player : Mortal
         onGround,
         flying
     }
+
+
     /*
     メモ 
 
@@ -46,6 +48,9 @@ public class Player : Mortal
     [SerializeField] ActionAwake actionAwake;
     [SerializeField] AttackInHitbox umbrellaUpward;
     [SerializeField] Collider2D guardColliderExtension;
+    [SerializeField] ActorSarah.ActorStateConnectorSarah connectorSarah;
+    [SerializeField] ActorFunction.Directionable directionable;
+    [SerializeField] ActorFunction.GuardMethod guard;
     [SerializeField] UnityEngine.UI.Text _debugText;
     [SerializeField, DisabledField] bool damaged = false;
 
@@ -64,8 +69,9 @@ public class Player : Mortal
     
     public int DirSign { get => dirSign; }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         //状態遷移管理用のコンポーネントの初期化
         //これを行って初めて状態遷移が動き始める
         awakeningState.Initialize();
@@ -90,6 +96,7 @@ public class Player : Mortal
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(GetComponent<ActorSarah.ActorStateConnectorSarah>().Current.GetType().Name);
         //現在、プレイヤーは被ダメージ状態から抜けた時点で体力が0以下だと消滅する
         if (health <= 0&&!damaged)
         {
@@ -121,15 +128,13 @@ public class Player : Mortal
         guardSucceed = false;
     }
 
-
-    protected override bool _IsInvulnerable() //無敵判定用の関数 これがtrueを返す間は被ダメージ処理自体が行われない
+    protected override void OnTriedAttack(Mortal attacker, AttackData dealt, in Vector2 relativePosition)
     {
-        return
-            damaged ||
-            dropAttacking ||
-            risingAttacking;
+        if (guard.Activated)
+        {
+            guard.TryGuard(dealt, relativePosition);
+        }
     }
-
 
     public override void Dying() //体力がなくなると呼ばれる関数　今はガバ実装
     {

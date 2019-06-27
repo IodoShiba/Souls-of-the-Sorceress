@@ -6,6 +6,10 @@ public class ActorStateConnectorSarahEditor : ActorStateConectorEditor
 {
     protected override void SetEssentials(SerializedProperty stateProp)
     {
-        stateProp.FindPropertyRelative("commands").objectReferenceValue = Target.GetComponent<ActorSarah.PlayerCommander>();
+        var p = stateProp.FindPropertyRelative("commands");
+        if (p != null)
+        {
+            p.objectReferenceValue = Target.GetComponent<ActorSarah.PlayerCommander>();
+        }
     }
 }

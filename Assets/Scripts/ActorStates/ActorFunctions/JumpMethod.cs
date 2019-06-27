@@ -43,12 +43,12 @@ namespace ActorFunction
                         );
             }
 
-            public override void CallableUpdate(in JumpFields fields)
+            public override void ManualUpdate(in JumpFields fields)
             {
                 this.fields = fields;
             }
 
-            public void UpdateCall(in JumpFields fields,bool isActive)
+            public void ManualUpdate(in JumpFields fields,bool isActive)
             {
                 if(activatable && !this.isActive && isActive)
                 {
@@ -58,7 +58,7 @@ namespace ActorFunction
                 activatable = groundSensor.IsOnGround && !this.isActive && (activatable || !isActive);
                 
                 this.isActive = (activatable || this.isActive) && isActive;
-                CallableUpdate(fields);
+                ManualUpdate(fields);
             }
 
             public void Enable()
@@ -76,6 +76,6 @@ namespace ActorFunction
     [System.Serializable]
     class Jump : ActorFunction<JumpFields,JumpMethod>
     {
-        public void Update(bool isActive) { Method.UpdateCall(Fields, isActive); }
+        public void Update(bool isActive) { Method.ManualUpdate(Fields, isActive); }
     }
 }

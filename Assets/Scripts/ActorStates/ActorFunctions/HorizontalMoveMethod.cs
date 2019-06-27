@@ -36,13 +36,13 @@ namespace ActorFunction
                     maxForce);
                 rigidbody.AddForce(f * Vector2.right);
             }
-            public override void CallableUpdate(in HorizontalMoveField fields) { }
+            public override void ManualUpdate(in HorizontalMoveField fields) { }
 
-            public void CallableUpdate(in HorizontalMoveField fields,float speedMultiplier)
+            public void ManualUpdate(in HorizontalMoveField fields,float speedMultiplier)
             {
                 argSpeedMultiplier = Max(-1, Min(speedMultiplier,1)); ;
                 this.fields = fields;
-                CallableUpdate(fields);
+                ManualUpdate(fields);
             }
         }
     }
@@ -51,6 +51,6 @@ namespace ActorFunction
 
     [System.Serializable]
     public class HorizontalMove : ActorFunction<HorizontalMoveField, HorizontalMoveField.Method> {
-        public void Update(float speedMultiplier) { Method.CallableUpdate(Fields,speedMultiplier); }
+        public void ManualUpdate(float speedMultiplier) { Method.ManualUpdate(Fields,speedMultiplier); }
     }
 }

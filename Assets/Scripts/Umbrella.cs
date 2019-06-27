@@ -69,6 +69,7 @@ public class Umbrella : MonoBehaviour {
 
     public void StartMotion(string name)
     {
+        StopCoroutine(coroutineName);
         StartCoroutine(name);
         coroutineName = name;
     }

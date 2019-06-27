@@ -26,7 +26,7 @@ public class ActorStateConectorEditor : Editor
                 EditorGUILayout.PropertyField(p, true);
             }
         }
-
+        //EditorGUILayout.LabelField("Current State : "+Target.Current == null ? "" : Target.Current.GetType().Name, new GUIStyle { fontStyle = FontStyle.Bold });
         Color defcol = GUI.backgroundColor;
         //foreach (FieldInfo fi in actorStateFields)
         foreach (FieldInfo fi in fieldg.Where(g => g.Key).First())
@@ -39,6 +39,10 @@ public class ActorStateConectorEditor : Editor
             using (new EditorGUILayout.VerticalScope(EditorStyles.helpBox))
             {
                 if (isDefaultState) { EditorGUILayout.LabelField("< Default State >", new GUIStyle{fontStyle = FontStyle.Bold}); }
+                //if(Target.Current != null && fi.FieldType.Name == Target.Current.GetType().Name)
+                //{
+                //    EditorGUILayout.LabelField("< Current State >", new GUIStyle { fontStyle = FontStyle.Bold });
+                //}
                 GUI.backgroundColor = defcol;
                 EditorGUILayout.PropertyField(p, true);
             }

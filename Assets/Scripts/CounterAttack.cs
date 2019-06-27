@@ -69,8 +69,8 @@ public class CounterAttack : AttackConverter
             case ConvertMode.multiplyByConstants:
                 AttackData.Copy(capturedAndSend, value);
                 capturedAndSend.damage *= baseAttack.damage;
-                capturedAndSend.knockBackImpact.x *= capturedAndSend.knockBackImpact.x;
-                capturedAndSend.knockBackImpact.y *= capturedAndSend.knockBackImpact.y;
+                capturedAndSend.knockBackImpulse.x *= capturedAndSend.knockBackImpulse.x;
+                capturedAndSend.knockBackImpulse.y *= capturedAndSend.knockBackImpulse.y;
                 break;
 
             case ConvertMode.copy:
