@@ -130,7 +130,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8916380848890831844}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1153354902}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19f3529071d6684468cc6df34f08946b, type: 3}
@@ -1183,6 +1183,18 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 1
+--- !u!114 &195664119 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8916380848889061092, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8916380848890831844}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439327b37816c1a45a2444dd45ae6f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &207620376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1983,6 +1995,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
+--- !u!1 &455563169 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8916380848891301890, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8916380848890831844}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &455563174
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455563169}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6, y: 0.6}
+  m_EdgeRadius: 0
 --- !u!1 &473135930
 GameObject:
   m_ObjectHideFlags: 0
@@ -2281,7 +2325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.1, y: -4.6999993, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 584196039}
@@ -4261,24 +4305,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1110070022}
   m_CullTransparentMesh: 0
---- !u!1 &1153354902 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8916380848889061178, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 8916380848890831844}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1153354926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1153354902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890a5575726f8284ab7517839a0e53e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1242673761
 GameObject:
   m_ObjectHideFlags: 0
@@ -5517,6 +5543,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1654962962}
   - component: {fileID: 1654962963}
+  - component: {fileID: 1654962964}
+  - component: {fileID: 1654962965}
   m_Layer: 5
   m_Name: SarahInfo
   m_TagString: Untagged
@@ -5567,11 +5595,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1785061}
   health: 1
-  awake: 1
-  umbrellaDurability: 8
   _healthSlider: {fileID: 2141180837}
-  _awakeGaugeImage: {fileID: 1802167124}
-  _UDurabilityToggles:
+--- !u!114 &1654962964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654962961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeffcd8563a54124aa1124d2b4dae995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 8916380848890831845}
+  gaugeElements:
   - {fileID: 100653192}
   - {fileID: 57183575}
   - {fileID: 610306612}
@@ -5580,6 +5618,20 @@ MonoBehaviour:
   - {fileID: 727375195}
   - {fileID: 826441746}
   - {fileID: 175415998}
+--- !u!114 &1654962965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654962961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f479d6ae40b18a942931008be9b08991, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 195664119}
+  _awakeGaugeImage: {fileID: 1802167124}
 --- !u!1 &1733380551
 GameObject:
   m_ObjectHideFlags: 0
@@ -9619,10 +9671,7 @@ MonoBehaviour:
   maxDurability: 8
   recoverCycle: 0.5
   breakTime: 8
-  costOfGuard: 1
-  costOfTackle: 2
-  costOfRisingAttack: 2
-  costOfGlidingPerSecond: 1
+  cheat_InfinityDurability: 0
 --- !u!4 &3473617832702634974
 Transform:
   m_ObjectHideFlags: 0
@@ -11591,11 +11640,6 @@ PrefabInstance:
       propertyPath: selfRigidbody
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: glide.guard.fields.multiplier
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 2312274154079463536, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: DegreeRangeWidth
@@ -11603,3 +11647,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 004a550fc633f6b48a28890fc9bbc1c7, type: 3}
+--- !u!114 &8916380848890831845 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8916380848891301902, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8916380848890831844}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455563169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2759114b059d085449a4019b59129781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

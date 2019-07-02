@@ -6,6 +6,7 @@ namespace ActorSarah
 {
     public abstract class PlayerCommander : MonoBehaviour
     {
+        [SerializeField] float attackLongPushThreshold;
 
         private AnalogueExpressions directional = new AnalogueExpressions();
         private BoolExpressions attack = new BoolExpressions();
@@ -32,7 +33,23 @@ namespace ActorSarah
         public MultiPushExpressions DownAttackMultiPush { get => downAttackMultiPush; }
         public MultiPushExpressions UpAttackMultiPush { get => upAttackMultiPush; }
 
-        public abstract void Decide();
+        public void Decide()
+        {
+            DecideOverride();
+            ManualUpdate();
+        }
 
+        public abstract void DecideOverride();
+        protected void ManualUpdate()
+        {
+            Directional.Update();
+            Attack.Update();
+            Jump.Update();
+            OpenUmbrella.Update();
+            AwakeButton.Update();
+            AnalogueUp.Update();
+            AnalogueDown.Update();
+            DownAttackMultiPush.Update();
+        }
     }
 }

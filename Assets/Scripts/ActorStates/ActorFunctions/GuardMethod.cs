@@ -20,14 +20,17 @@ namespace ActorFunction
             [SerializeField] bool activated;
 
             GuardFields fields;
-            bool isSucceed = true;
-            public bool IsSucceed { get => isSucceed; }
+            bool isAllSucceed = true;
+            /// <summary>
+            /// これまでのガードがすべて成功だったか
+            /// </summary>
+            public bool IsAllSucceed { get => isAllSucceed; }
             public bool Activated { get => activated; set => activated = value; }
 
             public override void ManualUpdate(in GuardFields fields)
             {
                 this.fields = fields;
-                ResetSucceedState();
+                //ResetSucceedState();
             }
 
             /// <summary>
@@ -38,9 +41,9 @@ namespace ActorFunction
             /// <param name="relativePosition"></param>
             public void TryGuard(AttackData dealt, in Vector2 relativePosition)
             {
-                if (fields == null) { return; }
+                if (fields == null || !Activated) { return; }
                 bool c = GuardCondition(relativePosition);
-                isSucceed = isSucceed && c;
+                isAllSucceed = isAllSucceed && c;
                 if (c)
                 {
                     dealt.damage *= fields.multiplier;
@@ -61,7 +64,9 @@ namespace ActorFunction
             /// <summary>
             /// ガードの成功・失敗の状態をリセットする
             /// </summary>
-            public void ResetSucceedState() { isSucceed = true; }
+            private void ResetSucceedState() { isAllSucceed = true; }
+
+            public bool GetIsAllSucceedAndReset() { bool ret = isAllSucceed; ResetSucceedState();return ret; }
         }
 
     }

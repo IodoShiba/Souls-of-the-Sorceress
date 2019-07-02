@@ -7,7 +7,7 @@ namespace ActorSarah
     {
         [SerializeField] float joyDirectionKeyRadiusThreshold;
 
-        public override void Decide()
+        public override void DecideOverride()
         {
             Vector2 joyIn;
             Directional.Evaluate(joyIn = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
@@ -20,14 +20,6 @@ namespace ActorSarah
             AnalogueUp.Evaluate(joyIn.y > joyDirectionKeyRadiusThreshold);
             AnalogueDown.Evaluate(joyIn.y < -joyDirectionKeyRadiusThreshold);
 
-            Directional.Update();
-            Attack.Update();
-            Jump.Update();
-            OpenUmbrella.Update();
-            AwakeButton.Update();
-            AnalogueUp.Update();
-            AnalogueDown.Update();
-            DownAttackMultiPush.Update();
             //Debug.Log($"Evaluation After Update:{Directional.Evaluation}");
         }
     }

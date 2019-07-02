@@ -32,30 +32,34 @@ namespace ActorCommanderUtility
             BoolExpressions subject;
             float thresholdTime;
             float pushedTime;
-            float lastPushedTime;
+            float finallyPushedTime;
+            bool allowedToStartCount = true;
 
             public float PushedTime { get => pushedTime; }
-            public bool IsLongPushedUp { get => lastPushedTime > thresholdTime; }
+            public float delayedPushedTime { get => subject.eval ? pushedTime : finallyPushedTime; }
+            public bool IsLongPushedUp { get => finallyPushedTime > thresholdTime; }
             public bool IsLongPushed { get => pushedTime > thresholdTime; }
+            public bool AllowedToStartCount { get => allowedToStartCount; set => allowedToStartCount = value; }
+            public float FinallyPushedTime { get => finallyPushedTime; }
 
             public LongPushClock(BoolExpressions subject, float thresholdTime)
             {
                 this.subject = subject;
                 pushedTime = 0;
-                lastPushedTime = 0;
+                finallyPushedTime = 0;
                 this.thresholdTime = thresholdTime;
             }
 
             public void Update()
             {
-                lastPushedTime = subject.IsUp ? pushedTime : 0;
-                pushedTime = subject.eval ? pushedTime + Time.deltaTime : 0;
+                finallyPushedTime = subject.IsUp ? pushedTime : 0;
+                pushedTime = (pushedTime > 0 && subject.eval) || ( AllowedToStartCount && subject.isDown) ? pushedTime + Time.deltaTime : 0;
             }
 
             public void Reset()
             {
                 pushedTime = 0;
-                lastPushedTime = 0;
+                finallyPushedTime = 0;
             }
         }
 

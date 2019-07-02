@@ -13,6 +13,11 @@ namespace ActorFunction
 
         Direction currentDirection = Direction.Right;
 
+        private void Awake()
+        {
+            currentDirection = Direction.Right;
+        }
+
         public Direction CurrentDirection
         {
             get => currentDirection;

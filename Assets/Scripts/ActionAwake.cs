@@ -6,6 +6,11 @@ using static System.Math;
 [DisallowMultipleComponent]
 public class ActionAwake : MonoBehaviour
 {
+    public class Viewer : MonoBehaviour
+    {
+        [SerializeField] protected ActionAwake target;
+        protected float AwakeGauge { get => target.awakeGauge; }
+    }
     public enum AwakeGrades
     {
         ordinary,

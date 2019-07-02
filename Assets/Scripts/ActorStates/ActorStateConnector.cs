@@ -93,7 +93,7 @@ public class ActorState
         void ChangeState(ActorState next,bool isNormalTermination)
         {
             Current._OnTerminate(isNormalTermination);
-            OnChangeState(next, isNormalTermination);
+            BeforeChangeState(next, isNormalTermination);
             Current = next;
             Current._OnInitialize();
         }
@@ -106,7 +106,7 @@ public class ActorState
         /// <param name="isNormalTermination">
         /// 前の状態が正常終了だったかどうか(Stateの正常終了：ActorStateConnector.Interrupt()の呼び出し以外の理由でStateが終了すること)
         /// </param>
-        protected virtual void OnChangeState(ActorState next, bool isNormalTermination)
+        protected virtual void BeforeChangeState(ActorState next, bool isNormalTermination)
         {
         }
 
@@ -149,9 +149,10 @@ public class ActorState
     protected virtual bool IsAvailable() => true;
     public ActorState NextState()
     {
-        if (!ShouldCotinue()) { return null; }//nullはDefaultStateに戻れという意味とする
-
         ActorState nextState = this;
+
+        if (!ShouldCotinue()) { nextState = null; }//nullはDefaultStateに戻れという意味とする
+
         foreach (var f in nextStateCandidateFuncs)//一方、fの返り値がnullとは現在の状態をそのまま継続せよという意味とする
         {
             ActorState res = f();

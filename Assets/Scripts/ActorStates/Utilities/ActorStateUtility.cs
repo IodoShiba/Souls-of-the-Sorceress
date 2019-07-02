@@ -13,15 +13,22 @@ namespace ActorStateUtility {
         float chainWaitSpan;
         float waitTimeLimit;
         bool isRecepting = false;
+        bool isRoot;
         readonly ActorState[] states;
         int i = 0;
 
         public bool IsRecepting { get => isRecepting; }
+        public int NextIndex()
+        {
+            UpdateIndex();
+            return i;
+        }
 
-        public ChainAttackStream(float chainWaitSpan, params ActorState[] states)
+        public ChainAttackStream(float chainWaitSpan, bool isRoot, params ActorState[] states)
         {
             this.chainWaitSpan = chainWaitSpan;
             this.states = states;
+            this.isRoot = isRoot;
         }
 
         /// <summary>
@@ -53,13 +60,18 @@ namespace ActorStateUtility {
             isRecepting = true;
         }
 
+        void UpdateIndex()
+        {
+            if (isRecepting && Time.time > waitTimeLimit) { Reset(); }
+        }
+
         /// <summary>
         /// 最初の状態の戻すメソッド
         /// </summary>
         public void Reset()
         {
             i = 0;
-            isRecepting = false;
+            isRecepting = isRoot;
         }
 
         /// <summary>
