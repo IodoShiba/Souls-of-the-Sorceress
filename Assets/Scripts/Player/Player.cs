@@ -109,7 +109,7 @@ public class Player : Mortal
         
         if (Input.GetButtonDown("Awake"))
         {
-            actionAwake.Action();
+            actionAwake.SwitchActivate();
         }
 
         if (_debugText != null)

@@ -17,15 +17,16 @@ public class ActionAwake : MonoBehaviour
         awaken,
         blueAwaken
     }
+
     [SerializeField,Range(0,1)] float awakeGauge;
     [SerializeField] float awakeGaugeDecreaseSpeed;
     [SerializeField] PlayerStates.Awakening.Ordinary _awakeningState_ordinary;
     [SerializeField] StateManager2 awakeningState2;
     [SerializeField] EnemyManager enemyManager;
-    private bool isActing = false;
+    private bool isActive = false;
     AwakeGrades awakeGrade = AwakeGrades.ordinary;
 
-    public bool IsActing { get => isActing;}
+    public bool IsActing { get => isActive;}
     public AwakeGrades AwakeGrade { get => awakeGrade; }
 
     private void Start()
@@ -36,22 +37,22 @@ public class ActionAwake : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isActing)
+        if (isActive)
         {
             awakeGauge = System.Math.Max(awakeGauge - awakeGaugeDecreaseSpeed * Time.deltaTime, 0);
             if(awakeGauge == 0)
             {
-                isActing = false;
+                isActive = false;
                 awakeGrade = AwakeGrades.ordinary;
             }
         }
     }
 
-    public void Action()
+    public void SwitchActivate()
     {
-        if (!isActing && awakeGauge >= .5) {
-            isActing = true;
-            if (awakeGauge>=1)
+        if (!isActive && awakeGauge >= .5f) {
+            isActive = true;
+            if (awakeGauge >= 1) 
             {
                 awakeGrade = AwakeGrades.blueAwaken;
             }
@@ -60,18 +61,18 @@ public class ActionAwake : MonoBehaviour
                 awakeGrade = AwakeGrades.awaken;
             }
         }
-        else if(isActing)
+        else if(isActive)
         {
-            isActing = false;
+            isActive = false;
             awakeGrade = AwakeGrades.ordinary;
         }
     }
     
     public void AddAwakeGauge(float amount)
     {
-        if (!isActing)
+        if (!isActive)
         {
-            awakeGauge = Max(0, Min(awakeGauge + amount, 1));
+            awakeGauge = Mathf.Clamp(awakeGauge + amount, 0, 1);
         }
     }
 

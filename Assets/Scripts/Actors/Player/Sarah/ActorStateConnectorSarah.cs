@@ -11,10 +11,12 @@ namespace ActorSarah
 
     public class ActorStateConnectorSarah : FightActorStateConector//ActorState.ActorStateConnector
     {
+
+        [SerializeField] float attackLongPushThreshold;
         [SerializeField] PlayerCommander commands;
         [SerializeField] GroundSensor groundSensor;
         [SerializeField] ActorFunction.Directionable direction;
-        [SerializeField] float attackLongPushThreshold;
+        [SerializeField] ActionAwake actionAwake;
         [SerializeField, DisabledField] string currentStateName;
         [SerializeField, DisabledField] float lpt;
 
@@ -92,6 +94,10 @@ namespace ActorSarah
         {
             commands.Decide();
             attackLongPushClock.Update();
+            if (commands.AwakeButton.IsDown)
+            {
+                actionAwake.SwitchActivate();
+            }
 
             lpt = attackLongPushClock.PushedTime;
             currentStateName = Current.GetType().Name;
