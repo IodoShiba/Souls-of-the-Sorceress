@@ -2325,7 +2325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.1, y: -4.6999993, z: -10}
+  m_LocalPosition: {x: 4.81, y: 7.6300006, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 584196039}
@@ -4772,7 +4772,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357350811}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.1, y: -4.6999993, z: -10}
+  m_LocalPosition: {x: 4.81, y: 7.6300006, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2120922736}
@@ -10335,8 +10335,6 @@ MonoBehaviour:
   dealtAttackConverters: []
   initialStunTime: 0.3
   umbrellaParameters: {fileID: 3473617832702634963}
-  awakeningState: {fileID: 3473617832704484565}
-  directionState: {fileID: 3473617832704484555}
   actionAwake: {fileID: 3473617832704484665}
   umbrellaUpward: {fileID: 0}
   guardColliderExtension: {fileID: 3473617832704484569}
@@ -10494,9 +10492,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awakeGauge: 1
   awakeGaugeDecreaseSpeed: 0.1
-  _awakeningState_ordinary: {fileID: 3473617832704484566}
-  awakeningState2: {fileID: 0}
   enemyManager: {fileID: 1008393799}
+  isActive: 0
 --- !u!114 &3473617832704484666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11573,12 +11570,12 @@ PrefabInstance:
     - target: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.1
+      value: 4.81
       objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.7
+      value: 5.63
       objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}

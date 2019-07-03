@@ -11,7 +11,7 @@ public class ActionAwake : MonoBehaviour
         [SerializeField] protected ActionAwake target;
         protected float AwakeGauge { get => target.awakeGauge; }
     }
-    public enum AwakeGrades
+    public enum AwakeLevels
     {
         ordinary,
         awaken,
@@ -20,17 +20,16 @@ public class ActionAwake : MonoBehaviour
 
     [SerializeField,Range(0,1)] float awakeGauge;
     [SerializeField] float awakeGaugeDecreaseSpeed;
-    [SerializeField] PlayerStates.Awakening.Ordinary _awakeningState_ordinary;
-    [SerializeField] StateManager2 awakeningState2;
     [SerializeField] EnemyManager enemyManager;
-    private bool isActive = false;
-    AwakeGrades awakeGrade = AwakeGrades.ordinary;
+    [SerializeField,DisabledField]private bool isActive = false;
+    AwakeLevels awakeLevel = AwakeLevels.ordinary;
 
-    public bool IsActing { get => isActive;}
-    public AwakeGrades AwakeGrade { get => awakeGrade; }
+    public bool IsActive { get => isActive;}
+    public AwakeLevels AwakeLevel { get => awakeLevel; }
 
     private void Start()
     {
+        awakeLevel = AwakeLevels.ordinary;
         enemyManager.AddEnemyDyingListener(() => AddAwakeGauge(.1f));
     }
 
@@ -43,7 +42,7 @@ public class ActionAwake : MonoBehaviour
             if(awakeGauge == 0)
             {
                 isActive = false;
-                awakeGrade = AwakeGrades.ordinary;
+                awakeLevel = AwakeLevels.ordinary;
             }
         }
     }
@@ -54,17 +53,17 @@ public class ActionAwake : MonoBehaviour
             isActive = true;
             if (awakeGauge >= 1) 
             {
-                awakeGrade = AwakeGrades.blueAwaken;
+                awakeLevel = AwakeLevels.blueAwaken;
             }
             else
             {
-                awakeGrade = AwakeGrades.awaken;
+                awakeLevel = AwakeLevels.awaken;
             }
         }
         else if(isActive)
         {
             isActive = false;
-            awakeGrade = AwakeGrades.ordinary;
+            awakeLevel = AwakeLevels.ordinary;
         }
     }
     

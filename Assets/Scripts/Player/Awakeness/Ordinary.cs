@@ -30,11 +30,11 @@ namespace PlayerStates
                 */
                 if (initialized)
                 {
-                    switch (playerAwake.AwakeGrade)
+                    switch (playerAwake.AwakeLevel)
                     {
-                        case ActionAwake.AwakeGrades.awaken:
+                        case ActionAwake.AwakeLevels.awaken:
                             return GetComponent<PlayerStates.Awakening.Awaken>();
-                        case ActionAwake.AwakeGrades.blueAwaken:
+                        case ActionAwake.AwakeLevels.blueAwaken:
                             return GetComponent<PlayerStates.Awakening.BlueAwaken>();
                     }
                 }

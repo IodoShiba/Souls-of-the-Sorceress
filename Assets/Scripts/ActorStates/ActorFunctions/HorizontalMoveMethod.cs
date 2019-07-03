@@ -19,6 +19,7 @@ namespace ActorFunction
             float argSpeedMultiplier;
             HorizontalMoveField fields;
             Rigidbody2D rigidbody;
+            float stopTime;
             private void Awake()
             {
                 rigidbody = GetComponent<Rigidbody2D>();
@@ -35,6 +36,12 @@ namespace ActorFunction
                     -maxForce, 
                     maxForce);
                 rigidbody.AddForce(f * Vector2.right);
+
+                if (stopTime > 0)
+                {
+                    stopTime -= Time.deltaTime;
+                    enabled = stopTime > 0;
+                }
             }
             public override void ManualUpdate(in HorizontalMoveField fields) { }
 
@@ -44,6 +51,18 @@ namespace ActorFunction
                 this.fields = fields;
                 ManualUpdate(fields);
             }
+
+            public void StopActorOnDisabled(float time)
+            {
+                argSpeedMultiplier = 0;
+                if (!enabled)
+                {
+                    stopTime = time;
+                    enabled = true;
+                }
+
+            }
+
         }
     }
 

@@ -10,22 +10,22 @@ public class AwakeMutableObject
     [SerializeField] GameObject ordinary;
     [SerializeField] GameObject awaken;
     [SerializeField] GameObject blueAwaken;
-    
+    ActionAwake targetAA;
+    ActionAwake TargetAA { get => targetAA == null ? (targetAA = target.GetComponent<ActionAwake>()) : targetAA; }
     public static implicit operator GameObject(AwakeMutableObject self)
     {
-        if (self.target.GetComponent<PlayerStates.Awakening.Ordinary>().IsCurrent)
+        switch (self.TargetAA.AwakeLevel)
         {
-            return self.ordinary;
+            case ActionAwake.AwakeLevels.ordinary:
+                return self.ordinary;
+            case ActionAwake.AwakeLevels.awaken:
+                return self.awaken;
+            case ActionAwake.AwakeLevels.blueAwaken:
+                return self.blueAwaken;
+
+            default:
+                return null;
         }
-        else if (self.target.GetComponent<PlayerStates.Awakening.Awaken>().IsCurrent)
-        {
-            return self.awaken;
-        }
-        else if (self.target.GetComponent<PlayerStates.Awakening.BlueAwaken>().IsCurrent)
-        {
-            return self.blueAwaken;
-        }
-        return null;
     }
 
     public GameObject GetObject()
@@ -33,58 +33,50 @@ public class AwakeMutableObject
         return (GameObject)this;
     }
 
-    public void SynchronizeWith(System.Action<GameObject> substitutor)
-    {
-        PlayerStates.Awakening.Ordinary oc = target.GetComponent<PlayerStates.Awakening.Ordinary>();
-        PlayerStates.Awakening.Awaken ac = target.GetComponent<PlayerStates.Awakening.Awaken>();
-        PlayerStates.Awakening.BlueAwaken bc = target.GetComponent<PlayerStates.Awakening.BlueAwaken>();
-        oc.RegisterInitialize(() => substitutor(ordinary));
-        ac.RegisterInitialize(() => substitutor(awaken));
-        bc.RegisterInitialize(() => substitutor(blueAwaken));
-        oc.RegisterTerminate(() => substitutor(null));
-        ac.RegisterTerminate(() => substitutor(null));
-        bc.RegisterTerminate(() => substitutor(null));
-        if (oc.IsCurrent) { substitutor(ordinary); }
-        else if (ac.IsCurrent) { substitutor(awaken); }
-        else if (bc.IsCurrent) { substitutor(blueAwaken); }
-    }
-    
-    //public void Ordinary() { presentForm = ordinary; }
-    //public void Awaken() { presentForm = awaken; }
-    //public void BlueAwaken() { presentForm = blueAwaken; }
 }
 
 //StateMutable クラス
 //状態(State)に依存して変化するオブジェクトを表す
 //覚醒状態に応じて変化するダメージ倍率等に使う
-public class StateMutable<T>
+public class AwakeMutable<T>
 {
-    public StateMutable(GameObject target,T defaultObj)
-    {
-        this.target = target;
-        content = defaultContent = defaultObj;
-    }
-
     [SerializeField] GameObject target;
-    T defaultContent;
-    T content;
+    [SerializeField] T ordinary;
+    [SerializeField] T awaken;
+    [SerializeField] T blueAwaken;
+    ActionAwake targetAA;
+    ActionAwake TargetAA { get => targetAA == null ? (targetAA = target.GetComponent<ActionAwake>()) : targetAA; }
 
     public T Content
     {
         get
         {
-            return content;
+            switch (TargetAA.AwakeLevel)
+            {
+                case ActionAwake.AwakeLevels.ordinary:
+                    return ordinary;
+                case ActionAwake.AwakeLevels.awaken:
+                    return awaken;
+                case ActionAwake.AwakeLevels.blueAwaken:
+                    return blueAwaken;
+
+                default:
+                    return default(T);
+            }
         }
     }
 
-    public void Assign<StateType>(T obj) where StateType : State
+    public void Assign(T ordinary,T awaken,T blueAwaken)
     {
-        var s = target.GetComponent<StateType>();
-        s.RegisterInitialize(() => { content = obj; });
-        s.RegisterTerminate(() => { content = defaultContent; });
-        if (target.GetComponent<StateType>().IsCurrent)
-        {
-            content = obj;
-        }
+        this.ordinary = ordinary;
+        this.awaken = awaken;
+        this.blueAwaken = blueAwaken;
+    }
+
+    public void Apply(System.Action<T> action)
+    {
+        action(ordinary);
+        action(awaken);
+        action(blueAwaken);
     }
 }

@@ -21,7 +21,7 @@ namespace PlayerStates
                     return GetComponent<Ordinary>();
                 }
                 */
-                if (initialized && !playerAwake.IsActing)
+                if (initialized && !playerAwake.IsActive)
                 {
                     return GetComponent<Ordinary>();
                 }

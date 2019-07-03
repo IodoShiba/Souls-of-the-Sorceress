@@ -7,36 +7,34 @@ using UnityEngine.Serialization;
 
 public class AwakeMutableAttack : AttackConverter
 {
-    [SerializeField,FormerlySerializedAs("owner")] Player awakenist;
+    [SerializeField] Player awakenist;
     [Space(16)]
     [SerializeField] AttackData ordinaryAttack;
     [SerializeField] AttackData awakenAttack;
     [SerializeField] AttackData blueAwakenAttack;
-    
-    Ordinary ordinary;
-    Awaken awaken;
-    BlueAwaken blueAwaken;
+
+    ActionAwake actionAwake;
     bool ready = false;
 
     private void Start()
     {
-        GameObject player = awakenist.gameObject;
-        ordinary = player.GetComponent<Ordinary>();
-        awaken = player.GetComponent<Awaken>();
-        blueAwaken = player.GetComponent<BlueAwaken>();
-        AdjustAwake();
-    }
-
-    public void AdjustAwake()
-    {
-        
+        actionAwake = awakenist.gameObject.GetComponent<ActionAwake>();
     }
 
     public override bool Convert(AttackData value)
     {
-        if (ordinary.IsCurrent) {AttackData.Copy(value,ordinaryAttack); }
-        else if (awaken.IsCurrent) { AttackData.Copy(value, awakenAttack);}
-        else if (blueAwaken.IsCurrent) { AttackData.Copy(value, blueAwakenAttack); }
+        switch (actionAwake.AwakeLevel)
+        {
+            case ActionAwake.AwakeLevels.ordinary:
+                AttackData.Copy(value, ordinaryAttack);
+                break;
+            case ActionAwake.AwakeLevels.awaken:
+                AttackData.Copy(value, awakenAttack);
+                break;
+            case ActionAwake.AwakeLevels.blueAwaken:
+                AttackData.Copy(value, blueAwakenAttack);
+                break;
+        }
         return true;
     }
 }
