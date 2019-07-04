@@ -75,5 +75,5 @@ public class ActionAwake : MonoBehaviour
         }
     }
 
-    public string _DebugOutput() { return $"Awake Gauge:{awakeGauge} (0.5 ≦ this value < 1 : Awake, this value = 1 : Blue Awake)\n"; }
+    public string _DebugOutput() { return $"Awake Gauge:{awakeGauge} (0.5 ≦ a < 1 : Awake, a = 1 : Blue Awake)\n"; }
 }

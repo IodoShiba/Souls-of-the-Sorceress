@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PassPlatform : BasicAbility
+public class PassPlatform : MonoBehaviour,IodoShiba.ManualUpdateClass.IManualUpdate
 {
     enum Mode {SwitchLayer,UsePlatformContactor }
     [SerializeField] Mode mode;
@@ -17,10 +17,13 @@ public class PassPlatform : BasicAbility
         ordinaryLayer = gameObject.layer;
     }
 
-    protected override bool ShouldContinue(bool ordered) => t < minContinueTime || ordered;
+    protected bool ShouldContinue(bool ordered) => t < minContinueTime || ordered;
+    private void Update()
+    {
+        
+    }
 
-
-    protected override void OnInitialize()
+    protected void OnInitialize()
     {
         t = 0;
         switch (mode)
@@ -34,15 +37,24 @@ public class PassPlatform : BasicAbility
         }
     }
 
-    protected override void OnActive(bool ordered)
+    protected void OnActive(bool ordered)
     {
         t += Time.deltaTime;
-        base.OnActive(ordered);
     }
-    protected override void OnTerminate()
+    protected void OnTerminate()
     {
         t = 0;
         gameObject.layer = ordinaryLayer;
         if(platformContactor!=null) platformContactor.enabled = true;
+    }
+
+    public void ManualUpdate()
+    {
+
+    }
+
+    public void ManualUpdate(bool use)
+    {
+        ManualUpdate();
     }
 }

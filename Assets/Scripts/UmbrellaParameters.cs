@@ -19,23 +19,27 @@ public class UmbrellaParameters : MonoBehaviour
     [SerializeField] bool cheat_InfinityDurability;
     [System.NonSerialized] private float breakRestTime = 0;
     [System.NonSerialized] private float t = 0;
-    [System.NonSerialized] private float changeCycle = 100000;
+    [System.NonSerialized] private float changeCycle = float.PositiveInfinity;
     [System.NonSerialized] private int changeAmount = 0;
 
     public int Durability { get => durability; }
     public int MaxDurability { get => maxDurability; }
 
+    private void Awake()
+    {
+        changeCycle = float.PositiveInfinity;
+    }
     private void Update()
     {
         if (DoesUmbrellaWork())
         {
             breakRestTime = 0;
+            t += Time.deltaTime;
             if (t > changeCycle)
             {
                 AddDurability(changeAmount);
                 t -= changeCycle;
             }
-            t += Time.deltaTime;
         }
         else //破損状態
         {
@@ -48,11 +52,32 @@ public class UmbrellaParameters : MonoBehaviour
         if (cheat_InfinityDurability) { durability = maxDurability; }
     }
 
-    public void ChangeDurabilityGradually(float cycle, int amount)
+    public void ChangeDurabilityGradually(float cycle, int amount, bool inheritCount = true)
     {
+        //if (inheritCount)
+        //{
+        //    if (amount * changeAmount < 0)
+        //    {
+        //        t = cycle * (1 - t / changeCycle);
+        //    }
+        //    else if (amount * changeAmount > 0)
+        //    {
+        //        t = cycle * (t / changeCycle);
+        //    }
+        //}
+        //else
+        {
+            t = 0;
+        }
+
+        if(cycle == 0) { throw new System.ArgumentOutOfRangeException("parameter 'cycle' cannot be 0."); }
         this.changeCycle = cycle;
         this.changeAmount = amount;
-        t = 0;
+    }
+
+    public void StopChangeDurabilityGradually(bool inheritCount = true)
+    {
+        ChangeDurabilityGradually(float.PositiveInfinity, 0, inheritCount);
     }
 
     /// <summary>

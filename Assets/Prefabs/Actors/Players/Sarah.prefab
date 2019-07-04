@@ -226,6 +226,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackLongPushThreshold: 2
   durabilityCostOnShootMagic: 1
+  progressLevel: 0
+  reqiredProgressLevelToShootMagic: 2
   shootObject:
     target: {fileID: 8916380848889061178}
     ordinary:
@@ -317,9 +319,11 @@ MonoBehaviour:
         jumpForce: 300
         jumpUpSpeed: 15
     directionable: {fileID: 4249487242134317880}
+    passPlatform: {fileID: 0}
   verticalSlash:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 0
     commands: {fileID: 7184598500640157805}
     receptionStartTime: 0.13
     amountConsumeUmbrellaDurability: 1
@@ -340,6 +344,7 @@ MonoBehaviour:
   returnSlash:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 0
     commands: {fileID: 7184598500640157805}
     retuenSlashAttack: {fileID: 8916380850370461321}
     receptionStartTime: 0.13
@@ -349,12 +354,14 @@ MonoBehaviour:
   smashSlash:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 0
     commands: {fileID: 7184598500640157805}
     smashSlashAttack: {fileID: 8916380849248469449}
     umbrella: {fileID: 8916380848891301901}
   aerialSlash:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 0
     commands: {fileID: 7184598500640157805}
     amountConsumeUmbrellaDurability: 1
     aerialSlashAttack: {fileID: 8916380849515846539}
@@ -363,6 +370,7 @@ MonoBehaviour:
   guard:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 1
     commands: {fileID: 7184598500640157805}
     amountConsumeUmbrellaDurability: 1
     direction: {fileID: 4249487242134317880}
@@ -389,6 +397,7 @@ MonoBehaviour:
   tackle:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 1
     commands: {fileID: 7184598500640157805}
     distance: 6
     speed: 18
@@ -442,6 +451,7 @@ MonoBehaviour:
   risingAttack:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 3
     commands: {fileID: 7184598500640157805}
     riseHeight: 6
     abilityTime: 0.6
@@ -464,6 +474,7 @@ MonoBehaviour:
   dropAttack:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 0
     commands: {fileID: 7184598500640157805}
     abilityTime: 2
     amountConsumeUmbrellaDurability: 2
@@ -486,6 +497,7 @@ MonoBehaviour:
   glide:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 3
     commands: {fileID: 7184598500640157805}
     fallSpeed: 1
     amountConsumeUmbrellaDurabilityOnGuard: 1
@@ -497,7 +509,7 @@ MonoBehaviour:
       method: {fileID: 4299200908901914630}
       fields:
         maxForce: {x: 0, y: 300}
-        velocity: {x: 0, y: -1}
+        velocity: {x: 0, y: 0}
         activeX: 0
         activeY: 1
     horizontalMove:
@@ -1343,7 +1355,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.39999998, y: 0.1}
+  m_Size: {x: 0.5, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &8916380849072566239
 MonoBehaviour:

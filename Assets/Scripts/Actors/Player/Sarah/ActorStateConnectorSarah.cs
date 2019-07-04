@@ -17,6 +17,8 @@ namespace ActorSarah
 
         [SerializeField] float attackLongPushThreshold;
         [SerializeField] int durabilityCostOnShootMagic;
+        [SerializeField, Range(0, 3)] int progressLevel;
+        [SerializeField, Range(0, 3)] int reqiredProgressLevelToShootMagic;
         [SerializeField] AwakeMutableShootObject shootObject;
         [SerializeField] PlayerCommander commands;
         [SerializeField] GroundSensor groundSensor;
@@ -118,7 +120,21 @@ namespace ActorSarah
             Debug.Log($"State has changed:{next.GetType().Name}");
         }
 
+        void TryShootMagic()
+        {
+            if (attackLongPushClock.IsLongPushedUp)
+            {
+                if (reqiredProgressLevelToShootMagic <= progressLevel && umbrellaParameters.TryConsumeDurability(durabilityCostOnShootMagic) > 0)
+                {
+                    shootObject.Content.Fields.InitialVelocity = (int)direction.CurrentDirection * Mathf.Abs(shootObject.Content.Fields.InitialVelocity.x) * Vector2.right;
+                    shootObject.Content.Fields.RelativePosition = (int)direction.CurrentDirection * Mathf.Abs(shootObject.Content.Fields.RelativePosition.x) * Vector2.right;
+                    shootObject.Content.ManualUpdate();
+                    shootObject.Content.Method.Use();
+                }
+                attackLongPushClock.Reset();
+            }
 
+        }
         [System.Serializable]
         private class SarahDefault : Default
         {
@@ -129,6 +145,7 @@ namespace ActorSarah
             [SerializeField] ActorFunction.HorizontalMove horizontalMove;
             [SerializeField] ActorFunction.Jump jump;
             [SerializeField] ActorFunction.Directionable directionable;
+            [SerializeField] PassPlatform passPlatform;
             //[SerializeField] UmbrellaParameters umbrellaParameters;
 
             public ChainAttackStream attackStream;
@@ -151,11 +168,20 @@ namespace ActorSarah
             }
             protected override void OnActive()
             {
-                horizontalMove.ManualUpdate(System.Math.Sign(commands.Directional.Evaluation.x));
+                int inSign = System.Math.Sign(commands.Directional.Evaluation.x);
+                if (inSign!=0)
+                {
+                    ConnectorSarah.tripleSlashAttackStream.Reset();
+                }
+                horizontalMove.ManualUpdate(inSign);
                 jump.Update(commands.Jump.Evaluation);
                 if (commands.Directional.Evaluation.x * (int)directionable.CurrentDirection < 0)
                 {
                     directionable.ChangeDirection(System.Math.Sign(commands.Directional.Evaluation.x));
+                }
+                if (commands.AnalogueDown.IsDown)
+                {
+                    //passPlatformを動作させる
                 }
             }
 
@@ -163,31 +189,18 @@ namespace ActorSarah
             {
                 horizontalMove.Method.enabled = false;
                 attackLongPushClock.AllowedToStartCount = false;
-                ConnectorSarah.umbrellaParameters.ChangeDurabilityGradually(0, 0);
+                ConnectorSarah.umbrellaParameters.StopChangeDurabilityGradually();
             }
         }
 
-        void TryShootMagic()
-        {
-            if (attackLongPushClock.IsLongPushedUp)
-            {
-                if (umbrellaParameters.TryConsumeDurability(durabilityCostOnShootMagic) > 0)
-                {
-                    shootObject.Content.Fields.InitialVelocity = (int)direction.CurrentDirection * Mathf.Abs(shootObject.Content.Fields.InitialVelocity.x) * Vector2.right;
-                    shootObject.Content.Fields.RelativePosition = (int)direction.CurrentDirection * Mathf.Abs(shootObject.Content.Fields.RelativePosition.x) * Vector2.right;
-                    shootObject.Content.ManualUpdate();
-                    shootObject.Content.Method.Use();
-                }
-                attackLongPushClock.Reset();
-            }
-
-        }
 
         [System.Serializable]
         private class SarahState : ActorState
         {
+            [SerializeField, Range(0, 3)] int requiredProgressLevel;
             ActorStateConnectorSarah connectorSarah;
-            
+
+            protected override bool IsAvailable() => requiredProgressLevel <= ConnectorSarah.progressLevel;
             public ActorStateConnectorSarah ConnectorSarah
             {
                 get => connectorSarah == null ?
@@ -331,6 +344,8 @@ namespace ActorSarah
             [SerializeField] Umbrella umbrella;
             int dirSign;
 
+            protected override bool IsAvailable() => base.IsAvailable() && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
+
             protected override bool ShouldCotinue() => commands.OpenUmbrella.Evaluation && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
 
             protected override void OnInitialize()
@@ -406,7 +421,7 @@ namespace ActorSarah
             float x0;
             int state = 0;
 
-            protected override bool IsAvailable() => ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
+            protected override bool IsAvailable() => base.IsAvailable() && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
             protected override bool ShouldCotinue()
             {
                 //if(Mathf.Abs(ConnectorSarah.SelfRigidbody.velocity.x ) < Mathf.Epsilon) { return false; }
@@ -475,7 +490,7 @@ namespace ActorSarah
             [SerializeField] ActorFunction.HorizontalMove horizontalMove;
             [SerializeField] ActorFunction.Guard guard;
 
-            protected override bool IsAvailable() => ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
+            protected override bool IsAvailable() => base.IsAvailable() && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
             protected override bool ShouldCotinue() => commands.OpenUmbrella.Evaluation && !groundSensor.IsOnGround && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
             protected override void OnInitialize()
             {
@@ -501,6 +516,7 @@ namespace ActorSarah
                 guard.Method.Activated = false;
                 velocityAdjuster.Method.enabled = false;
                 horizontalMove.Method.enabled = false;
+                ConnectorSarah.umbrellaParameters.StopChangeDurabilityGradually();
             }
 
             public override bool IsResistibleTo(Type actorStateType)
@@ -528,7 +544,7 @@ namespace ActorSarah
 
             float limitHeight;
             IodoShiba.ManualUpdateClass.ManualClock clock = new IodoShiba.ManualUpdateClass.ManualClock();
-            protected override bool IsAvailable() => ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
+            protected override bool IsAvailable() => base.IsAvailable() && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
 
             protected override bool ShouldCotinue() => clock.Clock < abilityTime;
             protected override void OnInitialize()
@@ -575,7 +591,7 @@ namespace ActorSarah
             [SerializeField] Umbrella umbrella;
             IodoShiba.ManualUpdateClass.ManualClock clock = new IodoShiba.ManualUpdateClass.ManualClock();
 
-            protected override bool IsAvailable() => ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
+            protected override bool IsAvailable() => base.IsAvailable() && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
             protected override bool ShouldCotinue() => !groundSensor.IsOnGround && clock.Clock < abilityTime;
             protected override void OnInitialize()
             {
