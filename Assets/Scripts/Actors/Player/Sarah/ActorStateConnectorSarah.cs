@@ -127,7 +127,7 @@ namespace ActorSarah
                 if (reqiredProgressLevelToShootMagic <= progressLevel && umbrellaParameters.TryConsumeDurability(durabilityCostOnShootMagic) > 0)
                 {
                     shootObject.Content.Fields.InitialVelocity = (int)direction.CurrentDirection * Mathf.Abs(shootObject.Content.Fields.InitialVelocity.x) * Vector2.right;
-                    shootObject.Content.Fields.RelativePosition = (int)direction.CurrentDirection * Mathf.Abs(shootObject.Content.Fields.RelativePosition.x) * Vector2.right;
+                    shootObject.Content.Fields.RelativePosition = new Vector2((int)direction.CurrentDirection * Mathf.Abs(shootObject.Content.Fields.RelativePosition.x), shootObject.Content.Fields.RelativePosition.y);
                     shootObject.Content.ManualUpdate();
                     shootObject.Content.Method.Use();
                 }

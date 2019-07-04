@@ -226,7 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackLongPushThreshold: 2
   durabilityCostOnShootMagic: 1
-  progressLevel: 0
+  progressLevel: 3
   reqiredProgressLevelToShootMagic: 2
   shootObject:
     target: {fileID: 8916380848889061178}
@@ -248,7 +248,7 @@ MonoBehaviour:
       method: {fileID: 8337234850337983617}
       fields:
         initialVelocity: {x: 20, y: 0}
-        relativePosition: {x: 1, y: 0}
+        relativePosition: {x: 1, y: 0.7}
         target: {fileID: 50772581978437856, guid: 41220af7366e91845ab0b9687566dde1,
           type: 3}
   commands: {fileID: 7184598500640157805}
