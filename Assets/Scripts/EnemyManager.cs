@@ -13,6 +13,7 @@ public class EnemyManager : MonoBehaviour {
 
     public static EnemyManager Instance { get => instance; }
 
+    public EnemyManager() { if (instance == null) instance = this; }
     IEnumerator RemoveDead()
     {
         Enemy it;
@@ -31,7 +32,12 @@ public class EnemyManager : MonoBehaviour {
 
     private void Awake()
     {
-        instance = this;
+        if (instance != null && this != instance) 
+        {
+            Debug.LogError($"{this.GetType().Name} cannot exist double or more in one scene. GameObject '{name}' has been Deleted because it has second {this.GetType().Name}.");
+            //Destroy(gameObject);
+            return;
+        }
     }
 
     private void Start()

@@ -44,8 +44,7 @@ public class CounterAttack : AttackConverter
         {
             //s._OnAttackedInternal(gameObject, attack.ParamsConvertedByOwner);
             
-            s.SetParams(gameObject, capturedAndSend, null);
-            s.SendSignal();
+            s.TryAttack(gameObject, capturedAndSend, null);
         }
     }
 
@@ -53,8 +52,7 @@ public class CounterAttack : AttackConverter
     {
         if (!isActive) return;
         //subject._OnAttackedInternal(gameObject, attack.ParamsConvertedByOwner);
-        subject.SetParams(gameObject, capturedAndSend, null);
-        subject.SendSignal();
+        subject.TryAttack(gameObject, capturedAndSend, null);
     }
 
     public override bool Convert(AttackData value)
@@ -65,18 +63,18 @@ public class CounterAttack : AttackConverter
         switch (convertMode)
         {
             case ConvertMode.overwrite:
-                AttackData.DeepCopy(capturedAndSend, baseAttack);
+                AttackData.Copy(capturedAndSend, baseAttack);
                 break;
 
             case ConvertMode.multiplyByConstants:
-                AttackData.DeepCopy(capturedAndSend, value);
+                AttackData.Copy(capturedAndSend, value);
                 capturedAndSend.damage *= baseAttack.damage;
-                capturedAndSend.knockBackImpact.x *= capturedAndSend.knockBackImpact.x;
-                capturedAndSend.knockBackImpact.y *= capturedAndSend.knockBackImpact.y;
+                capturedAndSend.knockBackImpulse.x *= capturedAndSend.knockBackImpulse.x;
+                capturedAndSend.knockBackImpulse.y *= capturedAndSend.knockBackImpulse.y;
                 break;
 
             case ConvertMode.copy:
-                AttackData.DeepCopy(capturedAndSend, value);
+                AttackData.Copy(capturedAndSend, value);
                 break;
         }
         dealingAttackConverters.ForEach(dac => dac.Convert(capturedAndSend));

@@ -147,13 +147,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 30
   maxHealth: 30
+  isInvulnerable: 0
   dyingCallbacks:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 964724003723573773}
+  dealingAttackConverters: []
   dealtAttackConverters: []
+  initialStunTime: 0.3
   manager: {fileID: 0}
 --- !u!114 &964724003723573770
 MonoBehaviour:
@@ -197,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 172be974b3056e94a9dd8e679013b3ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1904868358951468108, guid: 8fb1d65d2019341439623d304160cec2,
+  bulletPrefab: {fileID: 3890719905783342961, guid: 8fb1d65d2019341439623d304160cec2,
     type: 3}
   speed: 4
 --- !u!114 &964724003723573811

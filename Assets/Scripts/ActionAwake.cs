@@ -6,69 +6,74 @@ using static System.Math;
 [DisallowMultipleComponent]
 public class ActionAwake : MonoBehaviour
 {
-    public enum AwakeGrades
+    public class Viewer : MonoBehaviour
+    {
+        [SerializeField] protected ActionAwake target;
+        protected float AwakeGauge { get => target.awakeGauge; }
+    }
+    public enum AwakeLevels
     {
         ordinary,
         awaken,
         blueAwaken
     }
+
     [SerializeField,Range(0,1)] float awakeGauge;
     [SerializeField] float awakeGaugeDecreaseSpeed;
-    [SerializeField] PlayerStates.Awakening.Ordinary _awakeningState_ordinary;
-    [SerializeField] StateManager2 awakeningState2;
     [SerializeField] EnemyManager enemyManager;
-    private bool isActing = false;
-    AwakeGrades awakeGrade = AwakeGrades.ordinary;
+    [SerializeField,DisabledField]private bool isActive = false;
+    AwakeLevels awakeLevel = AwakeLevels.ordinary;
 
-    public bool IsActing { get => isActing;}
-    public AwakeGrades AwakeGrade { get => awakeGrade; }
+    public bool IsActive { get => isActive;}
+    public AwakeLevels AwakeLevel { get => awakeLevel; }
 
     private void Start()
     {
+        awakeLevel = AwakeLevels.ordinary;
         enemyManager.AddEnemyDyingListener(() => AddAwakeGauge(.1f));
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isActing)
+        if (isActive)
         {
             awakeGauge = System.Math.Max(awakeGauge - awakeGaugeDecreaseSpeed * Time.deltaTime, 0);
             if(awakeGauge == 0)
             {
-                isActing = false;
-                awakeGrade = AwakeGrades.ordinary;
+                isActive = false;
+                awakeLevel = AwakeLevels.ordinary;
             }
         }
     }
 
-    public void Action()
+    public void SwitchActivate()
     {
-        if (!isActing && awakeGauge >= .5) {
-            isActing = true;
-            if (awakeGauge>=1)
+        if (!isActive && awakeGauge >= .5f) {
+            isActive = true;
+            if (awakeGauge >= 1) 
             {
-                awakeGrade = AwakeGrades.blueAwaken;
+                awakeLevel = AwakeLevels.blueAwaken;
             }
             else
             {
-                awakeGrade = AwakeGrades.awaken;
+                awakeLevel = AwakeLevels.awaken;
             }
         }
-        else if(isActing)
+        else if(isActive)
         {
-            isActing = false;
-            awakeGrade = AwakeGrades.ordinary;
+            isActive = false;
+            awakeLevel = AwakeLevels.ordinary;
         }
     }
     
     public void AddAwakeGauge(float amount)
     {
-        if (!isActing)
+        if (!isActive)
         {
-            awakeGauge = Max(0, Min(awakeGauge + amount, 1));
+            awakeGauge = Mathf.Clamp(awakeGauge + amount, 0, 1);
         }
     }
 
-    public string _DebugOutput() { return $"Awake Gauge:{awakeGauge} (0.5 ≦ this value < 1 : Awake, this value = 1 : Blue Awake)\n"; }
+    public string _DebugOutput() { return $"Awake Gauge:{awakeGauge} (0.5 ≦ a < 1 : Awake, a = 1 : Blue Awake)\n"; }
 }

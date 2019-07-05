@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShootBullet : ArtsAbility,ActorBehaviour.IParamableWith<Vector2>
 {
-    [SerializeField] Rigidbody2D bulletPrefab;
+    [SerializeField] AttackInHitbox bulletPrefab;
     public float speed;
     private Vector2 direction;
 
@@ -14,7 +14,7 @@ public class ShootBullet : ArtsAbility,ActorBehaviour.IParamableWith<Vector2>
     }
     protected override void OnInitialize()
     {
-        var newRb2d = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        var newRb2d = AttackInHitbox.InstantiateThis(bulletPrefab, transform.position, Quaternion.identity,GetComponent<Mortal>()).GetComponent<Rigidbody2D>();
         newRb2d.velocity = direction.normalized * speed;
     }
     public void SetParams(Vector2 value)

@@ -3,8 +3,7 @@
 --- !u!1 &8916380848524203185
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1678311527970370, guid: 501b977c0c61eb3479d02e2313b09101,
-    type: 2}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
@@ -24,8 +23,7 @@ GameObject:
 --- !u!4 &8916380849796070452
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4301161592082944, guid: 501b977c0c61eb3479d02e2313b09101,
-    type: 2}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8916380848524203185}
@@ -77,19 +75,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 0
-    knockBackImpact: {x: 200, y: 50}
+    knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 8916380848524203196}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 0
-    knockBackImpact: {x: 200, y: 50}
+    knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 8916380848524203196}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 10
-    knockBackImpact: {x: 200, y: 50}
+    knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 8916380848524203196}
     throughable: 1
     hitstopSpan: 0
@@ -126,14 +124,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
   activeSpan: 0
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -149,39 +147,24 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8916380848889061127}
-  - component: {fileID: 8916380848889061126}
-  - component: {fileID: 8916380848889061125}
+  - component: {fileID: 7184598500640157805}
+  - component: {fileID: 8916380848890831846}
   - component: {fileID: 8916380848889061121}
-  - component: {fileID: 8916380848889061138}
   - component: {fileID: 8916380848889061092}
-  - component: {fileID: 8916380848889061151}
-  - component: {fileID: 8916380848889061145}
-  - component: {fileID: 8916380848889061124}
   - component: {fileID: 8916380848889061144}
   - component: {fileID: 8916380848889061139}
-  - component: {fileID: 8916380848889061095}
-  - component: {fileID: 8916380848889061120}
-  - component: {fileID: 8916380848889061179}
-  - component: {fileID: 8916380848889061147}
+  - component: {fileID: 4325353825048437118}
+  - component: {fileID: 3289781965317027910}
+  - component: {fileID: 1353951183406726685}
+  - component: {fileID: 2312274154079463536}
+  - component: {fileID: 4249487242134317880}
+  - component: {fileID: 4299200908901914630}
+  - component: {fileID: 8337234850337983617}
   - component: {fileID: 8916380848889061149}
-  - component: {fileID: 8916380848889061094}
-  - component: {fileID: 8916380848889061133}
-  - component: {fileID: 8916380848889061132}
-  - component: {fileID: 8916380848889061123}
-  - component: {fileID: 8916380848889061134}
-  - component: {fileID: 8916380848889061143}
-  - component: {fileID: 8916380848889061135}
-  - component: {fileID: 8916380848889061136}
-  - component: {fileID: 8916380848889061137}
-  - component: {fileID: 8916380848889061148}
-  - component: {fileID: 8916380848889061122}
-  - component: {fileID: 8916380848889061128}
-  - component: {fileID: 8916380848889061131}
-  - component: {fileID: 8916380848889061130}
-  - component: {fileID: 8916380848889061129}
-  - component: {fileID: 8916380848889061142}
-  - component: {fileID: 8916380848889061141}
-  - component: {fileID: 8916380848889061140}
+  - component: {fileID: 8916380848889061124}
+  - component: {fileID: 8916380848889061151}
+  - component: {fileID: 8916380848889061125}
+  - component: {fileID: 8916380848889061126}
   m_Layer: 20
   m_Name: Sarah
   m_TagString: Player
@@ -215,6 +198,613 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7184598500640157805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99c8b6417c17fee48805ac96ecdb9728, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackLongPushThreshold: 0
+  joyDirectionKeyRadiusThreshold: 0.5
+--- !u!114 &8916380848890831846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed4b52c2915e6c64cbc263dc86f3c250, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackLongPushThreshold: 2
+  durabilityCostOnShootMagic: 1
+  progressLevel: 3
+  reqiredProgressLevelToShootMagic: 2
+  shootObject:
+    target: {fileID: 8916380848889061178}
+    ordinary:
+      method: {fileID: 8337234850337983617}
+      fields:
+        initialVelocity: {x: 20, y: 0}
+        relativePosition: {x: 1, y: 0}
+        target: {fileID: 50918981803762924, guid: ff743e642f8ffa34c899082655a08e35,
+          type: 3}
+    awaken:
+      method: {fileID: 8337234850337983617}
+      fields:
+        initialVelocity: {x: 20, y: 0}
+        relativePosition: {x: 1, y: 0.5}
+        target: {fileID: 50332067022784446, guid: beda1472c4cdfa644bada645b9c32024,
+          type: 3}
+    blueAwaken:
+      method: {fileID: 8337234850337983617}
+      fields:
+        initialVelocity: {x: 20, y: 0}
+        relativePosition: {x: 1, y: 0.7}
+        target: {fileID: 50772581978437856, guid: 41220af7366e91845ab0b9687566dde1,
+          type: 3}
+  commands: {fileID: 7184598500640157805}
+  groundSensor: {fileID: 8916380849072566239}
+  direction: {fileID: 4249487242134317880}
+  actionAwake: {fileID: 8916380848889061092}
+  umbrellaParameters: {fileID: 8916380848891301902}
+  currentStateName: 
+  lpt: 0
+  sarahDefault:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    umbrellaRecoverCycle: 0.5
+    umbrellaRecoverAmount: 1
+    commands: {fileID: 7184598500640157805}
+    horizontalMove:
+      method: {fileID: 3289781965317027910}
+      fields:
+        maxSpeed: 8
+        pushForceMagnitude: 100
+        stopForceMagnitude: 200
+        curve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.9982829
+            inSlope: -6.1870217
+            outSlope: -6.1870217
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.044911936
+          - serializedVersion: 3
+            time: 0.18267518
+            value: -0.015916467
+            inSlope: -1.6507514
+            outSlope: -1.6507514
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.24021606
+          - serializedVersion: 3
+            time: 0.5939588
+            value: -0.4056789
+            inSlope: -0.24970157
+            outSlope: -0.24970157
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.66292655
+            outWeight: 0.7549567
+          - serializedVersion: 3
+            time: 0.9855652
+            value: -0.45129204
+            inSlope: -0.011692719
+            outSlope: -0.011692719
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 1
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    jump:
+      method: {fileID: 1353951183406726685}
+      fields:
+        jumpHeight: 2
+        jumpForce: 300
+        jumpUpSpeed: 15
+    directionable: {fileID: 4249487242134317880}
+    passPlatform: {fileID: 0}
+  verticalSlash:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 0
+    commands: {fileID: 7184598500640157805}
+    receptionStartTime: 0.13
+    amountConsumeUmbrellaDurability: 1
+    verticalSlashAttack: {fileID: 8916380849465762211}
+    horizontalMove:
+      method: {fileID: 3289781965317027910}
+      fields:
+        maxSpeed: 0
+        pushForceMagnitude: 0
+        stopForceMagnitude: Infinity
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    umbrella: {fileID: 8916380848891301901}
+  returnSlash:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 0
+    commands: {fileID: 7184598500640157805}
+    retuenSlashAttack: {fileID: 8916380850370461321}
+    receptionStartTime: 0.13
+    jumpUpImpulse: {x: 0, y: 15}
+    selfRigidBody: {fileID: 8916380848889061125}
+    umbrella: {fileID: 8916380848891301901}
+  smashSlash:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 0
+    commands: {fileID: 7184598500640157805}
+    smashSlashAttack: {fileID: 8916380849248469449}
+    umbrella: {fileID: 8916380848891301901}
+  aerialSlash:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 0
+    commands: {fileID: 7184598500640157805}
+    amountConsumeUmbrellaDurability: 1
+    aerialSlashAttack: {fileID: 8916380849515846539}
+    umbrella: {fileID: 8916380848891301901}
+    groundSensor: {fileID: 8916380849072566239}
+  guard:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 1
+    commands: {fileID: 7184598500640157805}
+    amountConsumeUmbrellaDurability: 1
+    direction: {fileID: 4249487242134317880}
+    guard:
+      method: {fileID: 2312274154079463536}
+      fields:
+        multiplier: 0.5
+        degreeRangeStart: -90
+        degreeRangeWidth: 180
+    extraCollider: {fileID: 8916380848889061124}
+    horizontalMove:
+      method: {fileID: 3289781965317027910}
+      fields:
+        maxSpeed: 0
+        pushForceMagnitude: 0
+        stopForceMagnitude: 400
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    umbrella: {fileID: 8916380848891301901}
+  tackle:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 1
+    commands: {fileID: 7184598500640157805}
+    distance: 6
+    speed: 18
+    degreeWidthOfGuardArea: 270
+    unguardTime: 0.5
+    amountConsumeUmbrellaDurability: 2
+    umbrella: {fileID: 8916380848891301901}
+    attack: {fileID: 8916380848965055384}
+    velocityAdjuster:
+      method: {fileID: 4299200908901914630}
+      fields:
+        maxForce: {x: 600, y: 0}
+        velocity: {x: 18, y: 0}
+        activeX: 1
+        activeY: 0
+    direction: {fileID: 4249487242134317880}
+    guard:
+      method: {fileID: 2312274154079463536}
+      fields:
+        multiplier: 0
+        degreeRangeStart: -135
+        degreeRangeWidth: 270
+    onChangeStateCallbacks:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8916380848889061121}
+          m_MethodName: set_IsInvulnerable
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8916380848889061178}
+          m_MethodName: 
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: ActorSarah.ActorStateConnectorSarah+Tackle+StateChangeEvent, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    wallSensor: {fileID: 7628696488050251550}
+  risingAttack:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 3
+    commands: {fileID: 7184598500640157805}
+    riseHeight: 6
+    abilityTime: 0.6
+    amountConsumeUmbrellaDurability: 2
+    attack: {fileID: 8916380850513594275}
+    velocityAdjuster:
+      method: {fileID: 4299200908901914630}
+      fields:
+        maxForce: {x: 30, y: 500}
+        velocity: {x: 0, y: 40}
+        activeX: 1
+        activeY: 1
+    guard:
+      method: {fileID: 2312274154079463536}
+      fields:
+        multiplier: 0
+        degreeRangeStart: -45
+        degreeRangeWidth: 270
+    umbrella: {fileID: 8916380848891301901}
+  dropAttack:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 0
+    commands: {fileID: 7184598500640157805}
+    abilityTime: 2
+    amountConsumeUmbrellaDurability: 2
+    attack: {fileID: 8916380849653747854}
+    velocityAdjuster:
+      method: {fileID: 4299200908901914630}
+      fields:
+        maxForce: {x: 200, y: 400}
+        velocity: {x: 0, y: -50}
+        activeX: 1
+        activeY: 1
+    guard:
+      method: {fileID: 2312274154079463536}
+      fields:
+        multiplier: 0
+        degreeRangeStart: 135
+        degreeRangeWidth: 270
+    groundSensor: {fileID: 8916380849072566239}
+    umbrella: {fileID: 8916380848891301901}
+  glide:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    requiredProgressLevel: 3
+    commands: {fileID: 7184598500640157805}
+    fallSpeed: 1
+    amountConsumeUmbrellaDurabilityOnGuard: 1
+    umbrellaConsumeCycle: 1
+    umbrellaConsumeAmount: 1
+    groundSensor: {fileID: 8916380849072566239}
+    umbrella: {fileID: 8916380848891301901}
+    velocityAdjuster:
+      method: {fileID: 4299200908901914630}
+      fields:
+        maxForce: {x: 0, y: 300}
+        velocity: {x: 0, y: 0}
+        activeX: 0
+        activeY: 1
+    horizontalMove:
+      method: {fileID: 3289781965317027910}
+      fields:
+        maxSpeed: 6
+        pushForceMagnitude: 300
+        stopForceMagnitude: 100
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    guard:
+      method: {fileID: 2312274154079463536}
+      fields:
+        multiplier: 0.5
+        degreeRangeStart: 0
+        degreeRangeWidth: 180
+  smashed:
+    gameObject: {fileID: 8916380848889061178}
+    connector: {fileID: 8916380848890831846}
+    horizontalMove: {fileID: 3289781965317027910}
+--- !u!114 &8916380848889061121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19f3529071d6684468cc6df34f08946b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1000
+  maxHealth: 1000
+  isInvulnerable: 0
+  dyingCallbacks:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  selfRigidbody: {fileID: 8916380848889061125}
+  dealingAttackConverters: []
+  dealtAttackConverters: []
+  initialStunTime: 0.3
+  umbrellaParameters: {fileID: 8916380848891301902}
+  actionAwake: {fileID: 8916380848889061092}
+  umbrellaUpward: {fileID: 0}
+  guardColliderExtension: {fileID: 8916380848889061124}
+  connectorSarah: {fileID: 8916380848890831846}
+  directionable: {fileID: 4249487242134317880}
+  guard: {fileID: 2312274154079463536}
+  _debugText: {fileID: 0}
+  damaged: 0
+--- !u!114 &8916380848889061092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439327b37816c1a45a2444dd45ae6f97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awakeGauge: 1
+  awakeGaugeDecreaseSpeed: 0.1
+  enemyManager: {fileID: 0}
+  isActive: 0
+--- !u!114 &8916380848889061144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c950623c53852a3488dfdfa1946d5d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseAttack:
+    damage: 0
+    knockBackImpulse: {x: 0, y: 0}
+    attackCollider: {fileID: 0}
+    throughable: 0
+    hitstopSpan: 0
+  owner: {fileID: 0}
+  convertMode: 1
+  dealingAttackConverters: []
+--- !u!114 &8916380848889061139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20a16ba780f36274f87fe7d81d3222b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awakenist: {fileID: 8916380848889061121}
+  ordinaryAttack:
+    damage: 0
+    knockBackImpulse: {x: 100, y: 50}
+    attackCollider: {fileID: 0}
+    throughable: 0
+    hitstopSpan: 0
+  awakenAttack:
+    damage: 0
+    knockBackImpulse: {x: 100, y: 50}
+    attackCollider: {fileID: 0}
+    throughable: 0
+    hitstopSpan: 0
+  blueAwakenAttack:
+    damage: 0
+    knockBackImpulse: {x: 100, y: 50}
+    attackCollider: {fileID: 0}
+    throughable: 0
+    hitstopSpan: 10
+--- !u!114 &4325353825048437118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4c1c480dfcd2b489bfa7155b61bbc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onAttacked:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &3289781965317027910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cadb6fc697b13c54eb0e3327a63b3926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1353951183406726685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f36d7676470be5d4b83f1d35d4bdfd33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundSensor: {fileID: 8916380849072566239}
+--- !u!114 &2312274154079463536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca2fa5ccee2f5448ae9c52292080d73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activated: 0
+--- !u!114 &4249487242134317880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b3db35e113ab9248af73ae37de07636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4299200908901914630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 890a5575726f8284ab7517839a0e53e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8337234850337983617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b69d4b237e548a04fb9bcb7e4cc7e708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8916380848889061149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 813b0aac0d1eb9644869bfe5d08d24b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: 1
+  onPasingLayer: 19
+  platformContactor: {fileID: 8916380850264124303}
+  minContinueTime: 0.15
+--- !u!70 &8916380848889061124
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.7, y: 0}
+  m_Size: {x: 0.8, y: 1.4}
+  m_Direction: 0
+--- !u!61 &8916380848889061151
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 1.4}
+  m_EdgeRadius: 0.3
+--- !u!50 &8916380848889061125
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 4
+  m_Material: {fileID: 6200000, guid: 539c780704303c84b96f6ceae3168579, type: 2}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!212 &8916380848889061126
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -263,728 +853,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &8916380848889061125
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 4
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!114 &8916380848889061121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19f3529071d6684468cc6df34f08946b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 1000
-  maxHealth: 1000
-  dyingCallbacks:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  selfRigidbody: {fileID: 8916380848889061125}
-  dealtAttackConverters: []
-  umbrellaParameters: {fileID: 8916380848891301902}
-  inputA: {fileID: 8916380848889061122}
-  enemyManager: {fileID: 0}
-  awakeningState: {fileID: 8916380848889061128}
-  directionState: {fileID: 8916380848889061142}
-  actionAwake: {fileID: 8916380848889061092}
-  umbrellaUpward: {fileID: 0}
-  guardColliderExtension: {fileID: 8916380848889061124}
-  groundSensor: {fileID: 8916380849072566239}
-  jumpAbility: {fileID: 8916380848889061094}
-  _debugText: {fileID: 0}
-  damaged: 0
---- !u!114 &8916380848889061138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92ec2773f0e06364c8d5029661dd9f6a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dealingAttackConverters: []
---- !u!114 &8916380848889061092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 439327b37816c1a45a2444dd45ae6f97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  awakeGauge: 1
-  awakeGaugeDecreaseSpeed: 0.1
-  _awakeningState_ordinary: {fileID: 8916380848889061131}
-  awakeningState2: {fileID: 0}
-  enemyManager: {fileID: 0}
---- !u!61 &8916380848889061151
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.4, y: 1.4}
-  m_EdgeRadius: 0.3
---- !u!70 &8916380848889061145
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
-  m_Size: {x: 1, y: 2}
-  m_Direction: 0
---- !u!70 &8916380848889061124
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.7, y: 0}
-  m_Size: {x: 0.8, y: 1.4}
-  m_Direction: 0
---- !u!114 &8916380848889061144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c950623c53852a3488dfdfa1946d5d36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseAttack:
-    damage: 0
-    knockBackImpact: {x: 0, y: 0}
-    attackCollider: {fileID: 0}
-    throughable: 0
-    hitstopSpan: 0
-  owner: {fileID: 8916380848889061138}
-  convertMode: 1
-  dealingAttackConverters: []
---- !u!114 &8916380848889061139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20a16ba780f36274f87fe7d81d3222b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  awakenist: {fileID: 8916380848889061121}
-  ordinaryAttack:
-    damage: 0
-    knockBackImpact: {x: 100, y: 50}
-    attackCollider: {fileID: 0}
-    throughable: 0
-    hitstopSpan: 0
-  awakenAttack:
-    damage: 0
-    knockBackImpact: {x: 100, y: 50}
-    attackCollider: {fileID: 0}
-    throughable: 0
-    hitstopSpan: 0
-  blueAwakenAttack:
-    damage: 0
-    knockBackImpact: {x: 100, y: 50}
-    attackCollider: {fileID: 0}
-    throughable: 0
-    hitstopSpan: 10
---- !u!114 &8916380848889061095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 361eb3ac83abb314990a12027512f4b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputA: {fileID: 8916380848889061122}
---- !u!114 &8916380848889061120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab230f97be6063348b736608f91b1d01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ai: {fileID: 8916380848889061095}
-  maxIntervalOfTripleAttack: 0.3
-  groundSensor: {fileID: 8916380849072566239}
---- !u!114 &8916380848889061179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97fd7b9659197794f98460653c259565, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Behaviour States
-  states:
-  - name: On ground
-    initializeActions:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    executionActions:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    terminateActions:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  - name: Flying
-    initializeActions:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    executionActions:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-    terminateActions:
-      m_PersistentCalls:
-        m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-  stateChangeCallbacks:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  groundSensor: {fileID: 8916380849072566239}
---- !u!114 &8916380848889061147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d902d5b5d9c72641bc3a2ac62dd47c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 8
-  maxPushForceMagnitude: 500
-  maxStopForceMagnitude: 200
-  targetRigidbody: {fileID: 8916380848889061125}
---- !u!114 &8916380848889061149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 813b0aac0d1eb9644869bfe5d08d24b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mode: 1
-  onPasingLayer: 19
-  platformContactor: {fileID: 8916380850264124303}
-  minContinueTime: 0.15
---- !u!114 &8916380848889061094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ecfee0287e814d4c92652734598d48d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpSpeed: 10
-  maxPushForceMagnitude: 300
-  maxJumpHeight: 3
-  targetRigidbody: {fileID: 8916380848889061125}
---- !u!114 &8916380848889061133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d950d23371d5fe7478bd6d77dd13df4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _motionLength: 0.2
-  attack: {fileID: 8916380849465762211}
-  umbrella: {fileID: 8916380848891301901}
---- !u!114 &8916380848889061132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 731d2bed17cc47942943cb893772ad1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hopImpact: 300
-  _motionLength: 0.2
-  attack: {fileID: 8916380850370461321}
-  umbrella: {fileID: 8916380848891301901}
-  playerRb: {fileID: 8916380848889061125}
---- !u!114 &8916380848889061123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6f7e5c1863a6114489602326bb2dc53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _motionLength: 0.2
-  attack: {fileID: 8916380849248469449}
-  umbrella: {fileID: 8916380848891301901}
---- !u!114 &8916380848889061134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcc47ea21fcf0c647a78bbd68548c13e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _motionLength: 0.3
-  playerRb: {fileID: 8916380848889061125}
-  groundSensor: {fileID: 8916380849072566239}
-  attack: {fileID: 8916380849515846539}
-  umbrella: {fileID: 8916380848891301901}
---- !u!114 &8916380848889061143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 890a5575726f8284ab7517839a0e53e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 8916380848889061121}
-  horizontalMoveSpeed: 6
-  maxFallSpeed: 2
-  umbrella: {fileID: 8916380848891301901}
-  groundSensor: {fileID: 8916380849072566239}
-  horizontalMove: {fileID: 8916380848889061147}
---- !u!114 &8916380848889061135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80c6f68b2bc20614191be6abc07b15ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  risingSpeed: 24
-  _motionLength: 0.3
-  attack: {fileID: 8916380850513594275}
-  umbrella: {fileID: 8916380848891301901}
---- !u!114 &8916380848889061136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6c8d84a50516e743a2d50b064773018, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropSpeed: 24
-  maxMotionLength: 2
-  attack: {fileID: 8916380849653747854}
-  groundSensor: {fileID: 8916380849072566239}
-  umbrella: {fileID: 8916380848891301901}
---- !u!114 &8916380848889061137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bca2fa5ccee2f5448ae9c52292080d73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 8916380848889061125}
-  playerData: {fileID: 8916380848889061121}
-  extensionCollider: {fileID: 8916380848889061124}
-  knockbackAttack: {fileID: 8916380850362335010}
-  umbrella: {fileID: 8916380848891301901}
---- !u!114 &8916380848889061148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02d505dee4403d84bbd0f3c49b8ff5c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 24
-  proceedDistance: 6
-  unguardTime: 0.5
-  playerRb: {fileID: 8916380848889061125}
-  wallSensor: {fileID: 0}
---- !u!114 &8916380848889061122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c37557345db8c46bae371ae8cb8011, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monitoringButtonNames:
-  - Attack
-  - Magical Attack
-  - Open Umbrella
-  - Jump
-  - Awake
-  shortDowningThreshold: 0.2
-  MultiDowningLimit: 0.2
---- !u!114 &8916380848889061128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b83df855ec62f0841a60f5c84dbc41e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Awakening States
-  currentState: {fileID: 8916380848889061131}
---- !u!114 &8916380848889061131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4788811beff3d74eb661317fea65080, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitializeCallbacks:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8916380848889061178}
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  TerminateCallbacks:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  isCurrent: 0
-  inputA: {fileID: 8916380848889061122}
-  player: {fileID: 8916380848889061121}
-  playerAwake: {fileID: 8916380848889061092}
---- !u!114 &8916380848889061130
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36f6de0f46ccead4e99390b78765c5c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitializeCallbacks:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  TerminateCallbacks:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  isCurrent: 0
-  inputA: {fileID: 8916380848889061122}
-  player: {fileID: 8916380848889061121}
-  playerAwake: {fileID: 8916380848889061092}
---- !u!114 &8916380848889061129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5ae1072535e0874ab794da782fa5f77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitializeCallbacks:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  TerminateCallbacks:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  isCurrent: 0
-  inputA: {fileID: 8916380848889061122}
-  player: {fileID: 8916380848889061121}
-  playerAwake: {fileID: 8916380848889061092}
---- !u!114 &8916380848889061142
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b83df855ec62f0841a60f5c84dbc41e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Direction States
-  currentState: {fileID: 8916380848889061141}
---- !u!114 &8916380848889061141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2553e2a6caa1c6341a1522606e66a2d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitializeCallbacks:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8916380848889061121}
-        m_MethodName: ChangeDirection
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: SetDirection
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: SetDirection
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  TerminateCallbacks:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  isCurrent: 0
-  behavior: {fileID: 0}
---- !u!114 &8916380848889061140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8916380848889061178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9295420e924880846b1b13f743a11d0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InitializeCallbacks:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8916380848889061121}
-        m_MethodName: ChangeDirection
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: -1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: SetDirection
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: -1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: SetDirection
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: -1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  TerminateCallbacks:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  isCurrent: 0
-  behavior: {fileID: 0}
 --- !u!1 &8916380848891301890
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,6 +865,7 @@ GameObject:
   - component: {fileID: 8916380848891301900}
   - component: {fileID: 8916380848891301901}
   - component: {fileID: 8916380848891301902}
+  - component: {fileID: 7628696488050251550}
   m_Layer: 20
   m_Name: Umbrella
   m_TagString: Untagged
@@ -1099,10 +968,20 @@ MonoBehaviour:
   maxDurability: 8
   recoverCycle: 0.5
   breakTime: 8
-  costOfGuard: 1
-  costOfTackle: 2
-  costOfRisingAttack: 2
-  costOfGlidingPerSecond: 1
+  cheat_InfinityDurability: 0
+--- !u!114 &7628696488050251550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848891301890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81053ec959e7dbc46a4b7ae6a8516768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundTagName: Ground
 --- !u!1 &8916380848965055376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,19 +1231,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpact: {x: 1000, y: 200}
+    knockBackImpulse: {x: 1000, y: 200}
     attackCollider: {fileID: 8916380848965055379}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpact: {x: 1400, y: 280}
+    knockBackImpulse: {x: 1400, y: 280}
     attackCollider: {fileID: 8916380848965055387}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
-    knockBackImpact: {x: 1600, y: 320}
+    knockBackImpulse: {x: 1600, y: 320}
     attackCollider: {fileID: 8916380848965055386}
     throughable: 1
     hitstopSpan: 0
@@ -1380,14 +1259,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
   activeSpan: 0.4
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -1413,7 +1292,7 @@ MonoBehaviour:
   activeSpan: 0
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -1476,7 +1355,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.39999998, y: 0.1}
+  m_Size: {x: 0.5, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &8916380849072566239
 MonoBehaviour:
@@ -1675,19 +1554,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849248469455}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849248469460}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849248469451}
     throughable: 1
     hitstopSpan: 0
@@ -1703,14 +1582,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
-  activeSpan: 0
+  activeSpan: 0.4
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -1886,19 +1765,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849465762222}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849465762218}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849465762217}
     throughable: 1
     hitstopSpan: 0
@@ -1914,14 +1793,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
-  activeSpan: 0
+  activeSpan: 0.4
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -2109,19 +1988,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpact: {x: 0, y: -1000}
+    knockBackImpulse: {x: 0, y: -1000}
     attackCollider: {fileID: 8916380849515846537}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpact: {x: 0, y: -1333}
+    knockBackImpulse: {x: 0, y: -1333}
     attackCollider: {fileID: 8916380849515846550}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
-    knockBackImpact: {x: 0, y: -1666}
+    knockBackImpulse: {x: 0, y: -1666}
     attackCollider: {fileID: 8916380849515846549}
     throughable: 1
     hitstopSpan: 0
@@ -2137,14 +2016,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
-  activeSpan: 0
+  activeSpan: 0.4
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -2290,19 +2169,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpact: {x: 0, y: -1800}
+    knockBackImpulse: {x: 0, y: -1800}
     attackCollider: {fileID: 8916380849653747852}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpact: {x: 0, y: -2400}
+    knockBackImpulse: {x: 0, y: -2400}
     attackCollider: {fileID: 8916380849653747849}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
-    knockBackImpact: {x: 0, y: -3000}
+    knockBackImpulse: {x: 0, y: -3000}
     attackCollider: {fileID: 8916380849653747848}
     throughable: 1
     hitstopSpan: 0
@@ -2318,14 +2197,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
   activeSpan: 0
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -2478,19 +2357,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 0
-    knockBackImpact: {x: 200, y: 50}
+    knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 0}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 0
-    knockBackImpact: {x: 200, y: 50}
+    knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 0}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 10
-    knockBackImpact: {x: 200, y: 50}
+    knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 0}
     throughable: 1
     hitstopSpan: 0
@@ -2506,14 +2385,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
   activeSpan: 0
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -2539,7 +2418,7 @@ MonoBehaviour:
   activeSpan: 0
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -2715,19 +2594,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380850370461327}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380850370461332}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
-    knockBackImpact: {x: 50, y: 100}
+    knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380850370461323}
     throughable: 1
     hitstopSpan: 0
@@ -2743,14 +2622,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
-  activeSpan: 0
+  activeSpan: 0.4
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
@@ -2896,19 +2775,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpact: {x: 100, y: 1000}
+    knockBackImpulse: {x: 100, y: 1000}
     attackCollider: {fileID: 8916380850513594286}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpact: {x: 130, y: 1300}
+    knockBackImpulse: {x: 130, y: 1300}
     attackCollider: {fileID: 8916380850513594282}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
-    knockBackImpact: {x: 160, y: 1600}
+    knockBackImpulse: {x: 160, y: 1600}
     attackCollider: {fileID: 8916380850513594281}
     throughable: 1
     hitstopSpan: 0
@@ -2924,14 +2803,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 8916380848889061138}
+  owner: {fileID: 8916380848889061121}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Enemy
   activeSpan: 0
   attackDataPrototype:
     damage: 0
-    knockBackImpact: {x: 0, y: 0}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0

@@ -208,7 +208,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.4}
+  m_Size: {x: 2, y: 0.8}
   m_EdgeRadius: 0
 --- !u!114 &114316537504607408
 MonoBehaviour:
@@ -223,19 +223,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  damage: 5
-  knockBackImpact: {x: 100, y: 50}
-  attackCollider: {fileID: 61074474207612290}
-  throughable: 0
   onceOnly: 1
   initiallyActivate: 1
   targetTag: Enemy
   activeSpan: 5
-  paramsRaw:
-    damage: 5
-    knockBackImpact: {x: 0, y: 0}
+  attackDataPrototype:
+    damage: 0
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 0}
     throughable: 0
+    hitstopSpan: 0
+  attackConvertersOnActivate: []
+  attackConvertersOnHit: []
 --- !u!114 &114553777242403738
 MonoBehaviour:
   m_ObjectHideFlags: 0

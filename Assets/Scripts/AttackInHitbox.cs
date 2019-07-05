@@ -10,7 +10,7 @@ using UnityEditor;
 public class AttackInHitbox : MonoBehaviour
 {
     //[SerializeField] private Mortal owner;
-    [SerializeField,UnityEngine.Serialization.FormerlySerializedAs("_oowner")] private AttackDealer owner;
+    [SerializeField,UnityEngine.Serialization.FormerlySerializedAs("_oowner")] private Mortal owner;
     [SerializeField] private bool onceOnly;
     [SerializeField] private bool initiallyActivate;
     [SerializeField, TagField] string targetTag;
@@ -18,15 +18,18 @@ public class AttackInHitbox : MonoBehaviour
     [SerializeField] private AttackData attackDataPrototype;
     [SerializeField,FormerlySerializedAs("dealingAttackConverters")] private List<AttackConverter> attackConvertersOnActivate;
     [SerializeField] private List<AttackConverter> attackConvertersOnHit;
+    bool isAttackActive = false;
 
     public float Damage { get { return convertedAttackData.damage; } }
-    public Vector2 KnockBackImpact { get { return convertedAttackData.knockBackImpact; } }
+    public Vector2 KnockBackImpact { get { return convertedAttackData.knockBackImpulse; } }
     public Collider2D AttackCollider { get { return convertedAttackData.attackCollider; } }
     public bool Throughable { get { return convertedAttackData.throughable; } }
 
     public AttackData ParamsConvertedByOwner { get => new AttackData(convertedAttackData); }//不自然
-    public AttackDealer Owner { get => owner;}
-    
+    //public AttackDealer Owner { get => owner;}
+    public Mortal Owner { get => owner; }
+    public bool IsAttackActive { get => isAttackActive; }
+
     private float realActiveSpan;
     
     private AttackData convertedAttackData;
@@ -59,8 +62,9 @@ public class AttackInHitbox : MonoBehaviour
         {
             Mortal mortal = hit.GetComponent<Mortal>();
             attackConvertersOnHit.ForEach(acOnHit => acOnHit.Convert(convertedAttackData));
-            mortal.SetParams(gameObject, this.ParamsConvertedByOwner, result => { HitProcess(); } );
-            mortal.SendSignal();
+            //mortal.TryAttack(gameObject, this.ParamsConvertedByOwner, result => { HitProcess(); } );
+            mortal.TryAttack(owner, this.ParamsConvertedByOwner, transform.position - hit.gameObject.transform.position);
+            HitProcess();
         }
     }
     public void HitProcess()
@@ -91,10 +95,7 @@ public class AttackInHitbox : MonoBehaviour
     public void Activate()
     {
         convertedAttackData = new AttackData(attackDataPrototype);
-        //if (owner)
-        //{
-        //    owner.ConvertDealingAttack(convertedAttackData);
-        //}
+        
         attackConvertersOnActivate.ForEach(ac => { ac.Convert(convertedAttackData); });
         if(owner!=null) owner.ConvertDealingAttack(convertedAttackData);
 
@@ -104,12 +105,14 @@ public class AttackInHitbox : MonoBehaviour
         {
             StartCoroutine(Clock());
         }
-        
+
+        isAttackActive = true;
     }
 
     public void Inactivate()
     {
         SetDependentsEnable(false);
+        isAttackActive = false;
     }
 
     
@@ -131,23 +134,30 @@ public class AttackInHitbox : MonoBehaviour
             Inactivate();
         }
     }
+
+    public static AttackInHitbox InstantiateThis(AttackInHitbox original, Vector3 position, Quaternion rotation, Mortal owner)
+    {
+        AttackInHitbox ins = Instantiate(original, position, rotation);
+        ins.owner = owner;
+        return ins;
+    }
 }
 
 [System.Serializable]
 public class AttackData
 {
     public float damage;
-    public Vector2 knockBackImpact;
+    [UnityEngine.Serialization.FormerlySerializedAs("knockBackImpact")] public Vector2 knockBackImpulse;
     public Collider2D attackCollider;
     public bool throughable;
     public float hitstopSpan;
 
-    public AttackData() { damage = 0; knockBackImpact = Vector2.zero; attackCollider = null; throughable = false; hitstopSpan = 0; }
+    public AttackData() { damage = 0; knockBackImpulse = Vector2.zero; attackCollider = null; throughable = false; hitstopSpan = 0; }
 
     public AttackData(float damage, Vector2 knockBackImpact, Collider2D attackCollider = null, bool throughable = false, float hitstopSpan = 0)
     {
         this.damage = damage;
-        this.knockBackImpact = knockBackImpact;
+        this.knockBackImpulse = knockBackImpact;
         this.attackCollider = attackCollider;
         this.throughable = throughable;
         this.hitstopSpan = hitstopSpan;
@@ -157,16 +167,16 @@ public class AttackData
     public AttackData(AttackData original)
     {
         this.damage = original.damage;
-        this.knockBackImpact = original.knockBackImpact;
+        this.knockBackImpulse = original.knockBackImpulse;
         this.attackCollider = original.attackCollider;
         this.throughable = original.throughable;
         this.hitstopSpan = original.hitstopSpan;
     }
 
-    public static AttackData DeepCopy(AttackData target,AttackData original)
+    public static AttackData Copy(AttackData target,AttackData original)
     {
         target.damage = original.damage;
-        target.knockBackImpact = original.knockBackImpact;
+        target.knockBackImpulse = original.knockBackImpulse;
         target.attackCollider = original.attackCollider;
         target.throughable = original.throughable;
         target.hitstopSpan = original.hitstopSpan;

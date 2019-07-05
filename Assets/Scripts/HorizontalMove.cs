@@ -34,7 +34,7 @@ public class HorizontalMove : BasicAbility , ActorVelocity.VelocityShifter , Act
     private void FixedUpdate()
     {
         if (!Activated) sign = 0;
-        float maxForceMagnitude = (sign == 0 ? maxStopForceMagnitude : maxPushForceMagnitude) * (selfMortal.Activated ? 0 : 1);
+        float maxForceMagnitude = (sign == 0 ? maxStopForceMagnitude : maxPushForceMagnitude) * (false ? 0 : 1);
         /*
         float accelaration = Max(-MaxAccelarationMagnitude, Min(sign * moveSpeed - targetRigidbody.velocity.x, MaxAccelarationMagnitude));
         Vector2 pushForce = (targetRigidbody.mass * accelaration * Vector2.right) / Time.deltaTime;*/

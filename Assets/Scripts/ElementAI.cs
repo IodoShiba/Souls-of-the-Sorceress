@@ -31,7 +31,7 @@ public class ElementAI : AI
         }
 
         t += Time.deltaTime;
-        if (t > shootCycle)
+        if (t > shootCycle && minChaseGap < Abs(d) && Abs(d) < maxChaseGap) 
         {
             _shootBullet.SetParams(player.transform.position - transform.position);
             _shootBullet.SendSignal();

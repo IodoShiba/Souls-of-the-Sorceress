@@ -100,7 +100,7 @@ namespace PlayerStates {
                 {
                     rb.velocity = new Vector2(rb.velocity.x, 0);
                 }
-                return GetComponent<PlayerStates.PlayerGliding>();
+                //return GetComponent<PlayerStates.PlayerGliding>();
             }
 
             if (inputA.GetMultiButtonDown("Attack", "Down"))

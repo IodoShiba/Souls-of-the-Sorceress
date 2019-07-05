@@ -10,21 +10,27 @@ public class Umbrella : MonoBehaviour {
     [SerializeField] Color _colorAwaken;
     [SerializeField] Color _colorBlueAwaken;
     SpriteRenderer spriteRenderer = null;
+    string coroutineName;
+    List<Color> colors;
+    ActionAwake actionAwake;
 
     // Use this for initialization
     void Start () {
         defpos = transform.localPosition ;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        transform.parent.GetComponent<PlayerStates.Awakening.Ordinary>().RegisterInitialize(() => spriteRenderer.color = _colorOrdinary);
-        transform.parent.GetComponent<PlayerStates.Awakening.Awaken>().RegisterInitialize(() => spriteRenderer.color = _colorAwaken);
-        transform.parent.GetComponent<PlayerStates.Awakening.BlueAwaken>().RegisterInitialize(() => spriteRenderer.color = _colorBlueAwaken);
+
+        actionAwake = transform.parent.GetComponent<ActionAwake>();
+        colors = new List<Color>();
+        colors.Add(_colorOrdinary);
+        colors.Add(_colorAwaken);
+        colors.Add(_colorBlueAwaken);
 
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        Color color = spriteRenderer.color;
+        Color color = colors[(int)actionAwake.AwakeLevel];
         if (player.DoesUmbrellaWork())
         {
             color.a = 1;
@@ -58,7 +64,19 @@ public class Umbrella : MonoBehaviour {
 
     public void Default()
     {
+        if (!string.IsNullOrEmpty(coroutineName))
+        {
+            StopCoroutine(coroutineName);
+            coroutineName = null;
+        }
         transform.localPosition = defpos;
+    }
+
+    public void StartMotion(string name)
+    {
+        StopCoroutine(coroutineName);
+        StartCoroutine(name);
+        coroutineName = name;
     }
 
     IEnumerator PlayerVerticalSlash()
