@@ -445,7 +445,7 @@ public abstract class ActorBehaviour : MonoBehaviour
 
         private void Update()
         {
-            ai.AskDecision();
+            ai.Decide();
 
             anyPassiveActive = false;
             passiveBehaviourMeds.ForEach(

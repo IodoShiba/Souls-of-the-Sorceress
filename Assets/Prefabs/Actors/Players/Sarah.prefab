@@ -533,6 +533,7 @@ MonoBehaviour:
   smashed:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
+    stunTime: 0.5
     horizontalMove: {fileID: 3289781965317027910}
 --- !u!114 &8916380848889061121
 MonoBehaviour:
@@ -549,7 +550,13 @@ MonoBehaviour:
   health: 1000
   maxHealth: 1000
   isInvulnerable: 0
+  initialStunTime: 0.3
   dyingCallbacks:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAttackedCallbacks:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -557,7 +564,6 @@ MonoBehaviour:
   selfRigidbody: {fileID: 8916380848889061125}
   dealingAttackConverters: []
   dealtAttackConverters: []
-  initialStunTime: 0.3
   umbrellaParameters: {fileID: 8916380848891301902}
   actionAwake: {fileID: 8916380848889061092}
   umbrellaUpward: {fileID: 0}
@@ -647,11 +653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d4c1c480dfcd2b489bfa7155b61bbc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onAttacked:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &3289781965317027910
 MonoBehaviour:
   m_ObjectHideFlags: 0

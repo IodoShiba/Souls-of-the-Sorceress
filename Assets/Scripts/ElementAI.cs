@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using static System.Math;
 
 public class ElementAI : AI
@@ -12,30 +10,43 @@ public class ElementAI : AI
     [SerializeField] ShootBullet _shootBullet;
     float t = 0;
 
-    HorizontalMove horizontalMove;
-    ShootBullet shootBullet;
+    //HorizontalMove horizontalMove;
+    //ShootBullet shootBullet;
+
+    int moveSign = 0;
+    Vector2 shoot = Vector2.zero;
+
+    public int MoveSign { get => moveSign; }
+    public Vector2 ShootDirection { get => shoot;  }
 
     private void Awake()
     {
-        horizontalMove = GetComponent<HorizontalMove>();
-        shootBullet = GetComponent<ShootBullet>();
+
+        ResetOutputs();
     }
 
-    public override void AskDecision()
+    public override void Decide()
     {
-        float d = player.transform.position.x - transform.position.x;
-        if (minChaseGap < Abs(d) && Abs(d) < maxChaseGap) 
+        Vector2 d = player.transform.position - transform.position;
+        ResetOutputs();
+
+        if (minChaseGap < Abs(d.x) && Abs(d.x) < maxChaseGap) 
         {
-            horizontalMove.SetParams(System.Math.Sign(player.transform.position.x - transform.position.x));
-            horizontalMove.SendSignal();
+            moveSign = System.Math.Sign(d.x);
+            if(t > shootCycle)
+            {
+                shoot = d.normalized;
+                t -= shootCycle;
+            }
+
+            t += Time.deltaTime;
         }
 
-        t += Time.deltaTime;
-        if (t > shootCycle && minChaseGap < Abs(d) && Abs(d) < maxChaseGap) 
-        {
-            _shootBullet.SetParams(player.transform.position - transform.position);
-            _shootBullet.SendSignal();
-            t -= shootCycle;
-        }
+    }
+
+    void ResetOutputs()
+    {
+        moveSign = 0;
+        shoot = Vector2.zero;
     }
 }

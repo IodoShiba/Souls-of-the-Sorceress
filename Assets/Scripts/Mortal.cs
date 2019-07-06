@@ -29,11 +29,13 @@ public class Mortal : MonoBehaviour,IodoShiba.ManualUpdateClass.IManualUpdate
     [SerializeField] protected float health;
     [SerializeField] protected float maxHealth;
     [SerializeField] private  bool isInvulnerable;
+    [SerializeField] float initialStunTime = 0.3f;
     [SerializeField] UnityEngine.Events.UnityEvent dyingCallbacks;
+    [SerializeField] UnityEngine.Events.UnityEvent onAttackedCallbacks;
     [SerializeField] Rigidbody2D selfRigidbody;
     [SerializeField] List<AttackConverter> dealingAttackConverters;
     [SerializeField] List<AttackConverter> dealtAttackConverters;
-    [SerializeField] float initialStunTime = 0.3f;
+    public UnityEngine.Events.UnityEvent OnAttackedCallbacks { get => onAttackedCallbacks; }
 
     AttackData argAttackData = new AttackData();
     GameObject argObj;
@@ -48,7 +50,7 @@ public class Mortal : MonoBehaviour,IodoShiba.ManualUpdateClass.IManualUpdate
 
     protected virtual void Awake()
     {
-        Actor.MortalUpdate = ManualUpdate;
+        dyingCallbacks.AddListener(Dying);
     }
     protected virtual void OnAttacked(GameObject attackObj,AttackData attack) { }
 
@@ -129,10 +131,13 @@ public class Mortal : MonoBehaviour,IodoShiba.ManualUpdateClass.IManualUpdate
 
         //ヒットストップを与える（未実装）
 
-        actor.OnAttacked.Invoke();//被攻撃時のコールバック関数を呼び出し
+        OnAttackedCallbacks.Invoke();//被攻撃時のコールバック関数を呼び出し
+        if(health <= 0) { dyingCallbacks.Invoke(); }
         
         
     }
+
+    public void DestroySelf(float time) { Destroy(gameObject, time); }
 }
 
 

@@ -30,7 +30,7 @@ public class ActionAwake : MonoBehaviour
     private void Start()
     {
         awakeLevel = AwakeLevels.ordinary;
-        enemyManager.AddEnemyDyingListener(() => AddAwakeGauge(.1f));
+        enemyManager.AddEnemyDyingListener(() => { AddAwakeGauge(.1f);Debug.Log("Awake Gauge Added"); });
     }
 
     // Update is called once per frame

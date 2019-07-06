@@ -29,6 +29,8 @@ namespace ActorFunction
             }
         }
 
+        public int CurrentDirectionInt { get => (int)currentDirection; }
+
         public void ChangeDirection(int direction)
         {
             CurrentDirection = (Direction)direction;

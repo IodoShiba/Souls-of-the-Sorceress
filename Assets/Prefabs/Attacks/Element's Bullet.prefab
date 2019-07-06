@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7340004956999325703}
   - component: {fileID: 4039749190968329392}
   - component: {fileID: 175180784554663720}
+  - component: {fileID: 1499969324531831612}
   m_Layer: 21
   m_Name: Element's Bullet
   m_TagString: Enemy
@@ -161,12 +162,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   maxHealth: 5
+  isInvulnerable: 0
+  initialStunTime: 0.3
   dyingCallbacks:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7155526383585071991}
+        m_MethodName: DestroySelf
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAttackedCallbacks:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 1904868358951468108}
+  dealingAttackConverters: []
   dealtAttackConverters: []
 --- !u!114 &3890719905783342961
 MonoBehaviour:
@@ -180,14 +200,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 7340004956999325703}
+  owner: {fileID: 0}
   onceOnly: 1
   initiallyActivate: 1
   targetTag: Player
   activeSpan: 0
   attackDataPrototype:
     damage: 10
-    knockBackImpact: {x: 100, y: 100}
+    knockBackImpulse: {x: 100, y: 100}
     attackCollider: {fileID: 9004923433284265342}
     throughable: 0
     hitstopSpan: 0
@@ -229,5 +249,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ef45153c8e2734439b05fb8d2175f91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1499969324531831612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8104706950811349038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 372b00862bc7a4e46a4b95d958930eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

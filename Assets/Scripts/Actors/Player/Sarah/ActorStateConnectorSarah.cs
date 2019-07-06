@@ -117,7 +117,7 @@ namespace ActorSarah
             {
                 attackLongPushClock.Reset();
             }
-            Debug.Log($"State has changed:{next.GetType().Name}");
+            //Debug.Log($"State has changed:{next.GetType().Name}");
         }
 
         void TryShootMagic()
@@ -136,7 +136,7 @@ namespace ActorSarah
 
         }
         [System.Serializable]
-        private class SarahDefault : Default
+        private class SarahDefault : DefaultState
         {
 
             [SerializeField] private float umbrellaRecoverCycle;

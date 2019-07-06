@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Mortal))]
 public abstract class FightActorStateConector : ActorState.ActorStateConnector
 {
 
@@ -9,13 +10,14 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
     [System.Serializable]
     public class SmashedState : ActorState
     {
+        [SerializeField] float stunTime;
         [SerializeField] ActorFunction.HorizontalMoveMethod horizontalMove;
         IodoShiba.ManualUpdateClass.ManualClock clock = new IodoShiba.ManualUpdateClass.ManualClock();
 
-        protected override bool ShouldCotinue() => clock.Clock < .5f;
+        protected override bool ShouldCotinue() => clock.Clock < stunTime;
         protected override void OnInitialize()
         {
-            horizontalMove.enabled = false;
+            if (horizontalMove != null) { horizontalMove.enabled = false; }
         }
         protected override void OnActive()
         {
@@ -24,7 +26,7 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
         protected override void OnTerminate(bool isNormal)
         {
             clock.Reset();
-            horizontalMove.enabled = true;
+            if (horizontalMove != null) { horizontalMove.enabled = true; }
         }
     }
 
@@ -32,7 +34,7 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
     protected override void Awake()
     {
         base.Awake();
-        GetComponent<Actor>().OnAttacked.AddListener(() => { InterruptWith(Smashed); });
+        GetComponent<Mortal>().OnAttackedCallbacks.AddListener(() => { InterruptWith(Smashed); });
     }
     //[SerializeField] protected SmashedState smashed;
 

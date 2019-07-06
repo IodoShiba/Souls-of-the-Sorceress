@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 964724003723573772}
   - component: {fileID: 964724003723573773}
   - component: {fileID: 964724003723573809}
-  - component: {fileID: 964724003723573770}
+  - component: {fileID: 1150505407682132065}
   - component: {fileID: 964724003723573771}
+  - component: {fileID: 3400861851107116815}
+  - component: {fileID: 4887456833946179394}
   - component: {fileID: 964724003723573808}
-  - component: {fileID: 964724003723573811}
   m_Layer: 24
   m_Name: Enemy Element
   m_TagString: Enemy
@@ -148,7 +149,24 @@ MonoBehaviour:
   health: 30
   maxHealth: 30
   isInvulnerable: 0
+  initialStunTime: 0.3
   dyingCallbacks:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 964724003723573809}
+        m_MethodName: DestroySelf
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.5
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAttackedCallbacks:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -156,9 +174,8 @@ MonoBehaviour:
   selfRigidbody: {fileID: 964724003723573773}
   dealingAttackConverters: []
   dealtAttackConverters: []
-  initialStunTime: 0.3
   manager: {fileID: 0}
---- !u!114 &964724003723573770
+--- !u!114 &1150505407682132065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -167,10 +184,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 964724003723573768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b31773bb92bab314da2bc3887bc2b414, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d4c1c480dfcd2b489bfa7155b61bbc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ai: {fileID: 964724003723573771}
 --- !u!114 &964724003723573771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +204,49 @@ MonoBehaviour:
   minChaseGap: 0.3
   player: {fileID: 0}
   _shootBullet: {fileID: 964724003723573808}
+--- !u!114 &3400861851107116815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964724003723573768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac6f9cf7ba85a464eb23498d6eae1191, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: 4
+  ai: {fileID: 964724003723573771}
+  elementDefault:
+    gameObject: {fileID: 964724003723573768}
+    connector: {fileID: 3400861851107116815}
+    moveSpeedX: 6
+    velocityAdjuster:
+      method: {fileID: 4887456833946179394}
+      fields:
+        maxForce: {x: 100, y: 30}
+        velocity: {x: 6, y: 0}
+        activeX: 1
+        activeY: 1
+    shootBullet: {fileID: 964724003723573808}
+  smashed:
+    gameObject: {fileID: 964724003723573768}
+    connector: {fileID: 3400861851107116815}
+    stunTime: 0.55
+    horizontalMove: {fileID: 0}
+--- !u!114 &4887456833946179394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964724003723573768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 890a5575726f8284ab7517839a0e53e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &964724003723573808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,20 +261,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3890719905783342961, guid: 8fb1d65d2019341439623d304160cec2,
     type: 3}
-  speed: 4
---- !u!114 &964724003723573811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964724003723573768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d902d5b5d9c72641bc3a2ac62dd47c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 6
-  maxPushForceMagnitude: 100
-  maxStopForceMagnitude: 50
-  targetRigidbody: {fileID: 964724003723573773}

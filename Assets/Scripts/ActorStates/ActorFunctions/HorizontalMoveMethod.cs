@@ -52,7 +52,7 @@ namespace ActorFunction
                 ManualUpdate(fields);
             }
 
-            public void StopActorOnDisabled(float time)
+            public void StopActorOnDisabled(float time = .1f)
             {
                 argSpeedMultiplier = 0;
                 if (!enabled)
