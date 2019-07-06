@@ -6,7 +6,7 @@ using static System.Math;
 public abstract class AI : MonoBehaviour
 {
     
-    public abstract void AskDecision();
+    public abstract void Decide();
     
 }
 

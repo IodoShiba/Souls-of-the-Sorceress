@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
+  owner: {fileID: 2495217448702265943}
   onceOnly: 0
   initiallyActivate: 1
   targetTag: Player
@@ -97,10 +97,10 @@ GameObject:
   - component: {fileID: 2495217448702265943}
   - component: {fileID: 2495217448702265934}
   - component: {fileID: 2495217448702265939}
-  - component: {fileID: 2495217448702265933}
+  - component: {fileID: 8844226029668920061}
+  - component: {fileID: 5953425717815938300}
   - component: {fileID: 2495217448702265932}
-  - component: {fileID: 2495217448702265935}
-  - component: {fileID: 2495217448702265928}
+  - component: {fileID: 1887466661123618811}
   m_Layer: 24
   m_Name: Enemy Slime
   m_TagString: Enemy
@@ -208,7 +208,24 @@ MonoBehaviour:
   health: 30
   maxHealth: 30
   isInvulnerable: 0
+  initialStunTime: 0.3
   dyingCallbacks:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2495217448702265943}
+        m_MethodName: DestroySelf
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.5
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAttackedCallbacks:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -216,7 +233,6 @@ MonoBehaviour:
   selfRigidbody: {fileID: 2495217448702265936}
   dealingAttackConverters: []
   dealtAttackConverters: []
-  initialStunTime: 0.3
   manager: {fileID: 0}
 --- !u!61 &2495217448702265934
 BoxCollider2D:
@@ -258,7 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   searchXRange: 3
   changeDirectionIntervalRange: {x: 1, y: 3}
---- !u!114 &2495217448702265933
+--- !u!114 &8844226029668920061
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,10 +283,59 @@ MonoBehaviour:
   m_GameObject: {fileID: 2495217448702265942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d805b5c73af63884baaa4ffef3736afd, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d4c1c480dfcd2b489bfa7155b61bbc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5953425717815938300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2495217448702265942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a17b9c5f70f9854fb0a9a266d2f8174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ai: {fileID: 2495217448702265939}
+  slimeDefault:
+    gameObject: {fileID: 2495217448702265942}
+    connector: {fileID: 5953425717815938300}
+    horizontalMove:
+      method: {fileID: 1887466661123618811}
+      fields:
+        maxSpeed: 2
+        pushForceMagnitude: 100
+        stopForceMagnitude: 100
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+  spike:
+    gameObject: {fileID: 2495217448702265942}
+    connector: {fileID: 5953425717815938300}
+    spikeAttack: {fileID: 2495217448933427336}
+    spikeSpriteRenderer: {fileID: 2495217448933427338}
+    horizontalMove:
+      method: {fileID: 1887466661123618811}
+      fields:
+        maxSpeed: 0
+        pushForceMagnitude: 100
+        stopForceMagnitude: 100
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+  smashed:
+    gameObject: {fileID: 2495217448702265942}
+    connector: {fileID: 5953425717815938300}
+    stunTime: 0.55
+    horizontalMove: {fileID: 1887466661123618811}
 --- !u!114 &2495217448702265932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,7 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spikeAttack: {fileID: 2495217448933427336}
   spikeSpriteRenderer: {fileID: 2495217448933427338}
---- !u!114 &2495217448702265935
+--- !u!114 &1887466661123618811
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -294,26 +359,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2495217448702265942}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92ec2773f0e06364c8d5029661dd9f6a, type: 3}
+  m_Script: {fileID: 11500000, guid: cadb6fc697b13c54eb0e3327a63b3926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dealingAttackConverters: []
---- !u!114 &2495217448702265928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2495217448702265942}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d902d5b5d9c72641bc3a2ac62dd47c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
-  maxPushForceMagnitude: 100
-  maxStopForceMagnitude: 100
-  targetRigidbody: {fileID: 2495217448702265936}
 --- !u!1 &2495217448933427342
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,7 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
+  owner: {fileID: 2495217448702265943}
   onceOnly: 0
   initiallyActivate: 0
   targetTag: Player

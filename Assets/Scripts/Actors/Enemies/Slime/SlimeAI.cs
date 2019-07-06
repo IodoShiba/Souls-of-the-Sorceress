@@ -7,25 +7,29 @@ public class SlimeAI : AI
     [SerializeField] float searchXRange;
     [SerializeField] Vector2 changeDirectionIntervalRange;
     Transform player;
-    HorizontalMove horizontalMove;
-    Spike spike;
     float leftTimeToChangeInterval;
     int direction = 0;
+    int moveSign;
+    bool spike;
+
+    public int MoveSign { get => moveSign; }
+    public bool Spike { get => spike; }
 
     private void Awake()
     {
-        horizontalMove = GetComponent<HorizontalMove>();
-        spike = GetComponent<Spike>();
         player = GameObject.FindWithTag("Player").transform;
         ResetChangeInterval();
         direction = Random.Range(0, 2) * 2 - 1;
+        ResetOutputs();
     }
 
-    public override void AskDecision()
+    public override void Decide()
     {
+        ResetOutputs();
+
         if (System.Math.Abs(player.position.x - transform.position.x) < searchXRange)
         {
-            spike.SendSignal();
+            spike = true;
         }
 
         if (leftTimeToChangeInterval <= 0)
@@ -33,11 +37,15 @@ public class SlimeAI : AI
             direction *= -1;
             ResetChangeInterval();
         }
-        horizontalMove.SetParams(direction);
-        horizontalMove.SendSignal();
+        moveSign = direction;
 
         leftTimeToChangeInterval -= Time.deltaTime;
     }
 
+    public void ResetOutputs()
+    {
+        moveSign = 0;
+        spike = false;
+    }
     private void ResetChangeInterval() => leftTimeToChangeInterval = Random.Range(changeDirectionIntervalRange.x, changeDirectionIntervalRange.y);
 }

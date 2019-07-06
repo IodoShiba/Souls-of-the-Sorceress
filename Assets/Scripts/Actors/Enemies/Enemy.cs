@@ -7,41 +7,41 @@ using UnityEngine;
 public class Enemy : Mortal {
     public EnemyManager manager;//修正すべし
     private Rigidbody2D rb;
-    private float _protectTime;
+    //private float _protectTime;
 
 	// Use this for initialization
 	void Start () {
-        if (manager == null) manager = EnemyManager.Instance;
+        if (manager == null) { manager = EnemyManager.Instance; }
         manager.AddNewEnemy(this);
         rb = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (_protectTime > 0)
-        {
-            _protectTime -= Time.deltaTime;
-        }
-        else if (_protectTime < 0)
-        {
-            rb.velocity = new Vector2(0, 0);
-            _protectTime = 0;
-        }
-        else
-        {
-            if (health <= 0)
-            {
-                manager.EnemyDying();
-                Destroy(gameObject);
-            }
+        //if (_protectTime > 0)
+        //{
+        //    _protectTime -= Time.deltaTime;
+        //}
+        //else if (_protectTime < 0)
+        //{
+        //    rb.velocity = new Vector2(0, 0);
+        //    _protectTime = 0;
+        //}
+        //else
+        //{
+        //    if (health <= 0)
+        //    {
+        //        manager.EnemyDying();
+        //        Destroy(gameObject);
+        //    }
             
-        }
+        //}
 	}
 
     protected override void OnAttacked(GameObject attackObj, AttackData attack)
     {
         Debug.Log("Enemy:Ahh!");
-        _protectTime = 0.3f;
+        //_protectTime = 0.3f;
     }
     
 
@@ -49,7 +49,7 @@ public class Enemy : Mortal {
     public override void Dying()
     {
         Debug.Log("Enemy has dead.");
-        
+        manager.EnemyDying();
     }
     
     /*private void OnTriggerEnter2D(Collider2D collision)

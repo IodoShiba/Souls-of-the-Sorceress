@@ -10,29 +10,33 @@ public class HugeMashAI : AI
     [SerializeField] float summonCycle;
     float t = 0;
 
-    HorizontalMove horizontalMove;
-    Summon summon;
+    int moveSign;
+    bool doSummon;
 
-    private void Awake()
-    {
-        horizontalMove = GetComponent<HorizontalMove>();
-        summon = GetComponent<Summon>();
-    }
+    public int MoveSign { get => moveSign; }
+    public bool DoSummon { get => doSummon; }
 
-    public override void AskDecision()
+    public override void Decide()
     {
+        ResetOutputs();
         Vector2 vector = playerTransform.position - transform.position;
         if (minChaseRadius < vector.magnitude && vector.magnitude < maxChaseRadius)
         {
-            horizontalMove.SetParams(System.Math.Sign(vector.x));
-            horizontalMove.SendSignal();
+            moveSign = System.Math.Sign(vector.x);
+
         }
 
         t += Time.deltaTime;
         if (t > summonCycle)
         {
+            doSummon = true;
             t -= summonCycle;
-            summon.SendSignal();
         }
+    }
+
+    void ResetOutputs()
+    {
+        moveSign = 0;
+        doSummon = false;
     }
 }

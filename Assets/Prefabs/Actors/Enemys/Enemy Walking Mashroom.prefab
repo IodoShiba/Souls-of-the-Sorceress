@@ -13,10 +13,12 @@ GameObject:
   - component: {fileID: 6891321230494324960}
   - component: {fileID: 6891321230494324967}
   - component: {fileID: 6891321230494324962}
-  - component: {fileID: 6891321230494324961}
   - component: {fileID: 6891321230494324963}
   - component: {fileID: 6891321230494324956}
-  - component: {fileID: 3628215078390612390}
+  - component: {fileID: 8268208092763081074}
+  - component: {fileID: 6462707158948944647}
+  - component: {fileID: 2695806798541559436}
+  - component: {fileID: 5789477729350289480}
   m_Layer: 24
   m_Name: Enemy Walking Mashroom
   m_TagString: Enemy
@@ -149,19 +151,6 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   maxChaseRadius: 16
   minChaseRadius: 0.3
---- !u!114 &6891321230494324961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6891321230494324964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f070d98fc386e74e90581f29b01e5c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ai: {fileID: 6891321230494324962}
 --- !u!114 &6891321230494324963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +182,24 @@ MonoBehaviour:
   health: 30
   maxHealth: 30
   isInvulnerable: 0
+  initialStunTime: 0.3
   dyingCallbacks:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6891321230494324956}
+        m_MethodName: DestroySelf
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.5
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAttackedCallbacks:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -201,9 +207,8 @@ MonoBehaviour:
   selfRigidbody: {fileID: 6891321230494324967}
   dealingAttackConverters: []
   dealtAttackConverters: []
-  initialStunTime: 0.3
   manager: {fileID: 0}
---- !u!114 &3628215078390612390
+--- !u!114 &8268208092763081074
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,10 +217,67 @@ MonoBehaviour:
   m_GameObject: {fileID: 6891321230494324964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92ec2773f0e06364c8d5029661dd9f6a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d4c1c480dfcd2b489bfa7155b61bbc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dealingAttackConverters: []
+--- !u!114 &6462707158948944647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891321230494324964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0baccae9e3d8e6243882b53c05dc3ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ai: {fileID: 6891321230494324962}
+  direction: {fileID: 5789477729350289480}
+  mushDefault:
+    gameObject: {fileID: 6891321230494324964}
+    connector: {fileID: 6462707158948944647}
+    horizontalMove:
+      method: {fileID: 2695806798541559436}
+      fields:
+        maxSpeed: 4
+        pushForceMagnitude: 100
+        stopForceMagnitude: 100
+        curve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+  smashed:
+    gameObject: {fileID: 6891321230494324964}
+    connector: {fileID: 6462707158948944647}
+    stunTime: 0.55
+    horizontalMove: {fileID: 2695806798541559436}
+--- !u!114 &2695806798541559436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891321230494324964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cadb6fc697b13c54eb0e3327a63b3926, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5789477729350289480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891321230494324964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b3db35e113ab9248af73ae37de07636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6891321231477494689
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 3628215078390612390}
+  owner: {fileID: 6891321230494324956}
   onceOnly: 0
   initiallyActivate: 1
   targetTag: Player

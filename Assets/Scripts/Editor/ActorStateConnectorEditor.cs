@@ -18,12 +18,16 @@ public class ActorStateConectorEditor : Editor
         //IEnumerable<FieldInfo> actorStateFields = fields.Where(fi => typeof(ActorState).IsAssignableFrom(fi.FieldType));
         IEnumerable<IGrouping<bool,FieldInfo>> fieldg = fields.GroupBy(fi => typeof(ActorState).IsAssignableFrom(fi.FieldType));
 
-        foreach(FieldInfo fi in fieldg.Where(g => !g.Key).First())
+        IEnumerable<IGrouping<bool,FieldInfo>> nonStateFieldEnumerable = fieldg.Where(g => !g.Key);
+        if (nonStateFieldEnumerable.Count() > 0)
         {
-            SerializedProperty p = serializedObject.FindProperty(fi.Name);
-            if (p != null)
+            foreach (FieldInfo fi in fieldg.Where(g => !g.Key).First())
             {
-                EditorGUILayout.PropertyField(p, true);
+                SerializedProperty p = serializedObject.FindProperty(fi.Name);
+                if (p != null)
+                {
+                    EditorGUILayout.PropertyField(p, true);
+                }
             }
         }
         //EditorGUILayout.LabelField("Current State : "+Target.Current == null ? "" : Target.Current.GetType().Name, new GUIStyle { fontStyle = FontStyle.Bold });

@@ -78,7 +78,7 @@ public class Player : Mortal
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(GetComponent<ActorSarah.ActorStateConnectorSarah>().Current.GetType().Name);
+        Debug.Log(GetComponent<ActorSarah.ActorStateConnectorSarah>().Current.GetType().Name); 
         //現在、プレイヤーは被ダメージ状態から抜けた時点で体力が0以下だと消滅する
         if (health <= 0&&!damaged)
         {

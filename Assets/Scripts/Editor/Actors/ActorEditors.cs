@@ -13,3 +13,23 @@ public class ActorStateConnectorSarahEditor : ActorStateConectorEditor
         }
     }
 }
+
+[UnityEditor.CustomEditor(typeof(ActorWalkingMushroom.AscWalkingMushroom))]
+public class AscWalkingMashroomEditor : ActorStateConectorEditor
+{
+}
+
+[UnityEditor.CustomEditor(typeof(ActorEnemyElement.AscEnemyElement))]
+public class AscEnemyElementEditor : ActorStateConectorEditor
+{
+}
+
+[UnityEditor.CustomEditor(typeof(ActorHugeMashroom.AscHugeMush))]
+public class AscHugeMashEditor : ActorStateConectorEditor
+{
+}
+
+[UnityEditor.CustomEditor(typeof(ActorSlime.AscSlime))]
+public class AscSlimeEditor : ActorStateConectorEditor
+{
+}

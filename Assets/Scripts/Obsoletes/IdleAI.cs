@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class IdleAI : AI
 {
-    public override void AskDecision()
+    public override void Decide()
     {
 
     }

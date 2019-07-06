@@ -7,9 +7,10 @@ using UnityEngine.Events;
 /// <summary>
 /// Actorを代表し、Actorの諸機能を統合するリーダークラス
 /// </summary>
+[RequireComponent(typeof(ActorState.ActorStateConnector),typeof(Mortal))]
 public class Actor : MonoBehaviour,IodoShiba.ManualUpdateClass.IManualUpdate
 {
-    [SerializeField] UnityEngine.Events.UnityEvent onAttacked;
+    //[SerializeField] UnityEngine.Events.UnityEvent onAttacked;
 
     private ActorManager manager;
 
@@ -38,12 +39,14 @@ public class Actor : MonoBehaviour,IodoShiba.ManualUpdateClass.IManualUpdate
         }
     }
 
-    public UnityEvent OnAttacked { get => onAttacked; }
+    //public UnityEvent OnAttacked { get => onAttacked; }
     public int DirSign { get => dirSign; }
 
     private void Start()
     {
         Manager.RegisterActor(this);
+        stateConnectorUpdate = GetComponent<ActorState.ActorStateConnector>().ManualUpdate;
+        mortalUpdate = GetComponent<Mortal>().ManualUpdate;
     }
 
     public void ManualUpdate()
@@ -52,4 +55,8 @@ public class Actor : MonoBehaviour,IodoShiba.ManualUpdateClass.IManualUpdate
         mortalUpdate();
     }
 
+    private void OnDestroy()
+    {
+        manager.RemoveActor(this);
+    }
 }

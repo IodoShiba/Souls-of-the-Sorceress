@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spike : ArtsAbility
 {
-    [SerializeField]AttackInHitbox spikeAttack;
+    [SerializeField] AttackInHitbox spikeAttack;
     [SerializeField] SpriteRenderer spikeSpriteRenderer;
 
     protected override bool ShouldContinue(bool ordered)

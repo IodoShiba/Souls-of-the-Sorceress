@@ -13,6 +13,7 @@ public class ActorState
     /// <summary>
     /// Actorの状態の接続と遷移を担う抽象コンポーネント
     /// </summary>
+    [DisallowMultipleComponent]
     public abstract class ActorStateConnector : MonoBehaviour , IodoShiba.ManualUpdateClass.IManualUpdate
     {
 
@@ -49,7 +50,7 @@ public class ActorState
 
         protected virtual void Awake()
         {
-            GetComponent<Actor>().StateConnectorUpdate = ManualUpdate;
+            //GetComponent<Actor>().StateConnectorUpdate = ManualUpdate;
 
             _defaultState = DefaultState;
             BuildStateConnection();
@@ -216,10 +217,10 @@ public class ActorState
 
 
 [System.Serializable]
-public class Default : ActorState
+public class DefaultState : ActorState
 {
     protected override bool ShouldCotinue() => true;
-    protected Default() { }
+    protected DefaultState() { }
 }
 
 
