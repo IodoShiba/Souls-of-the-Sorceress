@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 6462707158948944647}
   - component: {fileID: 2695806798541559436}
   - component: {fileID: 5789477729350289480}
+  - component: {fileID: 8859945168043927398}
   m_Layer: 24
   m_Name: Enemy Walking Mashroom
   m_TagString: Enemy
@@ -197,6 +198,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8859945168043927398}
+        m_MethodName: Activate
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.45
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onAttackedCallbacks:
@@ -278,6 +290,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b3db35e113ab9248af73ae37de07636, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8859945168043927398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891321230494324964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68f0b08aa1422447b1e70dc1ca7c834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootTable: {fileID: 11400000, guid: 468a388555488f14ea66d2086f83d7f5, type: 2}
 --- !u!1 &6891321231477494689
 GameObject:
   m_ObjectHideFlags: 0
