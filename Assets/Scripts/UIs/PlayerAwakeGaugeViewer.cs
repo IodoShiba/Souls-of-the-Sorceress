@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerAwakeGaugeViewer : ActionAwake.Viewer
 {
-
+    [SerializeField] float maxFillAmount;
     [SerializeField] UnityEngine.UI.Image _awakeGaugeImage;
 
     // Update is called once per frame
     private void Update()
     {
-        _awakeGaugeImage.fillAmount = AwakeGauge * 0.6f;
+        _awakeGaugeImage.fillAmount = AwakeGauge * maxFillAmount;
     }
 }

@@ -10,9 +10,15 @@ public class OnewayPlatformPatternSubject : TilePattermMappingSubjectVector3IntS
         float ysize = tilemap.cellSize.y;
 
         BoxCollider2D bcollider = GetComponent<BoxCollider2D>();
-        Rect rect = new Rect(tilemap.CellToWorld(position), tilemap.CellToLocal(size));
+        //Rect rect = new Rect(tilemap.CellToWorld(position), tilemap.CellToLocal(size));
+
+        float width = tilemap.CellToLocal(size).x;
+
         transform.position += Vector3.up * (tilemap.cellSize.y / 2);
-        bcollider.size = new Vector2(rect.size.x, ysize);
+        bcollider.size = new Vector2(width, ysize);
         bcollider.offset = Vector2.up * (-ysize / 2);
+
+        BoxCollider2D ecollider = transform.GetChild(0).GetComponent<BoxCollider2D>();
+        ecollider.size = new Vector2(width, ecollider.size.y);//points = new Vector2[] { new Vector2(-width / 2, 0), new Vector2(width / 2, 0) };
     }
 }

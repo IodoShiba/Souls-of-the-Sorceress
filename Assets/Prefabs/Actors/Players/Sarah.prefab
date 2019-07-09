@@ -320,7 +320,7 @@ MonoBehaviour:
         jumpForce: 300
         jumpUpSpeed: 15
     directionable: {fileID: 4249487242134317880}
-    passPlatform: {fileID: 0}
+    passPlatform: {fileID: 8916380848889061149}
   verticalSlash:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
@@ -743,7 +743,7 @@ MonoBehaviour:
   mode: 1
   onPasingLayer: 19
   platformContactor: {fileID: 8916380850264124303}
-  minContinueTime: 0.15
+  minContinueTime: 0.2
 --- !u!114 &2687985479622013432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2237,6 +2237,7 @@ GameObject:
   - component: {fileID: 8916380850264124303}
   - component: {fileID: 8916380850264124302}
   - component: {fileID: 8916380850264124301}
+  - component: {fileID: 2091739903441384668}
   m_Layer: 27
   m_Name: Platform Contactor
   m_TagString: Untagged
@@ -2271,7 +2272,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25}
+  m_Offset: {x: 0, y: 0.125}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2282,7 +2283,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.5}
+  m_Size: {x: 1, y: 0.25}
   m_EdgeRadius: 0
 --- !u!50 &8916380850264124302
 Rigidbody2D:
@@ -2323,6 +2324,22 @@ FixedJoint2D:
   m_ConnectedAnchor: {x: 0, y: -0.5}
   m_DampingRatio: 0
   m_Frequency: 0
+--- !u!114 &2091739903441384668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380850264124291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22945bb7e53950a4996fc85e82de7cb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedMinThreshold: -15
+  ordinaryHeight: 0.0625
+  hardDroppingHeight: 2
+  targetRigidbody: {fileID: 8916380848889061125}
 --- !u!1 &8916380850362335008
 GameObject:
   m_ObjectHideFlags: 0

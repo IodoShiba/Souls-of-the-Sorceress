@@ -179,10 +179,8 @@ namespace ActorSarah
                 {
                     directionable.ChangeDirection(System.Math.Sign(commands.Directional.Evaluation.x));
                 }
-                if (commands.AnalogueDown.IsDown)
-                {
-                    //passPlatformを動作させる
-                }
+                passPlatform.Use(commands.AnalogueDown.Evaluation);
+                
             }
 
             protected override void OnTerminate(bool isNormal)
@@ -190,6 +188,7 @@ namespace ActorSarah
                 horizontalMove.Method.enabled = false;
                 attackLongPushClock.AllowedToStartCount = false;
                 ConnectorSarah.umbrellaParameters.StopChangeDurabilityGradually();
+                passPlatform.Use(false);
             }
         }
 
@@ -584,12 +583,16 @@ namespace ActorSarah
         {
             [SerializeField] float abilityTime;
             [SerializeField] int amountConsumeUmbrellaDurability;
+            //[SerializeField] float platformContactorHeight;
             [SerializeField] AttackInHitbox attack;
             [SerializeField] ActorFunction.VelocityAdjuster velocityAdjuster;
             [SerializeField] ActorFunction.Guard guard;
             [SerializeField] GroundSensor groundSensor;
             [SerializeField] Umbrella umbrella;
+            //[SerializeField] BoxCollider2D platformContactorCollider;
+
             IodoShiba.ManualUpdateClass.ManualClock clock = new IodoShiba.ManualUpdateClass.ManualClock();
+            //float originalPlatformContactorHeight;
 
             protected override bool IsAvailable() => base.IsAvailable() && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
             protected override bool ShouldCotinue() => !groundSensor.IsOnGround && clock.Clock < abilityTime;
@@ -600,6 +603,9 @@ namespace ActorSarah
                 umbrella.PlayerDropAttack();
                 clock.Reset();
                 ConnectorSarah.umbrellaParameters.TryConsumeDurability(amountConsumeUmbrellaDurability);
+                //originalPlatformContactorHeight = platformContactorCollider.size.y;
+                //platformContactorCollider.size = new Vector2(platformContactorCollider.size.x, platformContactorHeight);
+                //platformContactorCollider.offset = new Vector2(platformContactorCollider.offset.x, platformContactorHeight / 2);
             }
 
             protected override void OnActive()
@@ -614,6 +620,8 @@ namespace ActorSarah
                 velocityAdjuster.Method.enabled = false;
                 umbrella.Default();
                 clock.Reset();
+                //platformContactorCollider.size = new Vector2(platformContactorCollider.size.x, originalPlatformContactorHeight);
+                //platformContactorCollider.offset = new Vector2(platformContactorCollider.offset.x, originalPlatformContactorHeight / 2);
             }
         }
 

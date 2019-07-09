@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PassPlatform : MonoBehaviour,IodoShiba.ManualUpdateClass.IManualUpdate
+
+public class PassPlatform : MonoBehaviour//,IodoShiba.ManualUpdateClass.IManualUpdate
 {
     enum Mode {SwitchLayer,UsePlatformContactor }
     [SerializeField] Mode mode;
@@ -11,16 +12,32 @@ public class PassPlatform : MonoBehaviour,IodoShiba.ManualUpdateClass.IManualUpd
     [SerializeField] float minContinueTime;
     int ordinaryLayer;
     float t = 0;
+    bool usingThis = false;
+    bool ordered;
+
+    public bool UsingThis
+    {
+        get => usingThis;
+    }
 
     private void Awake()
     {
         ordinaryLayer = gameObject.layer;
+        usingThis = false;
+        
     }
 
-    protected bool ShouldContinue(bool ordered) => t < minContinueTime || ordered;
     private void Update()
     {
-        
+        if (usingThis)
+        {
+            t += Time.deltaTime;
+            if (t > minContinueTime && !ordered)
+            {
+                OnTerminate();
+                usingThis = false;
+            }
+        }
     }
 
     protected void OnInitialize()
@@ -37,24 +54,26 @@ public class PassPlatform : MonoBehaviour,IodoShiba.ManualUpdateClass.IManualUpd
         }
     }
 
-    protected void OnActive(bool ordered)
-    {
-        t += Time.deltaTime;
-    }
     protected void OnTerminate()
     {
         t = 0;
         gameObject.layer = ordinaryLayer;
         if(platformContactor!=null) platformContactor.enabled = true;
     }
-
-    public void ManualUpdate()
+    public void Use(bool value)        
     {
+        if(value && !usingThis)
+        {
+            OnInitialize();
+            usingThis = true;
+        }
 
-    }
+        if (!value && usingThis && t>minContinueTime)
+        {
+            OnTerminate();
+            usingThis = false;
+        }
 
-    public void ManualUpdate(bool use)
-    {
-        ManualUpdate();
+        ordered = value;
     }
 }
