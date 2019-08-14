@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 2695806798541559436}
   - component: {fileID: 5789477729350289480}
   - component: {fileID: 8859945168043927398}
+  - component: {fileID: 3507201115654841080}
   m_Layer: 24
   m_Name: Enemy Walking Mashroom
   m_TagString: Enemy
@@ -303,6 +304,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootTable: {fileID: 11400000, guid: 468a388555488f14ea66d2086f83d7f5, type: 2}
+--- !u!114 &3507201115654841080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891321230494324964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47e2af06c38e69842aaa49ae74a7c7a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewardData: {fileID: 11400000, guid: 0d4a524bdaeb3b54ca34668bc2314e08, type: 2}
 --- !u!1 &6891321231477494689
 GameObject:
   m_ObjectHideFlags: 0

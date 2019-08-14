@@ -465,7 +465,8 @@ namespace ActorSarah
             protected override void OnTerminate(bool isNormal)
             {
                 attack.Inactivate();
-                velocityAdjuster.Method.enabled = false;
+                //velocityAdjuster.Method.enabled = false;
+                velocityAdjuster.Method.Disable();
                 umbrella.Default();
                 onChangeStateCallbacks.Invoke(false);
                 guard.Method.Activated = false;
@@ -513,7 +514,8 @@ namespace ActorSarah
             {
                 umbrella.Default();
                 guard.Method.Activated = false;
-                velocityAdjuster.Method.enabled = false;
+                //velocityAdjuster.Method.enabled = false;
+                velocityAdjuster.Method.Disable();
                 horizontalMove.Method.enabled = false;
                 ConnectorSarah.umbrellaParameters.StopChangeDurabilityGradually();
             }
@@ -561,7 +563,8 @@ namespace ActorSarah
                 if(GameObject.transform.position.y > limitHeight && velocityAdjuster.Method.enabled)
                 {
                     ConnectorSarah.SelfRigidbody.velocity = Vector2.right * ConnectorSarah.SelfRigidbody.velocity.x;
-                    velocityAdjuster.Method.enabled = false;
+                    //velocityAdjuster.Method.enabled = false;
+                    velocityAdjuster.Method.Disable();
                 }
                 velocityAdjuster.ManualUpdate();
                 guard.ManualUpdate();
@@ -571,7 +574,8 @@ namespace ActorSarah
             protected override void OnTerminate(bool isNormal)
             {
                 attack.Inactivate();
-                velocityAdjuster.Method.enabled = false;
+                //velocityAdjuster.Method.enabled = false;
+                velocityAdjuster.Method.Disable();
                 umbrella.Default();
                 guard.Method.Activated = false;
                 clock.Reset();
@@ -583,13 +587,11 @@ namespace ActorSarah
         {
             [SerializeField] float abilityTime;
             [SerializeField] int amountConsumeUmbrellaDurability;
-            //[SerializeField] float platformContactorHeight;
             [SerializeField] AttackInHitbox attack;
             [SerializeField] ActorFunction.VelocityAdjuster velocityAdjuster;
             [SerializeField] ActorFunction.Guard guard;
             [SerializeField] GroundSensor groundSensor;
             [SerializeField] Umbrella umbrella;
-            //[SerializeField] BoxCollider2D platformContactorCollider;
 
             IodoShiba.ManualUpdateClass.ManualClock clock = new IodoShiba.ManualUpdateClass.ManualClock();
             //float originalPlatformContactorHeight;
@@ -603,9 +605,6 @@ namespace ActorSarah
                 umbrella.PlayerDropAttack();
                 clock.Reset();
                 ConnectorSarah.umbrellaParameters.TryConsumeDurability(amountConsumeUmbrellaDurability);
-                //originalPlatformContactorHeight = platformContactorCollider.size.y;
-                //platformContactorCollider.size = new Vector2(platformContactorCollider.size.x, platformContactorHeight);
-                //platformContactorCollider.offset = new Vector2(platformContactorCollider.offset.x, platformContactorHeight / 2);
             }
 
             protected override void OnActive()
@@ -617,11 +616,10 @@ namespace ActorSarah
             protected override void OnTerminate(bool isNormal)
             {
                 attack.Inactivate();
-                velocityAdjuster.Method.enabled = false;
+                //velocityAdjuster.Method.enabled = false;
+                velocityAdjuster.Method.Disable();
                 umbrella.Default();
                 clock.Reset();
-                //platformContactorCollider.size = new Vector2(platformContactorCollider.size.x, originalPlatformContactorHeight);
-                //platformContactorCollider.offset = new Vector2(platformContactorCollider.offset.x, originalPlatformContactorHeight / 2);
             }
         }
 

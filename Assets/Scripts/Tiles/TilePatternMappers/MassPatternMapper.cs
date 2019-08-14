@@ -243,7 +243,9 @@ public class MassPatternMapper : TilePatternMapperRegionPathsIntShape,ISerializa
         int cnt = path.Count;
         for (int i = 0; i < cnt; ++i)
         {
-            if ((path[i] - path[(i + cnt - 1) % cnt]).x < 0 && (path[(i + 1) % cnt] - path[i]).y>0)//(prevEdge.x < 0 && nextEdge.y > 0)
+            Vector3Int edgeFwrd = path[(i + 1) % cnt] - path[i];
+            Vector3Int edgeBack = path[i] - path[(i + cnt - 1) % cnt];
+            if ((edgeBack.x < 0 && edgeFwrd.y>0) || (edgeBack.y < 0 && edgeFwrd.x > 0))
             {
                 detectedLowerLeftCorners.Add(path[i]); //左下角ならば集合に追加
             }

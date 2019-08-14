@@ -49,6 +49,7 @@ public class EnemyManager : MonoBehaviour {
     {
         var r = Instantiate(target, position, quaternion);
         r.manager = this;
+        AddNewEnemy(r);
         return r;
     }
 

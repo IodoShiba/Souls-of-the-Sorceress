@@ -11,11 +11,14 @@ namespace ActorFunction
             Left  = -1
         }
 
+        [SerializeField] Direction initialDirection;
+
         Direction currentDirection = Direction.Right;
 
         private void Awake()
         {
             currentDirection = Direction.Right;
+            CurrentDirection = initialDirection;
         }
 
         public Direction CurrentDirection
@@ -23,6 +26,7 @@ namespace ActorFunction
             get => currentDirection;
             set
             {
+                if(currentDirection == value) { return; }
                 currentDirection = value;
                 var ls = gameObject.transform.localScale;
                 gameObject.transform.localScale = new Vector3((int)value * Mathf.Abs(ls.x), ls.y, ls.z);
@@ -35,5 +39,7 @@ namespace ActorFunction
         {
             CurrentDirection = (Direction)direction;
         }
+
+        public void SwitchDirection() { ChangeDirection(-(int)currentDirection); }
     }
 }

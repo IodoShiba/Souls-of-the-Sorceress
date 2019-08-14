@@ -59,4 +59,18 @@ namespace IodoShiba
             }
         }
     }
+
+    namespace Bound2DUtility
+    {
+        public static class Bound2DUtilityExtension
+        {
+            public static bool Contains2D(this Bounds bounds,Vector2 point)
+            {
+                var b = bounds;
+                b.extents += new Vector3(0, 0, float.PositiveInfinity);
+                return b.Contains((Vector3)point);
+            }
+            
+        }
+    }
 }

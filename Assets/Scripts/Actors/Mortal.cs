@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D)),DisallowMultipleComponent]
 public class Mortal : MonoBehaviour,IodoShiba.ManualUpdateClass.IManualUpdate
@@ -35,7 +36,6 @@ public class Mortal : MonoBehaviour,IodoShiba.ManualUpdateClass.IManualUpdate
     [SerializeField] Rigidbody2D selfRigidbody;
     [SerializeField] List<AttackConverter> dealingAttackConverters;
     [SerializeField] List<AttackConverter> dealtAttackConverters;
-    public UnityEngine.Events.UnityEvent OnAttackedCallbacks { get => onAttackedCallbacks; }
 
     AttackData argAttackData = new AttackData();
     GameObject argObj;
@@ -47,6 +47,8 @@ public class Mortal : MonoBehaviour,IodoShiba.ManualUpdateClass.IManualUpdate
 
     public bool IsInvulnerable { get => isInvulnerable; set => isInvulnerable = value; }
     public Actor Actor { get => actor == null ? (actor = GetComponent<Actor>()) : actor; }
+    public UnityEngine.Events.UnityEvent OnAttackedCallbacks { get => onAttackedCallbacks; }
+    public UnityEvent DyingCallbacks { get => dyingCallbacks; }
 
     protected virtual void Awake()
     {

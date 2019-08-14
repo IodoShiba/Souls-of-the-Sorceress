@@ -27,11 +27,13 @@ namespace ActorFunction
             }
             private void FixedUpdate()
             {
-                Debug.Log(gameObject.name + ":" + (fields == null));
+                //Debug.Log(gameObject.name + ":" + (fields == null));
                 if (fields == null) { return; }
                 if (fields.activeX) { Rigidbody.SetVelocityX(fields.velocity.x, fields.maxForce.x); }
                 if (fields.activeY) { Rigidbody.SetVelocityY(fields.velocity.y, fields.maxForce.y); }
             }
+            public void Disable() { fields = null; enabled = false; }
+            public void Enable() { enabled = true; }
         }
     }
 
