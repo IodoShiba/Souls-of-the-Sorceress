@@ -13,6 +13,7 @@ public class AttackInHitbox : MonoBehaviour
     [SerializeField,UnityEngine.Serialization.FormerlySerializedAs("_oowner")] private Mortal owner;
     [SerializeField] private bool onceOnly;
     [SerializeField] private bool initiallyActivate;
+    [SerializeField] private bool allowToAttackSelf;
     [SerializeField, TagField] string targetTag;
     [SerializeField] float activeSpan;
     [SerializeField] private AttackData attackDataPrototype;
@@ -61,6 +62,11 @@ public class AttackInHitbox : MonoBehaviour
         if (hit.tag == targetTag)
         {
             Mortal mortal = hit.GetComponent<Mortal>();
+            if(!allowToAttackSelf && owner == mortal)
+            {
+                return;
+            }
+
             attackConvertersOnHit.ForEach(acOnHit => acOnHit.Convert(convertedAttackData));
             //mortal.TryAttack(gameObject, this.ParamsConvertedByOwner, result => { HitProcess(); } );
             mortal.TryAttack(owner, this.ParamsConvertedByOwner, transform.position - hit.gameObject.transform.position);

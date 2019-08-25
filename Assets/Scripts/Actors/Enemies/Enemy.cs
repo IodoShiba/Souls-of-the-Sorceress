@@ -23,8 +23,13 @@ public class Enemy : Mortal {
     }
     
 
-    public override void Dying()
+    public override void OnDying(DealtAttackInfo causeOfDeath)
     {
+        UnityEngine.EventSystems.ExecuteEvents.Execute<IDyingCallbackReceiver>(
+           gameObject,
+           null,
+           (dyingCallbackReceiver, disposedEventData) => { dyingCallbackReceiver.OnSelfDying(causeOfDeath); }
+        );
         Debug.Log("Enemy has dead.");
         manager.EnemyDying();
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using IodoShibaUtil.RigidbodySetVelocity;
 
 namespace ActorFunction
 {
@@ -34,13 +35,31 @@ namespace ActorFunction
                     isActive = false;
                     return;
                 }
+
+                float forceRequirementProp;
+                if (rigidbody.velocity.y > 0)
+                {
+                    forceRequirementProp = 0;
+                    if (Time.deltaTime > 0)
+                    {
+                        forceRequirementProp = Mathf.Clamp01((limitHeight - transform.position.y) / (rigidbody.velocity.y * Time.deltaTime));
+                    }
+                }
+                else
+                {
+                    forceRequirementProp = 1;
+                }
+
+                float force = forceRequirementProp * rigidbody.mass * (fields.jumpUpSpeed - rigidbody.velocity.y) / Time.deltaTime;
+
                 rigidbody.AddForce(
                     UnityEngine.Mathf.Clamp(
-                        rigidbody.mass * (fields.jumpUpSpeed - rigidbody.velocity.y) / Time.deltaTime,
+                        force,
                         0, 
                         fields.jumpForce
                         ) * Vector2.up
                         );
+
             }
 
             public override void ManualUpdate(in JumpFields fields)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace IodoShiba
+namespace IodoShibaUtil
 {
     namespace ManualUpdateClass
     {
@@ -71,6 +71,15 @@ namespace IodoShiba
                 return b.Contains((Vector3)point);
             }
             
+        }
+    }
+
+    namespace Tags
+    {
+        public static class TagsUtility
+        {
+            public static readonly string untaggedTag = "Untagged";
+            static bool IsSuitableForTag(string tag) => !(string.IsNullOrEmpty(tag) || tag == untaggedTag);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using IodoShiba.Bound2DUtility;
+using IodoShibaUtil.Bound2DUtility;
 
 public class BossTitanAI : AI
 {
@@ -89,7 +89,7 @@ public class BossTitanAI : AI
         Debug.Log($"Found Boss pos : {position}");
 
         jumpUpRowsCount = areaIndexPlayerIsIn / 2 - position.y;
-        moveDirection = areaIndexPlayerIsIn % 2 - position.x;
+        moveDirection = areaIndexPlayerIsIn == PositionVectorToAreaIndex(position) ? (1 - position.x*2) : (areaIndexPlayerIsIn % 2 - position.x);
 
         if (areaIndexPlayerIsIn != PositionVectorToAreaIndex(position) && IsPlayerAndIInSameColumn(areaIndexPlayerIsIn)) //プレイヤーとボスが異なるエリアかつ同列
         {

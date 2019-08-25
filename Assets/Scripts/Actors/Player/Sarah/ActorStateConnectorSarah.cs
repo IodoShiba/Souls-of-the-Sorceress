@@ -221,7 +221,7 @@ namespace ActorSarah
             [SerializeField] ActorFunction.HorizontalMove horizontalMove;
             [SerializeField] Umbrella umbrella;
 
-            IodoShiba.ManualUpdateClass.ManualClock receptionStartClock = new IodoShiba.ManualUpdateClass.ManualClock();
+            IodoShibaUtil.ManualUpdateClass.ManualClock receptionStartClock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
             public BoolExpressions.LongPushClock attackLongPushClock;
 
             protected override bool ShouldCotinue() => verticalSlashAttack.IsAttackActive;
@@ -260,7 +260,7 @@ namespace ActorSarah
             [SerializeField] Vector2 jumpUpImpulse;
             [SerializeField] Rigidbody2D selfRigidBody;
             [SerializeField] Umbrella umbrella;
-            IodoShiba.ManualUpdateClass.ManualClock receptionStartClock = new IodoShiba.ManualUpdateClass.ManualClock();
+            IodoShibaUtil.ManualUpdateClass.ManualClock receptionStartClock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
 
             protected override bool ShouldCotinue() => retuenSlashAttack.IsAttackActive;
             protected override void OnInitialize()
@@ -416,7 +416,7 @@ namespace ActorSarah
             [SerializeField] StateChangeEvent onChangeStateCallbacks;
             [SerializeField] GroundSensor wallSensor;
 
-            IodoShiba.ManualUpdateClass.ManualClock unguardClock = new IodoShiba.ManualUpdateClass.ManualClock();
+            IodoShibaUtil.ManualUpdateClass.ManualClock unguardClock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
             float x0;
             int state = 0;
 
@@ -544,7 +544,7 @@ namespace ActorSarah
             [SerializeField] Umbrella umbrella;
 
             float limitHeight;
-            IodoShiba.ManualUpdateClass.ManualClock clock = new IodoShiba.ManualUpdateClass.ManualClock();
+            IodoShibaUtil.ManualUpdateClass.ManualClock clock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
             protected override bool IsAvailable() => base.IsAvailable() && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
 
             protected override bool ShouldCotinue() => clock.Clock < abilityTime;
@@ -593,7 +593,7 @@ namespace ActorSarah
             [SerializeField] GroundSensor groundSensor;
             [SerializeField] Umbrella umbrella;
 
-            IodoShiba.ManualUpdateClass.ManualClock clock = new IodoShiba.ManualUpdateClass.ManualClock();
+            IodoShibaUtil.ManualUpdateClass.ManualClock clock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
             //float originalPlatformContactorHeight;
 
             protected override bool IsAvailable() => base.IsAvailable() && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();

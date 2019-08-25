@@ -33,6 +33,7 @@ namespace ActorBossTitan
         [SerializeField] Fainted fainted;
         [SerializeField] RecoverFromFaint recoverFromFaint;
         [SerializeField] Boss1Smashed smashed;
+        [SerializeField] Dead dead;
 
         public override SmashedState Smashed => smashed;
 
@@ -48,6 +49,11 @@ namespace ActorBossTitan
         protected override void BeforeStateUpdate()
         {
             currentStateName = Current.GetType().Name;
+        }
+
+        public void OnWeakpointDestroyed()
+        {
+            InterruptWith(dead);
         }
 
         [System.Serializable]
@@ -106,8 +112,12 @@ namespace ActorBossTitan
         {
             [SerializeField] float span;
             [SerializeField] BossTitanAI titanAI;
+            [SerializeField] EnemySpawner enemySpawner;
+            [SerializeField] Collider2D hitboxCollider;
+            [SerializeField] Mortal weakPoint;
+            [SerializeField] SpriteRenderer _spriteRenderer;
 
-            IodoShiba.ManualUpdateClass.ManualClock manualClock = new IodoShiba.ManualUpdateClass.ManualClock();
+            IodoShibaUtil.ManualUpdateClass.ManualClock manualClock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
 
             public float Span { get => span; }
 
@@ -118,7 +128,14 @@ namespace ActorBossTitan
             {
                 manualClock.Reset();
                 titanAI.enabled = false;
+                hitboxCollider.enabled = false;
+                weakPoint.IsInvulnerable = false;
                 Debug.Log("Titan Boss is fainted.");
+
+                //一時的
+                _spriteRenderer.color = new Color(1, 1, 1, .5f);
+
+                enemySpawner.Spawn();
             }
 
             protected override void OnActive()
@@ -128,7 +145,11 @@ namespace ActorBossTitan
 
             protected override void OnTerminate(bool isNormal)
             {
+                weakPoint.IsInvulnerable = true;
                 manualClock.Reset();
+
+                //一時的
+                _spriteRenderer.color = Color.white;
             }
         }
 
@@ -138,8 +159,10 @@ namespace ActorBossTitan
             [SerializeField] float span;
             [SerializeField] BossTitanAI titanAI;
             [SerializeField] ActorFunction.Directionable directionable;
+            [SerializeField] Collider2D hitboxCollider;
+            [SerializeField] Mortal weakPoint;
 
-            IodoShiba.ManualUpdateClass.ManualClock manualClock = new IodoShiba.ManualUpdateClass.ManualClock();
+            IodoShibaUtil.ManualUpdateClass.ManualClock manualClock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
 
             protected override bool ShouldCotinue() => manualClock.Clock < span;
 
@@ -158,6 +181,20 @@ namespace ActorBossTitan
             {
                 manualClock.Reset();
                 titanAI.enabled = true;
+                hitboxCollider.enabled = true;
+            }
+        }
+
+        [System.Serializable]
+        class Dead : ActorState
+        {
+            [SerializeField] SpriteRenderer _spriteRenderer;
+
+            protected override bool ShouldCotinue() => true;
+            protected override void OnInitialize()
+            {
+                Debug.Log("Boss Titan has dead.");
+                _spriteRenderer.color = new Color(.5f,0,0,1);
             }
         }
     }
