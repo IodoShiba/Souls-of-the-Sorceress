@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AreaObjectDetector : MonoBehaviour
 {
+    public const int NO_DETECT = -1;
+
     [SerializeField] List<Sensor> sensors;
 
     //private void Update()
@@ -21,7 +23,7 @@ public class AreaObjectDetector : MonoBehaviour
                 return i;
             }
         }
-        return -1;
+        return NO_DETECT;
     }
 
     public List<int> GetDetectingIndexes()

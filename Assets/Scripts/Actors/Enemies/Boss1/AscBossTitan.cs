@@ -67,15 +67,15 @@ namespace ActorBossTitan
             [SerializeField] ActorFunction.Jump jump2Step;
             [SerializeField] PassPlatform passPlatform;
             [SerializeField] ActorFunction.Directionable directionable;
+            [SerializeField] AttackDifferencer attackDifferencer;
 
             //protected override bool ShouldCotinue()
             //{
             //    return !wallSensor1.IsOnGround || !wallSensor2.IsOnGround;
             //}
-
+            
             protected override void OnActive()
             {
-
                 titanAI.Decide();
 
                 horizontalMove.ManualUpdate(titanAI.MoveDirection);
@@ -98,6 +98,13 @@ namespace ActorBossTitan
                         passPlatform.Use(titanAI.DoPassPlatform);
                         break;
                 }
+
+                attackDifferencer.UseIndex = titanAI.MoveDirection == 0 ? 0 : 1;
+            }
+
+            protected override void OnTerminate(bool isNormal)
+            {
+                attackDifferencer.UseIndex = 0;
             }
         }
 

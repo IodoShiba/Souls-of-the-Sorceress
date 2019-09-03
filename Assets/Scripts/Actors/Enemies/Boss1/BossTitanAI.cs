@@ -59,6 +59,11 @@ public class BossTitanAI : AI
         return new Vector2Int(i % 2, i / 2);
     }
 
+    private void OnDisable()
+    {
+        moveDirection = 0;
+    }
+
     private void OnEnable()
     {
         t = 0;
@@ -84,6 +89,10 @@ public class BossTitanAI : AI
 
         position = WhereAmI();
         int areaIndexPlayerIsIn = playerDetector.GetDetectingIndex();
+        if(areaIndexPlayerIsIn == AreaObjectDetector.NO_DETECT)
+        {
+            areaIndexPlayerIsIn = PositionVectorToAreaIndex(position);
+        }
 
         Debug.Log($"Player is in Area {areaIndexPlayerIsIn}");
         Debug.Log($"Found Boss pos : {position}");
