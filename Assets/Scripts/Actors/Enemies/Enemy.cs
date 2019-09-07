@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//多分後々 abstractな基底クラス になる
 [DisallowMultipleComponent]
 public class Enemy : Mortal {
     public EnemyManager manager;//修正すべし
@@ -16,27 +15,6 @@ public class Enemy : Mortal {
         rb = GetComponent<Rigidbody2D>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-        //if (_protectTime > 0)
-        //{
-        //    _protectTime -= Time.deltaTime;
-        //}
-        //else if (_protectTime < 0)
-        //{
-        //    rb.velocity = new Vector2(0, 0);
-        //    _protectTime = 0;
-        //}
-        //else
-        //{
-        //    if (health <= 0)
-        //    {
-        //        manager.EnemyDying();
-        //        Destroy(gameObject);
-        //    }
-            
-        //}
-	}
 
     protected override void OnAttacked(GameObject attackObj, AttackData attack)
     {
@@ -45,30 +23,16 @@ public class Enemy : Mortal {
     }
     
 
-
-    public override void Dying()
+    public override void OnDying(DealtAttackInfo causeOfDeath)
     {
+        UnityEngine.EventSystems.ExecuteEvents.Execute<IDyingCallbackReceiver>(
+           gameObject,
+           null,
+           (dyingCallbackReceiver, disposedEventData) => { dyingCallbackReceiver.OnSelfDying(causeOfDeath); }
+        );
         Debug.Log("Enemy has dead.");
         manager.EnemyDying();
     }
     
-    /*private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (_protectTime <= 0 && collision.transform.tag == "Attack")
-        {
-            int sign = System.Math.Sign(transform.position.x - collision.transform.position.x);
-            rb.AddForce(new Vector2(sign * knockBackImpact.x, knockBackImpact.y));
-            _protectTime = 0.3f;
-        }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (_protectTime <= 0 && collision.transform.tag == "Attack")
-        {
-            Debug.Log("Enemy:Ahh!");
-            int sign = System.Math.Sign(transform.position.x - collision.transform.position.x);
-            rb.AddForce(new Vector2(sign * knockBackImpact.x, knockBackImpact.y));
-            _protectTime = 0.3f;
-        }
-    }*/
+
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace IodoShiba
+namespace IodoShibaUtil
 {
     namespace ManualUpdateClass
     {
@@ -57,6 +57,29 @@ namespace IodoShiba
                    maxForce);
                 rigidbody.AddForce(f * Vector2.up);
             }
+        }
+    }
+
+    namespace Bound2DUtility
+    {
+        public static class Bound2DUtilityExtension
+        {
+            public static bool Contains2D(this Bounds bounds,Vector2 point)
+            {
+                var b = bounds;
+                b.extents += new Vector3(0, 0, float.PositiveInfinity);
+                return b.Contains((Vector3)point);
+            }
+            
+        }
+    }
+
+    namespace Tags
+    {
+        public static class TagsUtility
+        {
+            public static readonly string untaggedTag = "Untagged";
+            static bool IsSuitableForTag(string tag) => !(string.IsNullOrEmpty(tag) || tag == untaggedTag);
         }
     }
 }

@@ -7,8 +7,8 @@ using UnityEngine.Events;
 /// <summary>
 /// Actorを代表し、Actorの諸機能を統合するリーダークラス
 /// </summary>
-[RequireComponent(typeof(ActorState.ActorStateConnector),typeof(Mortal))]
-public class Actor : MonoBehaviour,IodoShiba.ManualUpdateClass.IManualUpdate
+[RequireComponent(typeof(ActorState.ActorStateConnector),typeof(Mortal)),DisallowMultipleComponent]
+public class Actor : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdate
 {
     //[SerializeField] UnityEngine.Events.UnityEvent onAttacked;
 

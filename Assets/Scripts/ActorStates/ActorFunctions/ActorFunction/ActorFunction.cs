@@ -45,7 +45,7 @@ namespace ActorFunction
 //
 //    public class Method : ActorFunctionMethod<Func1Fields>
 //    {
-//        public override void Use(Func1Fields fields)
+//        public override void ManualUpdate(Func1Fields fields)
 //        {
 //            Debug.Log("Func1:" + fields.fl);
 //        }

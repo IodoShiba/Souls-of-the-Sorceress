@@ -33,3 +33,8 @@ public class AscHugeMashEditor : ActorStateConectorEditor
 public class AscSlimeEditor : ActorStateConectorEditor
 {
 }
+
+[UnityEditor.CustomEditor(typeof(ActorBossTitan.AscBossTitan))]
+public class AscBossTitanEditor : ActorStateConectorEditor
+{
+}

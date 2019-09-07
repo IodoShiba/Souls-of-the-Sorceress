@@ -2,14 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class ActorManager : MonoBehaviour
 {
     HashSet<Actor> actors = new HashSet<Actor>();
 
-
     static ActorManager instance;
     static Actor playerActor;
+
+    /// <summary>
+    /// このクラスのインスタンスを返す
+    /// Awake()より後で有効
+    /// </summary>
     public static ActorManager Instance { get => instance; }
+
+    /// <summary>
+    /// PlayerのGameObjectにアタッチされているActorコンポーネントを取得する
+    /// Update()内なら有効なインスタンスを返すことを保証すべきである
+    /// </summary>
     public static Actor PlayerActor { get => playerActor; }
     //public ActorManager() { if (instance == null) instance = this; }
     private void Awake()
@@ -17,7 +27,7 @@ public class ActorManager : MonoBehaviour
         if (instance == null) { instance = this; }
         else if (this != instance)
         {
-            Debug.LogError($"{this.GetType().Name} cannot exist double or more in one scene. GameObject '{name}' has been Deleted because it has second {this.GetType().Name}.");
+            Debug.LogError($"Two or more {this.GetType().Name} cannot exist in one scene. GameObject '{name}' has been Deleted because it has second {this.GetType().Name}.");
             Destroy(gameObject);
             return;
         }
@@ -45,7 +55,7 @@ public class ActorManager : MonoBehaviour
 
     public void RemoveActor(Actor actor)
     {
-        Debug.Log(actor.gameObject.name + "was removed from ActorManager.");
+        Debug.Log($"'{actor.gameObject.name}' was removed from ActorManager.");
         actors.Remove(actor);
     }
 

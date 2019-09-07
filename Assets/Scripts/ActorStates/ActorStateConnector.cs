@@ -14,7 +14,7 @@ public class ActorState
     /// Actorの状態の接続と遷移を担う抽象コンポーネント
     /// </summary>
     [DisallowMultipleComponent]
-    public abstract class ActorStateConnector : MonoBehaviour , IodoShiba.ManualUpdateClass.IManualUpdate
+    public abstract class ActorStateConnector : MonoBehaviour , IodoShibaUtil.ManualUpdateClass.IManualUpdate
     {
 
 

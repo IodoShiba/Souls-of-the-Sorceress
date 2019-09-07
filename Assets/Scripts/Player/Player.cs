@@ -72,9 +72,8 @@ public class Player : Mortal
     protected override void Awake()
     {
         base.Awake();
-
-        
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -104,13 +103,14 @@ public class Player : Mortal
 
     protected override void OnTriedAttack(Mortal attacker, AttackData dealt, in Vector2 relativePosition)
     {
+        base.OnTriedAttack(attacker, dealt, relativePosition);
         if (guard.Activated)
         {
             guard.TryGuard(dealt, relativePosition);
         }
     }
 
-    public override void Dying() //体力がなくなると呼ばれる関数　今はガバ実装
+    public override void OnDying(DealtAttackInfo causeOfDeath) //体力がなくなると呼ばれる関数　今はガバ実装
     {
         Debug.Log("Player has dead.");
     }
