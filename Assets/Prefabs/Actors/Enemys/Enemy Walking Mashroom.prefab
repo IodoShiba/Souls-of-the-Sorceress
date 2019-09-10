@@ -243,7 +243,7 @@ MonoBehaviour:
     horizontalMove:
       method: {fileID: 2695806798541559436}
       fields:
-        maxSpeed: 4
+        maxSpeed: 1
         pushForceMagnitude: 100
         stopForceMagnitude: 100
         curve:
@@ -387,7 +387,7 @@ MonoBehaviour:
   activeSpan: Infinity
   attackDataPrototype:
     damage: 10
-    knockBackImpulse: {x: 500, y: 200}
+    knockBackImpulse: {x: 800, y: 200}
     attackCollider: {fileID: 6891321231477494684}
     throughable: 1
     hitstopSpan: 0

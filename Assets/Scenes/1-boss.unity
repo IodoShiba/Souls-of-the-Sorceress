@@ -278,7 +278,7 @@ MonoBehaviour:
   targetTag: Player
   activeSpan: Infinity
   attackDataPrototype:
-    damage: 10
+    damage: 30
     knockBackImpulse: {x: 500, y: 200}
     attackCollider: {fileID: 189919881}
     throughable: 1
@@ -332,7 +332,7 @@ MonoBehaviour:
   activeSpan: Infinity
   attackDataPrototype:
     damage: 1000
-    knockBackImpulse: {x: 1000, y: 400}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 189919881}
     throughable: 1
     hitstopSpan: 0
@@ -484,7 +484,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &440838838
 GameObject:
@@ -609,8 +609,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb1ac6de0b0f0d46a7b8c3689d8c891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
-  maxHealth: 1000
+  health: 500
+  maxHealth: 500
   isInvulnerable: 0
   dyingCallbacks:
     m_PersistentCalls:
@@ -901,7 +901,7 @@ RectTransform:
   m_Children:
   - {fileID: 1878264143}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1035,7 +1035,7 @@ Transform:
   m_Children:
   - {fileID: 1450252547}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &843604126
 PrefabInstance:
@@ -1087,7 +1087,7 @@ PrefabInstance:
     - target: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
@@ -1108,7 +1108,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyManager
       value: 
-      objectReference: {fileID: 1532042061}
+      objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: _debugText
@@ -1118,7 +1118,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyManager
       value: 
-      objectReference: {fileID: 1532042061}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 004a550fc633f6b48a28890fc9bbc1c7, type: 3}
 --- !u!1 &849581133
@@ -1173,7 +1173,7 @@ MonoBehaviour:
   activeSpan: 0
   attackDataPrototype:
     damage: 0
-    knockBackImpulse: {x: 400, y: 400}
+    knockBackImpulse: {x: 0, y: 0}
     attackCollider: {fileID: 849581136}
     throughable: 1
     hitstopSpan: 0
@@ -2385,7 +2385,7 @@ Transform:
   - {fileID: 2096538985}
   - {fileID: 2132210502}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1178182269
 MonoBehaviour:
@@ -2448,8 +2448,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61bce3ae7c4a88440a6ea6326b43c94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100000
-  maxHealth: 100000
+  health: 250
+  maxHealth: 250
   isInvulnerable: 1
   dyingCallbacks:
     m_PersistentCalls:
@@ -2590,7 +2590,7 @@ Transform:
   - {fileID: 622328220}
   - {fileID: 940029272}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1200558867
 MonoBehaviour:
@@ -2647,7 +2647,7 @@ MonoBehaviour:
   fainted:
     gameObject: {fileID: 1200558860}
     connector: {fileID: 1200558867}
-    span: 5
+    span: 10
     titanAI: {fileID: 1200558871}
     enemySpawner: {fileID: 1311982143}
     hitboxCollider: {fileID: 189919881}
@@ -3980,7 +3980,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1311982143
 MonoBehaviour:
@@ -4066,7 +4066,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1450252546
 GameObject:
@@ -4151,49 +4151,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1532042060
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1532042062}
-  - component: {fileID: 1532042061}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1532042061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1532042060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89db286fdd2f61a4eacf8e17bf6327db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1532042062
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1532042060}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.769253, y: 8.936161, z: 0.7821088}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1620216729
 GameObject:
   m_ObjectHideFlags: 0
@@ -4293,7 +4250,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1878264142
 GameObject:
@@ -4660,7 +4617,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2096538984
 GameObject:
