@@ -27,8 +27,6 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
         {
             if (!disallowCross)
             {
-                //originalLayer = GameObject.layer;
-                //GameObject.layer = LayerMask.NameToLayer("Smashed Actor");
                 SelfMortal.OrderInvincible(useInvincibleTime ? invincibleTime : stateSpan);
             }
             if (horizontalMove != null) { horizontalMove.enabled = false; }
@@ -40,10 +38,6 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
         protected override void OnTerminate(bool isNormal)
         {
             clock.Reset();
-            //if (!disallowCross)
-            //{
-            //    GameObject.layer = originalLayer;
-            //}
             if (horizontalMove != null) { horizontalMove.enabled = true; }
         }
     }
