@@ -27,6 +27,7 @@ namespace ActorSarah
         [SerializeField] UmbrellaParameters umbrellaParameters;
         [SerializeField, DisabledField] string currentStateName;
         [SerializeField, DisabledField] float lpt;
+        [SerializeField] Animator sarahAnimator;
 
         [SerializeField] SarahDefault sarahDefault;
         [SerializeField] VerticalSlash verticalSlash;
@@ -50,6 +51,7 @@ namespace ActorSarah
         public override SmashedState Smashed => smashed;
 
         public bool isGuard { get => guard.IsCurrent; }
+
         
         protected Rigidbody2D selfRigidbody;
         protected Rigidbody2D SelfRigidbody { get => selfRigidbody == null ? (selfRigidbody = GetComponent<Rigidbody2D>()) : selfRigidbody; }
@@ -77,7 +79,9 @@ namespace ActorSarah
                 aerialSlash);
 
             ConnectState(proceedFunc, verticalSlash);
-            ConnectState(tripleSlashAttackStream.ProceedsWhen(() => (groundSensor.IsOnGround || tripleSlashAttackStream.IsRecepting) && commands.Attack.IsDown), returnSlash);
+            ConnectState(tripleSlashAttackStream.ProceedsWhen(
+                () => (groundSensor.IsOnGround || tripleSlashAttackStream.IsRecepting) && commands.Attack.IsDown),
+                returnSlash);
 
             ConnectStateFromDefault(
                 () => groundSensor.IsOnGround && commands.OpenUmbrella.IsDown,
@@ -136,7 +140,7 @@ namespace ActorSarah
 
         }
         [System.Serializable]
-        private class SarahDefault : DefaultState
+        public class SarahDefault : DefaultState
         {
 
             [SerializeField] private float umbrellaRecoverCycle;
@@ -146,11 +150,15 @@ namespace ActorSarah
             [SerializeField] ActorFunction.Jump jump;
             [SerializeField] ActorFunction.Directionable directionable;
             [SerializeField] PassPlatform passPlatform;
+            [SerializeField] GroundSensor groundSensor;
             //[SerializeField] UmbrellaParameters umbrellaParameters;
 
             public ChainAttackStream attackStream;
             ActorStateConnectorSarah connectorSarah;
             public BoolExpressions.LongPushClock attackLongPushClock;
+            Animator sarahAnimator;
+            StateInDefaultNum currentState;
+            bool IsInterruptJump;
 
             public ActorStateConnectorSarah ConnectorSarah
             {
@@ -165,6 +173,8 @@ namespace ActorSarah
                 horizontalMove.Method.enabled = true;
                 attackLongPushClock.AllowedToStartCount = true;
                 ConnectorSarah.umbrellaParameters.ChangeDurabilityGradually(umbrellaRecoverCycle, umbrellaRecoverAmount);
+                sarahAnimator = ConnectorSarah.sarahAnimator;
+                IsInterruptJump = false;
             }
             protected override void OnActive()
             {
@@ -180,7 +190,9 @@ namespace ActorSarah
                     directionable.ChangeDirection(System.Math.Sign(commands.Directional.Evaluation.x));
                 }
                 passPlatform.Use(commands.AnalogueDown.Evaluation);
-                
+
+                StateInDefaultJudge();
+
             }
 
             protected override void OnTerminate(bool isNormal)
@@ -190,6 +202,88 @@ namespace ActorSarah
                 ConnectorSarah.umbrellaParameters.StopChangeDurabilityGradually();
                 passPlatform.Use(false);
             }
+
+            void StateInDefaultJudge()
+            {
+                //State遷移を検知してStateBoolsを設定->AnimatorがBoolsの変化を検知してAnimation遷移してくれる
+                StateInDefaultNum nextState = JudgeNextStateInDefault();
+                //Debug.Log("IsJampingFinishd:" + IsJumpingFinished);
+
+                if(nextState != currentState)
+                {
+                    Debug.Log(nextState);
+                    ResetStateBools();
+                    switch (nextState)
+                    {
+                        case StateInDefaultNum.IsWaiting:
+                            sarahAnimator.SetBool("IsWaiting",true);
+                            break;
+                        case StateInDefaultNum.IsRunning:
+                            sarahAnimator.SetBool("IsRunning",true);
+                            break;
+                        case StateInDefaultNum.IsJumping:
+                            sarahAnimator.SetBool("IsJumping", true);
+                            break;
+                        case StateInDefaultNum.IsInAir:
+                            sarahAnimator.SetBool("IsInAir", true);
+                            break;
+                        case StateInDefaultNum.IsOnLanding:
+                            sarahAnimator.SetBool("IsOnLanding", true);
+                            break;
+                    }
+                    currentState = nextState;
+                }
+            }
+            StateInDefaultNum JudgeNextStateInDefault()
+            {
+                AnimatorStateInfo stateInfo = sarahAnimator.GetCurrentAnimatorStateInfo(0);
+                //Debug.Log(stateInfo.normalizedTime);
+                switch (currentState)
+                {
+                    case StateInDefaultNum.IsWaiting:
+                        //Jumping遷移判定
+                        if (jump.Method.IsActivated || IsInterruptJump) { IsInterruptJump = false; return StateInDefaultNum.IsJumping; }
+                        //Running遷移判定
+                        if (horizontalMove.Method.IsMoving) { return StateInDefaultNum.IsRunning; }
+                        return StateInDefaultNum.IsWaiting;
+                    case StateInDefaultNum.IsRunning:
+                        //Jumping遷移判定
+                        if (jump.Method.IsActivated) { return StateInDefaultNum.IsJumping; }
+                        //InAir遷移判定
+                        if (!groundSensor.IsOnGround) { return StateInDefaultNum.IsInAir; }
+                        //Waiting遷移判定
+                        if (!horizontalMove.Method.IsMoving) { return StateInDefaultNum.IsWaiting; }
+                        return StateInDefaultNum.IsRunning;
+                    case StateInDefaultNum.IsJumping:
+                        //InAir遷移判定
+                        if (stateInfo.normalizedTime > 0.99) { return StateInDefaultNum.IsInAir; }
+                        return StateInDefaultNum.IsJumping;
+                    case StateInDefaultNum.IsInAir:
+                        //OnLanding遷移判定
+                        if (groundSensor.IsOnGround) { return StateInDefaultNum.IsOnLanding; }
+                        return StateInDefaultNum.IsInAir;
+                    case StateInDefaultNum.IsOnLanding:
+                        //割り込みIsJumpingのためのboolをセット
+                        if (jump.Method.IsActivated) { IsInterruptJump = true; }
+                        //IsWaiting遷移判定
+                        if (stateInfo.normalizedTime > 0.99) { return StateInDefaultNum.IsWaiting; }
+                        return StateInDefaultNum.IsOnLanding;
+                }
+                return StateInDefaultNum.IsWaiting;
+            }
+
+            void ResetStateBools()
+            {
+                string[] boolsName = new string[] { "IsWaiting", "IsRunning", "IsJumping", "IsInAir", "IsOnLanding" };
+                foreach (string name in boolsName)
+                {
+                    sarahAnimator.SetBool(name, false);
+                }
+            }
+
+
+            enum StateInDefaultNum {IsWaiting = 0,IsRunning,IsJumping,IsInAir,IsOnLanding}
+
         }
 
 
@@ -200,6 +294,7 @@ namespace ActorSarah
             ActorStateConnectorSarah connectorSarah;
 
             protected override bool IsAvailable() => requiredProgressLevel <= ConnectorSarah.progressLevel;
+
             public ActorStateConnectorSarah ConnectorSarah
             {
                 get => connectorSarah == null ?
@@ -210,7 +305,6 @@ namespace ActorSarah
             [SerializeField,DisabledField] protected PlayerCommander commands;
 
         }
-
 
         [System.Serializable]
         private class VerticalSlash : SarahState
@@ -630,6 +724,6 @@ namespace ActorSarah
         {
 
         }
-    }
 
+    }
 }

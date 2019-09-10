@@ -19,6 +19,7 @@ namespace ActorFunction
             float limitHeight=0;
             Rigidbody2D rigidbody;
             [SerializeField] GroundSensor groundSensor;
+            [DisabledField] public bool IsActivated;
 
             private void Awake()
             {
@@ -34,13 +35,12 @@ namespace ActorFunction
                     isActive = false;
                     return;
                 }
-                rigidbody.AddForce(
-                    UnityEngine.Mathf.Clamp(
-                        rigidbody.mass * (fields.jumpUpSpeed - rigidbody.velocity.y) / Time.deltaTime,
-                        0, 
-                        fields.jumpForce
-                        ) * Vector2.up
-                        );
+                float f  = UnityEngine.Mathf.Clamp(
+                    rigidbody.mass * (fields.jumpUpSpeed - rigidbody.velocity.y) / Time.deltaTime,
+                    0,
+                    fields.jumpForce
+                    );
+                rigidbody.AddForce(f * Vector2.up);
             }
 
             public override void ManualUpdate(in JumpFields fields)
@@ -56,7 +56,9 @@ namespace ActorFunction
                 }
 
                 activatable = groundSensor.IsOnGround && !this.isActive && (activatable || !isActive);
-                
+                //offからonになった時を検知してIsActivatedに格納
+                if (!this.isActive && ((activatable || this.isActive) && isActive)) { IsActivated = true; }
+                else { IsActivated = false; }
                 this.isActive = (activatable || this.isActive) && isActive;
                 ManualUpdate(fields);
             }

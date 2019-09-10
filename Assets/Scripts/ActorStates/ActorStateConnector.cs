@@ -110,9 +110,7 @@ public class ActorState
         protected virtual void BeforeChangeState(ActorState next, bool isNormalTermination)
         {
         }
-
     }
-
 
 
     //MEMO:
