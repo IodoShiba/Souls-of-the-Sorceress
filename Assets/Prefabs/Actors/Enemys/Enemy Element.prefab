@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3400861851107116815}
   - component: {fileID: 4887456833946179394}
   - component: {fileID: 964724003723573808}
+  - component: {fileID: 2676481591472195364}
   m_Layer: 24
   m_Name: Enemy Element
   m_TagString: Enemy
@@ -149,7 +150,6 @@ MonoBehaviour:
   health: 20
   maxHealth: 20
   isInvulnerable: 0
-  initialStunTime: 0.3
   dyingCallbacks:
     m_PersistentCalls:
       m_Calls:
@@ -233,7 +233,9 @@ MonoBehaviour:
   smashed:
     gameObject: {fileID: 964724003723573768}
     connector: {fileID: 3400861851107116815}
-    stunTime: 2
+    stateSpan: 2
+    useInvincibleTime: 0
+    invincibleTime: 0
     horizontalMove: {fileID: 0}
     disallowCross: 0
 --- !u!114 &4887456833946179394
@@ -262,3 +264,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3890719905783342961, guid: 8fb1d65d2019341439623d304160cec2,
     type: 3}
+--- !u!114 &2676481591472195364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964724003723573768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47e2af06c38e69842aaa49ae74a7c7a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rewardData: {fileID: 11400000, guid: 0d4a524bdaeb3b54ca34668bc2314e08, type: 2}

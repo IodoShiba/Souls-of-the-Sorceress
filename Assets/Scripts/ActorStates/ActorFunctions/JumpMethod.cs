@@ -20,6 +20,7 @@ namespace ActorFunction
             float limitHeight=0;
             Rigidbody2D rigidbody;
             [SerializeField] GroundSensor groundSensor;
+            [DisabledField] public bool IsActivated;
 
             private void Awake()
             {
@@ -75,7 +76,8 @@ namespace ActorFunction
                 }
 
                 activatable = groundSensor.IsOnGround && !this.isActive && (activatable || !isActive);
-                
+
+                IsActivated = !this.isActive && ((activatable || this.isActive) && isActive);
                 this.isActive = (activatable || this.isActive) && isActive;
                 ManualUpdate(fields);
             }

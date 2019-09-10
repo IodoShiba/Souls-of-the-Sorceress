@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 8916380848889061151}
   - component: {fileID: 8916380848889061125}
   - component: {fileID: 8916380848889061126}
+  - component: {fileID: 1220244123324782236}
   m_Layer: 20
   m_Name: Sarah
   m_TagString: Player
@@ -228,7 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackLongPushThreshold: 2
   durabilityCostOnShootMagic: 1
-  progressLevel: 0
+  progressLevel: 3
   reqiredProgressLevelToShootMagic: 2
   shootObject:
     target: {fileID: 8916380848889061178}
@@ -260,6 +261,7 @@ MonoBehaviour:
   umbrellaParameters: {fileID: 8916380848891301902}
   currentStateName: 
   lpt: 0
+  sarahAnimator: {fileID: 1220244123324782236}
   sarahDefault:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
@@ -322,6 +324,9 @@ MonoBehaviour:
         jumpUpSpeed: 15
     directionable: {fileID: 4249487242134317880}
     passPlatform: {fileID: 8916380848889061149}
+    groundSensor: {fileID: 8916380849072566239}
+    IsJumpingFinished: 0
+    IsOnLandingFinished: 0
   verticalSlash:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
@@ -379,7 +384,7 @@ MonoBehaviour:
     guard:
       method: {fileID: 2312274154079463536}
       fields:
-        multiplier: 0.2
+        multiplier: 0.5
         degreeRangeStart: -90
         degreeRangeWidth: 180
     extraCollider: {fileID: 8916380848889061124}
@@ -535,7 +540,9 @@ MonoBehaviour:
   smashed:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
-    stunTime: 0.1
+    stateSpan: 0.5
+    useInvincibleTime: 1
+    invincibleTime: 2
     horizontalMove: {fileID: 3289781965317027910}
     disallowCross: 0
 --- !u!114 &8916380848889061121
@@ -550,10 +557,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f3529071d6684468cc6df34f08946b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
+  health: 1000
+  maxHealth: 1000
   isInvulnerable: 0
-  initialStunTime: 0.3
   dyingCallbacks:
     m_PersistentCalls:
       m_Calls: []
@@ -588,7 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439327b37816c1a45a2444dd45ae6f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  awakeGauge: 0
+  awakeGauge: 1
   awakeGaugeDecreaseSpeed: 0.1
   enemyManager: {fileID: 0}
   isActive: 0
@@ -668,6 +674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cadb6fc697b13c54eb0e3327a63b3926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsMoving: 0
 --- !u!114 &1353951183406726685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,6 +688,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundSensor: {fileID: 8916380849072566239}
+  IsActivated: 0
 --- !u!114 &2312274154079463536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -860,7 +868,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4928ee17be5a6b944bae95ed702ba683, type: 3}
-  m_Color: {r: 1, g: 0.504717, b: 0.504717, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -870,6 +878,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1220244123324782236
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4791d6f3380558f45ae4b6175c958718, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8916380848891301890
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,12 +1480,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -0.6, y: 3.5}
-      - {x: 0.5, y: 3.5}
-      - {x: 1.5, y: 3}
-      - {x: 2, y: 1.75}
-      - {x: 2, y: 0.4}
+    - - {x: 0, y: 0}
+      - {x: -0.6, y: 3}
+      - {x: 0.5, y: 3}
+      - {x: 1.5, y: 2.25}
+      - {x: 2, y: 0.75}
+      - {x: 2, y: -0.6}
 --- !u!60 &8916380849248469460
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1484,12 +1511,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -0.9, y: 4.75}
-      - {x: 0.75, y: 4.75}
-      - {x: 2.25, y: 4}
-      - {x: 3, y: 2.125}
-      - {x: 3, y: 0.1}
+    - - {x: 0, y: 0}
+      - {x: -0.6, y: 3}
+      - {x: 0.5, y: 3}
+      - {x: 1.5, y: 2.25}
+      - {x: 2, y: 0.75}
+      - {x: 2, y: -0.6}
 --- !u!60 &8916380849248469451
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1515,12 +1542,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 1}
-      - {x: -1.2, y: 6}
-      - {x: 1, y: 6}
-      - {x: 3, y: 5}
-      - {x: 4, y: 2.5}
-      - {x: 4, y: -0.2}
+    - - {x: 0, y: 0}
+      - {x: -0.6, y: 3}
+      - {x: 0.5, y: 3}
+      - {x: 1.5, y: 2.25}
+      - {x: 2, y: 0.75}
+      - {x: 2, y: -0.6}
 --- !u!255 &8916380849248469453
 FixedJoint2D:
   m_ObjectHideFlags: 0
@@ -1574,19 +1601,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
-    damage: 15
+    damage: 10
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849248469455}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
-    damage: 45
+    damage: 15
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849248469460}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 75
+    damage: 20
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849248469451}
     throughable: 1
@@ -1786,7 +1813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
-    damage: 5
+    damage: 10
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849465762222}
     throughable: 1
@@ -1798,7 +1825,7 @@ MonoBehaviour:
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 25
+    damage: 20
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849465762217}
     throughable: 1
@@ -2016,13 +2043,13 @@ MonoBehaviour:
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
-    damage: 30
+    damage: 15
     knockBackImpulse: {x: 0, y: -1333}
     attackCollider: {fileID: 8916380849515846550}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 50
+    damage: 20
     knockBackImpulse: {x: 0, y: -1666}
     attackCollider: {fileID: 8916380849515846549}
     throughable: 1
@@ -2044,7 +2071,7 @@ MonoBehaviour:
   initiallyActivate: 0
   allowToAttackSelf: 0
   targetTag: Enemy
-  activeSpan: 0.2
+  activeSpan: 0.4
   attackDataPrototype:
     damage: 0
     knockBackImpulse: {x: 0, y: 0}
@@ -2192,20 +2219,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
-    damage: 20
-    knockBackImpulse: {x: 1500, y: -1800}
+    damage: 10
+    knockBackImpulse: {x: 0, y: -1800}
     attackCollider: {fileID: 8916380849653747852}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
-    damage: 60
-    knockBackImpulse: {x: 2000, y: -2400}
+    damage: 15
+    knockBackImpulse: {x: 0, y: -2400}
     attackCollider: {fileID: 8916380849653747849}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 100
-    knockBackImpulse: {x: 2500, y: -3000}
+    damage: 20
+    knockBackImpulse: {x: 0, y: -3000}
     attackCollider: {fileID: 8916380849653747848}
     throughable: 1
     hitstopSpan: 0
@@ -2643,13 +2670,13 @@ MonoBehaviour:
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
-    damage: 30
+    damage: 15
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380850370461332}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 50
+    damage: 20
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380850370461323}
     throughable: 1

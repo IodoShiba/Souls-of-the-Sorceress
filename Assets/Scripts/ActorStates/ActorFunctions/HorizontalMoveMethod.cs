@@ -20,6 +20,7 @@ namespace ActorFunction
             HorizontalMoveField fields;
             Rigidbody2D rigidbody;
             float stopTime;
+            [DisabledField] public bool IsMoving;
             private void Awake()
             {
                 rigidbody = GetComponent<Rigidbody2D>();
@@ -37,6 +38,7 @@ namespace ActorFunction
                     maxForce);
                 rigidbody.AddForce(f * Vector2.right);
 
+
                 if (stopTime > 0)
                 {
                     stopTime -= Time.deltaTime;
@@ -47,6 +49,8 @@ namespace ActorFunction
 
             public void ManualUpdate(in HorizontalMoveField fields,float speedMultiplier)
             {
+                if(speedMultiplier != 0f) { IsMoving = true; }
+                else { IsMoving = false; }
                 argSpeedMultiplier = Max(-1, Min(speedMultiplier,1)); ;
                 this.fields = fields;
                 ManualUpdate(fields);

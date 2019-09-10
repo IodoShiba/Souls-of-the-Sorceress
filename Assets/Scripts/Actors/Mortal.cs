@@ -35,7 +35,6 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     [SerializeField] protected float health;
     [SerializeField] protected float maxHealth;
     [SerializeField] private  bool isInvulnerable;
-    [SerializeField] float initialStunTime = 0.3f;
     [SerializeField] UnityEngine.Events.UnityEvent dyingCallbacks;
     [SerializeField] UnityEngine.Events.UnityEvent onAttackedCallbacks;
     [SerializeField] Rigidbody2D selfRigidbody;
@@ -49,15 +48,23 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     int dealtAttackCount = 0;
     List<DealtAttackInfo> dealtAttackInfos = new List<DealtAttackInfo>(4);
     Actor actor;
+    int invincibleOrderedCount = 0;
+    int originalLayer;
 
-    public bool IsInvulnerable { get => isInvulnerable; set => isInvulnerable = value; }
     public Actor Actor { get => actor == null ? (actor = GetComponent<Actor>()) : actor; }
     public UnityEngine.Events.UnityEvent OnAttackedCallbacks { get => onAttackedCallbacks; }
     public UnityEvent DyingCallbacks { get => dyingCallbacks; }
+    public bool IsInvulnerable //{ get => isInvulnerable; set => isInvulnerable = value; }
+    {
+        get => isInvulnerable;
+        set => isInvulnerable = value;
+    }
+    public bool IsInvincible { get => invincibleOrderedCount > 0; }
 
     protected virtual void Awake()
     {
         //dyingCallbacks.AddListener(OnDying);
+        invincibleOrderedCount = 0;
     }
     protected virtual void OnAttacked(GameObject attackObj,AttackData attack) { }
 
@@ -97,7 +104,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     {
         OnTriedAttack(attacker, argAttackData, relativePosition);
 
-        if (isInvulnerable) { return; }
+        if (IsInvulnerable) { return; }
 
         if (dealtAttackCount >= dealtAttackInfos.Count)
         {
@@ -177,6 +184,33 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     }
 
     public void DestroySelf(float time) { Destroy(gameObject, time); }
+
+    public void OrderInvincible(float time)
+    {
+        StartCoroutine(OrderInvincibleImple(time));
+    }
+
+    IEnumerator OrderInvincibleImple(float time)
+    {
+        if(invincibleOrderedCount == 0)
+        {
+            originalLayer = gameObject.layer;
+            gameObject.layer = LayerMask.NameToLayer(LayerName.smashedActor);
+        }
+        invincibleOrderedCount++;
+
+        yield return new WaitForSeconds(time);
+
+        if (invincibleOrderedCount > 0)
+        {
+            invincibleOrderedCount--;
+            if (invincibleOrderedCount == 0)
+            {
+                gameObject.layer = originalLayer;
+            }
+        }
+    }
+
 }
 
 
