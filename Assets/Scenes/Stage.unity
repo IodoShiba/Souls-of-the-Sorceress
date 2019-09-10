@@ -4517,7 +4517,6 @@ MonoBehaviour:
   health: 120
   maxHealth: 120
   isInvulnerable: 0
-  initialStunTime: 0.3
   dyingCallbacks:
     m_PersistentCalls:
       m_Calls:
@@ -4708,7 +4707,9 @@ MonoBehaviour:
   smashed:
     gameObject: {fileID: 1073469324}
     connector: {fileID: 1073469337}
-    stunTime: 0
+    stateSpan: 0
+    useInvincibleTime: 0
+    invincibleTime: 0
     horizontalMove: {fileID: 1073469336}
     disallowCross: 0
 --- !u!1 &1110070022
