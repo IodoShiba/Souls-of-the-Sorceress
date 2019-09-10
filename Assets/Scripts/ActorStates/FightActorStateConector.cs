@@ -10,20 +10,26 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
     [System.Serializable]
     public class SmashedState : ActorState
     {
-        [SerializeField] float stunTime;
+        [SerializeField,UnityEngine.Serialization.FormerlySerializedAs("stunTime")] float stateSpan;
+        [SerializeField] bool useInvincibleTime;
+        [SerializeField] float invincibleTime;
         [SerializeField] ActorFunction.HorizontalMoveMethod horizontalMove;
         [SerializeField] bool disallowCross;
 
         IodoShibaUtil.ManualUpdateClass.ManualClock clock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
         int originalLayer;
 
-        protected override bool ShouldCotinue() => clock.Clock < stunTime;
+        Mortal selfMortal = null;
+        Mortal SelfMortal { get => selfMortal == null ? (selfMortal = GameObject.GetComponent<Mortal>()) : selfMortal;}
+
+        protected override bool ShouldCotinue() => clock.Clock < stateSpan;
         protected override void OnInitialize()
         {
             if (!disallowCross)
             {
-                originalLayer = GameObject.layer;
-                GameObject.layer = LayerMask.NameToLayer("Smashed Actor");
+                //originalLayer = GameObject.layer;
+                //GameObject.layer = LayerMask.NameToLayer("Smashed Actor");
+                SelfMortal.OrderInvincible(useInvincibleTime ? invincibleTime : stateSpan);
             }
             if (horizontalMove != null) { horizontalMove.enabled = false; }
         }
@@ -34,10 +40,10 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
         protected override void OnTerminate(bool isNormal)
         {
             clock.Reset();
-            if (!disallowCross)
-            {
-                GameObject.layer = originalLayer;
-            }
+            //if (!disallowCross)
+            //{
+            //    GameObject.layer = originalLayer;
+            //}
             if (horizontalMove != null) { horizontalMove.enabled = true; }
         }
     }
