@@ -229,7 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackLongPushThreshold: 2
   durabilityCostOnShootMagic: 1
-  progressLevel: 3
+  progressLevel: 0
   reqiredProgressLevelToShootMagic: 2
   shootObject:
     target: {fileID: 8916380848889061178}
@@ -325,8 +325,6 @@ MonoBehaviour:
     directionable: {fileID: 4249487242134317880}
     passPlatform: {fileID: 8916380848889061149}
     groundSensor: {fileID: 8916380849072566239}
-    IsJumpingFinished: 0
-    IsOnLandingFinished: 0
   verticalSlash:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
@@ -557,8 +555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f3529071d6684468cc6df34f08946b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
-  maxHealth: 1000
+  health: 100
+  maxHealth: 100
   isInvulnerable: 0
   dyingCallbacks:
     m_PersistentCalls:
@@ -1468,7 +1466,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3}
+  m_Offset: {x: 0, y: 0.7}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1481,11 +1479,11 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0, y: 0}
-      - {x: -0.6, y: 3}
-      - {x: 0.5, y: 3}
-      - {x: 1.5, y: 2.25}
-      - {x: 2, y: 0.75}
-      - {x: 2, y: -0.6}
+      - {x: -0.6, y: 2.75}
+      - {x: 0.5, y: 2.75}
+      - {x: 1.75, y: 2}
+      - {x: 2.25, y: 0.75}
+      - {x: 2.5, y: -0.6}
 --- !u!60 &8916380849248469460
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1499,7 +1497,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3}
+  m_Offset: {x: 0, y: 0.7}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1512,11 +1510,11 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0, y: 0}
-      - {x: -0.6, y: 3}
-      - {x: 0.5, y: 3}
-      - {x: 1.5, y: 2.25}
-      - {x: 2, y: 0.75}
-      - {x: 2, y: -0.6}
+      - {x: -0.9, y: 4.125}
+      - {x: 0.75, y: 4.1125}
+      - {x: 2.625, y: 3}
+      - {x: 3.375, y: 1.125}
+      - {x: 3.75, y: -0.9}
 --- !u!60 &8916380849248469451
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1530,7 +1528,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.3}
+  m_Offset: {x: 0, y: 0.7}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1543,11 +1541,11 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: 0, y: 0}
-      - {x: -0.6, y: 3}
-      - {x: 0.5, y: 3}
-      - {x: 1.5, y: 2.25}
-      - {x: 2, y: 0.75}
-      - {x: 2, y: -0.6}
+      - {x: -1.2, y: 5.5}
+      - {x: 1, y: 5.5}
+      - {x: 3.5, y: 4}
+      - {x: 4.5, y: 1.5}
+      - {x: 5, y: -1.2}
 --- !u!255 &8916380849248469453
 FixedJoint2D:
   m_ObjectHideFlags: 0
@@ -1601,19 +1599,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
-    damage: 10
+    damage: 15
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849248469455}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
-    damage: 15
+    damage: 45
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849248469460}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 20
+    damage: 75
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849248469451}
     throughable: 1
@@ -1732,7 +1730,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2.5}
+  m_Size: {x: 2, y: 3}
   m_EdgeRadius: 0
 --- !u!61 &8916380849465762217
 BoxCollider2D:
@@ -1747,7 +1745,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.35, y: 0.2}
+  m_Offset: {x: 0.75, y: 0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1758,7 +1756,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4, y: 2.5}
+  m_Size: {x: 2.8, y: 4}
   m_EdgeRadius: 0
 --- !u!255 &8916380849465762220
 FixedJoint2D:
@@ -1813,7 +1811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
-    damage: 10
+    damage: 5
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849465762222}
     throughable: 1
@@ -1825,7 +1823,7 @@ MonoBehaviour:
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 20
+    damage: 25
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849465762217}
     throughable: 1
@@ -2043,13 +2041,13 @@ MonoBehaviour:
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
-    damage: 15
+    damage: 30
     knockBackImpulse: {x: 0, y: -1333}
     attackCollider: {fileID: 8916380849515846550}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 20
+    damage: 50
     knockBackImpulse: {x: 0, y: -1666}
     attackCollider: {fileID: 8916380849515846549}
     throughable: 1
@@ -2219,20 +2217,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
-    damage: 10
-    knockBackImpulse: {x: 0, y: -1800}
+    damage: 20
+    knockBackImpulse: {x: 900, y: -1800}
     attackCollider: {fileID: 8916380849653747852}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
-    damage: 15
-    knockBackImpulse: {x: 0, y: -2400}
+    damage: 60
+    knockBackImpulse: {x: 1200, y: -2400}
     attackCollider: {fileID: 8916380849653747849}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 20
-    knockBackImpulse: {x: 0, y: -3000}
+    damage: 100
+    knockBackImpulse: {x: 1600, y: -3200}
     attackCollider: {fileID: 8916380849653747848}
     throughable: 1
     hitstopSpan: 0
@@ -2572,7 +2570,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.35, y: 0.6}
+  m_Offset: {x: 0.3, y: 0.6}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2583,7 +2581,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2.5}
+  m_Size: {x: 2, y: 3.5}
   m_EdgeRadius: 0
 --- !u!61 &8916380850370461323
 BoxCollider2D:
@@ -2598,7 +2596,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.35, y: 0.6}
+  m_Offset: {x: 0.83, y: 0.6}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2609,7 +2607,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4, y: 2.5}
+  m_Size: {x: 3, y: 4}
   m_EdgeRadius: 0
 --- !u!50 &8916380850370461326
 Rigidbody2D:
@@ -2670,13 +2668,13 @@ MonoBehaviour:
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
-    damage: 15
+    damage: 30
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380850370461332}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 20
+    damage: 50
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380850370461323}
     throughable: 1
