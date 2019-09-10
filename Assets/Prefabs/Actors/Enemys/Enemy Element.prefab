@@ -146,8 +146,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61bce3ae7c4a88440a6ea6326b43c94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
-  maxHealth: 30
+  health: 20
+  maxHealth: 20
   isInvulnerable: 0
   initialStunTime: 0.3
   dyingCallbacks:
@@ -199,8 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff3c10dfcfec334681b250d9fef1086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootCycle: 2.5
-  maxChaseGap: 16
+  shootCycle: 3
+  maxChaseGap: 8
   minChaseGap: 0.3
   player: {fileID: 0}
   _shootBullet: {fileID: 964724003723573808}
@@ -221,7 +221,7 @@ MonoBehaviour:
   elementDefault:
     gameObject: {fileID: 964724003723573768}
     connector: {fileID: 3400861851107116815}
-    moveSpeedX: 6
+    moveSpeedX: 2
     velocityAdjuster:
       method: {fileID: 4887456833946179394}
       fields:
@@ -233,8 +233,9 @@ MonoBehaviour:
   smashed:
     gameObject: {fileID: 964724003723573768}
     connector: {fileID: 3400861851107116815}
-    stunTime: 0.55
+    stunTime: 2
     horizontalMove: {fileID: 0}
+    disallowCross: 0
 --- !u!114 &4887456833946179394
 MonoBehaviour:
   m_ObjectHideFlags: 0

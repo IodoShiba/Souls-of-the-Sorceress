@@ -228,7 +228,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackLongPushThreshold: 2
   durabilityCostOnShootMagic: 1
-  progressLevel: 3
+  progressLevel: 0
   reqiredProgressLevelToShootMagic: 2
   shootObject:
     target: {fileID: 8916380848889061178}
@@ -379,7 +379,7 @@ MonoBehaviour:
     guard:
       method: {fileID: 2312274154079463536}
       fields:
-        multiplier: 0.5
+        multiplier: 0.2
         degreeRangeStart: -90
         degreeRangeWidth: 180
     extraCollider: {fileID: 8916380848889061124}
@@ -535,8 +535,9 @@ MonoBehaviour:
   smashed:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
-    stunTime: 0.5
+    stunTime: 0.1
     horizontalMove: {fileID: 3289781965317027910}
+    disallowCross: 0
 --- !u!114 &8916380848889061121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,8 +550,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f3529071d6684468cc6df34f08946b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
-  maxHealth: 1000
+  health: 100
+  maxHealth: 100
   isInvulnerable: 0
   initialStunTime: 0.3
   dyingCallbacks:
@@ -587,7 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439327b37816c1a45a2444dd45ae6f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  awakeGauge: 1
+  awakeGauge: 0
   awakeGaugeDecreaseSpeed: 0.1
   enemyManager: {fileID: 0}
   isActive: 0
@@ -1452,12 +1453,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0}
-      - {x: -0.6, y: 3}
-      - {x: 0.5, y: 3}
-      - {x: 1.5, y: 2.25}
-      - {x: 2, y: 0.75}
-      - {x: 2, y: -0.6}
+    - - {x: 0, y: 1}
+      - {x: -0.6, y: 3.5}
+      - {x: 0.5, y: 3.5}
+      - {x: 1.5, y: 3}
+      - {x: 2, y: 1.75}
+      - {x: 2, y: 0.4}
 --- !u!60 &8916380849248469460
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1483,12 +1484,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0}
-      - {x: -0.6, y: 3}
-      - {x: 0.5, y: 3}
-      - {x: 1.5, y: 2.25}
-      - {x: 2, y: 0.75}
-      - {x: 2, y: -0.6}
+    - - {x: 0, y: 1}
+      - {x: -0.9, y: 4.75}
+      - {x: 0.75, y: 4.75}
+      - {x: 2.25, y: 4}
+      - {x: 3, y: 2.125}
+      - {x: 3, y: 0.1}
 --- !u!60 &8916380849248469451
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1514,12 +1515,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0}
-      - {x: -0.6, y: 3}
-      - {x: 0.5, y: 3}
-      - {x: 1.5, y: 2.25}
-      - {x: 2, y: 0.75}
-      - {x: 2, y: -0.6}
+    - - {x: 0, y: 1}
+      - {x: -1.2, y: 6}
+      - {x: 1, y: 6}
+      - {x: 3, y: 5}
+      - {x: 4, y: 2.5}
+      - {x: 4, y: -0.2}
 --- !u!255 &8916380849248469453
 FixedJoint2D:
   m_ObjectHideFlags: 0
@@ -1573,19 +1574,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
-    damage: 10
+    damage: 15
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849248469455}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
-    damage: 15
+    damage: 45
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849248469460}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 20
+    damage: 75
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849248469451}
     throughable: 1
@@ -1785,7 +1786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
-    damage: 10
+    damage: 5
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849465762222}
     throughable: 1
@@ -1797,7 +1798,7 @@ MonoBehaviour:
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 20
+    damage: 25
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380849465762217}
     throughable: 1
@@ -2015,13 +2016,13 @@ MonoBehaviour:
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
-    damage: 15
+    damage: 30
     knockBackImpulse: {x: 0, y: -1333}
     attackCollider: {fileID: 8916380849515846550}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 20
+    damage: 50
     knockBackImpulse: {x: 0, y: -1666}
     attackCollider: {fileID: 8916380849515846549}
     throughable: 1
@@ -2043,7 +2044,7 @@ MonoBehaviour:
   initiallyActivate: 0
   allowToAttackSelf: 0
   targetTag: Enemy
-  activeSpan: 0.4
+  activeSpan: 0.2
   attackDataPrototype:
     damage: 0
     knockBackImpulse: {x: 0, y: 0}
@@ -2191,20 +2192,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
-    damage: 10
-    knockBackImpulse: {x: 0, y: -1800}
+    damage: 20
+    knockBackImpulse: {x: 1500, y: -1800}
     attackCollider: {fileID: 8916380849653747852}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
-    damage: 15
-    knockBackImpulse: {x: 0, y: -2400}
+    damage: 60
+    knockBackImpulse: {x: 2000, y: -2400}
     attackCollider: {fileID: 8916380849653747849}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 20
-    knockBackImpulse: {x: 0, y: -3000}
+    damage: 100
+    knockBackImpulse: {x: 2500, y: -3000}
     attackCollider: {fileID: 8916380849653747848}
     throughable: 1
     hitstopSpan: 0
@@ -2642,13 +2643,13 @@ MonoBehaviour:
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
-    damage: 15
+    damage: 30
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380850370461332}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 20
+    damage: 50
     knockBackImpulse: {x: 50, y: 100}
     attackCollider: {fileID: 8916380850370461323}
     throughable: 1

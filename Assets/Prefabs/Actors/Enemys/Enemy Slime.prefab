@@ -73,6 +73,7 @@ MonoBehaviour:
   owner: {fileID: 2495217448702265943}
   onceOnly: 0
   initiallyActivate: 1
+  allowToAttackSelf: 0
   targetTag: Player
   activeSpan: Infinity
   attackDataPrototype:
@@ -305,7 +306,7 @@ MonoBehaviour:
     horizontalMove:
       method: {fileID: 1887466661123618811}
       fields:
-        maxSpeed: 2
+        maxSpeed: 1
         pushForceMagnitude: 100
         stopForceMagnitude: 100
         curve:
@@ -336,6 +337,7 @@ MonoBehaviour:
     connector: {fileID: 5953425717815938300}
     stunTime: 0.55
     horizontalMove: {fileID: 1887466661123618811}
+    disallowCross: 0
 --- !u!114 &2495217448702265932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -436,10 +438,11 @@ MonoBehaviour:
   owner: {fileID: 2495217448702265943}
   onceOnly: 0
   initiallyActivate: 0
+  allowToAttackSelf: 0
   targetTag: Player
   activeSpan: Infinity
   attackDataPrototype:
-    damage: 10
+    damage: 15
     knockBackImpulse: {x: 500, y: 20}
     attackCollider: {fileID: 2495217448933427337}
     throughable: 1
