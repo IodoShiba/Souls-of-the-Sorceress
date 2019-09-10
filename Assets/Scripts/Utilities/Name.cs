@@ -32,3 +32,8 @@ public static class SceneName
     public const string stage1 = "stage1";
     public const string boss1 = "1-boss";
 }
+
+public static class LayerName
+{
+    public const string smashedActor = "Smashed Actor";
+}
