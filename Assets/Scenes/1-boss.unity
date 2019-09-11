@@ -609,8 +609,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cb1ac6de0b0f0d46a7b8c3689d8c891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 500
-  maxHealth: 500
+  health: 400
+  maxHealth: 400
   isInvulnerable: 0
   dyingCallbacks:
     m_PersistentCalls:
@@ -2685,6 +2685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cadb6fc697b13c54eb0e3327a63b3926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsMoving: 0
 --- !u!114 &1200558869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2698,6 +2699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundSensor: {fileID: 837632195}
+  IsActivated: 0
 --- !u!114 &1200558870
 MonoBehaviour:
   m_ObjectHideFlags: 0
