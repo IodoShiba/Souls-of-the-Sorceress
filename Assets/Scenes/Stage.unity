@@ -2203,6 +2203,57 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &512549407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 512549408}
+  - component: {fileID: 512549409}
+  m_Layer: 5
+  m_Name: UmbrellaDurability
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &512549408
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512549407}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1038221651}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -27.2, y: 38.1}
+  m_SizeDelta: {x: 23.12, y: 25.21}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &512549409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512549407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeffcd8563a54124aa1124d2b4dae995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 8916380848890831845}
+  elementPrefab: {fileID: 4857543497856399092, guid: 5fa463a7cbb384e4ea76ff9d2676eeed,
+    type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2280,7 +2331,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 22.77, y: 1.6299999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 584196039}
@@ -4230,6 +4281,7 @@ RectTransform:
   - {fileID: 809393664}
   - {fileID: 2092583375}
   - {fileID: 1871970184}
+  - {fileID: 512549408}
   m_Father: {fileID: 894453140}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6174,7 +6226,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1654962962}
   - component: {fileID: 1654962963}
-  - component: {fileID: 1654962964}
   - component: {fileID: 1654962965}
   m_Layer: 5
   m_Name: SarahInfo
@@ -6228,28 +6279,6 @@ MonoBehaviour:
   target: {fileID: 1785061}
   health: 1
   healthGaugeImage: {fileID: 525926968}
---- !u!114 &1654962964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1654962961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aeffcd8563a54124aa1124d2b4dae995, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 8916380848890831845}
-  gaugeElements:
-  - {fileID: 100653192}
-  - {fileID: 57183575}
-  - {fileID: 610306612}
-  - {fileID: 2134769542}
-  - {fileID: 413250181}
-  - {fileID: 727375195}
-  - {fileID: 826441746}
-  - {fileID: 175415998}
 --- !u!114 &1654962965
 MonoBehaviour:
   m_ObjectHideFlags: 0
