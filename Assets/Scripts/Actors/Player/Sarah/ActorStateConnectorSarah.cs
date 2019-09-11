@@ -251,7 +251,7 @@ namespace ActorSarah
                         //Jumping遷移判定
                         if (jump.Method.IsActivated) { return StateInDefaultNum.IsJumping; }
                         //InAir遷移判定
-                        if (!groundSensor.IsOnGround) { return StateInDefaultNum.IsInAir; }
+                        //if (!groundSensor.IsOnGround) { return StateInDefaultNum.IsInAir; }
                         //Waiting遷移判定
                         if (!horizontalMove.Method.IsMoving) { return StateInDefaultNum.IsWaiting; }
                         return StateInDefaultNum.IsRunning;
