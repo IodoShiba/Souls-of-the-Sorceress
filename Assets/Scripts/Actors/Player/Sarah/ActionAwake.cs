@@ -20,12 +20,14 @@ public class ActionAwake : MonoBehaviour
 
     [SerializeField,Range(0,1)] float awakeGauge;
     [SerializeField] float awakeGaugeDecreaseSpeed;
-    [SerializeField] EnemyManager enemyManager;
+    [SerializeField, Range(0, 4)] int requiredProgressLevelToBreakLimitation;
+    [SerializeField] ActorSarah.ActorStateConnectorSarah ascSarah;
     [SerializeField,DisabledField]private bool isActive = false;
     AwakeLevels awakeLevel = AwakeLevels.ordinary;
 
     public bool IsActive { get => isActive;}
     public AwakeLevels AwakeLevel { get => awakeLevel; }
+    public float MaxGauge { get => ascSarah.ProgressLevel >= requiredProgressLevelToBreakLimitation ? 1 : .5f; }
 
     private void Start()
     {
@@ -71,7 +73,7 @@ public class ActionAwake : MonoBehaviour
     {
         if (!isActive)
         {
-            awakeGauge = Mathf.Clamp(awakeGauge + amount, 0, 1);
+            awakeGauge = Mathf.Clamp(awakeGauge + amount, 0, MaxGauge);
         }
     }
 
