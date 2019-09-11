@@ -325,8 +325,6 @@ MonoBehaviour:
     directionable: {fileID: 4249487242134317880}
     passPlatform: {fileID: 8916380848889061149}
     groundSensor: {fileID: 8916380849072566239}
-    IsJumpingFinished: 0
-    IsOnLandingFinished: 0
   verticalSlash:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
@@ -594,9 +592,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439327b37816c1a45a2444dd45ae6f97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  awakeGauge: 1
+  awakeGauge: 0
   awakeGaugeDecreaseSpeed: 0.1
-  enemyManager: {fileID: 0}
+  requiredProgressLevelToBreakLimitation: 4
+  ascSarah: {fileID: 8916380848890831846}
   isActive: 0
 --- !u!114 &8916380848889061144
 MonoBehaviour:

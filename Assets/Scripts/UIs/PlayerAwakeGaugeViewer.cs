@@ -10,6 +10,6 @@ public class PlayerAwakeGaugeViewer : ActionAwake.Viewer
     // Update is called once per frame
     private void Update()
     {
-        _awakeGaugeImage.fillAmount = AwakeGauge * maxFillAmount;
+        _awakeGaugeImage.fillAmount = Mathf.Clamp(AwakeGauge * 2 * maxFillAmount, 0, maxFillAmount);
     }
 }

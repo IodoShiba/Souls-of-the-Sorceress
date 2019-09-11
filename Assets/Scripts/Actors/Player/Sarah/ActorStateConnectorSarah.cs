@@ -17,8 +17,8 @@ namespace ActorSarah
 
         [SerializeField] float attackLongPushThreshold;
         [SerializeField] int durabilityCostOnShootMagic;
-        [SerializeField, Range(0, 3)] int progressLevel;
-        [SerializeField, Range(0, 3)] int reqiredProgressLevelToShootMagic;
+        [SerializeField, Range(0, 4)] int progressLevel;
+        [SerializeField, Range(0, 4)] int reqiredProgressLevelToShootMagic;
         [SerializeField] AwakeMutableShootObject shootObject;
         [SerializeField] PlayerCommander commands;
         [SerializeField] GroundSensor groundSensor;
@@ -55,6 +55,7 @@ namespace ActorSarah
         
         protected Rigidbody2D selfRigidbody;
         protected Rigidbody2D SelfRigidbody { get => selfRigidbody == null ? (selfRigidbody = GetComponent<Rigidbody2D>()) : selfRigidbody; }
+        public int ProgressLevel { get => progressLevel; }
 
         protected override void Awake()
         {
@@ -290,7 +291,7 @@ namespace ActorSarah
         [System.Serializable]
         private class SarahState : ActorState
         {
-            [SerializeField, Range(0, 3)] int requiredProgressLevel;
+            [SerializeField, Range(0, 4)] int requiredProgressLevel;
             ActorStateConnectorSarah connectorSarah;
 
             protected override bool IsAvailable() => requiredProgressLevel <= ConnectorSarah.progressLevel;
