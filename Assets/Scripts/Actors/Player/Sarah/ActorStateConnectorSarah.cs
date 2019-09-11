@@ -150,7 +150,7 @@ namespace ActorSarah
             [SerializeField] ActorFunction.Jump jump;
             [SerializeField] ActorFunction.Directionable directionable;
             [SerializeField] PassPlatform passPlatform;
-            [SerializeField] GroundSensor groundSensor;
+            [SerializeField] GroundSensor groundSensor, groundSensorForOnLanding;
             //[SerializeField] UmbrellaParameters umbrellaParameters;
 
             public ChainAttackStream attackStream;
@@ -175,6 +175,7 @@ namespace ActorSarah
                 ConnectorSarah.umbrellaParameters.ChangeDurabilityGradually(umbrellaRecoverCycle, umbrellaRecoverAmount);
                 sarahAnimator = ConnectorSarah.sarahAnimator;
                 IsInterruptJump = false;
+                sarahAnimator.SetTrigger("DefaultTrigger");
             }
             protected override void OnActive()
             {
@@ -256,17 +257,17 @@ namespace ActorSarah
                         return StateInDefaultNum.IsRunning;
                     case StateInDefaultNum.IsJumping:
                         //InAir遷移判定
-                        if (stateInfo.normalizedTime > 0.99) { return StateInDefaultNum.IsInAir; }
+                        if (stateInfo.normalizedTime > 0.9) { return StateInDefaultNum.IsInAir; }
                         return StateInDefaultNum.IsJumping;
                     case StateInDefaultNum.IsInAir:
                         //OnLanding遷移判定
-                        if (groundSensor.IsOnGround) { return StateInDefaultNum.IsOnLanding; }
+                        if (groundSensorForOnLanding.IsOnGround) { return StateInDefaultNum.IsOnLanding; }
                         return StateInDefaultNum.IsInAir;
                     case StateInDefaultNum.IsOnLanding:
                         //割り込みIsJumpingのためのboolをセット
                         if (jump.Method.IsActivated) { IsInterruptJump = true; }
                         //IsWaiting遷移判定
-                        if (stateInfo.normalizedTime > 0.99) { return StateInDefaultNum.IsWaiting; }
+                        if (stateInfo.normalizedTime > 0.85) { return StateInDefaultNum.IsWaiting; }
                         return StateInDefaultNum.IsOnLanding;
                 }
                 return StateInDefaultNum.IsWaiting;
@@ -317,7 +318,7 @@ namespace ActorSarah
 
             IodoShibaUtil.ManualUpdateClass.ManualClock receptionStartClock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
             public BoolExpressions.LongPushClock attackLongPushClock;
-
+            
             protected override bool ShouldCotinue() => verticalSlashAttack.IsAttackActive;
             protected override void OnInitialize()
             {
@@ -328,6 +329,7 @@ namespace ActorSarah
                 horizontalMove.ManualUpdate();
                 horizontalMove.Method.StopActorOnDisabled(.1f);
                 ConnectorSarah.TryShootMagic();
+                ConnectorSarah.sarahAnimator.SetTrigger("VerticalSlashTrigger");
             }
 
             protected override void OnActive()
