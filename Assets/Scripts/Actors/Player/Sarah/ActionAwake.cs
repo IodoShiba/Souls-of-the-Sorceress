@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static System.Math;
 
 [DisallowMultipleComponent]
-public class ActionAwake : MonoBehaviour
+public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
 {
     public class Viewer : MonoBehaviour
     {
@@ -78,4 +79,14 @@ public class ActionAwake : MonoBehaviour
     }
 
     public string _DebugOutput() { return $"Awake Gauge:{awakeGauge} (0.5 ≦ a < 1 : Awake, a = 1 : Blue Awake)\n"; }
+
+    public void Restore(float data)
+    {
+        awakeGauge = data;
+    }
+
+    public void Store(SaveData target, Action<float> setter)
+    {
+        setter(awakeGauge);
+    }
 }

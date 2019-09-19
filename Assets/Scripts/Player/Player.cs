@@ -9,7 +9,7 @@ using UnityEngine;
 //・攻撃を受ける
 //・状態遷移を構築する
 [DisallowMultipleComponent]
-public class Player : Mortal
+public class Player : Mortal, SaveData.IPlayerHealthCareer
 {
     enum BehaviourStates : int
     {
@@ -145,7 +145,17 @@ public class Player : Mortal
     //傘が機能する(=使える=「破損」状態でない)かを返す "=>"以降の式がこの条件そのもの（同値）と考える
     //Note: _ReturnType _Function() => _statement; で1文だけの関数を定義できる これは _ReturnType _Function() {return _statement;} に等しい
     public bool DoesUmbrellaWork() => umbrellaParameters.DoesUmbrellaWork();
-    
+
+    public void Restore((float health, float maxHealth) data)
+    {
+        health = data.health;
+        maxHealth = data.maxHealth;
+    }
+
+    public void Store(SaveData target, Action<(float health, float maxHealth)> setter)
+    {
+        setter((health, maxHealth));
+    }
 }
 
 
