@@ -58,11 +58,7 @@ public class Player : Mortal
     bool risingAttacking = false;
     int dirSign = 1;    //自機の横方向の向きを表す符号
 
-    //StateMutable<float> guardDamageMultiplier = null;
     bool guardSucceed = false;
-    //AwakeMutable<float> guardKnockBackMultiplier = null;
-    //AwakeMutable<float> horizontalSpeed = null;
-    //AwakeMutable<string> testStateMutable = null;
 
     PlayerStates.PlayerOnGround playerOnGround;
     PlayerStates.PlayerFlying playerFlying;
