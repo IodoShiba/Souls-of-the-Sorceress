@@ -33,6 +33,11 @@ public static class SceneName
     public const string boss1 = "1-boss";
 }
 
+public static class TagName
+{
+    public const string player = "Player";
+}
+
 public static class LayerName
 {
     public const string smashedActor = "Smashed Actor";
