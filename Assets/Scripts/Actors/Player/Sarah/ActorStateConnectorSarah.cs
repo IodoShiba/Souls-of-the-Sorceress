@@ -9,7 +9,7 @@ using UniRx;
 namespace ActorSarah
 {
 
-    public class ActorStateConnectorSarah : FightActorStateConector//ActorState.ActorStateConnector
+    public class ActorStateConnectorSarah : FightActorStateConector,SaveData.IPlayerProgressLevelCareer
     {
 
         [Serializable]
@@ -140,6 +140,17 @@ namespace ActorSarah
             }
 
         }
+
+        public void Restore(int data)
+        {
+            progressLevel = data;
+        }
+
+        public void Store(SaveData target, Action<int> setter)
+        {
+            setter(progressLevel);
+        }
+
         [System.Serializable]
         public class SarahDefault : DefaultState
         {
