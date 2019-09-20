@@ -40,5 +40,6 @@ public static class TagName
 
 public static class LayerName
 {
+    public const string ground = "Ground";
     public const string smashedActor = "Smashed Actor";
 }
