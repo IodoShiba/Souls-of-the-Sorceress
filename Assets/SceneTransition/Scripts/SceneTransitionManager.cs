@@ -8,6 +8,7 @@ public class SceneTransitionManager : MonoBehaviour
     static SceneTransitionManager instance = null;
 
     [SerializeField] TransitionEffect transitionEffect;
+    [SerializeField] GameObject sceneMemberRoot;
 
     static string targetScene = null;
     static string originScene = null;
@@ -72,7 +73,7 @@ public class SceneTransitionManager : MonoBehaviour
         GameObject[] roots = SceneManager.GetSceneByName(transitionSceneName).GetRootGameObjects();
         for(int i = 0; i < roots.Length; ++i)
         {
-            if(roots[i].name == "SCENEMEMBERROOT") { continue; }
+            if(roots[i] == sceneMemberRoot) { continue; }
             SceneManager.MoveGameObjectToScene(roots[i], targetSceneObj);
         }
 
