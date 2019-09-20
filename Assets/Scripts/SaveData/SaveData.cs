@@ -28,6 +28,16 @@ public class SaveData : ScriptableObject
         //これのJSON形式を暗号化してファイルに保存
     }
 
+    public void Load(string path)
+    {
+        //これのJSON形式の暗号化を解読して上書き
+    }
+
+    void Init()
+    {
+        playerHealth = playerMaxHealth;
+        playerAwakeGauge = 0;
+    }
     public void StorePlayerData(Player player)
     {
         ExecuteEvents.Execute<IPlayerHealthCareer>(player.gameObject, null, 

@@ -55,6 +55,8 @@ public class SceneTransitionManager : MonoBehaviour
         while (!targetSceneLoaded) { yield return null; }
 
         var targetSceneObj = SceneManager.GetSceneByName(targetScene);
+        SceneManager.SetActiveScene(targetSceneObj);
+
         if (sceneInitializer != null)
         {
             sceneInitializer(targetSceneObj);
@@ -63,11 +65,17 @@ public class SceneTransitionManager : MonoBehaviour
         transitionEffect.StartEffect(false);
         while (transitionEffect.IsOnEffect) { yield return null; }
 
-        SceneManager.SetActiveScene(targetSceneObj);
-
         SceneTransitionManager.targetScene = null;
         SceneTransitionManager.sceneInitializer = null;
         SceneTransitionManager.originScene = null;
+
+        GameObject[] roots = SceneManager.GetSceneByName(transitionSceneName).GetRootGameObjects();
+        for(int i = 0; i < roots.Length; ++i)
+        {
+            if(roots[i].name == "SCENEMEMBERROOT") { continue; }
+            SceneManager.MoveGameObjectToScene(roots[i], targetSceneObj);
+        }
+
         SceneManager.UnloadSceneAsync(transitionSceneName);
     }
 

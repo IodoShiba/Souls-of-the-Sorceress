@@ -6,6 +6,7 @@ public class StorePlayerAndChangeScene : MonoBehaviour
 {
     [SerializeField] string destinationSceneName;
     [SerializeField] SaveData saveData;
+    [SerializeField] WipeEffet wipeEffet;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,7 +19,10 @@ public class StorePlayerAndChangeScene : MonoBehaviour
             }
 
             saveData.StorePlayerData(player);
-            UnityEngine.SceneManagement.SceneManager.LoadScene(destinationSceneName);
+            //UnityEngine.SceneManagement.SceneManager.LoadScene(destinationSceneName);
+
+            TransitionEffect.WipeEffet = wipeEffet;
+            SceneTransitionManager.TransScene(destinationSceneName, null);
             
         }
     }
