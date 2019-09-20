@@ -25,9 +25,9 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
         protected override bool ShouldCotinue() => clock.Clock < stateSpan;
         protected override void OnInitialize()
         {
-            if (!disallowCross)
+            if (!disallowCross && useInvincibleTime)
             {
-                SelfMortal.OrderInvincible(useInvincibleTime ? invincibleTime : stateSpan);
+                SelfMortal.OrderInvincible(invincibleTime);
             }
             if (horizontalMove != null) { horizontalMove.enabled = false; }
         }
