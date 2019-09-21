@@ -5,8 +5,6 @@ using System.Collections;
 public abstract class FightActorStateConector : ActorState.ActorStateConnector
 {
 
-    //public interface BearableState { }
-
     [System.Serializable]
     public class SmashedState : ActorState
     {
@@ -48,7 +46,6 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
         base.Awake();
         GetComponent<Mortal>().OnAttackedCallbacks.AddListener(() => { InterruptWith(Smashed); });
     }
-    //[SerializeField] protected SmashedState smashed;
 
     public abstract SmashedState Smashed { get; }
     public bool BearAgainstAttack { get => bearAgainstAttack; set => bearAgainstAttack = value; }

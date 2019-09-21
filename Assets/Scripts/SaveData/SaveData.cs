@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-[CreateAssetMenu(menuName = "ScriptableObject/SaveData")]
 public class SaveData : ScriptableObject
 {
     public interface ISaveDataCareer<DataType> : IEventSystemHandler
@@ -12,7 +11,7 @@ public class SaveData : ScriptableObject
         void Store(SaveData target, System.Action<DataType> setter);
     }
 
-    public interface IPlayerHealthCareer :ISaveDataCareer<(float health,float maxHealth)> { }
+    public interface IPlayerHealthCareer : ISaveDataCareer<(float health, float maxHealth)> { }
 
     public interface IPlayerAwakeCareer : ISaveDataCareer<float> { }
 
@@ -22,6 +21,21 @@ public class SaveData : ScriptableObject
     [SerializeField] float playerMaxHealth;
     [SerializeField] float playerAwakeGauge;
     [SerializeField] int playerProgressLevel;
+
+    static SaveData instance = null;
+
+    static SaveData Instance {get => instance;}
+
+    private void OnEnable()
+    {
+        instance = this;
+    }
+
+    [RuntimeInitializeOnLoadMethod]
+    static void RuntimeInitializeOnLoad()
+    {
+        Instance.Init();
+    }
 
     public void Save(string path)
     {
