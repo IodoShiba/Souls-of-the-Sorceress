@@ -20,7 +20,7 @@ public class SaveData : ScriptableObject
     [SerializeField] float playerHealth;
     [SerializeField] float playerMaxHealth;
     [SerializeField] float playerAwakeGauge;
-    [SerializeField] int playerProgressLevel;
+    [SerializeField,Range(0,4)] int playerProgressLevel;
 
     static SaveData instance = null;
 
