@@ -130,7 +130,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8916380848890831844}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1863902048}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19f3529071d6684468cc6df34f08946b, type: 3}
@@ -867,7 +867,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8916380848890831844}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1863902048}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 439327b37816c1a45a2444dd45ae6f97, type: 3}
@@ -1726,7 +1726,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.77, y: 1.6299999, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 584196039}
@@ -2627,7 +2627,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   area: {fileID: 860905282}
-  monitoringGameObject: {fileID: 519420028}
+  monitoringGameObject: {fileID: 1863902048}
   layers:
   - meshRenderer: {fileID: 797241468}
     meshRendererLoopeX: {fileID: 0}
@@ -3414,7 +3414,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1357350811}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.77, y: 1.6299999, z: -10}
+  m_LocalPosition: {x: 22.77, y: 6.95, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2120922736}
@@ -5924,6 +5924,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7c6cabcccbdff1045853907b3de4877d, type: 2}
   - {fileID: 11400000, guid: a4f1314cb3b4dc84281f39d72c4a30bf, type: 2}
   - {fileID: 11400000, guid: c08fe23c808b29c488a80adf07e27144, type: 2}
+--- !u!1 &1863902048 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8916380848889061178, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 8916380848890831844}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1896432497
 GameObject:
   m_ObjectHideFlags: 0
@@ -6253,22 +6259,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LookaheadTime: 0.25
+  m_LookaheadTime: 0
   m_LookaheadSmoothing: 10
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
   m_ScreenX: 0.5
-  m_ScreenY: 0.484
+  m_ScreenY: 0.75
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0.05
-  m_DeadZoneHeight: 0.45
+  m_DeadZoneWidth: 0
+  m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.55
+  m_SoftZoneWidth: 0
+  m_SoftZoneHeight: 0
   m_BiasX: 0
-  m_BiasY: -0.3049981
+  m_BiasY: 0
   m_GroupFramingMode: 2
   m_AdjustmentMode: 2
   m_GroupFramingSize: 0.8
