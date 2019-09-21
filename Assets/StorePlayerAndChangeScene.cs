@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StorePlayerAndChangeScene : MonoBehaviour
 {
-    [SerializeField] string destinationSceneName;
+    [SerializeField,UnityEngine.Serialization.FormerlySerializedAs("destinationSceneName")] string destinationSceneNameOnTriggerEnter;
     [SerializeField] SaveData saveData;
     [SerializeField] WipeEffet wipeEffet;
 
@@ -18,12 +18,20 @@ public class StorePlayerAndChangeScene : MonoBehaviour
                 throw new System.NullReferenceException($"Detected GameObject '{collision.name}' does not have 'Player' Component.");
             }
 
-            saveData.StorePlayerData(player);
-            //UnityEngine.SceneManagement.SceneManager.LoadScene(destinationSceneName);
-
-            TransitionEffect.WipeEffet = wipeEffet;
-            SceneTransitionManager.TransScene(destinationSceneName, null);
-            
+            StoreAndChangeSene(player, destinationSceneNameOnTriggerEnter);
         }
+    }
+
+    public void StoreAndChangeSene(string destinationSceneName)
+    {
+        StoreAndChangeSene(ActorManager.PlayerActor.GetComponent<Player>(), destinationSceneName);
+    }
+
+    public void StoreAndChangeSene(Player player,string destinationSceneName)
+    {
+        saveData.StorePlayerData(player);
+
+        TransitionEffect.WipeEffet = wipeEffet;
+        SceneTransitionManager.TransScene(destinationSceneNameOnTriggerEnter, null);
     }
 }
