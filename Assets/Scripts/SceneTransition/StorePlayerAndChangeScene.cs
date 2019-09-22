@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StorePlayerAndChangeScene : MonoBehaviour
 {
-    [SerializeField,UnityEngine.Serialization.FormerlySerializedAs("destinationSceneName")] string destinationSceneNameOnTriggerEnter;
+    [SerializeField,UnityEngine.Serialization.FormerlySerializedAs("destinationSceneNameOnTriggerEnter")] string defaultDestinationSceneName;
     [SerializeField] SaveData saveData;
     [SerializeField] WipeEffet wipeEffet;
 
@@ -18,7 +18,7 @@ public class StorePlayerAndChangeScene : MonoBehaviour
                 throw new System.NullReferenceException($"Detected GameObject '{collision.name}' does not have 'Player' Component.");
             }
 
-            StoreAndChangeSene(player, destinationSceneNameOnTriggerEnter);
+            StoreAndChangeSene(player, defaultDestinationSceneName);
         }
     }
 
@@ -27,11 +27,28 @@ public class StorePlayerAndChangeScene : MonoBehaviour
         StoreAndChangeSene(ActorManager.PlayerActor.GetComponent<Player>(), destinationSceneName);
     }
 
+    public void StoreAndChangeSeneTimed(float time)
+    {
+        StartCoroutine(WaitAndChange(time, defaultDestinationSceneName));
+    }
+
+    public void StoreAndChangeSeneTimed(string destinationSceneName, float time)
+    {
+        StartCoroutine(WaitAndChange(time, destinationSceneName));
+    }
+
+    IEnumerator WaitAndChange(float t,string dest)
+    {
+        yield return new WaitForSeconds(t);
+        StoreAndChangeSene(ActorManager.PlayerActor.GetComponent<Player>(), defaultDestinationSceneName);
+    }
+
+
     public void StoreAndChangeSene(Player player,string destinationSceneName)
     {
         saveData.StorePlayerData(player);
 
         TransitionEffect.WipeEffet = wipeEffet;
-        SceneTransitionManager.TransScene(destinationSceneNameOnTriggerEnter, null);
+        SceneTransitionManager.TransScene(destinationSceneName, null);
     }
 }

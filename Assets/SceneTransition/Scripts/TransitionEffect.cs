@@ -14,8 +14,11 @@ public class TransitionEffect : MonoBehaviour
     const float INTERVAL_TIME = 0.1f;
     const float OUT_EFFECT_TIME = 0.2f;
 
-    static WipeEffet wipeEffet;
-    public static WipeEffet WipeEffet { get => wipeEffet; set => wipeEffet = value; }
+    static WipeEffet inWipeEffet;
+    static WipeEffet outWipeEffet;
+    public static WipeEffet WipeEffet { set => inWipeEffet = outWipeEffet = value; }
+    public static WipeEffet InWipeEffet { get => inWipeEffet; set => inWipeEffet = value; }
+    public static WipeEffet OutWipeEffet { get => outWipeEffet; set => outWipeEffet = value; }
 
     public bool IsOnEffect { get => isOnEffect; }
 
@@ -27,19 +30,20 @@ public class TransitionEffect : MonoBehaviour
         }
         fade = isTransIn;
         isOnEffect = true;
-        material.SetTexture("_Map", TransitionEffect.wipeEffet.Texture);
+        WipeEffet wipeEffet = isTransIn ? inWipeEffet : outWipeEffet;
+        material.SetTexture("_Map", wipeEffet.Texture);
         
-        StartCoroutine(TransCo(isTransIn));
+        StartCoroutine(TransCo(isTransIn,wipeEffet));
     }
 
-    IEnumerator TransCo(bool isTransIn)
+    IEnumerator TransCo(bool isTransIn, WipeEffet wipeEffet)
     {
         isOnEffect = true;
-        yield return StartCoroutine(TransEffect(isTransIn));
+        yield return StartCoroutine(TransEffect(isTransIn,wipeEffet));
         isOnEffect = false;
     }
 
-    public virtual IEnumerator TransEffect(bool isTransIn)
+    public virtual IEnumerator TransEffect(bool isTransIn,WipeEffet wipeEffet)
     {
         if (material == null) { yield break; }
 
