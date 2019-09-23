@@ -8,11 +8,12 @@ public class BackGround : MonoBehaviour
     [System.Serializable]
     class Layer
     {
-        public MeshRenderer meshRenderer;
-        public MeshRenderer meshRendererLoopeX;
-        public MeshRenderer meshRendererLoopeY;
-        public MeshRenderer meshRendererLoopeXY;
+        public SpriteRenderer spriteRenderer;
+        public SpriteRenderer spriteRendererLoopX;
+        public SpriteRenderer spriteRendererLoopY;
+        public SpriteRenderer spriteRendererLoopXY;
         [Range(0,1)] public float sizeProportion;
+        public float margin;
     }
 
     [SerializeField] BoxCollider2D area;
@@ -32,11 +33,12 @@ public class BackGround : MonoBehaviour
             posProp.x /= area.bounds.size.x / 2;
             posProp.y /= area.bounds.size.y / 2;
 
-            layers[i].meshRenderer.transform.position = (Vector3)monitObjPos + new Vector3(
-                -layers[i].meshRenderer.bounds.size.x / 2 * layers[i].sizeProportion * posProp.x,
-                -layers[i].meshRenderer.bounds.size.y / 2 * layers[i].sizeProportion * posProp.y,
-                layers[i].meshRenderer.transform.position.z
+            layers[i].spriteRenderer.transform.position = (Vector3)monitObjPos + new Vector3(
+                -layers[i].spriteRenderer.bounds.size.x / 2 * layers[i].sizeProportion * posProp.x,
+                -layers[i].spriteRenderer.bounds.size.y / 2 * layers[i].sizeProportion * posProp.y,
+                layers[i].spriteRenderer.transform.position.z
                 );
         }
+
     }
 }
