@@ -28,7 +28,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     public class Viewer : MonoBehaviour
     {
         [SerializeField] Mortal target;
-        protected float Health { get => target.health; }
+        protected float Health { get => target == null ? 0 : target.health; }
         protected float MaxHealth { get => target.maxHealth; }
     }
 
