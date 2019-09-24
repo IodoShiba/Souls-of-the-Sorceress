@@ -41,5 +41,6 @@ public static class TagName
 public static class LayerName
 {
     public const string ground = "Ground";
-    public const string smashedActor = "Smashed Actor";
+    public const string invincibleActor = "Invincible Actor";
+    public const string uncrossActor = "Uncross Actor";
 }
