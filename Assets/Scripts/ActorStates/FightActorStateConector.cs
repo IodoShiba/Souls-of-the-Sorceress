@@ -23,9 +23,17 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
         protected override bool ShouldCotinue() => clock.Clock < stateSpan;
         protected override void OnInitialize()
         {
-            if (!disallowCross && useInvincibleTime)
+            if (!disallowCross)
             {
-                SelfMortal.OrderInvincible(invincibleTime);
+                if (useInvincibleTime)
+                {
+                    SelfMortal.OrderInvincible(invincibleTime);
+                }
+                else
+                {
+                    originalLayer = GameObject.layer;
+                    GameObject.layer = LayerMask.NameToLayer(LayerName.uncrossActor);
+                }
             }
             if (horizontalMove != null) { horizontalMove.enabled = false; }
         }
@@ -35,6 +43,10 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
         }
         protected override void OnTerminate(bool isNormal)
         {
+            if (!disallowCross && !useInvincibleTime)
+            {
+                GameObject.layer = originalLayer;
+            }
             clock.Reset();
             if (horizontalMove != null) { horizontalMove.enabled = true; }
         }

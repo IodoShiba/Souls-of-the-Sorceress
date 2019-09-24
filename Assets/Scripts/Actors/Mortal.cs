@@ -195,7 +195,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         if(invincibleOrderedCount == 0)
         {
             originalLayer = gameObject.layer;
-            gameObject.layer = LayerMask.NameToLayer(LayerName.smashedActor);
+            gameObject.layer = LayerMask.NameToLayer(LayerName.invincibleActor);
         }
         invincibleOrderedCount++;
 
