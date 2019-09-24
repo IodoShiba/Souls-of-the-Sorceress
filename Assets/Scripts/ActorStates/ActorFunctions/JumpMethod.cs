@@ -15,7 +15,7 @@ namespace ActorFunction
         public class Method : ActorFunctionMethod<JumpFields>
         {
             bool activatable = false;
-            bool isActive = false;
+            public bool isActive = false;
             JumpFields fields = null;
             float limitHeight=0;
             Rigidbody2D rigidbody;

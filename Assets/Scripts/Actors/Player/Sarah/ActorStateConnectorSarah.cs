@@ -69,7 +69,12 @@ namespace ActorSarah
             ConnectStateFromDefault(
                 proceedFunc =
                 (tripleSlashAttackStream = new ChainAttackStream(.4f, true ,new ActorState[] { verticalSlash, returnSlash, smashSlash }))
-                .ProceedsWhen(() => groundSensor.IsOnGround && (commands.Attack.IsDown || (tripleSlashAttackStream.NextIndex() == 0 && attackLongPushClock.FinallyPushedTime > 0))));
+                .ProceedsWhen(() => groundSensor.IsOnGround && 
+                                    (commands.Attack.IsDown || (tripleSlashAttackStream.NextIndex() == 0 && attackLongPushClock.FinallyPushedTime > 0)) &&
+                                    !sarahDefault.currentState.Equals(SarahDefault.StateInDefaultNum.IsInAir) && 
+                                    !sarahDefault.currentState.Equals(SarahDefault.StateInDefaultNum.IsOnLanding)
+                             )
+                );
 
             ConnectStateFromDefault(
                 () => !groundSensor.IsOnGround && commands.DownAttackMultiPush.IsDown,
@@ -163,14 +168,15 @@ namespace ActorSarah
             [SerializeField] ActorFunction.Directionable directionable;
             [SerializeField] PassPlatform passPlatform;
             [SerializeField] GroundSensor groundSensor, groundSensorForOnLanding;
+            [DisabledField] public StateInDefaultNum currentState;
             //[SerializeField] UmbrellaParameters umbrellaParameters;
-
             public ChainAttackStream attackStream;
             ActorStateConnectorSarah connectorSarah;
             public BoolExpressions.LongPushClock attackLongPushClock;
             Animator sarahAnimator;
-            StateInDefaultNum currentState;
+
             bool IsInterruptJump;
+            float InAirTimer = 0f;
 
             public ActorStateConnectorSarah ConnectorSarah
             {
@@ -188,6 +194,8 @@ namespace ActorSarah
                 sarahAnimator = ConnectorSarah.sarahAnimator;
                 IsInterruptJump = false;
                 sarahAnimator.SetTrigger("DefaultTrigger");
+                ResetDefaultStateTriggers();
+                currentState = StateInDefaultNum.IsWaiting;
             }
             protected override void OnActive()
             {
@@ -220,28 +228,27 @@ namespace ActorSarah
             {
                 //State遷移を検知してStateBoolsを設定->AnimatorがBoolsの変化を検知してAnimation遷移してくれる
                 StateInDefaultNum nextState = JudgeNextStateInDefault();
-                //Debug.Log("IsJampingFinishd:" + IsJumpingFinished);
-
-                if(nextState != currentState)
+                Debug.Log(currentState);
+                if (nextState != currentState)
                 {
-                    Debug.Log(nextState);
-                    ResetStateBools();
+                    ResetDefaultStateTriggers();
                     switch (nextState)
                     {
                         case StateInDefaultNum.IsWaiting:
-                            sarahAnimator.SetBool("IsWaiting",true);
+                            sarahAnimator.SetTrigger("WaitingTrigger");
                             break;
                         case StateInDefaultNum.IsRunning:
-                            sarahAnimator.SetBool("IsRunning",true);
+                            sarahAnimator.SetTrigger("RunningTrigger");
                             break;
                         case StateInDefaultNum.IsJumping:
-                            sarahAnimator.SetBool("IsJumping", true);
+                            sarahAnimator.SetTrigger("JumpingTrigger");
                             break;
                         case StateInDefaultNum.IsInAir:
-                            sarahAnimator.SetBool("IsInAir", true);
+                            InAirTimer = 0f;
+                            sarahAnimator.SetTrigger("InAirTrigger");
                             break;
                         case StateInDefaultNum.IsOnLanding:
-                            sarahAnimator.SetBool("IsOnLanding", true);
+                            sarahAnimator.SetTrigger("OnLandingTrigger");
                             break;
                     }
                     currentState = nextState;
@@ -250,52 +257,50 @@ namespace ActorSarah
             StateInDefaultNum JudgeNextStateInDefault()
             {
                 AnimatorStateInfo stateInfo = sarahAnimator.GetCurrentAnimatorStateInfo(0);
-                //Debug.Log(stateInfo.normalizedTime);
                 switch (currentState)
                 {
                     case StateInDefaultNum.IsWaiting:
                         //Jumping遷移判定
                         if (jump.Method.IsActivated || IsInterruptJump) { IsInterruptJump = false; return StateInDefaultNum.IsJumping; }
                         //Running遷移判定
-                        if (horizontalMove.Method.IsMoving) { return StateInDefaultNum.IsRunning; }
+                        if (horizontalMove.Method.IsMoving && groundSensor.IsOnGround) { return StateInDefaultNum.IsRunning; }
                         return StateInDefaultNum.IsWaiting;
                     case StateInDefaultNum.IsRunning:
                         //Jumping遷移判定
                         if (jump.Method.IsActivated) { return StateInDefaultNum.IsJumping; }
-                        //InAir遷移判定
-                        //if (!groundSensor.IsOnGround) { return StateInDefaultNum.IsInAir; }
                         //Waiting遷移判定
                         if (!horizontalMove.Method.IsMoving) { return StateInDefaultNum.IsWaiting; }
                         return StateInDefaultNum.IsRunning;
                     case StateInDefaultNum.IsJumping:
                         //InAir遷移判定
-                        if (stateInfo.normalizedTime > 0.9) { return StateInDefaultNum.IsInAir; }
+                        if (stateInfo.normalizedTime > 1 && !jump.Method.isActive) { return StateInDefaultNum.IsInAir; }
                         return StateInDefaultNum.IsJumping;
                     case StateInDefaultNum.IsInAir:
+                        //InAirTimer更新
+                        InAirTimer += Time.deltaTime;
                         //OnLanding遷移判定
-                        if (groundSensorForOnLanding.IsOnGround) { return StateInDefaultNum.IsOnLanding; }
+                        if (InAirTimer > 0.3f && groundSensorForOnLanding.IsOnGround) { InAirTimer = 0f; ; return StateInDefaultNum.IsOnLanding; }
                         return StateInDefaultNum.IsInAir;
                     case StateInDefaultNum.IsOnLanding:
                         //割り込みIsJumpingのためのboolをセット
                         if (jump.Method.IsActivated) { IsInterruptJump = true; }
                         //IsWaiting遷移判定
-                        if (stateInfo.normalizedTime > 0.85) { return StateInDefaultNum.IsWaiting; }
+                        if (stateInfo.normalizedTime > 1) {return StateInDefaultNum.IsWaiting; }
                         return StateInDefaultNum.IsOnLanding;
                 }
                 return StateInDefaultNum.IsWaiting;
             }
 
-            void ResetStateBools()
+            void ResetDefaultStateTriggers()
             {
-                string[] boolsName = new string[] { "IsWaiting", "IsRunning", "IsJumping", "IsInAir", "IsOnLanding" };
-                foreach (string name in boolsName)
+                string[] names = {"WaitingTrigger","RunningTrigger","JumpingTrigger","InAirTrigger","OnLandingTrigger"};
+                foreach (string name in names)
                 {
-                    sarahAnimator.SetBool(name, false);
+                    sarahAnimator.ResetTrigger(name);
                 }
             }
 
-
-            enum StateInDefaultNum {IsWaiting = 0,IsRunning,IsJumping,IsInAir,IsOnLanding}
+            public enum StateInDefaultNum {IsWaiting = 0,IsRunning,IsJumping,IsInAir,IsOnLanding}
 
         }
 
@@ -342,6 +347,10 @@ namespace ActorSarah
                 horizontalMove.Method.StopActorOnDisabled(.1f);
                 ConnectorSarah.TryShootMagic();
                 ConnectorSarah.sarahAnimator.SetTrigger("VerticalSlashTrigger");
+                ConnectorSarah.sarahAnimator.ResetTrigger("DefaultTrigger");//これらは本質的でないがAnimatorControllerと内部Stateの同期ズレによるバグを防ぐ
+                ConnectorSarah.sarahAnimator.ResetTrigger("JumpingTrigger");//
+                ConnectorSarah.sarahAnimator.ResetTrigger("ReturnSmashTrigger");//
+                ConnectorSarah.sarahAnimator.ResetTrigger("SmashSlashTrigger");//
             }
 
             protected override void OnActive()
@@ -377,6 +386,7 @@ namespace ActorSarah
                 ConnectorSarah.SelfRigidbody.velocity = Vector2.zero;
                 ConnectorSarah.SelfRigidbody.AddForce(jumpUpImpulse, ForceMode2D.Impulse);
                 umbrella.StartMotion("Player" + nameof(ReturnSlash));
+                ConnectorSarah.sarahAnimator.SetTrigger("ReturnSmashTrigger");
             }
             protected override void OnActive()
             {
@@ -406,6 +416,7 @@ namespace ActorSarah
                 ConnectorSarah.SelfRigidbody.velocity = Vector2.up * ConnectorSarah.SelfRigidbody.velocity.y;
                 smashSlashAttack.Activate();
                 umbrella.StartMotion("Player" + nameof(SmashSlash));
+                ConnectorSarah.sarahAnimator.SetTrigger("SmashSlashTrigger");
             }
             protected override void OnTerminate(bool isNormal)
             {
