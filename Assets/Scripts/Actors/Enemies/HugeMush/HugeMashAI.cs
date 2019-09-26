@@ -8,6 +8,8 @@ public class HugeMashAI : AI
     [SerializeField] float maxChaseRadius;
     [SerializeField] float minChaseRadius;
     [SerializeField] float summonCycle;
+    [SerializeField] int maxNearbyEnemyCount;
+    [SerializeField] Sensor sensor;
     float t = 0;
 
     int moveSign;
@@ -29,7 +31,10 @@ public class HugeMashAI : AI
         t += Time.deltaTime;
         if (t > summonCycle)
         {
-            doSummon = true;
+            if (sensor.DetectCount < maxNearbyEnemyCount + 1)
+            {
+                doSummon = true;
+            }
             t -= summonCycle;
         }
     }

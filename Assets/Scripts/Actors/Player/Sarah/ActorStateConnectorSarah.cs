@@ -714,6 +714,8 @@ namespace ActorSarah
 
             IodoShibaUtil.ManualUpdateClass.ManualClock clock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
             //float originalPlatformContactorHeight;
+            Player player;
+            Player Player { get => player == null ? (player = GameObject.GetComponent<Player>()) : player; }
 
             protected override bool IsAvailable() => base.IsAvailable() && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
             protected override bool ShouldCotinue() => !groundSensor.IsOnGround && clock.Clock < abilityTime;
@@ -724,6 +726,7 @@ namespace ActorSarah
                 umbrella.PlayerDropAttack();
                 clock.Reset();
                 ConnectorSarah.umbrellaParameters.TryConsumeDurability(amountConsumeUmbrellaDurability);
+                Player.IsInvulnerable = true;
             }
 
             protected override void OnActive()
@@ -739,6 +742,7 @@ namespace ActorSarah
                 velocityAdjuster.Method.Disable();
                 umbrella.Default();
                 clock.Reset();
+                Player.IsInvulnerable = false;
             }
         }
 
