@@ -176,7 +176,6 @@ namespace ActorBossTitan
             protected override void OnInitialize()
             {
                 manualClock.Reset();
-                directionable.SwitchDirection();
             }
 
             protected override void OnActive()
@@ -189,6 +188,7 @@ namespace ActorBossTitan
                 manualClock.Reset();
                 titanAI.enabled = true;
                 hitboxCollider.enabled = true;
+                directionable.SwitchDirection();
             }
         }
 
