@@ -18,8 +18,11 @@ public class SceneTransitionManager : MonoBehaviour
     const string transitionSceneName = "TransitionAddScene";
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    private static void RuntimeInitializeOnLoad()
+    public static void RuntimeInitializeOnLoad()
     {
+        targetScene = null;
+        originScene = null;
+        sceneInitializer = null;
         SceneManager.sceneLoaded += (scene, mode) =>
         {
             if (scene.name == targetScene)
