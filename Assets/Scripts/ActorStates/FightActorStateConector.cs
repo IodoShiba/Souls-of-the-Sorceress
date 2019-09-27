@@ -1,14 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(Mortal))]
 public abstract class FightActorStateConector : ActorState.ActorStateConnector
 {
+    private bool bearAgainstAttack = false;
+    protected override void Awake()
+    {
+        base.Awake();
+        GetComponent<Mortal>().OnAttackedCallbacks.AddListener(() => { InterruptWith(Smashed); });
+    }
+
+    public abstract SmashedState Smashed { get; }
+    public virtual DeadState Dead { get => null; }
+    public bool BearAgainstAttack { get => bearAgainstAttack; set => bearAgainstAttack = value; }
+    public bool IsDead { get => Current is DeadState; }
 
     [System.Serializable]
     public class SmashedState : ActorState
     {
-        [SerializeField,UnityEngine.Serialization.FormerlySerializedAs("stunTime")] float stateSpan;
+        [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("stunTime")] float stateSpan;
         [SerializeField] bool useInvincibleTime;
         [SerializeField] float invincibleTime;
         [SerializeField] ActorFunction.HorizontalMoveMethod horizontalMove;
@@ -18,7 +30,7 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
         int originalLayer;
 
         Mortal selfMortal = null;
-        Mortal SelfMortal { get => selfMortal == null ? (selfMortal = GameObject.GetComponent<Mortal>()) : selfMortal;}
+        Mortal SelfMortal { get => selfMortal == null ? (selfMortal = GameObject.GetComponent<Mortal>()) : selfMortal; }
 
         protected override bool ShouldCotinue() => clock.Clock < stateSpan;
         protected override void OnInitialize()
@@ -52,13 +64,18 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
         }
     }
 
-    private bool bearAgainstAttack = false;
-    protected override void Awake()
+    [System.Serializable]
+    public class DeadState : ActorState
     {
-        base.Awake();
-        GetComponent<Mortal>().OnAttackedCallbacks.AddListener(() => { InterruptWith(Smashed); });
-    }
+        protected override bool ShouldCotinue() => true;
+        protected override void OnInitialize()
+        {
+            Destroy(GameObject);
+        }
 
-    public abstract SmashedState Smashed { get; }
-    public bool BearAgainstAttack { get => bearAgainstAttack; set => bearAgainstAttack = value; }
+        public override bool IsResistibleTo(Type actorStateType)
+        {
+            return true;
+        }
+    }
 }

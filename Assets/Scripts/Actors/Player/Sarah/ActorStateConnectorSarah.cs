@@ -41,6 +41,7 @@ namespace ActorSarah
         [SerializeField] Glide glide;
 
         [SerializeField] SarahSmashed smashed;
+        [SerializeField] SarahDead dead;
 
         ChainAttackStream tripleSlashAttackStream;
         ActorState formerState;
@@ -49,7 +50,7 @@ namespace ActorSarah
 
         public override ActorState DefaultState => sarahDefault;
         public override SmashedState Smashed => smashed;
-
+        public override DeadState Dead => dead;
         public bool isGuard { get => guard.IsCurrent; }
 
         
@@ -752,5 +753,22 @@ namespace ActorSarah
 
         }
 
+        [System.Serializable]
+        private class SarahDead : DeadState
+        {
+            [SerializeField] SpriteRenderer spriteRenderer;
+            [SerializeField] ActorFunction.HorizontalMove horizontalMove;
+            protected override void OnInitialize()
+            {
+                //死んだ通知出す
+                spriteRenderer.color = new Color(1, 0.5f, 0.5f, 0.5f);
+                GameObject.GetComponent<Player>().IsInvulnerable = true;
+
+                horizontalMove.Method.StopActorOnDisabled(.1f);
+
+                var rb2d = GameObject.GetComponent<Rigidbody2D>();
+                rb2d.constraints = rb2d.constraints | RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+            }
+        }
     }
 }

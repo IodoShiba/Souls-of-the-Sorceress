@@ -4,6 +4,7 @@ using System.Collections;
 [CreateAssetMenu(menuName = "ScriptableObject/WipeEffect")]
 public class WipeEffet : ScriptableObject
 {
+    [SerializeField] Material shaderMaterial;
     [SerializeField] Texture texture;
     [SerializeField] AnimationCurve borderSIn;
     [SerializeField] AnimationCurve borderEIn;
@@ -13,6 +14,7 @@ public class WipeEffet : ScriptableObject
     [SerializeField] float intervalTime;
     [SerializeField] float outTime;
 
+    public Material ShaderMaterial { get => shaderMaterial; }
     public Texture Texture { get => texture; }
     public AnimationCurve BorderSIn { get => borderSIn; }
     public AnimationCurve BorderEIn { get => borderEIn; }

@@ -75,10 +75,6 @@ public class Player : Mortal, SaveData.IPlayerHealthCareer
     {
         //Debug.Log(GetComponent<ActorSarah.ActorStateConnectorSarah>().Current.GetType().Name); 
         //現在、プレイヤーは被ダメージ状態から抜けた時点で体力が0以下だと消滅する
-        if (health <= 0&&!damaged)
-        {
-            Destroy(gameObject);
-        }
         
 
         if (_debugText != null)
@@ -109,6 +105,7 @@ public class Player : Mortal, SaveData.IPlayerHealthCareer
     public override void OnDying(DealtAttackInfo causeOfDeath) //体力がなくなると呼ばれる関数　今はガバ実装
     {
         Debug.Log("Player has dead.");
+        connectorSarah.InterruptWith(connectorSarah.Dead);
     }
 
     public void ChangeDirection(int sign) //方向転換用の関数　dirSignもこの中で変更してもよいかもしれない
