@@ -812,6 +812,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 843604127}
+        m_MethodName: set_IsInvulnerable
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onAttackedCallbacks:
@@ -945,51 +956,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
-        type: 3}
-      propertyPath: onVictory.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
-        type: 3}
-      propertyPath: onVictory.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
-        type: 3}
-      propertyPath: onVictory.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
-        type: 3}
-      propertyPath: onVictory.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2065726995}
-    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
-        type: 3}
-      propertyPath: onVictory.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StoreAndChangeSeneTimed
-      objectReference: {fileID: 0}
-    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
-        type: 3}
-      propertyPath: onVictory.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
-        type: 3}
-      propertyPath: onVictory.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
-        type: 3}
-      propertyPath: onDefeated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoGameOver
-      objectReference: {fileID: 0}
-    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
-        type: 3}
-      propertyPath: onDefeated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7457400105786499162, guid: ed6649e14a4e53345afeb85aed4f4e98,
         type: 3}
       propertyPath: m_Name
@@ -1049,6 +1015,51 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
+        type: 3}
+      propertyPath: onVictory.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
+        type: 3}
+      propertyPath: onVictory.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
+        type: 3}
+      propertyPath: onVictory.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
+        type: 3}
+      propertyPath: onVictory.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2065726995}
+    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
+        type: 3}
+      propertyPath: onVictory.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: StoreAndChangeSeneTimed
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
+        type: 3}
+      propertyPath: onVictory.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
+        type: 3}
+      propertyPath: onVictory.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_FloatArgument
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
+        type: 3}
+      propertyPath: onDefeated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoGameOver
+      objectReference: {fileID: 0}
+    - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
+        type: 3}
+      propertyPath: onDefeated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed6649e14a4e53345afeb85aed4f4e98, type: 3}
@@ -1438,16 +1449,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sarah
       objectReference: {fileID: 0}
-    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: enemyManager
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: _debugText
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1502,6 +1503,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: enemyManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: _debugText
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061092, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
