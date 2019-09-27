@@ -32,7 +32,7 @@ public class Fes_EmergencyReset : MonoBehaviour
         if(!allPushedm1 && allPushed)
         {
             SaveData.Instance.Init();
-            SceneTransitionManager.RuntimeInitializeOnLoad();
+            SceneTransitionManager.Initialize();
             UnityEngine.SceneManagement.SceneManager.LoadScene(SceneName.title);
         }
         allPushedm1 = allPushed;

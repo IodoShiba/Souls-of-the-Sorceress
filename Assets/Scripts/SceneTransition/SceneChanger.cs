@@ -34,4 +34,5 @@ public class SceneChanger : MonoBehaviour
         yield return new WaitForSeconds(time);
         ChangeScene(dest);
     }
+
 }
