@@ -30,6 +30,18 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
     public AwakeLevels AwakeLevel { get => awakeLevel; }
     public float MaxGauge { get => ascSarah.ProgressLevel >= requiredProgressLevelToBreakLimitation ? 1 : .5f; }
 
+    public bool IsAbleToAwake { get => awakeGauge >= 0.5f; }
+
+    public AwakeLevels CurrentAvailableAwakeLevel
+    {
+        get
+        {
+            if(awakeGauge < .5f) { return AwakeLevels.ordinary; }
+            else if(awakeGauge < 1f) { return AwakeLevels.awaken; }
+            else { return AwakeLevels.blueAwaken; } // awakeGauge == 1;
+        }
+    }
+
     private void Start()
     {
         awakeLevel = AwakeLevels.ordinary;
