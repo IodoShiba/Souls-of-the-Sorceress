@@ -227,9 +227,8 @@ namespace ActorSarah
 
             void StateInDefaultJudge()
             {
-                //State遷移を検知してStateBoolsを設定->AnimatorがBoolsの変化を検知してAnimation遷移してくれる
                 StateInDefaultNum nextState = JudgeNextStateInDefault();
-                Debug.Log(currentState);
+                //Debug.Log(currentState);
                 if (nextState != currentState)
                 {
                     ResetDefaultStateTriggers();
@@ -443,6 +442,7 @@ namespace ActorSarah
                 umbrella.StartMotion("Player" + nameof(AerialSlash));
 
                 ConnectorSarah.TryShootMagic();
+                ConnectorSarah.sarahAnimator.SetTrigger("AerialSlashTrigger");
             }
 
             protected override void OnTerminate(bool isNormal)
@@ -728,6 +728,7 @@ namespace ActorSarah
                 clock.Reset();
                 ConnectorSarah.umbrellaParameters.TryConsumeDurability(amountConsumeUmbrellaDurability);
                 Player.IsInvulnerable = true;
+                ConnectorSarah.sarahAnimator.SetTrigger("DropAttackTrigger");
             }
 
             protected override void OnActive()
@@ -750,7 +751,12 @@ namespace ActorSarah
         [System.Serializable]
         private class SarahSmashed : SmashedState
         {
-
+            protected override void OnInitialize()
+            {
+                ActorStateConnectorSarah actorStateConnectorSarah = Connector as ActorStateConnectorSarah;
+                actorStateConnectorSarah.sarahAnimator.SetTrigger("SarahSmashedTrigger");
+                base.OnInitialize();   
+            }
         }
 
         [System.Serializable]
