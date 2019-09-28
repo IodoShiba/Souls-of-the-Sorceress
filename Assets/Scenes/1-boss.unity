@@ -1449,6 +1449,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sarah
       objectReference: {fileID: 0}
+    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: enemyManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: _debugText
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1503,16 +1513,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: enemyManager
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: _debugText
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061092, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
@@ -3090,17 +3090,19 @@ MonoBehaviour:
         jumpForce: 100000
         jumpUpSpeed: 18
     passPlatform: {fileID: 1200558870}
-    directionable: {fileID: 1200558872}
     attackDifferencer: {fileID: 1200558874}
   fainted:
     gameObject: {fileID: 1200558860}
     connector: {fileID: 1200558867}
     span: 10
+    reactionImpulse: {x: -200, y: 700}
     titanAI: {fileID: 1200558871}
     enemySpawner: {fileID: 1311982143}
     hitboxCollider: {fileID: 189919881}
     weakPoint: {fileID: 464670549}
     _spriteRenderer: {fileID: 1200558865}
+    rigidbody: {fileID: 1200558863}
+    directionable: {fileID: 1200558872}
   recoverFromFaint:
     gameObject: {fileID: 1200558860}
     connector: {fileID: 1200558867}
