@@ -8,10 +8,10 @@ public class PlayerAwakeGaugeViewer : ActionAwake.Viewer
     [SerializeField] UnityEngine.UI.Image _awakeGaugeImage;
     [SerializeField] Animator flameAniamtor;
 
-    bool ableToAwake;
     static readonly int beatHash = Animator.StringToHash("Beat");
     static readonly int idleHash = Animator.StringToHash("Idle");
 
+    bool ableToAwake;
     bool AbleToAwake
     {
         set
