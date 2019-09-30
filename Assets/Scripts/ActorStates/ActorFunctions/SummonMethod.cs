@@ -87,9 +87,5 @@ namespace ActorFunction
             Method.ManualUpdate(Fields, use);
         }
 
-        public void SetDirection(int dirSign)
-        {
-
-        }
     }
 }
