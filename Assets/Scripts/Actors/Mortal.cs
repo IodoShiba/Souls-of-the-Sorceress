@@ -158,6 +158,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         //if (result.damage <= 0 && result.knockBackImpulse.magnitude < 0.01) { return; }//攻撃が無意味ならば処理を中断
         if (result.damage > 0 || result.knockBackImpulse.magnitude >= 0.01)//攻撃を受ける処理
         {
+            float originalHealth = health;
             health -= result.damage; //体力を減算する
             selfRigidbody.velocity = Vector2.zero; //Actorの動きを止める
             selfRigidbody.AddForce(
@@ -167,7 +168,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
             //ヒットストップを与える（未実装）
 
             OnAttackedCallbacks.Invoke();//被攻撃時のコールバック関数を呼び出し
-            if (health <= 0)
+            if (health <= 0 && originalHealth > 0)
             {
                 health = 0;
                 dyingCallbacks.Invoke();

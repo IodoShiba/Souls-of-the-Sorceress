@@ -41,6 +41,7 @@ namespace ActorSarah
         [SerializeField] Glide glide;
 
         [SerializeField] SarahSmashed smashed;
+        [SerializeField] SarahDead dead;
 
         ChainAttackStream tripleSlashAttackStream;
         ActorState formerState;
@@ -49,7 +50,7 @@ namespace ActorSarah
 
         public override ActorState DefaultState => sarahDefault;
         public override SmashedState Smashed => smashed;
-
+        public override DeadState Dead => dead;
         public bool isGuard { get => guard.IsCurrent; }
 
         
@@ -226,9 +227,8 @@ namespace ActorSarah
 
             void StateInDefaultJudge()
             {
-                //State遷移を検知してStateBoolsを設定->AnimatorがBoolsの変化を検知してAnimation遷移してくれる
                 StateInDefaultNum nextState = JudgeNextStateInDefault();
-                Debug.Log(currentState);
+                //Debug.Log(currentState);
                 if (nextState != currentState)
                 {
                     ResetDefaultStateTriggers();
@@ -442,6 +442,7 @@ namespace ActorSarah
                 umbrella.StartMotion("Player" + nameof(AerialSlash));
 
                 ConnectorSarah.TryShootMagic();
+                ConnectorSarah.sarahAnimator.SetTrigger("AerialSlashTrigger");
             }
 
             protected override void OnTerminate(bool isNormal)
@@ -714,6 +715,8 @@ namespace ActorSarah
 
             IodoShibaUtil.ManualUpdateClass.ManualClock clock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
             //float originalPlatformContactorHeight;
+            Player player;
+            Player Player { get => player == null ? (player = GameObject.GetComponent<Player>()) : player; }
 
             protected override bool IsAvailable() => base.IsAvailable() && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
             protected override bool ShouldCotinue() => !groundSensor.IsOnGround && clock.Clock < abilityTime;
@@ -724,6 +727,8 @@ namespace ActorSarah
                 umbrella.PlayerDropAttack();
                 clock.Reset();
                 ConnectorSarah.umbrellaParameters.TryConsumeDurability(amountConsumeUmbrellaDurability);
+                Player.IsInvulnerable = true;
+                ConnectorSarah.sarahAnimator.SetTrigger("DropAttackTrigger");
             }
 
             protected override void OnActive()
@@ -739,14 +744,37 @@ namespace ActorSarah
                 velocityAdjuster.Method.Disable();
                 umbrella.Default();
                 clock.Reset();
+                Player.IsInvulnerable = false;
             }
         }
 
         [System.Serializable]
         private class SarahSmashed : SmashedState
         {
-
+            protected override void OnInitialize()
+            {
+                ActorStateConnectorSarah actorStateConnectorSarah = Connector as ActorStateConnectorSarah;
+                actorStateConnectorSarah.sarahAnimator.SetTrigger("SarahSmashedTrigger");
+                base.OnInitialize();   
+            }
         }
 
+        [System.Serializable]
+        private class SarahDead : DeadState
+        {
+            [SerializeField] SpriteRenderer spriteRenderer;
+            [SerializeField] ActorFunction.HorizontalMove horizontalMove;
+            protected override void OnInitialize()
+            {
+                //死んだ通知出す
+                spriteRenderer.color = new Color(1, 0.5f, 0.5f, 0.5f);
+                GameObject.GetComponent<Player>().IsInvulnerable = true;
+
+                horizontalMove.Method.StopActorOnDisabled(.1f);
+
+                var rb2d = GameObject.GetComponent<Rigidbody2D>();
+                rb2d.constraints = rb2d.constraints | RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezePositionY;
+            }
+        }
     }
 }

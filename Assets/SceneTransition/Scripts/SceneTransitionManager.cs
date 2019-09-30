@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,8 +17,9 @@ public class SceneTransitionManager : MonoBehaviour
     const string transitionSceneName = "TransitionAddScene";
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    private static void RuntimeInitializeOnLoad()
+    static void RuntimeInitializeOnLoad()
     {
+        Initialize();
         SceneManager.sceneLoaded += (scene, mode) =>
         {
             if (scene.name == targetScene)
@@ -29,6 +29,12 @@ public class SceneTransitionManager : MonoBehaviour
         };
     }
 
+    public static void Initialize()
+    {
+        targetScene = null;
+        originScene = null;
+        sceneInitializer = null;
+    }
     private void Awake()
     {
         if(instance != null && instance != this)
@@ -91,4 +97,5 @@ public class SceneTransitionManager : MonoBehaviour
         SceneManager.LoadScene(transitionSceneName, LoadSceneMode.Additive);
         //SceneManager.SetActiveScene(SceneManager.GetSceneByName(transitionSceneName));
     }
+
 }

@@ -57,7 +57,10 @@ public class PassPlatform : MonoBehaviour//,IodoShiba.ManualUpdateClass.IManualU
     protected void OnTerminate()
     {
         t = 0;
-        gameObject.layer = ordinaryLayer;
+        if (mode == Mode.SwitchLayer)
+        {
+            gameObject.layer = ordinaryLayer;
+        }
         if(platformContactor!=null) platformContactor.enabled = true;
     }
     public void Use(bool value)        

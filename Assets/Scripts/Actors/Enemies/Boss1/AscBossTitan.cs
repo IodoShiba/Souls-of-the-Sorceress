@@ -66,14 +66,17 @@ namespace ActorBossTitan
             [SerializeField] ActorFunction.Jump jump1Step;
             [SerializeField] ActorFunction.Jump jump2Step;
             [SerializeField] PassPlatform passPlatform;
-            [SerializeField] ActorFunction.Directionable directionable;
             [SerializeField] AttackDifferencer attackDifferencer;
 
             //protected override bool ShouldCotinue()
             //{
             //    return !wallSensor1.IsOnGround || !wallSensor2.IsOnGround;
             //}
-            
+            protected override void OnInitialize()
+            {
+                horizontalMove.Method.enabled = true;
+            }
+
             protected override void OnActive()
             {
                 titanAI.Decide();
@@ -105,6 +108,8 @@ namespace ActorBossTitan
             protected override void OnTerminate(bool isNormal)
             {
                 attackDifferencer.UseIndex = 0;
+                horizontalMove.ManualUpdate(0);
+                horizontalMove.Method.enabled = false;
             }
         }
 
@@ -118,11 +123,14 @@ namespace ActorBossTitan
         class Fainted : ActorState
         {
             [SerializeField] float span;
+            [SerializeField] Vector2 reactionImpulse;
             [SerializeField] BossTitanAI titanAI;
             [SerializeField] EnemySpawner enemySpawner;
             [SerializeField] Collider2D hitboxCollider;
             [SerializeField] Mortal weakPoint;
             [SerializeField] SpriteRenderer _spriteRenderer;
+            [SerializeField] Rigidbody2D rigidbody;
+            [SerializeField] ActorFunction.Directionable directionable;
 
             IodoShibaUtil.ManualUpdateClass.ManualClock manualClock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
 
@@ -138,6 +146,10 @@ namespace ActorBossTitan
                 hitboxCollider.enabled = false;
                 weakPoint.IsInvulnerable = false;
                 Debug.Log("Titan Boss is fainted.");
+                Debug.Log("Boss dir:" + directionable.CurrentDirectionInt+"/ * :"+ reactionImpulse.x * directionable.CurrentDirectionInt);
+
+                rigidbody.velocity = Vector2.zero;
+                rigidbody.AddForce(new Vector2(reactionImpulse.x * directionable.CurrentDirectionInt, reactionImpulse.y),ForceMode2D.Impulse);
 
                 //一時的
                 _spriteRenderer.color = new Color(1, 1, 1, .5f);
@@ -176,7 +188,6 @@ namespace ActorBossTitan
             protected override void OnInitialize()
             {
                 manualClock.Reset();
-                directionable.SwitchDirection();
             }
 
             protected override void OnActive()
@@ -189,6 +200,7 @@ namespace ActorBossTitan
                 manualClock.Reset();
                 titanAI.enabled = true;
                 hitboxCollider.enabled = true;
+                directionable.SwitchDirection();
             }
         }
 

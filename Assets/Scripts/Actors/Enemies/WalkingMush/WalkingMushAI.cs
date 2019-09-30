@@ -5,8 +5,8 @@ using UnityEngine;
 public class WalkingMushAI : AI
 {
     [SerializeField] Transform playerTransform;
-    [SerializeField] float maxChaseRadius;
-    [SerializeField] float minChaseRadius;
+    [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("maxChaseRadius")] float maxChaseDistance;
+    [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("minChaseRadius")] float minChaseDistance;
     int moveSign;
 
     public int MoveSign { get => moveSign; }
@@ -20,7 +20,8 @@ public class WalkingMushAI : AI
     {
         if (this==null) { return; }
         Vector2 vector = playerTransform.position - transform.position;
-        if (minChaseRadius < vector.magnitude && vector.magnitude < maxChaseRadius)
+        float xdistance = Mathf.Abs(vector.x);
+        if (minChaseDistance < xdistance && xdistance < maxChaseDistance)
         {
             moveSign = System.Math.Sign(vector.x);
         }

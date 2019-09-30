@@ -22,7 +22,7 @@ public class AttackInHitbox : MonoBehaviour
     bool isAttackActive = false;
 
     public float Damage { get { return convertedAttackData.damage; } }
-    public Vector2 KnockBackImpact { get { return convertedAttackData.knockBackImpulse; } }
+    public Vector2 KnockBackImpulse { get { return convertedAttackData.knockBackImpulse; } }
     public Collider2D AttackCollider { get { return convertedAttackData.attackCollider; } }
     public bool Throughable { get { return convertedAttackData.throughable; } }
 

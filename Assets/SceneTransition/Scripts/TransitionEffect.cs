@@ -31,6 +31,7 @@ public class TransitionEffect : MonoBehaviour
         fade = isTransIn;
         isOnEffect = true;
         WipeEffet wipeEffet = isTransIn ? inWipeEffet : outWipeEffet;
+        material = wipeEffet.ShaderMaterial;
         material.SetTexture("_Map", wipeEffet.Texture);
         
         StartCoroutine(TransCo(isTransIn,wipeEffet));

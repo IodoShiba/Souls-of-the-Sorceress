@@ -24,7 +24,7 @@ public class SaveData : ScriptableObject
 
     static SaveData instance = null;
 
-    static SaveData Instance {get => instance;}
+    public static SaveData Instance {get => instance;}
 
     private void OnEnable()
     {
@@ -47,7 +47,7 @@ public class SaveData : ScriptableObject
         //これのJSON形式の暗号化を解読して上書き
     }
 
-    void Init()
+    public void Init()
     {
         playerHealth = playerMaxHealth;
         playerAwakeGauge = 0;
