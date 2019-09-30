@@ -233,8 +233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61bce3ae7c4a88440a6ea6326b43c94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 120
-  maxHealth: 120
+  health: 200
+  maxHealth: 200
   isInvulnerable: 0
   dyingCallbacks:
     m_PersistentCalls:
@@ -434,6 +434,9 @@ MonoBehaviour:
   monitoredTagName: Enemy
   useTargetGameObject: 0
   targetGameObjects: []
+  useCountUpdateCycle: 0
+  countUpdateCycle: 0
+  detectCount: 0
 --- !u!61 &6574033088514807396
 BoxCollider2D:
   m_ObjectHideFlags: 0
