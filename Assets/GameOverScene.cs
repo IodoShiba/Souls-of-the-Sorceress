@@ -19,6 +19,7 @@ public class GameOverScene : MonoBehaviour
     [SerializeField] WipeEffet noWipe;
     [SerializeField] WipeEffet outWipe;
     [SerializeField] InputToFireEvent inputToFireEvent;
+    [SerializeField] AudioSource audioSource;
 
     Vector3 playerScreenCoordinate;
     float orthoCamSize;
@@ -54,6 +55,7 @@ public class GameOverScene : MonoBehaviour
         yield return new WaitForSeconds(cameraMoveSpan);
 
         gameOverTextImage.DOFade(1, gameOverTextAppearSpan);
+        audioSource.Play();
         inputToFireEvent.enabled = true;
 
         yield return new WaitForSeconds(1);
