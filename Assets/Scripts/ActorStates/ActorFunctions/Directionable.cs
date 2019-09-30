@@ -27,6 +27,7 @@ namespace ActorFunction
             set
             {
                 if(currentDirection == value) { return; }
+                if(value == 0) { return; }
                 currentDirection = value;
                 var ls = gameObject.transform.localScale;
                 gameObject.transform.localScale = new Vector3((int)value * Mathf.Abs(ls.x), ls.y, ls.z);

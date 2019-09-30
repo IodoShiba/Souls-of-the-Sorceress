@@ -23,7 +23,8 @@ namespace ActorFunction
 
         [SerializeField] List<SubjectAndWeight> targets;
         [SerializeField] List<SummonPositionParameter> summonPositions;
-        
+        [SerializeField] ActorFunction.Directionable directionable;
+
 
         public class Method : ActorFunctionMethod<SummonFields>
         {
@@ -34,13 +35,20 @@ namespace ActorFunction
             {
                 if (!use) { return; }
 
+                int dirSign = fields.directionable == null ? 1 : fields.directionable.CurrentDirectionInt;
+
                 foreach (var r in fields.summonPositions)
                 {
+                    Vector3 summonRelPos =
+                        (Vector3)r.position + 
+                        new Vector3(
+                            Random.Range(-r.randomRange.x, r.randomRange.x) / 2,
+                            Random.Range(-r.randomRange.y, r.randomRange.y) / 2, 0
+                            );
+                    summonRelPos = new Vector3(summonRelPos.x * dirSign, summonRelPos.y);
+
                     _manager.Summon(SelectEnemy(fields),//fields.targetPrefab,
-                        transform.position +
-                            (Vector3)r.position +
-                            new Vector3(Random.Range(-r.randomRange.x, r.randomRange.x)/2,
-                                Random.Range(-r.randomRange.y, r.randomRange.y)/2, 0),
+                        transform.position + summonRelPos,
                         Quaternion.identity);
                 }
             }
@@ -77,6 +85,11 @@ namespace ActorFunction
         public void ManualUpdate(bool use)
         {
             Method.ManualUpdate(Fields, use);
+        }
+
+        public void SetDirection(int dirSign)
+        {
+
         }
     }
 }

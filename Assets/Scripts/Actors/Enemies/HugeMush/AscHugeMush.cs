@@ -24,6 +24,7 @@ namespace ActorHugeMashroom
         {
             [SerializeField] ActorFunction.HorizontalMove horizontalMove;
             [SerializeField] ActorFunction.Summon summon;
+            [SerializeField] ActorFunction.Directionable directionable;
 
             AscHugeMush connectorHugeMush;
             AscHugeMush ConnectorHugeMush { get => connectorHugeMush == null ? (connectorHugeMush = Connector as AscHugeMush) : connectorHugeMush; }
@@ -31,6 +32,9 @@ namespace ActorHugeMashroom
             {
                 horizontalMove.ManualUpdate(ConnectorHugeMush.ai.MoveSign);
                 summon.ManualUpdate(ConnectorHugeMush.ai.DoSummon);
+                directionable.CurrentDirection = (ActorFunction.Directionable.Direction)ConnectorHugeMush.ai.MoveSign;
+
+                
             }
         }
     }
