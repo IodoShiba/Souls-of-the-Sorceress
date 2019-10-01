@@ -16,9 +16,20 @@ public class SoundManager : MonoBehaviour
     public void PlayOneShot(AudioClip audioClip) => audioSource.PlayOneShot(audioClip);
     public void PlayOneShot(AudioClip audioClip, float volumeScale) => audioSource.PlayOneShot(audioClip, volumeScale);
     
-    public class SoundManagerScriptable : ScriptableObject
+
+
+    public class Scriptable : ScriptableObject
     {
         [SerializeField] SoundManager prefab;
+
+        [Space(16)]
+        [SerializeField] AudioClip submit;
+        [SerializeField] AudioClip cancel;
+        [SerializeField] AudioClip moveCursor;
+        [SerializeField] AudioClip attack;
+        [SerializeField] AudioClip stageClear;
+        [SerializeField] AudioClip stageReleased;
+
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         void RuntimeInitializeOnLoad()
