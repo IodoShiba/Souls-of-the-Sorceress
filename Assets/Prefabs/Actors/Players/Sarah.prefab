@@ -336,6 +336,7 @@ GameObject:
   - component: {fileID: 8916380848889061124}
   - component: {fileID: 8916380848889061151}
   - component: {fileID: 8916380848889061125}
+  - component: {fileID: 7396359423064295611}
   m_Layer: 20
   m_Name: Sarah
   m_TagString: Player
@@ -496,12 +497,31 @@ MonoBehaviour:
     passPlatform: {fileID: 8916380848889061149}
     groundSensor: {fileID: 8916380849072566239}
     groundSensorForOnLanding: {fileID: 4495670378847634645}
+    runningAudioSource: {fileID: 7396359423064295611}
+    runningClip: {fileID: 8300000, guid: 0c6fb23941742cb4a8f93de8297434e9, type: 3}
     currentState: 0
   verticalSlash:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
     requiredProgressLevel: 0
     commands: {fileID: 7184598500640157805}
+    onInitialize:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7396359423064295611}
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: e21d0009f5928134c892eda379e4457d,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
     receptionStartTime: 0.13
     amountConsumeUmbrellaDurability: 1
     verticalSlashAttack: {fileID: 8916380849465762211}
@@ -523,6 +543,23 @@ MonoBehaviour:
     connector: {fileID: 8916380848890831846}
     requiredProgressLevel: 0
     commands: {fileID: 7184598500640157805}
+    onInitialize:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7396359423064295611}
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: e21d0009f5928134c892eda379e4457d,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
     retuenSlashAttack: {fileID: 8916380850370461321}
     receptionStartTime: 0.13
     jumpUpImpulse: {x: 0, y: 15}
@@ -533,6 +570,23 @@ MonoBehaviour:
     connector: {fileID: 8916380848890831846}
     requiredProgressLevel: 0
     commands: {fileID: 7184598500640157805}
+    onInitialize:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7396359423064295611}
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: e21d0009f5928134c892eda379e4457d,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
     smashSlashAttack: {fileID: 8916380849248469449}
     umbrella: {fileID: 8916380848891301901}
   aerialSlash:
@@ -540,6 +594,23 @@ MonoBehaviour:
     connector: {fileID: 8916380848890831846}
     requiredProgressLevel: 0
     commands: {fileID: 7184598500640157805}
+    onInitialize:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7396359423064295611}
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: e21d0009f5928134c892eda379e4457d,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
     amountConsumeUmbrellaDurability: 1
     aerialSlashAttack: {fileID: 8916380849515846539}
     umbrella: {fileID: 8916380848891301901}
@@ -549,6 +620,11 @@ MonoBehaviour:
     connector: {fileID: 8916380848890831846}
     requiredProgressLevel: 1
     commands: {fileID: 7184598500640157805}
+    onInitialize:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
     amountConsumeUmbrellaDurability: 1
     direction: {fileID: 4249487242134317880}
     guard:
@@ -576,6 +652,11 @@ MonoBehaviour:
     connector: {fileID: 8916380848890831846}
     requiredProgressLevel: 1
     commands: {fileID: 7184598500640157805}
+    onInitialize:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
     distance: 6
     speed: 18
     degreeWidthOfGuardArea: 270
@@ -630,6 +711,11 @@ MonoBehaviour:
     connector: {fileID: 8916380848890831846}
     requiredProgressLevel: 3
     commands: {fileID: 7184598500640157805}
+    onInitialize:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
     riseHeight: 6
     abilityTime: 0.6
     amountConsumeUmbrellaDurability: 2
@@ -653,6 +739,23 @@ MonoBehaviour:
     connector: {fileID: 8916380848890831846}
     requiredProgressLevel: 0
     commands: {fileID: 7184598500640157805}
+    onInitialize:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 7396359423064295611}
+          m_MethodName: PlayOneShot
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 8300000, guid: de6b5e909295060428d74100f20e4546,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
     abilityTime: 2
     amountConsumeUmbrellaDurability: 2
     attack: {fileID: 8916380849653747854}
@@ -676,6 +779,11 @@ MonoBehaviour:
     connector: {fileID: 8916380848890831846}
     requiredProgressLevel: 3
     commands: {fileID: 7184598500640157805}
+    onInitialize:
+      m_PersistentCalls:
+        m_Calls: []
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
     fallSpeed: 1
     amountConsumeUmbrellaDurabilityOnGuard: 1
     umbrellaConsumeCycle: 1
@@ -753,7 +861,19 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
   onAttackedCallbacks:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7396359423064295611}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 0b7d82ee74df9314ab20d78e48bbb9ba,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 8916380848889061125}
@@ -783,6 +903,57 @@ MonoBehaviour:
   awakeGauge: 0
   awakeGaugeDecreaseSpeed: 0.1
   requiredProgressLevelToBreakLimitation: 4
+  onCharged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7396359423064295611}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 4d99bace63a1ec54dab41fe68c16ea15,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onActivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7396359423064295611}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: cba317fe468a83c41b4880aede8a9e25,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onInactivate:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7396359423064295611}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 64e9c12728f9aca40bf87db1dc3be823,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   ascSarah: {fileID: 8916380848890831846}
   isActive: 0
 --- !u!114 &8916380848889061144
@@ -861,7 +1032,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cadb6fc697b13c54eb0e3327a63b3926, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IsMoving: 0
 --- !u!114 &1353951183406726685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -876,6 +1046,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isActive: 0
   groundSensor: {fileID: 8916380849072566239}
+  onJumpStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7396359423064295611}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 27253b3b55f0b884cb867ba61d67a92e,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onActivatablized:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7396359423064295611}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 5ade4dd6c52aa054486aabca47f14b03,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   IsActivated: 0
 --- !u!114 &2312274154079463536
 MonoBehaviour:
@@ -1018,6 +1222,102 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!82 &7396359423064295611
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8916380848891301890
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,7 +20,20 @@ namespace ActorFunction
             float limitHeight=0;
             Rigidbody2D rigidbody;
             [SerializeField] GroundSensor groundSensor;
+            [SerializeField] UnityEngine.Events.UnityEvent onJumpStart;
+            [SerializeField] UnityEngine.Events.UnityEvent onActivatablized;
             [DisabledField] public bool IsActivated;
+
+            public bool Activatable { get => activatable;
+                private set
+                {
+                    if(!activatable && value)
+                    {
+                        onActivatablized.Invoke();
+                    }
+                    activatable = value;
+                }
+            }
 
             private void Awake()
             {
@@ -32,7 +45,7 @@ namespace ActorFunction
                 if (!isActive || fields == null) { return; }
                 if (transform.position.y > limitHeight)
                 {
-                    activatable = false;
+                    Activatable = false;
                     isActive = false;
                     return;
                 }
@@ -70,21 +83,22 @@ namespace ActorFunction
 
             public void ManualUpdate(in JumpFields fields,bool isActive)
             {
-                if(activatable && !this.isActive && isActive)
+                if(Activatable && !this.isActive && isActive)
                 {
                     limitHeight = fields.jumpHeight + rigidbody.transform.position.y;
+                    onJumpStart.Invoke();
                 }
 
-                activatable = groundSensor.IsOnGround && !this.isActive && (activatable || !isActive);
+                Activatable = groundSensor.IsOnGround && !this.isActive && (Activatable || !isActive);
 
-                IsActivated = !this.isActive && ((activatable || this.isActive) && isActive);
-                this.isActive = (activatable || this.isActive) && isActive;
+                IsActivated = !this.isActive && ((Activatable || this.isActive) && isActive);
+                this.isActive = (Activatable || this.isActive) && isActive;
                 ManualUpdate(fields);
             }
 
             public void Enable()
             {
-                activatable = true;
+                Activatable = true;
             }
         }
     }
