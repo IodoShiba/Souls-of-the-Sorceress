@@ -17,6 +17,7 @@ public class AttackInHitbox : MonoBehaviour
     [SerializeField, TagField] string targetTag;
     [SerializeField] float activeSpan;
     [SerializeField] private AttackData attackDataPrototype;
+    [SerializeField] UnityEngine.Events.UnityEvent onAttackSucceeded;
     [SerializeField,FormerlySerializedAs("dealingAttackConverters")] private List<AttackConverter> attackConvertersOnActivate;
     [SerializeField] private List<AttackConverter> attackConvertersOnHit;
     bool isAttackActive = false;
@@ -69,7 +70,11 @@ public class AttackInHitbox : MonoBehaviour
 
             attackConvertersOnHit.ForEach(acOnHit => acOnHit.Convert(convertedAttackData));
             //mortal.TryAttack(gameObject, this.ParamsConvertedByOwner, result => { HitProcess(); } );
-            mortal.TryAttack(owner, this.ParamsConvertedByOwner, transform.position - hit.gameObject.transform.position);
+            mortal.TryAttack(owner, this.ParamsConvertedByOwner, transform.position - hit.gameObject.transform.position,
+                isSuccess=> 
+                {
+                    if (isSuccess) { onAttackSucceeded.Invoke(); }
+                });
             HitProcess();
         }
     }
