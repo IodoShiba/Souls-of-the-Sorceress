@@ -27,6 +27,10 @@ namespace ActorBossTitan
 
         [SerializeField] GroundSensor wallSensor1;
         [SerializeField] GroundSensor wallSensor2;
+        [SerializeField] GroundSensor groundSensor;
+        [SerializeField] new Rigidbody2D rigidbody;
+        [SerializeField] AudioClip landClip;
+        [SerializeField] AudioSource audioSource;
 
         [SerializeField] string currentStateName;
         [SerializeField] Boss1Default boss1Default;
@@ -39,6 +43,19 @@ namespace ActorBossTitan
 
         public override ActorState DefaultState => boss1Default;
 
+        bool isOnGround = false;
+        bool IsOnGround
+        {
+            set
+            {
+                if (!isOnGround && value)
+                {
+                    audioSource.PlayOneShot(landClip);
+                }
+                isOnGround = value;
+            }
+
+        }
 
         protected override void BuildStateConnection()
         {
@@ -49,6 +66,7 @@ namespace ActorBossTitan
         protected override void BeforeStateUpdate()
         {
             currentStateName = Current.GetType().Name;
+            IsOnGround = -Mathf.Epsilon <= rigidbody.velocity.y && rigidbody.velocity.y <= Mathf.Epsilon && groundSensor.IsOnGround;
         }
 
         public void OnWeakpointDestroyed()
@@ -67,11 +85,30 @@ namespace ActorBossTitan
             [SerializeField] ActorFunction.Jump jump2Step;
             [SerializeField] PassPlatform passPlatform;
             [SerializeField] AttackDifferencer attackDifferencer;
+            [SerializeField] AudioClip dashClip;
+            [SerializeField] AudioSource audioSource;
 
-            //protected override bool ShouldCotinue()
-            //{
-            //    return !wallSensor1.IsOnGround || !wallSensor2.IsOnGround;
-            //}
+            bool isRunning = false;
+            bool IsRunning
+            {
+                set
+                {
+                    if(!isRunning && value)
+                    {
+                        audioSource.clip = dashClip;
+                        audioSource.Play();
+                    }
+                    if(isRunning && !value)
+                    {
+                        audioSource.clip = null;
+                        audioSource.Play();
+                    }
+                    isRunning = value;
+                }
+            }
+
+
+
             protected override void OnInitialize()
             {
                 horizontalMove.Method.enabled = true;
@@ -103,6 +140,8 @@ namespace ActorBossTitan
                 }
 
                 attackDifferencer.UseIndex = titanAI.MoveDirection == 0 ? 0 : 1;
+
+                IsRunning = jump0Step.Method.Activatable && horizontalMove.Method.IsMoving;
             }
 
             protected override void OnTerminate(bool isNormal)
@@ -110,6 +149,7 @@ namespace ActorBossTitan
                 attackDifferencer.UseIndex = 0;
                 horizontalMove.ManualUpdate(0);
                 horizontalMove.Method.enabled = false;
+                IsRunning = false;
             }
         }
 
@@ -125,6 +165,7 @@ namespace ActorBossTitan
             [SerializeField] float span;
             [SerializeField] Vector2 reactionImpulse;
             [SerializeField] BossTitanAI titanAI;
+            [SerializeField] UnityEngine.Events.UnityEvent onInitialize;
             [SerializeField] EnemySpawner enemySpawner;
             [SerializeField] Collider2D hitboxCollider;
             [SerializeField] Mortal weakPoint;
@@ -141,6 +182,8 @@ namespace ActorBossTitan
             public bool JumpToRecover() => manualClock.Clock >= span;
             protected override void OnInitialize()
             {
+                onInitialize.Invoke();
+
                 manualClock.Reset();
                 titanAI.enabled = false;
                 hitboxCollider.enabled = false;
@@ -208,12 +251,34 @@ namespace ActorBossTitan
         class Dead : ActorState
         {
             [SerializeField] SpriteRenderer _spriteRenderer;
+            [SerializeField] int boomCount;
+            [SerializeField] float boomLength;
+            [SerializeField] float intervalAfterEffect;
+            [SerializeField] AudioClip boomClip;
+            [SerializeField] AudioClip boom2Clip;
+            [SerializeField] AudioSource audioSource;
+            [SerializeField] UnityEngine.Events.UnityEvent onEffectEnd;
 
             protected override bool ShouldCotinue() => true;
             protected override void OnInitialize()
             {
                 Debug.Log("Boss Titan has dead.");
                 _spriteRenderer.color = new Color(.5f,0,0,1);
+                Connector.StartCoroutine(DeadEffect());
+            }
+
+            IEnumerator DeadEffect()
+            {
+                for(int i = 0; i < boomCount; ++i)
+                {
+                    audioSource.PlayOneShot(boomClip);
+                    yield return new WaitForSeconds(boomLength);
+                }
+                audioSource.PlayOneShot(boom2Clip);
+
+                yield return new WaitForSeconds(intervalAfterEffect + boom2Clip.length);
+
+                onEffectEnd.Invoke();
             }
         }
     }
