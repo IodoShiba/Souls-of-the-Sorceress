@@ -39,6 +39,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     [SerializeField] private  bool isInvulnerable;
     [SerializeField] UnityEngine.Events.UnityEvent dyingCallbacks;
     [SerializeField] UnityEngine.Events.UnityEvent onAttackedCallbacks;
+    [SerializeField] UnityEngine.Events.UnityEvent onHealthRecoveredCallbacks;
     [SerializeField] Rigidbody2D selfRigidbody;
     [SerializeField] List<AttackConverter> dealingAttackConverters;
     [SerializeField] List<AttackConverter> dealtAttackConverters;
@@ -198,6 +199,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     public void RecoverHealth(float amount)
     {
         health = Mathf.Clamp(health + amount, 0, maxHealth);
+        onHealthRecoveredCallbacks.Invoke();
     }
 
     public void DestroySelf(float time) { Destroy(gameObject, time); }
