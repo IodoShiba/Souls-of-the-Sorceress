@@ -22,6 +22,9 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
     [SerializeField,Range(0,1)] float awakeGauge;
     [SerializeField] float awakeGaugeDecreaseSpeed;
     [SerializeField, Range(0, 4)] int requiredProgressLevelToBreakLimitation;
+    [SerializeField] UnityEngine.Events.UnityEvent onCharged;
+    [SerializeField] UnityEngine.Events.UnityEvent onActivate;
+    [SerializeField] UnityEngine.Events.UnityEvent onInactivate;
     [SerializeField] ActorSarah.ActorStateConnectorSarah ascSarah;
     [SerializeField,DisabledField]private bool isActive = false;
     AwakeLevels awakeLevel = AwakeLevels.ordinary;
@@ -29,6 +32,18 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
     public bool IsActive { get => isActive;}
     public AwakeLevels AwakeLevel { get => awakeLevel; }
     public float MaxGauge { get => ascSarah.ProgressLevel >= requiredProgressLevelToBreakLimitation ? 1 : .5f; }
+
+    public bool IsAbleToAwake { get => awakeGauge >= 0.5f; }
+
+    public AwakeLevels CurrentAvailableAwakeLevel
+    {
+        get
+        {
+            if(awakeGauge < .5f) { return AwakeLevels.ordinary; }
+            else if(awakeGauge < 1f) { return AwakeLevels.awaken; }
+            else { return AwakeLevels.blueAwaken; } // awakeGauge == 1;
+        }
+    }
 
     private void Start()
     {
@@ -62,11 +77,13 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
             {
                 awakeLevel = AwakeLevels.awaken;
             }
+            onActivate.Invoke();
         }
         else if(isActive)
         {
             isActive = false;
             awakeLevel = AwakeLevels.ordinary;
+            onInactivate.Invoke();
         }
     }
     
@@ -74,6 +91,10 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
     {
         if (!isActive)
         {
+            if(awakeGauge < MaxGauge && awakeGauge + amount >= MaxGauge)
+            {
+                onCharged.Invoke();
+            }
             awakeGauge = Mathf.Clamp(awakeGauge + amount, 0, MaxGauge);
         }
     }

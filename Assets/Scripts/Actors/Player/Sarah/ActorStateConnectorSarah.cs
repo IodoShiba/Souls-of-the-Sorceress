@@ -169,6 +169,8 @@ namespace ActorSarah
             [SerializeField] ActorFunction.Directionable directionable;
             [SerializeField] PassPlatform passPlatform;
             [SerializeField] GroundSensor groundSensor, groundSensorForOnLanding;
+            [SerializeField] AudioSource runningAudioSource;
+            [SerializeField] AudioClip runningClip;
             [DisabledField] public StateInDefaultNum currentState;
             //[SerializeField] UmbrellaParameters umbrellaParameters;
             public ChainAttackStream attackStream;
@@ -177,6 +179,24 @@ namespace ActorSarah
             Animator sarahAnimator;
 
             bool IsInterruptJump;
+
+            bool isRunning = false;
+            bool IsRunning {
+                set
+                {
+                    if(!isRunning && value)
+                    {
+                        runningAudioSource.clip = runningClip;
+                        runningAudioSource.Play();
+                    }
+                    if (isRunning && !value)
+                    {
+                        runningAudioSource.clip = null;
+                        runningAudioSource.Play();
+                    }
+                    isRunning = value;
+                }
+            }
 
             public ActorStateConnectorSarah ConnectorSarah
             {
@@ -203,6 +223,7 @@ namespace ActorSarah
                     currentState = StateInDefaultNum.IsInAir;
                     sarahAnimator.SetTrigger("InAirTrigger");
                 }
+                IsRunning = false;
             }
             protected override void OnActive()
             {
@@ -218,6 +239,7 @@ namespace ActorSarah
                     directionable.ChangeDirection(System.Math.Sign(commands.Directional.Evaluation.x));
                 }
                 passPlatform.Use(commands.AnalogueDown.Evaluation);
+                IsRunning = groundSensor.IsOnGround && jump.Method.Activatable && horizontalMove.Method.IsMoving;
 
                 StateInDefaultJudge();
 
@@ -231,6 +253,7 @@ namespace ActorSarah
                 passPlatform.Use(false);
                 ResetDefaultStateTriggers();
                 sarahAnimator.ResetTrigger("DefaultTrigger");
+                IsRunning = false;
             }
 
             void StateInDefaultJudge()
@@ -321,6 +344,8 @@ namespace ActorSarah
         private class SarahState : ActorState
         {
             [SerializeField, Range(0, 4)] int requiredProgressLevel;
+            [SerializeField, DisabledField] protected PlayerCommander commands;
+            [SerializeField] protected UnityEngine.Events.UnityEvent onInitialize;
             ActorStateConnectorSarah connectorSarah;
 
             protected override bool IsAvailable() => requiredProgressLevel <= ConnectorSarah.progressLevel;
@@ -332,8 +357,10 @@ namespace ActorSarah
                     connectorSarah;
             }
 
-            [SerializeField,DisabledField] protected PlayerCommander commands;
-
+            protected override void OnInitialize()
+            {
+                onInitialize.Invoke();
+            }
         }
 
         [System.Serializable]
@@ -351,6 +378,8 @@ namespace ActorSarah
             protected override bool ShouldCotinue() => verticalSlashAttack.IsAttackActive;
             protected override void OnInitialize()
             {
+                base.OnInitialize();
+
                 receptionStartClock.Reset();
                 verticalSlashAttack.Activate();
                 umbrella.StartMotion("Player"+nameof(VerticalSlash));
@@ -394,6 +423,8 @@ namespace ActorSarah
             protected override bool ShouldCotinue() => retuenSlashAttack.IsAttackActive;
             protected override void OnInitialize()
             {
+                base.OnInitialize();
+
                 retuenSlashAttack.Activate();
                 ConnectorSarah.SelfRigidbody.velocity = Vector2.zero;
                 ConnectorSarah.SelfRigidbody.AddForce(jumpUpImpulse, ForceMode2D.Impulse);
@@ -425,6 +456,8 @@ namespace ActorSarah
             protected override bool ShouldCotinue() => smashSlashAttack.IsAttackActive;
             protected override void OnInitialize()
             {
+                base.OnInitialize();
+
                 ConnectorSarah.SelfRigidbody.velocity = Vector2.up * ConnectorSarah.SelfRigidbody.velocity.y;
                 smashSlashAttack.Activate();
                 umbrella.StartMotion("Player" + nameof(SmashSlash));
@@ -450,6 +483,8 @@ namespace ActorSarah
 
             protected override void OnInitialize()
             {
+                base.OnInitialize();
+
                 aerialSlashAttack.Activate();
                 umbrella.StartMotion("Player" + nameof(AerialSlash));
 
@@ -739,6 +774,8 @@ namespace ActorSarah
             protected override bool ShouldCotinue() => !groundSensor.IsOnGround && clock.Clock < abilityTime;
             protected override void OnInitialize()
             {
+                base.OnInitialize();
+
                 attack.Activate();
                 velocityAdjuster.Method.enabled = true;
                 umbrella.PlayerDropAttack();

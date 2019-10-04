@@ -16,12 +16,14 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         public Mortal attacker;
         public AttackData attackData;
         public Vector2 relativePosition;
+        public System.Action<bool> onAttackEvaluatedCallback;
 
-        public DealtAttackInfo(Mortal attacker, AttackData attackData,Vector2 relativePosition)
+        public DealtAttackInfo(Mortal attacker, AttackData attackData,Vector2 relativePosition, System.Action<bool> onAttackEvaluatedCallback)
         {
             this.attacker = attacker;
             this.attackData = attackData;
             this.relativePosition = relativePosition;
+            this.onAttackEvaluatedCallback = onAttackEvaluatedCallback;
         }
     }
 
@@ -37,6 +39,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     [SerializeField] private  bool isInvulnerable;
     [SerializeField] UnityEngine.Events.UnityEvent dyingCallbacks;
     [SerializeField] UnityEngine.Events.UnityEvent onAttackedCallbacks;
+    [SerializeField] UnityEngine.Events.UnityEvent onHealthRecoveredCallbacks;
     [SerializeField] Rigidbody2D selfRigidbody;
     [SerializeField] List<AttackConverter> dealingAttackConverters;
     [SerializeField] List<AttackConverter> dealtAttackConverters;
@@ -100,7 +103,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         AttackData.Copy(this.argAttackData, argAttackData);
         this.argSucceedCallback = succeedCallback;
     }
-    public void TryAttack(Mortal attacker, AttackData argAttackData,in Vector2 relativePosition)
+    public void TryAttack(Mortal attacker, AttackData argAttackData,in Vector2 relativePosition,System.Action<bool> onAttackEvaluatedCallback)
     {
         OnTriedAttack(attacker, argAttackData, relativePosition);
 
@@ -108,11 +111,11 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
 
         if (dealtAttackCount >= dealtAttackInfos.Count)
         {
-            dealtAttackInfos.Add(new DealtAttackInfo(attacker, new AttackData(argAttackData), relativePosition));
+            dealtAttackInfos.Add(new DealtAttackInfo(attacker, new AttackData(argAttackData), relativePosition, onAttackEvaluatedCallback));
         }
         else if (dealtAttackInfos[dealtAttackCount] == null)
         {
-            dealtAttackInfos[dealtAttackCount] = new DealtAttackInfo(attacker, new AttackData(argAttackData), relativePosition);
+            dealtAttackInfos[dealtAttackCount] = new DealtAttackInfo(attacker, new AttackData(argAttackData), relativePosition, onAttackEvaluatedCallback);
         }
         else
         {
@@ -152,11 +155,14 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
             }//ヒットストップ
 
             rxsum += dealtAttackInfos[i].relativePosition.x;
+
+            
         }
         //dealtAttackCount = 0;
 
         //if (result.damage <= 0 && result.knockBackImpulse.magnitude < 0.01) { return; }//攻撃が無意味ならば処理を中断
-        if (result.damage > 0 || result.knockBackImpulse.magnitude >= 0.01)//攻撃を受ける処理
+        bool isValidAttack = result.damage > 0 || result.knockBackImpulse.magnitude >= 0.01;
+        if (isValidAttack)//攻撃を受ける処理
         {
             float originalHealth = health;
             health -= result.damage; //体力を減算する
@@ -168,11 +174,22 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
             //ヒットストップを与える（未実装）
 
             OnAttackedCallbacks.Invoke();//被攻撃時のコールバック関数を呼び出し
+            for(int i = 0; i < dealtAttackCount; ++i)
+            {
+                if (dealtAttackInfos[i] != null){ dealtAttackInfos[i].onAttackEvaluatedCallback(true); }
+            }
             if (health <= 0 && originalHealth > 0)
             {
                 health = 0;
                 dyingCallbacks.Invoke();
                 OnDying(mainAttackInfo);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < dealtAttackCount; ++i)
+            {
+                if (dealtAttackInfos[i] != null) { dealtAttackInfos[i].onAttackEvaluatedCallback(false); }
             }
         }
         dealtAttackCount = 0;//攻撃を全て統合したのでカウンターを0にし、与えられた攻撃を忘却する
@@ -182,6 +199,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     public void RecoverHealth(float amount)
     {
         health = Mathf.Clamp(health + amount, 0, maxHealth);
+        onHealthRecoveredCallbacks.Invoke();
     }
 
     public void DestroySelf(float time) { Destroy(gameObject, time); }

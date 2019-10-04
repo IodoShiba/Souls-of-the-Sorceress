@@ -20,7 +20,10 @@ namespace ActorFunction
             HorizontalMoveField fields;
             Rigidbody2D rigidbody;
             float stopTime;
-            [DisabledField] public bool IsMoving;
+            [DisabledField] private bool isMoving;
+
+            public bool IsMoving { get => isMoving; private set => isMoving = value; }
+
             private void Awake()
             {
                 rigidbody = GetComponent<Rigidbody2D>();
