@@ -14,7 +14,6 @@ public class GameRule : MonoBehaviour
 
     static GameRule instance;
     public static GameRule Instance { get => instance; }
-
     [SerializeField] UnityEngine.Events.UnityEvent onVictory;
     [SerializeField] UnityEngine.Events.UnityEvent onDefeated;
 

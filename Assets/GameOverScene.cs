@@ -20,6 +20,7 @@ public class GameOverScene : MonoBehaviour
     [SerializeField] WipeEffet outWipe;
     [SerializeField] InputToFireEvent inputToFireEvent;
     [SerializeField] AudioSource audioSource;
+    [SerializeField] Animator gameOverAnimatorSarah;
 
     Vector3 playerScreenCoordinate;
     float orthoCamSize;
@@ -43,6 +44,10 @@ public class GameOverScene : MonoBehaviour
     {
         flashImage.color = Color.white;
         flashImage.DOFade(0, flashSpan);
+
+        yield return new WaitForSeconds(0.8f); //flash待ち
+
+        gameOverAnimatorSarah.SetTrigger("AnimStartTrigger");
 
         yield return new WaitForSeconds(deadAnimationSpan);
 
