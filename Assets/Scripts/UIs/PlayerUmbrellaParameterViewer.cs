@@ -8,6 +8,7 @@ public class PlayerUmbrellaParameterViewer : UmbrellaParameters.Viewer
     [SerializeField] UDPointElement elementPrefab;
     [SerializeField] List<Vector2> shakeRPositionsOnBreak;
     [SerializeField] float shakeCycleOnBreak;
+    [SerializeField] float blinkCycleOnBreak;
 
     List<UDPointElement> gaugeElements = new List<UDPointElement>();
     Vector3 initPos;
@@ -28,6 +29,10 @@ public class PlayerUmbrellaParameterViewer : UmbrellaParameters.Viewer
                 sequence.Play();
             }
             umbrellaWorking = value;
+            for(int i=0;i< gaugeElements.Count; ++i)
+            {
+                gaugeElements[i].SetUmbrellaWork(value);
+            }
         }
     }
 
@@ -35,6 +40,7 @@ public class PlayerUmbrellaParameterViewer : UmbrellaParameters.Viewer
     {
         gaugeElements.Clear();
         initPos = transform.position;
+
         sequence = DOTween.Sequence();
         sequence.OnStart(() => transform.position = initPos);
         for(int i=0; i < shakeRPositionsOnBreak.Count; ++i)
@@ -70,6 +76,7 @@ public class PlayerUmbrellaParameterViewer : UmbrellaParameters.Viewer
                 ins.transform.parent = transform;
                 var rTrans = ins.GetComponent<RectTransform>();
                 ins.SetSize(new Vector2((rTrans.sizeDelta.x / rTrans.sizeDelta.y) * selfRTrans.sizeDelta.y, selfRTrans.sizeDelta.y));
+                ins.SetBlinkCycle(blinkCycleOnBreak);
                 gaugeElements.Add(ins);
             }
         }
