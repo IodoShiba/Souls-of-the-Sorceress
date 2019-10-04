@@ -11,6 +11,18 @@ public class UmbrellaParameters : MonoBehaviour
         protected float MaxHealth { get => target.maxDurability; }
     }
 
+    public class UmbrellaAttackConverter : AttackConverter
+    {
+        [SerializeField] UmbrellaParameters target;
+        public override bool Convert(AttackData value)
+        {
+            if (target.DoesUmbrellaWork()) { return true; }
+            value.damage /= 2;
+            value.knockBackImpulse /= 2;
+            return true;
+        }
+    }
+
     [SerializeField] GameObject _playerObj;
     [SerializeField] int durability;
     [SerializeField] int maxDurability;

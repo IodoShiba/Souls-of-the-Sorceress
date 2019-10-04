@@ -337,6 +337,7 @@ GameObject:
   - component: {fileID: 4299200908901914630}
   - component: {fileID: 8337234850337983617}
   - component: {fileID: 8916380848889061149}
+  - component: {fileID: 2754574714993579308}
   - component: {fileID: 2687985479622013432}
   - component: {fileID: 8916380848889061124}
   - component: {fileID: 8916380848889061151}
@@ -899,7 +900,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 8916380848889061125}
-  dealingAttackConverters: []
+  dealingAttackConverters:
+  - {fileID: 2754574714993579308}
   dealtAttackConverters: []
   umbrellaParameters: {fileID: 8916380848891301902}
   actionAwake: {fileID: 8916380848889061092}
@@ -1169,6 +1171,19 @@ MonoBehaviour:
   onPasingLayer: 19
   platformContactor: {fileID: 8916380850264124303}
   minContinueTime: 0.2
+--- !u!114 &2754574714993579308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b19edc6777aa848806c40e9734e0bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 8916380848891301902}
 --- !u!114 &2687985479622013432
 MonoBehaviour:
   m_ObjectHideFlags: 0
