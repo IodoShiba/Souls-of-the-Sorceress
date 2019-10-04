@@ -140,7 +140,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 4928ee17be5a6b944bae95ed702ba683, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9dba604214d2b60478a8ae8f1723f34b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -881,6 +881,23 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onHealthRecoveredCallbacks:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7396359423064295611}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 52061dcdbe2d41c489caee0134b5fe5e,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 8916380848889061125}
   dealingAttackConverters: []
   dealtAttackConverters: []
@@ -1439,6 +1456,23 @@ MonoBehaviour:
   maxDurability: 8
   recoverCycle: 0.5
   breakTime: 8
+  onUmbrellaBreoken:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7396359423064295611}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 5e19b6d19e36b9f469e6763fd9db766c,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   cheat_InfinityDurability: 0
 --- !u!114 &7628696488050251550
 MonoBehaviour:
@@ -1868,7 +1902,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.1}
+  m_Size: {x: 0.5, y: 0.01}
   m_EdgeRadius: 0
 --- !u!114 &8916380849072566239
 MonoBehaviour:
