@@ -97,5 +97,4 @@ public class SceneTransitionManager : MonoBehaviour
         SceneManager.LoadScene(transitionSceneName, LoadSceneMode.Additive);
         //SceneManager.SetActiveScene(SceneManager.GetSceneByName(transitionSceneName));
     }
-
 }

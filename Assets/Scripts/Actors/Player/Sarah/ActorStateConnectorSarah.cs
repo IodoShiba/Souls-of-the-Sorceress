@@ -27,7 +27,7 @@ namespace ActorSarah
         [SerializeField] UmbrellaParameters umbrellaParameters;
         [SerializeField, DisabledField] string currentStateName;
         [SerializeField, DisabledField] float lpt;
-        [SerializeField] Animator sarahAnimator;
+        [SerializeField] public Animator sarahAnimator;
 
         [SerializeField] SarahDefault sarahDefault;
         [SerializeField] VerticalSlash verticalSlash;
@@ -214,7 +214,6 @@ namespace ActorSarah
                 sarahAnimator = ConnectorSarah.sarahAnimator;
                 IsInterruptJump = false;
                 sarahAnimator.SetTrigger("DefaultTrigger");
-                Debug.Log("DefaultOnInitialize");
                 ResetDefaultStateTriggers();
                 currentState = StateInDefaultNum.IsWaiting;
                 if (sarahAnimator.GetBool("InterruptToInAir"))
@@ -259,32 +258,32 @@ namespace ActorSarah
             void StateInDefaultJudge()
             {
                 StateInDefaultNum nextState = JudgeNextStateInDefault();
-                Debug.Log(currentState);
-                AnimatorStateInfo stateInfo = sarahAnimator.GetCurrentAnimatorStateInfo(0);
-                Debug.Log(stateInfo.fullPathHash);
+                //Debug.Log(currentState);
+                //AnimatorStateInfo stateInfo = sarahAnimator.GetCurrentAnimatorStateInfo(0);
+                //Debug.Log(stateInfo.fullPathHash);
                 if (nextState != currentState)
                 {
                     ResetDefaultStateTriggers();
                     switch (nextState)
                     {
                         case StateInDefaultNum.IsWaiting:
-                            Debug.Log("WaitingTrigger");
+                            //Debug.Log("WaitingTrigger");
                             sarahAnimator.SetTrigger("WaitingTrigger");
                             break;
                         case StateInDefaultNum.IsRunning:
-                            Debug.Log("RunningTrigger");
+                            //Debug.Log("RunningTrigger");
                             sarahAnimator.SetTrigger("RunningTrigger");
                             break;
                         case StateInDefaultNum.IsJumping:
-                            Debug.Log("JumpingTrigger");
+                            //Debug.Log("JumpingTrigger");
                             sarahAnimator.SetTrigger("JumpingTrigger");
                             break;
                         case StateInDefaultNum.IsInAir:
-                            Debug.Log("InAirTrigger");
+                            //Debug.Log("InAirTrigger");
                             sarahAnimator.SetTrigger("InAirTrigger");
                             break;
                         case StateInDefaultNum.IsOnLanding:
-                            Debug.Log("OnLandingTrigger");
+                            //Debug.Log("OnLandingTrigger");
                             sarahAnimator.SetTrigger("OnLandingTrigger");
                             break;
                     }
@@ -338,7 +337,6 @@ namespace ActorSarah
             public enum StateInDefaultNum {IsWaiting = 0,IsRunning,IsJumping,IsInAir,IsOnLanding}
 
         }
-
 
         [System.Serializable]
         private class SarahState : ActorState

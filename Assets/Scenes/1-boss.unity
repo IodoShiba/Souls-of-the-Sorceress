@@ -829,6 +829,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onHealthRecoveredCallbacks:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 464670550}
   dealingAttackConverters: []
   dealtAttackConverters: []
@@ -1637,6 +1642,11 @@ PrefabInstance:
       propertyPath: enemyManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6314495245485655847, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3b42d0fa434244a4f822d783b2b5b134, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 004a550fc633f6b48a28890fc9bbc1c7, type: 3}
 --- !u!114 &843604127 stripped
@@ -3029,6 +3039,11 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onAttackedCallbacks:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onHealthRecoveredCallbacks:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,

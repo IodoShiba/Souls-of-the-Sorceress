@@ -28,6 +28,8 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
     [SerializeField] ActorSarah.ActorStateConnectorSarah ascSarah;
     [SerializeField,DisabledField]private bool isActive = false;
     AwakeLevels awakeLevel = AwakeLevels.ordinary;
+    [SerializeField] RuntimeAnimatorController DefaultAnimatorController;
+    [SerializeField] RuntimeAnimatorController AwakenAnimatorController;
 
     public bool IsActive { get => isActive;}
     public AwakeLevels AwakeLevel { get => awakeLevel; }
@@ -76,6 +78,7 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
             else
             {
                 awakeLevel = AwakeLevels.awaken;
+                ascSarah.sarahAnimator.runtimeAnimatorController = (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(AwakenAnimatorController);
             }
             onActivate.Invoke();
         }
@@ -83,6 +86,7 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
         {
             isActive = false;
             awakeLevel = AwakeLevels.ordinary;
+            ascSarah.sarahAnimator.runtimeAnimatorController = (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(DefaultAnimatorController);
             onInactivate.Invoke();
         }
     }
