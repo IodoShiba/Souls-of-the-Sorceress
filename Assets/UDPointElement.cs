@@ -18,6 +18,8 @@ public class UDPointElement : MonoBehaviour
     RectTransform SelfRTrans { get => selfRTrans == null ? (selfRTrans = GetComponent<RectTransform>()) : selfRTrans; }
     RectTransform ChildRTrans { get => childRTrans == null ? (childRTrans = usableImage.GetComponent<RectTransform>()) : childRTrans; }
 
+    Vector3 initPos;
+
     public void SetSize(in Vector2 size)
     {
         ChildRTrans.sizeDelta = SelfRTrans.sizeDelta = size;

@@ -140,7 +140,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 4928ee17be5a6b944bae95ed702ba683, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9dba604214d2b60478a8ae8f1723f34b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -337,6 +337,7 @@ GameObject:
   - component: {fileID: 4299200908901914630}
   - component: {fileID: 8337234850337983617}
   - component: {fileID: 8916380848889061149}
+  - component: {fileID: 2754574714993579308}
   - component: {fileID: 2687985479622013432}
   - component: {fileID: 8916380848889061124}
   - component: {fileID: 8916380848889061151}
@@ -899,7 +900,8 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 8916380848889061125}
-  dealingAttackConverters: []
+  dealingAttackConverters:
+  - {fileID: 2754574714993579308}
   dealtAttackConverters: []
   umbrellaParameters: {fileID: 8916380848891301902}
   actionAwake: {fileID: 8916380848889061092}
@@ -1173,6 +1175,19 @@ MonoBehaviour:
   onPasingLayer: 19
   platformContactor: {fileID: 8916380850264124303}
   minContinueTime: 0.2
+--- !u!114 &2754574714993579308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b19edc6777aa848806c40e9734e0bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 8916380848891301902}
 --- !u!114 &2687985479622013432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1460,6 +1475,23 @@ MonoBehaviour:
   maxDurability: 8
   recoverCycle: 0.5
   breakTime: 8
+  onUmbrellaBreoken:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7396359423064295611}
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 5e19b6d19e36b9f469e6763fd9db766c,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   cheat_InfinityDurability: 0
 --- !u!114 &7628696488050251550
 MonoBehaviour:

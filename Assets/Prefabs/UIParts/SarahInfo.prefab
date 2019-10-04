@@ -464,6 +464,12 @@ MonoBehaviour:
   target: {fileID: 0}
   elementPrefab: {fileID: 4857543497856399092, guid: 5fa463a7cbb384e4ea76ff9d2676eeed,
     type: 3}
+  shakeRPositionsOnBreak:
+  - {x: 3, y: 3}
+  - {x: -3, y: 3}
+  - {x: 3, y: -3}
+  - {x: -3, y: -3}
+  shakeCycleOnBreak: 0.3
 --- !u!1 &6457742630695324936
 GameObject:
   m_ObjectHideFlags: 0
