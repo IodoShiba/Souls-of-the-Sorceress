@@ -16,6 +16,7 @@ public class UmbrellaParameters : MonoBehaviour
     [SerializeField] int maxDurability;
     [SerializeField] float recoverCycle;
     [SerializeField] float breakTime;
+    [SerializeField] UnityEngine.Events.UnityEvent onUmbrellaBreoken;
     [SerializeField] bool cheat_InfinityDurability;
     [System.NonSerialized] private float breakRestTime = 0;
     [System.NonSerialized] private float t = 0;
@@ -24,6 +25,16 @@ public class UmbrellaParameters : MonoBehaviour
 
     public int Durability { get => durability; }
     public int MaxDurability { get => maxDurability; }
+    public float BreakRestTime { get => breakRestTime;
+        private set
+        {
+            if(breakRestTime <= 0 && value > 0)
+            {
+                onUmbrellaBreoken.Invoke();
+            }
+            breakRestTime = value;
+        }
+    }
 
     private void Awake()
     {
@@ -33,7 +44,7 @@ public class UmbrellaParameters : MonoBehaviour
     {
         if (DoesUmbrellaWork())
         {
-            breakRestTime = 0;
+            BreakRestTime = 0;
             t += Time.deltaTime;
             if (t > changeCycle)
             {
@@ -43,8 +54,8 @@ public class UmbrellaParameters : MonoBehaviour
         }
         else //破損状態
         {
-            breakRestTime -= Time.deltaTime;
-            if (breakRestTime <= 0)
+            BreakRestTime -= Time.deltaTime;
+            if (BreakRestTime <= 0)
             {
                 durability = maxDurability;
             }
@@ -89,7 +100,7 @@ public class UmbrellaParameters : MonoBehaviour
         durability += amount;
         if (durability < 0 && DoesUmbrellaWork())
         {
-            breakRestTime = breakTime;
+            BreakRestTime = breakTime;
         }
         durability = Mathf.Clamp(durability, 0, maxDurability);
     }
@@ -108,9 +119,9 @@ public class UmbrellaParameters : MonoBehaviour
 
     public void RecoverEntirely() { AddDurability(maxDurability); }
 
-    public bool DoesUmbrellaWork() => breakRestTime <= 0;
+    public bool DoesUmbrellaWork() => BreakRestTime <= 0;
 
-    public string _DebugOutput() { return $"Umbrella Durability:{(DoesUmbrellaWork() ? $"{Durability}/{MaxDurability}" : $"(Recover in {breakRestTime} seconds)")}\n"; }
+    public string _DebugOutput() { return $"Umbrella Durability:{(DoesUmbrellaWork() ? $"{Durability}/{MaxDurability}" : $"(Recover in {BreakRestTime} seconds)")}\n"; }
 
 
 }
