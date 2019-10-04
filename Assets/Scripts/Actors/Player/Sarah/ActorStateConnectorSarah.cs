@@ -177,7 +177,6 @@ namespace ActorSarah
             Animator sarahAnimator;
 
             bool IsInterruptJump;
-            float InAirTimer = 0f;
 
             public ActorStateConnectorSarah ConnectorSarah
             {
@@ -195,8 +194,15 @@ namespace ActorSarah
                 sarahAnimator = ConnectorSarah.sarahAnimator;
                 IsInterruptJump = false;
                 sarahAnimator.SetTrigger("DefaultTrigger");
+                Debug.Log("DefaultOnInitialize");
                 ResetDefaultStateTriggers();
                 currentState = StateInDefaultNum.IsWaiting;
+                if (sarahAnimator.GetBool("InterruptToInAir"))
+                {
+                    sarahAnimator.SetBool("InterruptToInAir",false);
+                    currentState = StateInDefaultNum.IsInAir;
+                    sarahAnimator.SetTrigger("InAirTrigger");
+                }
             }
             protected override void OnActive()
             {
@@ -223,31 +229,39 @@ namespace ActorSarah
                 attackLongPushClock.AllowedToStartCount = false;
                 ConnectorSarah.umbrellaParameters.StopChangeDurabilityGradually();
                 passPlatform.Use(false);
+                ResetDefaultStateTriggers();
+                sarahAnimator.ResetTrigger("DefaultTrigger");
             }
 
             void StateInDefaultJudge()
             {
                 StateInDefaultNum nextState = JudgeNextStateInDefault();
-                //Debug.Log(currentState);
+                Debug.Log(currentState);
+                AnimatorStateInfo stateInfo = sarahAnimator.GetCurrentAnimatorStateInfo(0);
+                Debug.Log(stateInfo.fullPathHash);
                 if (nextState != currentState)
                 {
                     ResetDefaultStateTriggers();
                     switch (nextState)
                     {
                         case StateInDefaultNum.IsWaiting:
+                            Debug.Log("WaitingTrigger");
                             sarahAnimator.SetTrigger("WaitingTrigger");
                             break;
                         case StateInDefaultNum.IsRunning:
+                            Debug.Log("RunningTrigger");
                             sarahAnimator.SetTrigger("RunningTrigger");
                             break;
                         case StateInDefaultNum.IsJumping:
+                            Debug.Log("JumpingTrigger");
                             sarahAnimator.SetTrigger("JumpingTrigger");
                             break;
                         case StateInDefaultNum.IsInAir:
-                            InAirTimer = 0f;
+                            Debug.Log("InAirTrigger");
                             sarahAnimator.SetTrigger("InAirTrigger");
                             break;
                         case StateInDefaultNum.IsOnLanding:
+                            Debug.Log("OnLandingTrigger");
                             sarahAnimator.SetTrigger("OnLandingTrigger");
                             break;
                     }
@@ -276,10 +290,8 @@ namespace ActorSarah
                         if (stateInfo.normalizedTime > 1 && !jump.Method.isActive) { return StateInDefaultNum.IsInAir; }
                         return StateInDefaultNum.IsJumping;
                     case StateInDefaultNum.IsInAir:
-                        //InAirTimer更新
-                        InAirTimer += Time.deltaTime;
                         //OnLanding遷移判定
-                        if (InAirTimer > 0.3f && groundSensorForOnLanding.IsOnGround) { InAirTimer = 0f; ; return StateInDefaultNum.IsOnLanding; }
+                        if (groundSensorForOnLanding.IsOnGround) { return StateInDefaultNum.IsOnLanding; }
                         return StateInDefaultNum.IsInAir;
                     case StateInDefaultNum.IsOnLanding:
                         //割り込みIsJumpingのためのboolをセット
@@ -443,10 +455,15 @@ namespace ActorSarah
 
                 ConnectorSarah.TryShootMagic();
                 ConnectorSarah.sarahAnimator.SetTrigger("AerialSlashTrigger");
+                ConnectorSarah.sarahAnimator.SetBool("InterruptToInAir",false);
             }
 
             protected override void OnTerminate(bool isNormal)
             {
+                //DecideNextStateInDefaultState
+                ConnectorSarah.sarahAnimator.SetBool("InterruptToInAir",!groundSensor.IsOnGround);
+                Debug.Log(ConnectorSarah.sarahAnimator.GetBool("InterruptToInAir"));
+                Debug.Log("AerialOnTerminate");
                 umbrella.Default();
                 aerialSlashAttack.Inactivate();
             }
