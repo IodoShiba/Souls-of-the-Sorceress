@@ -2,6 +2,7 @@
 {
 	Properties{
 		_Map("Map",2D) = "white" {}
+		_MainTex("MainTex",2D) = "white" {}
 		_BorderS("BorderS",Range(0,1))=0
 		_BorderE("BorderE",Range(0,1))=1
 	}
