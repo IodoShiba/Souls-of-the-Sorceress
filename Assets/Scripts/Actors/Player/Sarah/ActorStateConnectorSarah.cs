@@ -381,7 +381,7 @@ namespace ActorSarah
                 receptionStartClock.Reset();
                 verticalSlashAttack.Activate();
                 umbrella.StartMotion("Player"+nameof(VerticalSlash));
-                Debug.Log(attackLongPushClock.IsLongPushedUp);
+                //Debug.Log(attackLongPushClock.IsLongPushedUp);
                 horizontalMove.ManualUpdate();
                 horizontalMove.Method.StopActorOnDisabled(.1f);
                 ConnectorSarah.TryShootMagic();
@@ -495,8 +495,6 @@ namespace ActorSarah
             {
                 //DecideNextStateInDefaultState
                 ConnectorSarah.sarahAnimator.SetBool("InterruptToInAir",!groundSensor.IsOnGround);
-                Debug.Log(ConnectorSarah.sarahAnimator.GetBool("InterruptToInAir"));
-                Debug.Log("AerialOnTerminate");
                 umbrella.Default();
                 aerialSlashAttack.Inactivate();
             }
