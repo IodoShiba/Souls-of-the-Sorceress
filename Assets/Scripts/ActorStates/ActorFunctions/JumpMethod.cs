@@ -14,8 +14,10 @@ namespace ActorFunction
 
         public class Method : ActorFunctionMethod<JumpFields>
         {
+            const float lossDisallowedProp = 0;
+
             bool activatable = false;
-            public bool isActive = false;
+            private bool isActive = false;
             JumpFields fields = null;
             float limitHeight=0;
             Rigidbody2D rigidbody;
@@ -23,6 +25,8 @@ namespace ActorFunction
             [SerializeField] UnityEngine.Events.UnityEvent onJumpStart;
             [SerializeField] UnityEngine.Events.UnityEvent onActivatablized;
             [DisabledField] public bool IsActivated;
+
+            float velocityQuota;
 
             public bool Activatable { get => activatable;
                 private set
@@ -35,18 +39,31 @@ namespace ActorFunction
                 }
             }
 
+            public bool IsActive
+            {
+                get => isActive;
+                set {
+                    if (!value)
+                    {
+                        velocityQuota = float.NegativeInfinity;
+                    }
+                    isActive = value;
+                }
+            }
+
             private void Awake()
             {
                 rigidbody = GetComponent<Rigidbody2D>();
+                velocityQuota = float.NegativeInfinity;
             }
 
             private void FixedUpdate()
             {
-                if (!isActive || fields == null) { return; }
-                if (transform.position.y > limitHeight)
+                if (!IsActive || fields == null) { return; }
+                if (transform.position.y > limitHeight || rigidbody.velocity.y < velocityQuota)
                 {
                     Activatable = false;
-                    isActive = false;
+                    IsActive = false;
                     return;
                 }
 
@@ -65,14 +82,15 @@ namespace ActorFunction
                 }
 
                 float force = forceRequirementProp * rigidbody.mass * (fields.jumpUpSpeed - rigidbody.velocity.y) / Time.deltaTime;
-
-                rigidbody.AddForce(
-                    UnityEngine.Mathf.Clamp(
-                        force,
-                        0, 
-                        fields.jumpForce
-                        ) * Vector2.up
+                force = UnityEngine.Mathf.Clamp(
+                            force,
+                            0,
+                            fields.jumpForce
                         );
+
+                velocityQuota = rigidbody.velocity.y;
+
+                rigidbody.AddForce(force * Vector2.up);
 
             }
 
@@ -83,16 +101,16 @@ namespace ActorFunction
 
             public void ManualUpdate(in JumpFields fields,bool isActive)
             {
-                if(Activatable && !this.isActive && isActive)
+                if(Activatable && !this.IsActive && isActive)
                 {
                     limitHeight = fields.jumpHeight + rigidbody.transform.position.y;
                     onJumpStart.Invoke();
                 }
 
-                Activatable = groundSensor.IsOnGround && !this.isActive && (Activatable || !isActive);
+                Activatable = groundSensor.IsOnGround && !this.IsActive && (Activatable || !isActive);
 
-                IsActivated = !this.isActive && ((Activatable || this.isActive) && isActive);
-                this.isActive = (Activatable || this.isActive) && isActive;
+                IsActivated = !this.IsActive && ((Activatable || this.IsActive) && isActive);
+                this.IsActive = (Activatable || this.IsActive) && isActive;
                 ManualUpdate(fields);
             }
 
