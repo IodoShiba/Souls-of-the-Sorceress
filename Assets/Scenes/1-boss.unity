@@ -1585,12 +1585,12 @@ PrefabInstance:
     - target: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.22
+      value: -5.85
       objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.47
+      value: -3.38
       objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
@@ -1646,7 +1646,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 3b42d0fa434244a4f822d783b2b5b134, type: 2}
+      objectReference: {fileID: 9100000, guid: 4791d6f3380558f45ae4b6175c958718, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 004a550fc633f6b48a28890fc9bbc1c7, type: 3}
 --- !u!114 &843604127 stripped
@@ -3011,6 +3011,7 @@ GameObject:
   - component: {fileID: 1200558873}
   - component: {fileID: 1200558874}
   - component: {fileID: 1200558876}
+  - component: {fileID: 1200558877}
   m_Layer: 23
   m_Name: Boss1
   m_TagString: Enemy
@@ -3102,7 +3103,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.924, y: 1.688}
+    oldSize: {x: 5.12, y: 3.75}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -3148,7 +3149,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 914e7ebd0811a82458075a898a3aecee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8f323e1f7d3a69d45b3f923c42e285f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3397,6 +3398,7 @@ MonoBehaviour:
   - {fileID: 1899652017}
   - {fileID: 2096538986}
   - {fileID: 2132210503}
+  titanAnimator: {fileID: 0}
 --- !u!114 &1200558872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3562,6 +3564,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &1200558877
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200558860}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c52028ca8eb4a348a7faaca5a65c694, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1223263613
 GameObject:
   m_ObjectHideFlags: 0
@@ -3573,7 +3594,7 @@ GameObject:
   - component: {fileID: 1223263615}
   - component: {fileID: 1223263614}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: BackGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
