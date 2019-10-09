@@ -30,7 +30,6 @@ public class Enemy : Mortal {
            null,
            (dyingCallbackReceiver, disposedEventData) => { dyingCallbackReceiver.OnSelfDying(causeOfDeath); }
         );
-        Debug.Log("Enemy has dead.");
         manager.EnemyDying();
     }
     

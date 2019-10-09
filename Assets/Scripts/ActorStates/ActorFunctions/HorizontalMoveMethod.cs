@@ -21,8 +21,10 @@ namespace ActorFunction
             Rigidbody2D rigidbody;
             float stopTime;
             [DisabledField] private bool isMoving;
+            [SerializeField] bool noUse;
 
             public bool IsMoving { get => isMoving; private set => isMoving = value; }
+            public bool NoUse { get => noUse; set => noUse = value; }
 
             private void Awake()
             {
@@ -31,6 +33,8 @@ namespace ActorFunction
             private void FixedUpdate()
             {
                 float goalSpeed = argSpeedMultiplier != 0 && fields != null ? argSpeedMultiplier * fields.maxSpeed : 0;
+
+                if (noUse) { return; }
                 if (fields == null) { return; }
                 //if(argSpeedMultiplier == 0) { return; }
                 float maxForce = argSpeedMultiplier == 0 ? fields.stopForceMagnitude : fields.pushForceMagnitude;
@@ -77,6 +81,7 @@ namespace ActorFunction
 
     [System.Serializable]
     public class HorizontalMove : ActorFunction<HorizontalMoveField, HorizontalMoveField.Method> {
+        public bool NoUse { get => Method.NoUse; set => Method.NoUse = value; }
         public void ManualUpdate(float speedMultiplier) { Method.ManualUpdate(Fields,speedMultiplier); }
     }
 }

@@ -223,6 +223,8 @@ namespace ActorSarah
                     sarahAnimator.SetTrigger("InAirTrigger");
                 }
                 IsRunning = false;
+
+                Debug.Log("Player:"+this.GetType().Name);
             }
             protected override void OnActive()
             {
@@ -358,6 +360,7 @@ namespace ActorSarah
             protected override void OnInitialize()
             {
                 onInitialize.Invoke();
+                Debug.Log("Player:" + this.GetType().Name);
             }
         }
 
@@ -805,7 +808,9 @@ namespace ActorSarah
             {
                 ActorStateConnectorSarah actorStateConnectorSarah = Connector as ActorStateConnectorSarah;
                 actorStateConnectorSarah.sarahAnimator.SetTrigger("SarahSmashedTrigger");
-                base.OnInitialize();   
+                base.OnInitialize();
+
+                Debug.Log("Player:" + this.GetType().Name);
             }
         }
 

@@ -55,7 +55,7 @@ public class ActorManager : MonoBehaviour
 
     public void RemoveActor(Actor actor)
     {
-        Debug.Log($"'{actor.gameObject.name}' was removed from ActorManager.");
+        //Debug.Log($"'{actor.gameObject.name}' was removed from ActorManager.");
         actors.Remove(actor);
     }
 
