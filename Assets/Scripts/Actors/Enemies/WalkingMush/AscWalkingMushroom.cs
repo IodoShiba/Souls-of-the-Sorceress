@@ -30,7 +30,7 @@ namespace ActorWalkingMushroom
 
             protected override void OnInitialize()
             {
-                horizontalMove.Method.enabled = true;
+                horizontalMove.Use = true;
             }
             protected override void OnActive()
             {
@@ -43,7 +43,7 @@ namespace ActorWalkingMushroom
             }
             protected override void OnTerminate(bool isNormalTermination)
             {
-                horizontalMove.Method.enabled = false;
+                horizontalMove.Use = false;
             }
         }
 

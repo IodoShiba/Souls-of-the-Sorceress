@@ -113,6 +113,7 @@ namespace ActorBossTitan
             {
                 horizontalMove.Method.enabled = true;
                 titanAI.titanAnimator.SetTrigger("DefaultTrigger");
+                horizontalMove.Use = true;
             }
 
             protected override void OnActive()
@@ -149,7 +150,7 @@ namespace ActorBossTitan
             {
                 attackDifferencer.UseIndex = 0;
                 horizontalMove.ManualUpdate(0);
-                horizontalMove.Method.enabled = false;
+                horizontalMove.Use = false;
                 IsRunning = false;
             }
         }
@@ -170,7 +171,6 @@ namespace ActorBossTitan
             [SerializeField] EnemySpawner enemySpawner;
             [SerializeField] Collider2D hitboxCollider;
             [SerializeField] Mortal weakPoint;
-            [SerializeField] SpriteRenderer _spriteRenderer;
             [SerializeField] Rigidbody2D rigidbody;
             [SerializeField] ActorFunction.Directionable directionable;
 
@@ -196,8 +196,6 @@ namespace ActorBossTitan
                 rigidbody.velocity = Vector2.zero;
                 rigidbody.AddForce(new Vector2(reactionImpulse.x * directionable.CurrentDirectionInt, reactionImpulse.y),ForceMode2D.Impulse);
 
-                //一時的
-                _spriteRenderer.color = new Color(1, 1, 1, .5f);
 
                 enemySpawner.Spawn();
             }
@@ -212,8 +210,6 @@ namespace ActorBossTitan
                 weakPoint.IsInvulnerable = true;
                 manualClock.Reset();
 
-                //一時的
-                _spriteRenderer.color = Color.white;
             }
         }
 
@@ -253,7 +249,6 @@ namespace ActorBossTitan
         [System.Serializable]
         class Dead : ActorState
         {
-            [SerializeField] SpriteRenderer _spriteRenderer;
             [SerializeField] int boomCount;
             [SerializeField] float boomLength;
             [SerializeField] float intervalAfterEffect;
@@ -266,7 +261,6 @@ namespace ActorBossTitan
             protected override void OnInitialize()
             {
                 Debug.Log("Boss Titan has dead.");
-                _spriteRenderer.color = new Color(.5f,0,0,1);
                 Connector.StartCoroutine(DeadEffect());
             }
 

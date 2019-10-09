@@ -1072,7 +1072,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f36d7676470be5d4b83f1d35d4bdfd33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
   groundSensor: {fileID: 8916380849072566239}
   onJumpStart:
     m_PersistentCalls:
@@ -2896,7 +2895,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.125}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}

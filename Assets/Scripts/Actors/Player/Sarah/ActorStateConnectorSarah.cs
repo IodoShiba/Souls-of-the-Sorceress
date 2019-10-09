@@ -208,7 +208,7 @@ namespace ActorSarah
             protected override void OnInitialize()
             {
                 ConnectorSarah.tripleSlashAttackStream.StartReception();
-                horizontalMove.Method.enabled = true;
+                horizontalMove.Use = true;
                 attackLongPushClock.AllowedToStartCount = true;
                 ConnectorSarah.umbrellaParameters.ChangeDurabilityGradually(umbrellaRecoverCycle, umbrellaRecoverAmount);
                 sarahAnimator = ConnectorSarah.sarahAnimator;
@@ -223,6 +223,8 @@ namespace ActorSarah
                     sarahAnimator.SetTrigger("InAirTrigger");
                 }
                 IsRunning = false;
+
+                Debug.Log("Player:"+this.GetType().Name);
             }
             protected override void OnActive()
             {
@@ -246,7 +248,7 @@ namespace ActorSarah
 
             protected override void OnTerminate(bool isNormal)
             {
-                horizontalMove.Method.enabled = false;
+                horizontalMove.Use = false;
                 attackLongPushClock.AllowedToStartCount = false;
                 ConnectorSarah.umbrellaParameters.StopChangeDurabilityGradually();
                 passPlatform.Use(false);
@@ -309,7 +311,7 @@ namespace ActorSarah
                         return StateInDefaultNum.IsRunning;
                     case StateInDefaultNum.IsJumping:
                         //InAir遷移判定
-                        if (stateInfo.normalizedTime > 1 && !jump.Method.isActive) { return StateInDefaultNum.IsInAir; }
+                        if (stateInfo.normalizedTime > 1 && !jump.Method.IsActive) { return StateInDefaultNum.IsInAir; }
                         return StateInDefaultNum.IsJumping;
                     case StateInDefaultNum.IsInAir:
                         //OnLanding遷移判定
@@ -358,6 +360,7 @@ namespace ActorSarah
             protected override void OnInitialize()
             {
                 onInitialize.Invoke();
+                Debug.Log("Player:" + this.GetType().Name);
             }
         }
 
@@ -664,7 +667,7 @@ namespace ActorSarah
             {
                 umbrella.PlayerGliding();
                 velocityAdjuster.Method.enabled = ConnectorSarah.SelfRigidbody.velocity.y <= velocityAdjuster.Fields.Velocity.y + Mathf.Epsilon;
-                horizontalMove.Method.enabled = true;
+                horizontalMove.Use = true;
                 guard.Method.Activated = true;
                 guard.Method.GetIsAllSucceedAndReset();
                 ConnectorSarah.umbrellaParameters.ChangeDurabilityGradually(umbrellaConsumeCycle, -umbrellaConsumeAmount);
@@ -684,7 +687,7 @@ namespace ActorSarah
                 guard.Method.Activated = false;
                 //velocityAdjuster.Method.enabled = false;
                 velocityAdjuster.Method.Disable();
-                horizontalMove.Method.enabled = false;
+                horizontalMove.Use = false;
                 ConnectorSarah.umbrellaParameters.StopChangeDurabilityGradually();
             }
 
@@ -805,7 +808,9 @@ namespace ActorSarah
             {
                 ActorStateConnectorSarah actorStateConnectorSarah = Connector as ActorStateConnectorSarah;
                 actorStateConnectorSarah.sarahAnimator.SetTrigger("SarahSmashedTrigger");
-                base.OnInitialize();   
+                base.OnInitialize();
+
+                Debug.Log("Player:" + this.GetType().Name);
             }
         }
 

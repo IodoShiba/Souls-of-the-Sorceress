@@ -31,7 +31,6 @@ public class LootTable : ScriptableObject
         }
 
         float randv = Random.Range(0, tendencySum);
-        Debug.Log("randv:" + randv);
 
         for (int i = 0; i < lootTabel.Count; ++i)
         {
