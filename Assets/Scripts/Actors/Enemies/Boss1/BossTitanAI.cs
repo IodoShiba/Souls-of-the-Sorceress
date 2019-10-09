@@ -19,6 +19,7 @@ public class BossTitanAI : AI
     [SerializeField] float passPlatformtime2;
     [SerializeField] AreaObjectDetector playerDetector;
     [SerializeField] List<BoxCollider2D> areaColliders;
+    [SerializeField] Animator titanAnimator;
 
     Vector2Int position;
     ActionModes actionMode;

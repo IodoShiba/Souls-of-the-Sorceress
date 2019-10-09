@@ -63,6 +63,10 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
             {
                 isActive = false;
                 awakeLevel = AwakeLevels.ordinary;
+                AnimatorStateInfo stateInfo = ascSarah.sarahAnimator.GetCurrentAnimatorStateInfo(0);
+                int presentStateHash = stateInfo.fullPathHash;
+                ascSarah.sarahAnimator.runtimeAnimatorController = (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(DefaultAnimatorController);
+                ascSarah.sarahAnimator.Play(presentStateHash);
             }
         }
     }
@@ -78,7 +82,10 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
             else
             {
                 awakeLevel = AwakeLevels.awaken;
+                AnimatorStateInfo stateInfo = ascSarah.sarahAnimator.GetCurrentAnimatorStateInfo(0);
+                int presentStateHash = stateInfo.fullPathHash;
                 ascSarah.sarahAnimator.runtimeAnimatorController = (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(AwakenAnimatorController);
+                ascSarah.sarahAnimator.Play(presentStateHash);
             }
             onActivate.Invoke();
         }
@@ -86,7 +93,10 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
         {
             isActive = false;
             awakeLevel = AwakeLevels.ordinary;
+            AnimatorStateInfo stateInfo = ascSarah.sarahAnimator.GetCurrentAnimatorStateInfo(0);
+            int presentStateHash = stateInfo.fullPathHash;
             ascSarah.sarahAnimator.runtimeAnimatorController = (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(DefaultAnimatorController);
+            ascSarah.sarahAnimator.Play(presentStateHash);
             onInactivate.Invoke();
         }
     }
