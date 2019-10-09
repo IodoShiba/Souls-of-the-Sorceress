@@ -13,6 +13,7 @@ public class PlatformContactorVelocityFrexiblizer : MonoBehaviour
     private void Awake()
     {
         platformContactorCollider = GetComponent<BoxCollider2D>();
+        ordinaryHeight = platformContactorCollider.size.y;
         hardDropping = false;
     }
     private void FixedUpdate()
