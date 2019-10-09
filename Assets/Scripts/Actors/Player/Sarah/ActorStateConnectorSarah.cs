@@ -208,7 +208,7 @@ namespace ActorSarah
             protected override void OnInitialize()
             {
                 ConnectorSarah.tripleSlashAttackStream.StartReception();
-                horizontalMove.Method.enabled = true;
+                horizontalMove.Use = true;
                 attackLongPushClock.AllowedToStartCount = true;
                 ConnectorSarah.umbrellaParameters.ChangeDurabilityGradually(umbrellaRecoverCycle, umbrellaRecoverAmount);
                 sarahAnimator = ConnectorSarah.sarahAnimator;
@@ -248,7 +248,7 @@ namespace ActorSarah
 
             protected override void OnTerminate(bool isNormal)
             {
-                horizontalMove.Method.enabled = false;
+                horizontalMove.Use = false;
                 attackLongPushClock.AllowedToStartCount = false;
                 ConnectorSarah.umbrellaParameters.StopChangeDurabilityGradually();
                 passPlatform.Use(false);
@@ -667,7 +667,7 @@ namespace ActorSarah
             {
                 umbrella.PlayerGliding();
                 velocityAdjuster.Method.enabled = ConnectorSarah.SelfRigidbody.velocity.y <= velocityAdjuster.Fields.Velocity.y + Mathf.Epsilon;
-                horizontalMove.Method.enabled = true;
+                horizontalMove.Use = true;
                 guard.Method.Activated = true;
                 guard.Method.GetIsAllSucceedAndReset();
                 ConnectorSarah.umbrellaParameters.ChangeDurabilityGradually(umbrellaConsumeCycle, -umbrellaConsumeAmount);
@@ -687,7 +687,7 @@ namespace ActorSarah
                 guard.Method.Activated = false;
                 //velocityAdjuster.Method.enabled = false;
                 velocityAdjuster.Method.Disable();
-                horizontalMove.Method.enabled = false;
+                horizontalMove.Use = false;
                 ConnectorSarah.umbrellaParameters.StopChangeDurabilityGradually();
             }
 

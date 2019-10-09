@@ -19,22 +19,25 @@ namespace ActorFunction
             float argSpeedMultiplier;
             HorizontalMoveField fields;
             Rigidbody2D rigidbody;
-            float stopTime;
+            //float stopTime;
+            int stopperCount;
             [DisabledField] private bool isMoving;
-            [SerializeField] bool noUse;
+            bool use;
 
             public bool IsMoving { get => isMoving; private set => isMoving = value; }
-            public bool NoUse { get => noUse; set => noUse = value; }
+            public bool Use { get => use; set => use = value; }
 
             private void Awake()
             {
                 rigidbody = GetComponent<Rigidbody2D>();
+                use = true;
+                stopperCount = 0;
             }
             private void FixedUpdate()
             {
                 float goalSpeed = argSpeedMultiplier != 0 && fields != null ? argSpeedMultiplier * fields.maxSpeed : 0;
 
-                if (noUse) { return; }
+                if (!use && stopperCount == 0) { return; }
                 if (fields == null) { return; }
                 //if(argSpeedMultiplier == 0) { return; }
                 float maxForce = argSpeedMultiplier == 0 ? fields.stopForceMagnitude : fields.pushForceMagnitude;
@@ -46,11 +49,11 @@ namespace ActorFunction
                 rigidbody.AddForce(f * Vector2.right);
 
 
-                if (stopTime > 0)
-                {
-                    stopTime -= Time.deltaTime;
-                    enabled = stopTime > 0;
-                }
+                //if (stopTime > 0)
+                //{
+                //    stopTime -= Time.deltaTime;
+                //    enabled = stopTime > 0;
+                //}
             }
             public override void ManualUpdate(in HorizontalMoveField fields) { }
 
@@ -66,14 +69,25 @@ namespace ActorFunction
             public void StopActorOnDisabled(float time = .1f)
             {
                 argSpeedMultiplier = 0;
-                if (!enabled)
+                if (!use)
                 {
-                    stopTime = time;
-                    enabled = true;
+                    //stopTime = time;
+                    //use = true;
+                    StartCoroutine(StopperOnDisabled(time));
                 }
 
             }
 
+            IEnumerator StopperOnDisabled(float time)
+            {
+                ++stopperCount;
+                while(time > 0 && !use)
+                {
+                    time -= Time.deltaTime;
+                    yield return null;
+                }
+                --stopperCount;
+            }
         }
     }
 
@@ -81,7 +95,7 @@ namespace ActorFunction
 
     [System.Serializable]
     public class HorizontalMove : ActorFunction<HorizontalMoveField, HorizontalMoveField.Method> {
-        public bool NoUse { get => Method.NoUse; set => Method.NoUse = value; }
+        public bool Use { get => Method.Use; set => Method.Use = value; }
         public void ManualUpdate(float speedMultiplier) { Method.ManualUpdate(Fields,speedMultiplier); }
     }
 }

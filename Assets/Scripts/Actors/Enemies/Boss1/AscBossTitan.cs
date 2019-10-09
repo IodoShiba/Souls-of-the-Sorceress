@@ -111,7 +111,7 @@ namespace ActorBossTitan
 
             protected override void OnInitialize()
             {
-                horizontalMove.Method.enabled = true;
+                horizontalMove.Use = true;
             }
 
             protected override void OnActive()
@@ -148,7 +148,7 @@ namespace ActorBossTitan
             {
                 attackDifferencer.UseIndex = 0;
                 horizontalMove.ManualUpdate(0);
-                horizontalMove.Method.enabled = false;
+                horizontalMove.Use = false;
                 IsRunning = false;
             }
         }
