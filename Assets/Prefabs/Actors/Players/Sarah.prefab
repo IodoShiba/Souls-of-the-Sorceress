@@ -2052,6 +2052,7 @@ GameObject:
   - component: {fileID: 8916380849248469454}
   - component: {fileID: 8916380849248469450}
   - component: {fileID: 8916380849248469449}
+  - component: {fileID: 7806928696938067614}
   m_Layer: 25
   m_Name: Smash Slash's Attack Collision
   m_TagString: Attack
@@ -2263,13 +2264,12 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7396359423064295611}
-        m_MethodName: PlayOneShot
-        m_Mode: 2
+      - m_Target: {fileID: 7806928696938067614}
+        m_MethodName: DoEffect
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 84b91e8b195f3154f831dcf44427cda2,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2280,6 +2280,25 @@ MonoBehaviour:
   attackConvertersOnActivate:
   - {fileID: 8916380849248469450}
   attackConvertersOnHit: []
+--- !u!114 &7806928696938067614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380849248469452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81457894b1abc63408678dc4317aaa9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipOrdinary: {fileID: 8300000, guid: 84b91e8b195f3154f831dcf44427cda2, type: 3}
+  audioClipAwaken: {fileID: 8300000, guid: 8fafd030dfdef9e45a27b40aca751455, type: 3}
+  animationClipOrdinary: {fileID: 7400000, guid: 074fc9e1973157d47bebbb773fe46d74,
+    type: 2}
+  animationClipAwaken: {fileID: 7400000, guid: b48a6521246ac9843a7f2fdf435c2d6f, type: 2}
+  audioSource: {fileID: 7396359423064295611}
+  actionAwake: {fileID: 8916380848889061092}
 --- !u!1 &8916380849465762210
 GameObject:
   m_ObjectHideFlags: 0
@@ -2296,6 +2315,7 @@ GameObject:
   - component: {fileID: 8916380849465762221}
   - component: {fileID: 8916380849465762216}
   - component: {fileID: 8916380849465762211}
+  - component: {fileID: 4121035682260114612}
   m_Layer: 25
   m_Name: Vertical Slash's Attack Collision
   m_TagString: Attack
@@ -2492,13 +2512,12 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7396359423064295611}
-        m_MethodName: PlayOneShot
-        m_Mode: 2
+      - m_Target: {fileID: 4121035682260114612}
+        m_MethodName: DoEffect
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 84b91e8b195f3154f831dcf44427cda2,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2509,6 +2528,25 @@ MonoBehaviour:
   attackConvertersOnActivate:
   - {fileID: 8916380849465762216}
   attackConvertersOnHit: []
+--- !u!114 &4121035682260114612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380849465762210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81457894b1abc63408678dc4317aaa9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipOrdinary: {fileID: 8300000, guid: 84b91e8b195f3154f831dcf44427cda2, type: 3}
+  audioClipAwaken: {fileID: 8300000, guid: 8fafd030dfdef9e45a27b40aca751455, type: 3}
+  animationClipOrdinary: {fileID: 7400000, guid: 074fc9e1973157d47bebbb773fe46d74,
+    type: 2}
+  animationClipAwaken: {fileID: 7400000, guid: b48a6521246ac9843a7f2fdf435c2d6f, type: 2}
+  audioSource: {fileID: 7396359423064295611}
+  actionAwake: {fileID: 8916380848889061092}
 --- !u!1 &8916380849515846542
 GameObject:
   m_ObjectHideFlags: 0
@@ -2525,6 +2563,7 @@ GameObject:
   - component: {fileID: 8916380849515846543}
   - component: {fileID: 8916380849515846548}
   - component: {fileID: 8916380849515846539}
+  - component: {fileID: 4742137266094557856}
   m_Layer: 25
   m_Name: Aerial Slash's Attack Collision
   m_TagString: Attack
@@ -2733,13 +2772,12 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7396359423064295611}
-        m_MethodName: PlayOneShot
-        m_Mode: 2
+      - m_Target: {fileID: 4742137266094557856}
+        m_MethodName: DoEffect
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 84b91e8b195f3154f831dcf44427cda2,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2750,6 +2788,25 @@ MonoBehaviour:
   attackConvertersOnActivate:
   - {fileID: 8916380849515846548}
   attackConvertersOnHit: []
+--- !u!114 &4742137266094557856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380849515846542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81457894b1abc63408678dc4317aaa9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipOrdinary: {fileID: 8300000, guid: 84b91e8b195f3154f831dcf44427cda2, type: 3}
+  audioClipAwaken: {fileID: 8300000, guid: 8fafd030dfdef9e45a27b40aca751455, type: 3}
+  animationClipOrdinary: {fileID: 7400000, guid: 074fc9e1973157d47bebbb773fe46d74,
+    type: 2}
+  animationClipAwaken: {fileID: 7400000, guid: b48a6521246ac9843a7f2fdf435c2d6f, type: 2}
+  audioSource: {fileID: 7396359423064295611}
+  actionAwake: {fileID: 8916380848889061092}
 --- !u!1 &8916380849653747841
 GameObject:
   m_ObjectHideFlags: 0
@@ -2766,6 +2823,7 @@ GameObject:
   - component: {fileID: 8916380849653747842}
   - component: {fileID: 8916380849653747855}
   - component: {fileID: 8916380849653747854}
+  - component: {fileID: 4310516146056782739}
   m_Layer: 25
   m_Name: Drop Attack's Attack Collision
   m_TagString: Attack
@@ -2932,13 +2990,12 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7396359423064295611}
-        m_MethodName: PlayOneShot
-        m_Mode: 2
+      - m_Target: {fileID: 4310516146056782739}
+        m_MethodName: DoEffect
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 84b91e8b195f3154f831dcf44427cda2,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2949,6 +3006,25 @@ MonoBehaviour:
   attackConvertersOnActivate:
   - {fileID: 8916380849653747855}
   attackConvertersOnHit: []
+--- !u!114 &4310516146056782739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380849653747841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81457894b1abc63408678dc4317aaa9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipOrdinary: {fileID: 8300000, guid: 84b91e8b195f3154f831dcf44427cda2, type: 3}
+  audioClipAwaken: {fileID: 8300000, guid: 8fafd030dfdef9e45a27b40aca751455, type: 3}
+  animationClipOrdinary: {fileID: 7400000, guid: 074fc9e1973157d47bebbb773fe46d74,
+    type: 2}
+  animationClipAwaken: {fileID: 7400000, guid: b48a6521246ac9843a7f2fdf435c2d6f, type: 2}
+  audioSource: {fileID: 7396359423064295611}
+  actionAwake: {fileID: 8916380848889061092}
 --- !u!1 &8916380850264124291
 GameObject:
   m_ObjectHideFlags: 0
@@ -3208,6 +3284,7 @@ GameObject:
   - component: {fileID: 8916380850370461325}
   - component: {fileID: 8916380850370461322}
   - component: {fileID: 8916380850370461321}
+  - component: {fileID: 5258681253247680869}
   m_Layer: 25
   m_Name: Return Slash's Attack Collision
   m_TagString: Attack
@@ -3404,13 +3481,12 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7396359423064295611}
-        m_MethodName: PlayOneShot
-        m_Mode: 2
+      - m_Target: {fileID: 5258681253247680869}
+        m_MethodName: DoEffect
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 84b91e8b195f3154f831dcf44427cda2,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3421,6 +3497,25 @@ MonoBehaviour:
   attackConvertersOnActivate:
   - {fileID: 8916380850370461322}
   attackConvertersOnHit: []
+--- !u!114 &5258681253247680869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380850370461324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81457894b1abc63408678dc4317aaa9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipOrdinary: {fileID: 8300000, guid: 84b91e8b195f3154f831dcf44427cda2, type: 3}
+  audioClipAwaken: {fileID: 8300000, guid: 8fafd030dfdef9e45a27b40aca751455, type: 3}
+  animationClipOrdinary: {fileID: 7400000, guid: 074fc9e1973157d47bebbb773fe46d74,
+    type: 2}
+  animationClipAwaken: {fileID: 7400000, guid: b48a6521246ac9843a7f2fdf435c2d6f, type: 2}
+  audioSource: {fileID: 7396359423064295611}
+  actionAwake: {fileID: 8916380848889061092}
 --- !u!1 &8916380850513594274
 GameObject:
   m_ObjectHideFlags: 0

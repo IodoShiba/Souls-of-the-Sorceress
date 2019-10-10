@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7457400105786499165}
   - component: {fileID: 8846357498839132271}
   - component: {fileID: 3266266874406353090}
+  - component: {fileID: 9075659024389728264}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -70,8 +71,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c706331923d624046be0794309b3ecd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionAwake: {fileID: 8916380848889061092, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-    type: 3}
   onVictory:
     m_PersistentCalls:
       m_Calls: []
@@ -108,3 +107,20 @@ MonoBehaviour:
   inWipeEffet: {fileID: 11400000, guid: d81e06185a9a3b346b8f84c079928f01, type: 2}
   outWipeEffet: {fileID: 11400000, guid: d81e06185a9a3b346b8f84c079928f01, type: 2}
   defaultDestinationSceneName: 
+--- !u!114 &9075659024389728264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7457400105786499162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67940e3ca25e66c4dbd1a05e2edeefbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolSize: 32
+  prefab: {fileID: 224757770675119211, guid: 13af3dd4a6ac99f448c86b8b7883065b, type: 3}
+  clips:
+  - {fileID: 7400000, guid: 074fc9e1973157d47bebbb773fe46d74, type: 2}
+  - {fileID: 7400000, guid: b48a6521246ac9843a7f2fdf435c2d6f, type: 2}

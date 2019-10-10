@@ -122,6 +122,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
             dealtAttackInfos[dealtAttackCount].attacker = attacker;
             AttackData.Copy(dealtAttackInfos[dealtAttackCount].attackData, argAttackData);
             dealtAttackInfos[dealtAttackCount].relativePosition = relativePosition;
+            dealtAttackInfos[dealtAttackCount].onAttackEvaluatedCallback = onAttackEvaluatedCallback;
         }
         dealtAttackCount++;
     }
