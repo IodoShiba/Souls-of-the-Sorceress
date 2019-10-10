@@ -29,8 +29,6 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
     [SerializeField,DisabledField]private bool isActive = false;
     AwakeLevels awakeLevel = AwakeLevels.ordinary;
     [SerializeField] Animator AwakeEffectAnimator;
-    [SerializeField] RuntimeAnimatorController DefaultAnimatorController;
-    [SerializeField] RuntimeAnimatorController AwakenAnimatorController;
 
     public bool IsActive { get => isActive;}
     public AwakeLevels AwakeLevel { get => awakeLevel; }
@@ -64,10 +62,7 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
             {
                 isActive = false;
                 awakeLevel = AwakeLevels.ordinary;
-                AnimatorStateInfo stateInfo = ascSarah.sarahAnimator.GetCurrentAnimatorStateInfo(0);
-                int presentStateHash = stateInfo.fullPathHash;
-                ascSarah.sarahAnimator.runtimeAnimatorController = (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(DefaultAnimatorController);
-                ascSarah.sarahAnimator.Play(presentStateHash);
+                SetAnimatorLayer(awakeLevel);
             }
         }
     }
@@ -79,14 +74,13 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
             if (awakeGauge >= 1) 
             {
                 awakeLevel = AwakeLevels.blueAwaken;
+                SetAnimatorLayer(awakeLevel);
             }
             else
             {
                 awakeLevel = AwakeLevels.awaken;
-                AnimatorStateInfo stateInfo = ascSarah.sarahAnimator.GetCurrentAnimatorStateInfo(0);
-                int presentStateHash = stateInfo.fullPathHash;
-                ascSarah.sarahAnimator.runtimeAnimatorController = (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(AwakenAnimatorController);
-                ascSarah.sarahAnimator.Play(presentStateHash);
+                SetAnimatorLayer(awakeLevel);
+
                 AwakeEffectAnimator.Play("SarahAwakeEffect");
             }
             onActivate.Invoke();
@@ -95,10 +89,8 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
         {
             isActive = false;
             awakeLevel = AwakeLevels.ordinary;
-            AnimatorStateInfo stateInfo = ascSarah.sarahAnimator.GetCurrentAnimatorStateInfo(0);
-            int presentStateHash = stateInfo.fullPathHash;
-            ascSarah.sarahAnimator.runtimeAnimatorController = (RuntimeAnimatorController)RuntimeAnimatorController.Instantiate(DefaultAnimatorController);
-            ascSarah.sarahAnimator.Play(presentStateHash);
+            SetAnimatorLayer(awakeLevel);
+
             onInactivate.Invoke();
         }
     }
@@ -125,5 +117,26 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
     public void Store(SaveData target, Action<float> setter)
     {
         setter(awakeGauge);
+    }
+
+    void SetAnimatorLayer(AwakeLevels mode)
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            ascSarah.sarahAnimator.SetLayerWeight(i,0);
+        }
+
+        switch (mode)
+        {
+            case AwakeLevels.ordinary:
+                ascSarah.sarahAnimator.SetLayerWeight(0,1);
+                break;
+            case AwakeLevels.awaken:
+                ascSarah.sarahAnimator.SetLayerWeight(1,1);
+                break;
+            case AwakeLevels.blueAwaken:
+                ascSarah.sarahAnimator.SetLayerWeight(2,1);
+                break;
+        }
     }
 }

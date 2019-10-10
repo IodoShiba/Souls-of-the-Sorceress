@@ -11,6 +11,7 @@ namespace ActorWalkingMushroom
 
         [SerializeField] MushDefault mushDefault;
         [SerializeField] MushSmashed smashed;
+        [SerializeField] Animator smallMushAnimator;
 
         public override SmashedState Smashed => smashed;
 
@@ -31,6 +32,7 @@ namespace ActorWalkingMushroom
             protected override void OnInitialize()
             {
                 horizontalMove.Use = true;
+                ConnectorMush.smallMushAnimator.Play("Move");
             }
             protected override void OnActive()
             {
@@ -50,7 +52,14 @@ namespace ActorWalkingMushroom
         [System.Serializable]
         private class MushSmashed : SmashedState
         {
+            AscWalkingMushroom connectorMush;
+            AscWalkingMushroom ConnectorMush { get => connectorMush == null ? (connectorMush = Connector as AscWalkingMushroom) : connectorMush; }
 
+            protected override void OnActive()
+            {
+                base.OnActive();
+                ConnectorMush.smallMushAnimator.Play("Smashed");
+            }
         }
     }
 }

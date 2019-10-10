@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1059764829938569078}
   - component: {fileID: 8155806831547113206}
+  - component: {fileID: 3475852781687035367}
   m_Layer: 24
   m_Name: Animation
   m_TagString: Untagged
@@ -79,6 +80,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &3475852781687035367
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833298949204556770}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ebc233dd0dcbb68449bd7b37047d5dfb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2495217448542570945
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +341,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onInvinsibleTimeOver:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 2495217448702265936}
   dealingAttackConverters: []
   dealtAttackConverters: []
@@ -430,6 +455,7 @@ MonoBehaviour:
     invincibleTime: 0
     horizontalMove: {fileID: 1887466661123618811}
     disallowCross: 0
+  slimeAnimator: {fileID: 3475852781687035367}
 --- !u!114 &2495217448702265932
 MonoBehaviour:
   m_ObjectHideFlags: 0

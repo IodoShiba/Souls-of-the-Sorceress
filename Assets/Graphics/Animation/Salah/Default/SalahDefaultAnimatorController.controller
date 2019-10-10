@@ -118,6 +118,81 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+  - serializedVersion: 5
+    m_Name: Awaken Layer
+    m_StateMachine: {fileID: 1107707659289378202}
+    m_Mask: {fileID: 0}
+    m_Motions:
+    - serializedVersion: 2
+      m_State: {fileID: 1102789161365191588}
+      m_Motion: {fileID: 7400000, guid: 85a516e6ce7ddb247aa18539ecdb7801, type: 2}
+    - serializedVersion: 2
+      m_State: {fileID: 1102077051626722714}
+      m_Motion: {fileID: 7400000, guid: ec5eed53dbd95144590b357d2b0fd510, type: 2}
+    - serializedVersion: 2
+      m_State: {fileID: 1102676426066130464}
+      m_Motion: {fileID: 7400000, guid: 89618f8a69bf4194b9f37508f3f8a701, type: 2}
+    - serializedVersion: 2
+      m_State: {fileID: 1102334228020960966}
+      m_Motion: {fileID: 7400000, guid: 5efd10e392d68f34585116d8ef289827, type: 2}
+    - serializedVersion: 2
+      m_State: {fileID: 1102890883897650890}
+      m_Motion: {fileID: 7400000, guid: 3c24fb15f51a26144ad6c502c9b387b4, type: 2}
+    - serializedVersion: 2
+      m_State: {fileID: 1102162815449531230}
+      m_Motion: {fileID: 7400000, guid: 8245a4f81eeabe6428b3f8ccbe25d65e, type: 2}
+    - serializedVersion: 2
+      m_State: {fileID: 1102213003102336510}
+      m_Motion: {fileID: 7400000, guid: 8f3de85868ebc2f4088b876cb9292f3f, type: 2}
+    - serializedVersion: 2
+      m_State: {fileID: 1102066149401937680}
+      m_Motion: {fileID: 7400000, guid: 260774b633910ea48bfd2714ca6712db, type: 2}
+    - serializedVersion: 2
+      m_State: {fileID: 1102712863362729464}
+      m_Motion: {fileID: 7400000, guid: 94c976da675500949a612dca6b9d042c, type: 2}
+    - serializedVersion: 2
+      m_State: {fileID: 1102126825991526576}
+      m_Motion: {fileID: 7400000, guid: 6feb471c81d980f498a874805dc6d355, type: 2}
+    - serializedVersion: 2
+      m_State: {fileID: 1102579777408554830}
+      m_Motion: {fileID: 7400000, guid: 34b7edd96e04cad4091f974937cff9fd, type: 2}
+    - serializedVersion: 2
+      m_State: {fileID: 1102761845140786140}
+      m_Motion: {fileID: 7400000, guid: f25805059a9167f41911e69c890c43b4, type: 2}
+    - serializedVersion: 2
+      m_State: {fileID: 1102805595938145636}
+      m_Motion: {fileID: 7400000, guid: 6298babc510170342a97846e8019cc18, type: 2}
+    m_Behaviours: []
+    m_BlendingMode: 0
+    m_SyncedLayerIndex: 0
+    m_DefaultWeight: 0
+    m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
+  - serializedVersion: 5
+    m_Name: BlueAwaken Layer
+    m_StateMachine: {fileID: 1107015945903950298}
+    m_Mask: {fileID: 0}
+    m_Motions: []
+    m_Behaviours: []
+    m_BlendingMode: 0
+    m_SyncedLayerIndex: 0
+    m_DefaultWeight: 0
+    m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
+  - serializedVersion: 5
+    m_Name: Invinsible Layer
+    m_StateMachine: {fileID: 1107910812366394312}
+    m_Mask: {fileID: 0}
+    m_Motions: []
+    m_Behaviours: []
+    m_BlendingMode: 1
+    m_SyncedLayerIndex: -1
+    m_DefaultWeight: 1
+    m_IKPass: 0
+    m_SyncedLayerAffectsTiming: 0
+    m_Controller: {fileID: 9100000}
 --- !u!1101 &1101001776724175034
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -769,6 +844,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &1102032631719860536
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Idle
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &1102066149401937680
 AnimatorState:
   serializedVersion: 5
@@ -1204,6 +1305,51 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &1102908589435909904
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: InvinsibleTime
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: d62ec2a02906ae544a5eec8ee6bbb7e2, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1107 &1107015945903950298
+AnimatorStateMachine:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BlueAwaken Layer
+  m_ChildStates: []
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: 0}
 --- !u!1107 &1107125510658104502
 AnimatorStateMachine:
   serializedVersion: 5
@@ -1327,6 +1473,50 @@ AnimatorStateMachine:
   m_ExitPosition: {x: -552, y: 564, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1102761845140786140}
+--- !u!1107 &1107707659289378202
+AnimatorStateMachine:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Awaken Layer
+  m_ChildStates: []
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: 0}
+--- !u!1107 &1107910812366394312
+AnimatorStateMachine:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Invinsible Layer
+  m_ChildStates:
+  - serializedVersion: 1
+    m_State: {fileID: 1102908589435909904}
+    m_Position: {x: 216, y: 192, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1102032631719860536}
+    m_Position: {x: 216, y: 120, z: 0}
+  m_ChildStateMachines: []
+  m_AnyStateTransitions: []
+  m_EntryTransitions: []
+  m_StateMachineTransitions: {}
+  m_StateMachineBehaviours: []
+  m_AnyStatePosition: {x: 50, y: 20, z: 0}
+  m_EntryPosition: {x: 50, y: 120, z: 0}
+  m_ExitPosition: {x: 800, y: 120, z: 0}
+  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+  m_DefaultState: {fileID: 1102032631719860536}
 --- !u!1109 &1109133624087269164
 AnimatorTransition:
   m_ObjectHideFlags: 1
