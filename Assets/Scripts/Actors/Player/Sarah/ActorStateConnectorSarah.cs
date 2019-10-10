@@ -806,11 +806,10 @@ namespace ActorSarah
         {
             protected override void OnInitialize()
             {
+                base.OnInitialize();
                 ActorStateConnectorSarah actorStateConnectorSarah = Connector as ActorStateConnectorSarah;
                 actorStateConnectorSarah.sarahAnimator.SetTrigger("SarahSmashedTrigger");
-                base.OnInitialize();
 
-                Debug.Log("Player:" + this.GetType().Name);
             }
         }
 
