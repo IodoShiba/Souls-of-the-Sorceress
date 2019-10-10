@@ -10,7 +10,7 @@ namespace ActorSlime
 
         [SerializeField] SlimeDefault slimeDefault;
         [SerializeField] Spike spike;
-        [SerializeField] SmashedState smashed;
+        [SerializeField] SlimeSmashedState smashed;
         [SerializeField] Animator slimeAnimator;
 
         public override SmashedState Smashed => smashed;
@@ -34,11 +34,6 @@ namespace ActorSlime
             AscSlime connectorSlime;
 
             AscSlime ConnectorSlime { get => connectorSlime == null ? (connectorSlime = Connector as AscSlime) : connectorSlime; }
-
-            protected override void OnInitialize()
-            {
-                ConnectorSlime.slimeAnimator.Play("Attack_Back");
-            }
 
             protected override void OnActive()
             {
@@ -75,6 +70,27 @@ namespace ActorSlime
             {
                 spikeAttack.Inactivate();
                 spikeSpriteRenderer.enabled = false;
+                ConnectorSlime.slimeAnimator.Play("Attack_Back");
+            }
+        }
+
+        [System.Serializable]
+        class SlimeSmashedState : SmashedState
+        {
+            AscSlime connectorSlime;
+
+            AscSlime ConnectorSlime { get => connectorSlime == null ? (connectorSlime = Connector as AscSlime) : connectorSlime; }
+
+            protected override void OnInitialize()
+            {
+                base.OnInitialize();
+                ConnectorSlime.slimeAnimator.Play("Smashed");
+            }
+
+            protected override void OnTerminate(bool isNormal)
+            {
+                base.OnTerminate(isNormal);
+                ConnectorSlime.slimeAnimator.Play("Move");
             }
         }
     }

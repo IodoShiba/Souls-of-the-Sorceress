@@ -177,6 +177,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onInvinsibleTimeOver:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 964724003723573773}
   dealingAttackConverters: []
   dealtAttackConverters: []
@@ -244,6 +249,7 @@ MonoBehaviour:
     invincibleTime: 0
     horizontalMove: {fileID: 0}
     disallowCross: 0
+  elementAnimator: {fileID: 6534074606263859062}
 --- !u!114 &4887456833946179394
 MonoBehaviour:
   m_ObjectHideFlags: 0

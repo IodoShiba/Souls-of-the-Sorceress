@@ -118,8 +118,8 @@ public class ActorState
     //
 
     List<System.Func<ActorState>> nextStateCandidateFuncs = new List<System.Func<ActorState>>();
-    [DisabledField,SerializeField] GameObject gameObject;
-    [SerializeField, DisabledField] ActorStateConnector connector;
+    [SerializeField,DisabledField] GameObject gameObject;
+    [SerializeField,DisabledField] ActorStateConnector connector;
 
     bool isCurrent = false;
     public GameObject GameObject { get => gameObject; }

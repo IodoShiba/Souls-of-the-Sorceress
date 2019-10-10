@@ -9,10 +9,10 @@ namespace ActorEnemyElement {
         [SerializeField] ElementAI ai;
 
         [SerializeField] ElementDefault elementDefault;
-        [SerializeField] SmashedState smashed;
+        [SerializeField] ElementSmashed smashed;
+        [SerializeField] Animator elementAnimator;
 
         public override ActorState DefaultState => elementDefault;
-
         public override SmashedState Smashed => smashed;
 
         protected override void BeforeStateUpdate()
@@ -33,6 +33,7 @@ namespace ActorEnemyElement {
             protected override void OnInitialize()
             {
                 base.OnInitialize();
+                ConnectorElem.elementAnimator.Play("Idle");
             }
             protected override void OnActive()
             {
@@ -47,5 +48,17 @@ namespace ActorEnemyElement {
             }
         }
 
+        [System.Serializable]
+        private class ElementSmashed : SmashedState
+        {
+            AscEnemyElement connectorElem;
+            AscEnemyElement ConnectorElem { get => connectorElem == null ? (connectorElem = Connector as AscEnemyElement) : connectorElem; }
+
+            protected override void OnInitialize()
+            {
+                base.OnInitialize();
+                ConnectorElem.elementAnimator.Play("Smashed");
+            }
+        }
     }
 }
