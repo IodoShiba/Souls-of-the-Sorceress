@@ -360,7 +360,7 @@ namespace ActorSarah
             protected override void OnInitialize()
             {
                 onInitialize.Invoke();
-                Debug.Log("Player:" + this.GetType().Name);
+                //Debug.Log("Player:" + this.GetType().Name);
             }
         }
 

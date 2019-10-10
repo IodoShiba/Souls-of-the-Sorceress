@@ -79,6 +79,9 @@ public class BossTitanAI : AI
     public override void Decide()
     {
         //Debug.Log(t);
+        AnimatorStateInfo info = titanAnimator.GetCurrentAnimatorStateInfo(0);
+        Debug.Log(info.fullPathHash);
+
         if (t < makingDecisionCycle || isActing)
         {
             actionMode = ActionModes.Normal;
@@ -167,12 +170,9 @@ public class BossTitanAI : AI
         doJump = false;
         if (moveDirection != 0)
         {
-            while(!groundSensor.IsOnGround){
-                yield return null;
-            }
+
             //down
             titanAnimator.SetTrigger("JumpDownTrigger");
-            yield return new WaitForSeconds(.1f);
             yield return StartCoroutine(StateHorizontalMoveEver());
         }
         else
