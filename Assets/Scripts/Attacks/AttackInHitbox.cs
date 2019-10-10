@@ -9,6 +9,8 @@ using UnityEditor;
 [System.Serializable]
 public class AttackInHitbox : MonoBehaviour
 {
+    [System.Serializable] class UnityEvent_SubjectMortal : UnityEngine.Events.UnityEvent<Mortal> { }
+
     //[SerializeField] private Mortal owner;
     [SerializeField,UnityEngine.Serialization.FormerlySerializedAs("_oowner")] private Mortal owner;
     [SerializeField] private bool onceOnly;
@@ -18,6 +20,7 @@ public class AttackInHitbox : MonoBehaviour
     [SerializeField] float activeSpan;
     [SerializeField] private AttackData attackDataPrototype;
     [SerializeField] UnityEngine.Events.UnityEvent onAttackSucceeded;
+    [SerializeField] UnityEvent_SubjectMortal onAttackSucceededMortal;
     [SerializeField,FormerlySerializedAs("dealingAttackConverters")] private List<AttackConverter> attackConvertersOnActivate;
     [SerializeField] private List<AttackConverter> attackConvertersOnHit;
     bool isAttackActive = false;
@@ -71,9 +74,12 @@ public class AttackInHitbox : MonoBehaviour
             attackConvertersOnHit.ForEach(acOnHit => acOnHit.Convert(convertedAttackData));
             //mortal.TryAttack(gameObject, this.ParamsConvertedByOwner, result => { HitProcess(); } );
             mortal.TryAttack(owner, this.ParamsConvertedByOwner, transform.position - hit.gameObject.transform.position,
-                isSuccess=> 
+                (isSuccess,subjectMortal)=> 
                 {
-                    if (isSuccess) { onAttackSucceeded.Invoke(); }
+                    if (isSuccess) {
+                        onAttackSucceeded.Invoke();
+                        onAttackSucceededMortal.Invoke(subjectMortal);
+                    }
                 });
             HitProcess();
         }
