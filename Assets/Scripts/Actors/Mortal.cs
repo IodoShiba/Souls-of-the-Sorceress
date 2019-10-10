@@ -41,6 +41,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     [SerializeField] UnityEngine.Events.UnityEvent onAttackedCallbacks;
     [SerializeField] UnityEngine.Events.UnityEvent onHealthRecoveredCallbacks;
     [SerializeField] UnityEngine.Events.UnityEvent onInvinsibleTimeOver;
+    [SerializeField] UnityEngine.Events.UnityEvent onDestroy;
     [SerializeField] Rigidbody2D selfRigidbody;
     [SerializeField] List<AttackConverter> dealingAttackConverters;
     [SerializeField] List<AttackConverter> dealtAttackConverters;
@@ -233,6 +234,10 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         onInvinsibleTimeOver.Invoke();
     }
 
+    private void OnDestroy()
+    {
+        onDestroy.Invoke();
+    }
 }
 
 
