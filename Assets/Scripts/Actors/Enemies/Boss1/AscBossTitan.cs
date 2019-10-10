@@ -111,6 +111,8 @@ namespace ActorBossTitan
 
             protected override void OnInitialize()
             {
+                horizontalMove.Method.enabled = true;
+                titanAI.titanAnimator.SetTrigger("DefaultTrigger");
                 horizontalMove.Use = true;
             }
 
@@ -184,6 +186,7 @@ namespace ActorBossTitan
                 onInitialize.Invoke();
 
                 manualClock.Reset();
+                titanAI.titanAnimator.SetTrigger("FaintedTrigger");
                 titanAI.enabled = false;
                 hitboxCollider.enabled = false;
                 weakPoint.IsInvulnerable = false;
@@ -226,6 +229,7 @@ namespace ActorBossTitan
             protected override void OnInitialize()
             {
                 manualClock.Reset();
+                titanAI.titanAnimator.SetTrigger("RecoverTrigger");
             }
 
             protected override void OnActive()

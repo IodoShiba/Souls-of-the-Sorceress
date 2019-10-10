@@ -13,13 +13,17 @@ public class BossTitanAI : AI
     }
 
     [SerializeField] float makingDecisionCycle;
+    [SerializeField] float BeforeAttackTiming;
     [SerializeField] float centerOfFieldX;
     [SerializeField] float distanceOfJumpUpBorderFromCenter;
     [SerializeField] float passPlatformtime1;
     [SerializeField] float passPlatformtime2;
+    [SerializeField] float jump1span;
+    [SerializeField] float jump2span;
     [SerializeField] AreaObjectDetector playerDetector;
     [SerializeField] List<BoxCollider2D> areaColliders;
-    [SerializeField] Animator titanAnimator;
+    [SerializeField] public Animator titanAnimator;
+    [SerializeField] GroundSensor groundSensor;
 
     Vector2Int position;
     ActionModes actionMode;
@@ -74,7 +78,7 @@ public class BossTitanAI : AI
 
     public override void Decide()
     {
-        Debug.Log(t);
+        //Debug.Log(t);
         if (t < makingDecisionCycle || isActing)
         {
             actionMode = ActionModes.Normal;
@@ -82,7 +86,8 @@ public class BossTitanAI : AI
             if (!isActing)
             {
                 t += Time.deltaTime;
-            } 
+            }
+            if (t >= BeforeAttackTiming && t-Time.deltaTime < BeforeAttackTiming) titanAnimator.SetTrigger("BeforeAttackTrigger");
             return;
         }
 
@@ -100,7 +105,6 @@ public class BossTitanAI : AI
 
         jumpUpRowsCount = areaIndexPlayerIsIn / 2 - position.y;
         moveDirection = areaIndexPlayerIsIn == PositionVectorToAreaIndex(position) ? (1 - position.x*2) : (areaIndexPlayerIsIn % 2 - position.x);
-
         if (areaIndexPlayerIsIn != PositionVectorToAreaIndex(position) && IsPlayerAndIInSameColumn(areaIndexPlayerIsIn)) //プレイヤーとボスが異なるエリアかつ同列
         {
             actionMode = ActionModes.Jump;
@@ -127,6 +131,9 @@ public class BossTitanAI : AI
 
     IEnumerator StateHorizontalMove()
     {
+        Debug.Log("HorizontalMove");
+        //horizontalMove
+        titanAnimator.SetTrigger("HorizontalMoveTrigger");
         while((transform.position.x - GetJumpUpBorder(-1 * moveDirection)) * moveDirection < 0)
         {
             yield return null;
@@ -137,7 +144,8 @@ public class BossTitanAI : AI
 
     IEnumerator BranchVerticalMove()
     {
-        if(jumpUpRowsCount >= 0)
+        Debug.Log("BranchVerticalMove");
+        if (jumpUpRowsCount >= 0)
         {
             return StateJump();
         }
@@ -149,23 +157,44 @@ public class BossTitanAI : AI
 
     IEnumerator StateJump()
     {
+        Debug.Log("Jump");
         doJump = true;
-        yield return new WaitForSeconds(.7f);
+        //up
+        titanAnimator.SetTrigger("JumpUpTrigger");
+        yield return new WaitForSeconds(.4f);
+        //inAir
+        titanAnimator.SetTrigger("JumpAirTrigger");
         doJump = false;
         if (moveDirection != 0)
         {
+            while(!groundSensor.IsOnGround){
+                yield return null;
+            }
+            //down
+            titanAnimator.SetTrigger("JumpDownTrigger");
+            yield return new WaitForSeconds(.1f);
             yield return StartCoroutine(StateHorizontalMoveEver());
         }
         else
         {
+            yield return new WaitForSeconds(JumpUpRowsCount == 1 ? jump1span:jump2span);
+            //down
+            titanAnimator.SetTrigger("JumpDownTrigger");
+            yield return new WaitForSeconds(.5f);
+            //Idle
             isActing = false;
         }
     }
 
     IEnumerator StatePassPlatform()
     {
+        Debug.Log("PassPlatform");
         doPassPlatform = true;
+        //air
+        titanAnimator.SetTrigger("PassPlatformAirTrigger");
         yield return new WaitForSeconds(jumpUpRowsCount == -1 ? passPlatformtime1 : passPlatformtime2);
+        //down
+        titanAnimator.SetTrigger("PassPlatformDownTrigger");
         doPassPlatform = false;
         if (moveDirection != 0)
         {
@@ -179,6 +208,9 @@ public class BossTitanAI : AI
 
     IEnumerator StateHorizontalMoveEver()
     {
+        //horizontalEver
+        titanAnimator.SetTrigger("HorizontalMoveEverTrigger");
+        Debug.Log("HorizontalMoveEver");
         while (enabled)
         {
             yield return null;
