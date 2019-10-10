@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class PlayerAttackEffect : MonoBehaviour
 {
+    private const float Z_SHIFT = 0.1f;
+
     [SerializeField] AudioClip audioClipOrdinary;
     [SerializeField] AudioClip audioClipAwaken;
     [SerializeField] AnimationClip animationClipOrdinary;
     [SerializeField] AnimationClip animationClipAwaken;
+    [SerializeField] Vector2 offset;
+    [SerializeField] float positionerMulti;
+    [SerializeField] Mortal owner;
     [SerializeField] AudioSource audioSource;
     [SerializeField] ActionAwake actionAwake;
 
-    public void DoEffect()
+    public void DoEffect(Mortal subjectMortal)
     {
         AudioClip audC = null;
         AnimationClip animC = null;
@@ -28,6 +33,10 @@ public class PlayerAttackEffect : MonoBehaviour
                 break;
         }
         audioSource.PlayOneShot(audC);
-        EffectAnimationManager.Play(animC, transform.position - 0.1f * Vector3.forward);
+        Vector2 diff = subjectMortal.transform.position - owner.transform.position;
+        EffectAnimationManager.Play(
+            animC,
+            owner.transform.position + (Vector3)offset + positionerMulti*(Vector3)diff - Z_SHIFT * Vector3.forward
+            );
     }
 }

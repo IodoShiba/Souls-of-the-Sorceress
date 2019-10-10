@@ -410,6 +410,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onAttackSucceededMortal:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380848524203187}
   attackConvertersOnHit: []
@@ -1108,10 +1113,6 @@ MonoBehaviour:
   ascSarah: {fileID: 8916380848890831846}
   isActive: 0
   AwakeEffectAnimator: {fileID: 3177258268889996863}
-  DefaultAnimatorController: {fileID: 9100000, guid: 4791d6f3380558f45ae4b6175c958718,
-    type: 2}
-  AwakenAnimatorController: {fileID: 9100000, guid: 3b42d0fa434244a4f822d783b2b5b134,
-    type: 2}
 --- !u!114 &8916380848889061144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1957,6 +1958,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onAttackSucceededMortal:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380848524203187}
   attackConvertersOnHit: []
@@ -1988,6 +1994,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAttackSucceededMortal:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380848965055385}
@@ -2290,10 +2301,15 @@ MonoBehaviour:
     hitstopSpan: 0
   onAttackSucceeded:
     m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAttackSucceededMortal:
+    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7806928696938067614}
         m_MethodName: DoEffect
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2302,7 +2318,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380849248469450}
@@ -2324,6 +2340,9 @@ MonoBehaviour:
   animationClipOrdinary: {fileID: 7400000, guid: 074fc9e1973157d47bebbb773fe46d74,
     type: 2}
   animationClipAwaken: {fileID: 7400000, guid: b48a6521246ac9843a7f2fdf435c2d6f, type: 2}
+  offset: {x: 0, y: 0}
+  positionerMulti: 0.7
+  owner: {fileID: 8916380848889061121}
   audioSource: {fileID: 7396359423064295611}
   actionAwake: {fileID: 8916380848889061092}
 --- !u!1 &8916380849465762210
@@ -2538,10 +2557,15 @@ MonoBehaviour:
     hitstopSpan: 0
   onAttackSucceeded:
     m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAttackSucceededMortal:
+    m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4121035682260114612}
+      - m_Target: {fileID: 7806928696938067614}
         m_MethodName: DoEffect
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2550,7 +2574,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380849465762216}
@@ -2572,6 +2596,9 @@ MonoBehaviour:
   animationClipOrdinary: {fileID: 7400000, guid: 074fc9e1973157d47bebbb773fe46d74,
     type: 2}
   animationClipAwaken: {fileID: 7400000, guid: b48a6521246ac9843a7f2fdf435c2d6f, type: 2}
+  offset: {x: 0, y: 0}
+  positionerMulti: 0.7
+  owner: {fileID: 8916380848889061121}
   audioSource: {fileID: 7396359423064295611}
   actionAwake: {fileID: 8916380848889061092}
 --- !u!1 &8916380849515846542
@@ -2798,10 +2825,15 @@ MonoBehaviour:
     hitstopSpan: 0
   onAttackSucceeded:
     m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAttackSucceededMortal:
+    m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4742137266094557856}
+      - m_Target: {fileID: 7806928696938067614}
         m_MethodName: DoEffect
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2810,7 +2842,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380849515846548}
@@ -2832,6 +2864,9 @@ MonoBehaviour:
   animationClipOrdinary: {fileID: 7400000, guid: 074fc9e1973157d47bebbb773fe46d74,
     type: 2}
   animationClipAwaken: {fileID: 7400000, guid: b48a6521246ac9843a7f2fdf435c2d6f, type: 2}
+  offset: {x: 0, y: 0}
+  positionerMulti: 0.7
+  owner: {fileID: 8916380848889061121}
   audioSource: {fileID: 7396359423064295611}
   actionAwake: {fileID: 8916380848889061092}
 --- !u!1 &8916380849653747841
@@ -3016,10 +3051,15 @@ MonoBehaviour:
     hitstopSpan: 0
   onAttackSucceeded:
     m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAttackSucceededMortal:
+    m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4310516146056782739}
+      - m_Target: {fileID: 7806928696938067614}
         m_MethodName: DoEffect
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3028,7 +3068,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380849653747855}
@@ -3050,6 +3090,9 @@ MonoBehaviour:
   animationClipOrdinary: {fileID: 7400000, guid: 074fc9e1973157d47bebbb773fe46d74,
     type: 2}
   animationClipAwaken: {fileID: 7400000, guid: b48a6521246ac9843a7f2fdf435c2d6f, type: 2}
+  offset: {x: 0, y: 0}
+  positionerMulti: 0.7
+  owner: {fileID: 8916380848889061121}
   audioSource: {fileID: 7396359423064295611}
   actionAwake: {fileID: 8916380848889061092}
 --- !u!1 &8916380850264124291
@@ -3260,6 +3303,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onAttackSucceededMortal:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380848524203187}
   attackConvertersOnHit: []
@@ -3291,6 +3339,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAttackSucceededMortal:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380850362335011}
@@ -3507,10 +3560,15 @@ MonoBehaviour:
     hitstopSpan: 0
   onAttackSucceeded:
     m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAttackSucceededMortal:
+    m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5258681253247680869}
+      - m_Target: {fileID: 7806928696938067614}
         m_MethodName: DoEffect
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3519,7 +3577,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380850370461322}
@@ -3541,6 +3599,9 @@ MonoBehaviour:
   animationClipOrdinary: {fileID: 7400000, guid: 074fc9e1973157d47bebbb773fe46d74,
     type: 2}
   animationClipAwaken: {fileID: 7400000, guid: b48a6521246ac9843a7f2fdf435c2d6f, type: 2}
+  offset: {x: 0, y: 0}
+  positionerMulti: 0.7
+  owner: {fileID: 8916380848889061121}
   audioSource: {fileID: 7396359423064295611}
   actionAwake: {fileID: 8916380848889061092}
 --- !u!1 &8916380850513594274
@@ -3726,6 +3787,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAttackSucceededMortal:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380850513594280}

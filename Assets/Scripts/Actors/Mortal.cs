@@ -16,9 +16,9 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         public Mortal attacker;
         public AttackData attackData;
         public Vector2 relativePosition;
-        public System.Action<bool> onAttackEvaluatedCallback;
+        public System.Action<bool,Mortal> onAttackEvaluatedCallback;
 
-        public DealtAttackInfo(Mortal attacker, AttackData attackData,Vector2 relativePosition, System.Action<bool> onAttackEvaluatedCallback)
+        public DealtAttackInfo(Mortal attacker, AttackData attackData,Vector2 relativePosition, System.Action<bool,Mortal> onAttackEvaluatedCallback)
         {
             this.attacker = attacker;
             this.attackData = attackData;
@@ -104,7 +104,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         AttackData.Copy(this.argAttackData, argAttackData);
         this.argSucceedCallback = succeedCallback;
     }
-    public void TryAttack(Mortal attacker, AttackData argAttackData,in Vector2 relativePosition,System.Action<bool> onAttackEvaluatedCallback)
+    public void TryAttack(Mortal attacker, AttackData argAttackData,in Vector2 relativePosition,System.Action<bool,Mortal> onAttackEvaluatedCallback)
     {
         OnTriedAttack(attacker, argAttackData, relativePosition);
 
@@ -178,7 +178,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
             OnAttackedCallbacks.Invoke();//被攻撃時のコールバック関数を呼び出し
             for(int i = 0; i < dealtAttackCount; ++i)
             {
-                if (dealtAttackInfos[i] != null){ dealtAttackInfos[i].onAttackEvaluatedCallback(true); }
+                if (dealtAttackInfos[i] != null){ dealtAttackInfos[i].onAttackEvaluatedCallback(true,this); }
             }
             if (health <= 0 && originalHealth > 0)
             {
@@ -191,7 +191,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         {
             for (int i = 0; i < dealtAttackCount; ++i)
             {
-                if (dealtAttackInfos[i] != null) { dealtAttackInfos[i].onAttackEvaluatedCallback(false); }
+                if (dealtAttackInfos[i] != null) { dealtAttackInfos[i].onAttackEvaluatedCallback(false,this); }
             }
         }
         dealtAttackCount = 0;//攻撃を全て統合したのでカウンターを0にし、与えられた攻撃を忘却する
