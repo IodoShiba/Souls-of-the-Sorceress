@@ -3165,11 +3165,14 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+<<<<<<< HEAD
   onDestroy:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+=======
+>>>>>>> b43ac5aa055f0570677a9ef26a6167fa23dfef05
   selfRigidbody: {fileID: 1200558863}
   dealingAttackConverters: []
   dealtAttackConverters: []
@@ -3510,8 +3513,8 @@ MonoBehaviour:
   distanceOfJumpUpBorderFromCenter: 3.3
   passPlatformtime1: 0.3
   passPlatformtime2: 1
-  jump1span: 0
-  jump2span: 0
+  jump1span: 0.3
+  jump2span: 0.5
   playerDetector: {fileID: 1178182269}
   areaColliders:
   - {fileID: 1925706273}
