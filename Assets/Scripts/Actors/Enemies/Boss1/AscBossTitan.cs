@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace ActorBossTitan
 {
@@ -253,24 +254,52 @@ namespace ActorBossTitan
             [SerializeField] AudioClip boomClip;
             [SerializeField] AudioClip boom2Clip;
             [SerializeField] AudioSource audioSource;
+            [SerializeField] AnimationClip boomEffect;
+            [SerializeField] SpriteRenderer spriteRenderer;
             [SerializeField] UnityEngine.Events.UnityEvent onEffectEnd;
+
+            Vector2 boomRange;
 
             protected override bool ShouldCotinue() => true;
             protected override void OnInitialize()
             {
                 Debug.Log("Boss Titan has dead.");
                 Connector.StartCoroutine(DeadEffect());
+                boomRange = GameObject.GetComponent<BoxCollider2D>().size;
             }
 
             IEnumerator DeadEffect()
             {
+                spriteRenderer.DOFade(0.3f, boomCount * boomLength);
+
                 for(int i = 0; i < boomCount; ++i)
                 {
                     audioSource.PlayOneShot(boomClip);
-                    yield return new WaitForSeconds(boomLength);
+
+                    for(int j = 0; j < 8; ++j)
+                    {
+                        EffectAnimationManager
+                            .Play(
+                            boomEffect,
+                            GameObject.transform.position + new Vector3(
+                                Random.Range(-boomRange.x, boomRange.x)/2, 
+                                Random.Range(-boomRange.y, boomRange.y)/2, 
+                                0));
+                        yield return new WaitForSeconds(boomLength / 8);
+                    }
                 }
                 audioSource.PlayOneShot(boom2Clip);
-
+                for(int i = 0; i < 16; ++i)
+                {
+                    EffectAnimationManager
+                        .Play(
+                        boomEffect,
+                        GameObject.transform.position + new Vector3(
+                            Random.Range(-boomRange.x, boomRange.x) / 2,
+                            Random.Range(-boomRange.y, boomRange.y) / 2,
+                            0));
+                }
+                spriteRenderer.DOFade(0, boom2Clip.length / 4);
                 yield return new WaitForSeconds(intervalAfterEffect + boom2Clip.length);
 
                 onEffectEnd.Invoke();
