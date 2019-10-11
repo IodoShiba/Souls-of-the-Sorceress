@@ -57,7 +57,6 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
         {
             if (!disallowCross && !useInvincibleTime)
             {
-                Debug.Log(GameObject);
                 GameObject.layer = originalLayer;
             }
             clock.Reset();

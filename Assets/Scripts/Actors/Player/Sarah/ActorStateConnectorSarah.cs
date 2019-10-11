@@ -224,7 +224,6 @@ namespace ActorSarah
                 }
                 IsRunning = false;
 
-                Debug.Log("Player:"+this.GetType().Name);
             }
             protected override void OnActive()
             {

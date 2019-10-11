@@ -52,15 +52,12 @@ public class BossTitanAI : AI
         int i = 0;
         for(; i < areaColliders.Count; ++i)
         {
-            
-            Debug.Log(areaColliders[i].bounds);
             if (areaColliders[i].bounds.Contains2D(transform.position))
             {
                 break;
             }
             
         }
-        Debug.Log($"Final i:{i}");
         return new Vector2Int(i % 2, i / 2);
     }
 
@@ -98,6 +95,9 @@ public class BossTitanAI : AI
 
         position = WhereAmI();
         int areaIndexPlayerIsIn = playerDetector.GetDetectingIndex();
+
+        Debug.Log($"Player was detected : {areaIndexPlayerIsIn}");
+
         if(areaIndexPlayerIsIn == AreaObjectDetector.NO_DETECT)
         {
             areaIndexPlayerIsIn = PositionVectorToAreaIndex(position);
@@ -134,8 +134,6 @@ public class BossTitanAI : AI
 
     IEnumerator StateHorizontalMove()
     {
-        Debug.Log("HorizontalMove");
-        //horizontalMove
         titanAnimator.SetTrigger("HorizontalMoveTrigger");
         while((transform.position.x - GetJumpUpBorder(-1 * moveDirection)) * moveDirection < 0)
         {
@@ -147,7 +145,6 @@ public class BossTitanAI : AI
 
     IEnumerator BranchVerticalMove()
     {
-        Debug.Log("BranchVerticalMove");
         if (jumpUpRowsCount >= 0)
         {
             return StateJump();
@@ -160,7 +157,6 @@ public class BossTitanAI : AI
 
     IEnumerator StateJump()
     {
-        Debug.Log("Jump");
         doJump = true;
         //up
         titanAnimator.SetTrigger("JumpUpTrigger");
@@ -188,7 +184,6 @@ public class BossTitanAI : AI
 
     IEnumerator StatePassPlatform()
     {
-        Debug.Log("PassPlatform");
         doPassPlatform = true;
         //air
         titanAnimator.SetTrigger("PassPlatformAirTrigger");
@@ -208,9 +203,7 @@ public class BossTitanAI : AI
 
     IEnumerator StateHorizontalMoveEver()
     {
-        //horizontalEver
         titanAnimator.SetTrigger("HorizontalMoveEverTrigger");
-        Debug.Log("HorizontalMoveEver");
         while (enabled)
         {
             yield return null;
