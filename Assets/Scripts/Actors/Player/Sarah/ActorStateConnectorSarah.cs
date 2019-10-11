@@ -224,7 +224,6 @@ namespace ActorSarah
                 }
                 IsRunning = false;
 
-                Debug.Log("Player:"+this.GetType().Name);
             }
             protected override void OnActive()
             {
@@ -360,7 +359,7 @@ namespace ActorSarah
             protected override void OnInitialize()
             {
                 onInitialize.Invoke();
-                Debug.Log("Player:" + this.GetType().Name);
+                //Debug.Log("Player:" + this.GetType().Name);
             }
         }
 

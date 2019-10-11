@@ -6,8 +6,8 @@ public class AreaObjectDetector : MonoBehaviour
 {
     public const int NO_DETECT = -1;
 
-    [SerializeField] List<Sensor> sensors;
-
+    [SerializeField] List<Collider2D> colliders;
+    [SerializeField] Transform target;
     //private void Update()
     //{
     //    int i = GetDetectingIndex();
@@ -16,9 +16,9 @@ public class AreaObjectDetector : MonoBehaviour
 
     public int GetDetectingIndex()
     {
-        for(int i = 0; i < sensors.Count; ++i)
+        for(int i = 0; i < colliders.Count; ++i)
         {
-            if (sensors[i].IsDetecting)
+            if (colliders[i].OverlapPoint(target.position))
             {
                 return i;
             }
@@ -36,9 +36,9 @@ public class AreaObjectDetector : MonoBehaviour
     public void GetDetectingIndexes(List<int> outArray)
     {
         outArray.Clear();
-        for (int i = 0; i < sensors.Count; ++i)
+        for (int i = 0; i < colliders.Count; ++i)
         {
-            if (sensors[i].IsDetecting)
+            if (colliders[i].OverlapPoint(target.position))
             {
                 outArray.Add(i);
             }

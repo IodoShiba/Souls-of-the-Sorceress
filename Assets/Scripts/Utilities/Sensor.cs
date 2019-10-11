@@ -11,6 +11,8 @@ public class Sensor : MonoBehaviour,ISerializationCallbackReceiver
     [SerializeField] float countUpdateCycle;
     [SerializeField,DisabledField] int detectCount;
     HashSet<GameObject> hsTargetGameObjects = new HashSet<GameObject>();
+    Collider2D collider;
+    Collider2D[] overlapRes = new Collider2D[MAX_DETECT];
 
     const int MAX_DETECT = 8;
 
@@ -18,7 +20,7 @@ public class Sensor : MonoBehaviour,ISerializationCallbackReceiver
     {
         get
         {
-            return detectCount>0;
+            return detectCount > 0;
         }
 
     }
@@ -28,6 +30,8 @@ public class Sensor : MonoBehaviour,ISerializationCallbackReceiver
     private void Awake()
     {
         detectCount = 0;
+        collider = GetComponent<Collider2D>();
+        overlapRes = new Collider2D[MAX_DETECT];
         StartCoroutine(UpdateCo());
     }
     public void Reset()
@@ -71,28 +75,32 @@ public class Sensor : MonoBehaviour,ISerializationCallbackReceiver
 
     IEnumerator UpdateCo()
     {
-        Collider2D collider = GetComponent<Collider2D>();
-        Collider2D[] overlapRes = new Collider2D[MAX_DETECT];
         while (true)
         {
-            for(int i = 0; i < overlapRes.Length; ++i)
-            {
-                overlapRes[i] = null;
-            }
-            ContactFilter2D contactFilter = new ContactFilter2D();
-            contactFilter.useTriggers = true;
-            UnityEngine.Physics2D.OverlapCollider(collider,contactFilter,overlapRes);
-
-            detectCount = 0;
-            for (int i = 0; i < overlapRes.Length; ++i)
-            {
-                if(overlapRes[i] != null && IsTarget(overlapRes[i]))
-                {
-                    ++detectCount;
-                }
-            }
-
+            ForceUpdate();
             yield return new WaitForSeconds(useCountUpdateCycle ? countUpdateCycle : 2); 
+        }
+    }
+
+    public void ForceUpdate()
+    {
+        Collider2D collider = GetComponent<Collider2D>();
+        Collider2D[] overlapRes = new Collider2D[MAX_DETECT];
+        for (int i = 0; i < overlapRes.Length; ++i)
+        {
+            overlapRes[i] = null;
+        }
+        ContactFilter2D contactFilter = new ContactFilter2D();
+        contactFilter.useTriggers = true;
+        UnityEngine.Physics2D.OverlapCollider(collider, contactFilter, overlapRes);
+
+        detectCount = 0;
+        for (int i = 0; i < overlapRes.Length; ++i)
+        {
+            if (overlapRes[i] != null && IsTarget(overlapRes[i]))
+            {
+                ++detectCount;
+            }
         }
     }
 }

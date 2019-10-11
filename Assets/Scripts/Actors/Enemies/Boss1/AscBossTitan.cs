@@ -190,8 +190,6 @@ namespace ActorBossTitan
                 titanAI.enabled = false;
                 hitboxCollider.enabled = false;
                 weakPoint.IsInvulnerable = false;
-                Debug.Log("Titan Boss is fainted.");
-                Debug.Log("Boss dir:" + directionable.CurrentDirectionInt+"/ * :"+ reactionImpulse.x * directionable.CurrentDirectionInt);
 
                 rigidbody.velocity = Vector2.zero;
                 rigidbody.AddForce(new Vector2(reactionImpulse.x * directionable.CurrentDirectionInt, reactionImpulse.y),ForceMode2D.Impulse);

@@ -335,6 +335,11 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+  onAttackSucceededMortal:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate: []
   attackConvertersOnHit:
   - {fileID: 1200558874}
@@ -392,6 +397,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAttackSucceededMortal:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate: []
   attackConvertersOnHit: []
@@ -540,6 +550,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 262289498}
   m_CullTransparentMesh: 0
+--- !u!4 &274852614 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 843604126}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &335472541
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,7 +695,6 @@ GameObject:
   m_Component:
   - component: {fileID: 440838839}
   - component: {fileID: 440838840}
-  - component: {fileID: 440838841}
   m_Layer: 0
   m_Name: Area2
   m_TagString: Untagged
@@ -727,24 +742,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8, y: 3}
   m_EdgeRadius: 0
---- !u!114 &440838841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 440838838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475d2d84bb4331f4dad1fd60cba78a9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monitoredTagName: Player
-  useTargetGameObject: 0
-  targetGameObjects: []
-  useCountUpdateCycle: 0
-  countUpdateCycle: 0
-  detectCount: 0
 --- !u!1 &464670547
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,6 +827,16 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onHealthRecoveredCallbacks:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onInvinsibleTimeOver:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onDestroy:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -1844,6 +1851,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onAttackSucceededMortal:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate: []
   attackConvertersOnHit: []
@@ -3079,13 +3091,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f8ffbd9848adc642bb5cb89698ae4f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensors:
-  - {fileID: 1925706274}
-  - {fileID: 440838841}
-  - {fileID: 1894591053}
-  - {fileID: 1899652018}
-  - {fileID: 2096538987}
-  - {fileID: 2132210504}
+  colliders:
+  - {fileID: 1925706273}
+  - {fileID: 440838840}
+  - {fileID: 1894591052}
+  - {fileID: 1899652017}
+  - {fileID: 2096538986}
+  - {fileID: 2132210503}
+  target: {fileID: 274852614}
 --- !u!1 &1200558860
 GameObject:
   m_ObjectHideFlags: 0
@@ -3143,6 +3156,16 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onHealthRecoveredCallbacks:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onInvinsibleTimeOver:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  onDestroy:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
@@ -5431,7 +5454,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1894591051}
   - component: {fileID: 1894591052}
-  - component: {fileID: 1894591053}
   m_Layer: 0
   m_Name: Area3
   m_TagString: Untagged
@@ -5479,24 +5501,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8, y: 3}
   m_EdgeRadius: 0
---- !u!114 &1894591053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894591050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475d2d84bb4331f4dad1fd60cba78a9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monitoredTagName: Player
-  useTargetGameObject: 0
-  targetGameObjects: []
-  useCountUpdateCycle: 0
-  countUpdateCycle: 0
-  detectCount: 0
 --- !u!1 &1899652015
 GameObject:
   m_ObjectHideFlags: 0
@@ -5507,7 +5511,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1899652016}
   - component: {fileID: 1899652017}
-  - component: {fileID: 1899652018}
   m_Layer: 0
   m_Name: Area4
   m_TagString: Untagged
@@ -5555,24 +5558,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8, y: 3}
   m_EdgeRadius: 0
---- !u!114 &1899652018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1899652015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475d2d84bb4331f4dad1fd60cba78a9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monitoredTagName: Player
-  useTargetGameObject: 0
-  targetGameObjects: []
-  useCountUpdateCycle: 0
-  countUpdateCycle: 0
-  detectCount: 0
 --- !u!1 &1925706271
 GameObject:
   m_ObjectHideFlags: 0
@@ -5583,7 +5568,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1925706272}
   - component: {fileID: 1925706273}
-  - component: {fileID: 1925706274}
   m_Layer: 0
   m_Name: Area1
   m_TagString: Untagged
@@ -5631,24 +5615,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8, y: 3}
   m_EdgeRadius: 0
---- !u!114 &1925706274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1925706271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475d2d84bb4331f4dad1fd60cba78a9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monitoredTagName: Player
-  useTargetGameObject: 0
-  targetGameObjects: []
-  useCountUpdateCycle: 0
-  countUpdateCycle: 0
-  detectCount: 0
 --- !u!1 &2027813702
 GameObject:
   m_ObjectHideFlags: 0
@@ -5934,7 +5900,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2096538985}
   - component: {fileID: 2096538986}
-  - component: {fileID: 2096538987}
   m_Layer: 0
   m_Name: Area5
   m_TagString: Untagged
@@ -5982,24 +5947,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8, y: 8.5}
   m_EdgeRadius: 0
---- !u!114 &2096538987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2096538984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475d2d84bb4331f4dad1fd60cba78a9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monitoredTagName: Player
-  useTargetGameObject: 0
-  targetGameObjects: []
-  useCountUpdateCycle: 0
-  countUpdateCycle: 0
-  detectCount: 0
 --- !u!1 &2132210501
 GameObject:
   m_ObjectHideFlags: 0
@@ -6010,7 +5957,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2132210502}
   - component: {fileID: 2132210503}
-  - component: {fileID: 2132210504}
   m_Layer: 0
   m_Name: Area6
   m_TagString: Untagged
@@ -6058,21 +6004,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8, y: 8.5}
   m_EdgeRadius: 0
---- !u!114 &2132210504
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2132210501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 475d2d84bb4331f4dad1fd60cba78a9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  monitoredTagName: Player
-  useTargetGameObject: 0
-  targetGameObjects: []
-  useCountUpdateCycle: 0
-  countUpdateCycle: 0
-  detectCount: 0
