@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 2495217448702265932}
   - component: {fileID: 1887466661123618811}
   - component: {fileID: 6995899179505882570}
+  - component: {fileID: 5830117638806471909}
   m_Layer: 24
   m_Name: Enemy Slime
   m_TagString: Enemy
@@ -528,6 +529,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rewardData: {fileID: 11400000, guid: 0d4a524bdaeb3b54ca34668bc2314e08, type: 2}
+--- !u!114 &5830117638806471909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2495217448702265942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c68f0b08aa1422447b1e70dc1ca7c834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootTable: {fileID: 11400000, guid: 468a388555488f14ea66d2086f83d7f5, type: 2}
 --- !u!1 &2495217448933427342
 GameObject:
   m_ObjectHideFlags: 0

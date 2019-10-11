@@ -1678,16 +1678,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sarah
       objectReference: {fileID: 0}
-    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: enemyManager
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: _debugText
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1742,6 +1732,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: enemyManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: _debugText
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061092, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
@@ -3566,7 +3566,7 @@ MonoBehaviour:
     attackCollider: {fileID: 189919881}
     throughable: 1
     hitstopSpan: 0
-  - damage: 40
+  - damage: 25
     knockBackImpulse: {x: 1000, y: 2500}
     attackCollider: {fileID: 189919881}
     throughable: 1
