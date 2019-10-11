@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Fes_EmergencyReset : MonoBehaviour
 {
-    List<KeyCode> keys = new List<KeyCode> { KeyCode.E, KeyCode.S, KeyCode.C };
+    List<KeyCode> keys = new List<KeyCode> { KeyCode.E, KeyCode.N, KeyCode.D };
 
     bool allPushedm1;
 
