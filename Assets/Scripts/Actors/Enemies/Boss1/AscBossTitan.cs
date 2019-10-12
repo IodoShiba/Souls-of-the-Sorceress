@@ -88,6 +88,7 @@ namespace ActorBossTitan
             [SerializeField] AttackDifferencer attackDifferencer;
             [SerializeField] AudioClip dashClip;
             [SerializeField] AudioSource audioSource;
+            [SerializeField] Mortal weakPoint;
 
             bool isRunning = false;
             bool IsRunning
@@ -115,6 +116,7 @@ namespace ActorBossTitan
                 horizontalMove.Method.enabled = true;
                 titanAI.titanAnimator.SetTrigger("DefaultTrigger");
                 horizontalMove.Use = true;
+                weakPoint.IsInvulnerable = true;
             }
 
             protected override void OnActive()
