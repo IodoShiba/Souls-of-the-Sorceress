@@ -2,6 +2,8 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+using UnityEditor.Tilemaps;
+
 namespace UnityEditor
 {
 	[CustomGridBrush(false, false, false, "Tint Brush (Smooth)")]

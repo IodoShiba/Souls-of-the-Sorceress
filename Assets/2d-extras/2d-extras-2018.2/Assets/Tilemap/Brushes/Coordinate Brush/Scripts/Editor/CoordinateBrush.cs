@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEditor.Tilemaps;
+
 namespace UnityEditor
 {
     [CustomGridBrush(true, false, false, "Coordinate Brush")]

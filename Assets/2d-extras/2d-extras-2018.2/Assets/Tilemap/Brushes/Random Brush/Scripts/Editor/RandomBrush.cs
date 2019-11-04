@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+using UnityEditor.Tilemaps;
+
 namespace UnityEditor
 {
     [CustomGridBrush(false, false, false, "Random Brush")]

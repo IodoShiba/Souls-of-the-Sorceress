@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Linq;
 
+using UnityEditor.Tilemaps;
+
 namespace UnityEditor
 {
     [CustomGridBrush(true, false, false, "Line Brush")]
