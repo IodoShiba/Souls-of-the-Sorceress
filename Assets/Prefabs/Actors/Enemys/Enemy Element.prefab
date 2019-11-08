@@ -67,6 +67,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -177,23 +178,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackedCallbacks:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onHealthRecoveredCallbacks:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onInvinsibleTimeOver:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onDestroy:
     m_PersistentCalls:
       m_Calls:
@@ -220,8 +213,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 964724003723573773}
   dealingAttackConverters: []
   dealtAttackConverters: []
@@ -250,8 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff3c10dfcfec334681b250d9fef1086, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootCycle: 3
-  maxChaseGap: 8
+  shootCycle: 2
+  maxChaseGap: 9
   minChaseGap: 0.3
   player: {fileID: 0}
   _shootBullet: {fileID: 964724003723573808}
@@ -267,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6f9cf7ba85a464eb23498d6eae1191, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 4
+  bulletSpeed: 5
   ai: {fileID: 964724003723573771}
   elementDefault:
     gameObject: {fileID: 964724003723573768}
@@ -284,7 +275,7 @@ MonoBehaviour:
   smashed:
     gameObject: {fileID: 964724003723573768}
     connector: {fileID: 3400861851107116815}
-    stateSpan: 2
+    stateSpan: 0.5
     useInvincibleTime: 0
     invincibleTime: 0
     horizontalMove: {fileID: 0}
