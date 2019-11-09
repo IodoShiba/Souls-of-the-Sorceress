@@ -57,6 +57,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -227,6 +228,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -408,13 +410,9 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380848524203187}
   attackConvertersOnHit: []
@@ -631,8 +629,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
     receptionStartTime: 0.13
     amountConsumeUmbrellaDurability: 1
     verticalSlashAttack: {fileID: 8916380849465762211}
@@ -669,8 +665,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
     retuenSlashAttack: {fileID: 8916380850370461321}
     receptionStartTime: 0.13
     jumpUpImpulse: {x: 0, y: 15}
@@ -696,8 +690,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
     smashSlashAttack: {fileID: 8916380849248469449}
     umbrella: {fileID: 8916380848891301901}
   aerialSlash:
@@ -720,8 +712,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
     amountConsumeUmbrellaDurability: 1
     aerialSlashAttack: {fileID: 8916380849515846539}
     umbrella: {fileID: 8916380848891301901}
@@ -734,8 +724,6 @@ MonoBehaviour:
     onInitialize:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
     amountConsumeUmbrellaDurability: 1
     direction: {fileID: 4249487242134317880}
     guard:
@@ -766,8 +754,6 @@ MonoBehaviour:
     onInitialize:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
     distance: 6
     speed: 18
     degreeWidthOfGuardArea: 270
@@ -814,8 +800,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: ActorSarah.ActorStateConnectorSarah+Tackle+StateChangeEvent, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     wallSensor: {fileID: 7628696488050251550}
   risingAttack:
     gameObject: {fileID: 8916380848889061178}
@@ -825,8 +809,6 @@ MonoBehaviour:
     onInitialize:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
     riseHeight: 6
     abilityTime: 0.6
     amountConsumeUmbrellaDurability: 2
@@ -865,8 +847,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
     abilityTime: 2
     amountConsumeUmbrellaDurability: 2
     attack: {fileID: 8916380849653747854}
@@ -893,8 +873,6 @@ MonoBehaviour:
     onInitialize:
       m_PersistentCalls:
         m_Calls: []
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
     fallSpeed: 1
     amountConsumeUmbrellaDurabilityOnGuard: 1
     umbrellaConsumeCycle: 1
@@ -968,8 +946,6 @@ MonoBehaviour:
   dyingCallbacks:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackedCallbacks:
     m_PersistentCalls:
       m_Calls:
@@ -996,8 +972,6 @@ MonoBehaviour:
           m_StringArgument: InvinsibleTime
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onHealthRecoveredCallbacks:
     m_PersistentCalls:
       m_Calls:
@@ -1013,8 +987,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onInvinsibleTimeOver:
     m_PersistentCalls:
       m_Calls:
@@ -1029,13 +1001,9 @@ MonoBehaviour:
           m_StringArgument: Idle
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onDestroy:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 8916380848889061125}
   dealingAttackConverters:
   - {fileID: 2754574714993579308}
@@ -1079,8 +1047,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onActivate:
     m_PersistentCalls:
       m_Calls:
@@ -1096,8 +1062,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onInactivate:
     m_PersistentCalls:
       m_Calls:
@@ -1113,8 +1077,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   ascSarah: {fileID: 8916380848890831846}
   isActive: 0
   AwakeEffectAnimator: {fileID: 3177258268889996863}
@@ -1222,8 +1184,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onActivatablized:
     m_PersistentCalls:
       m_Calls:
@@ -1239,8 +1199,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   IsActivated: 0
 --- !u!114 &2312274154079463536
 MonoBehaviour:
@@ -1552,6 +1510,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1623,8 +1582,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   cheat_InfinityDurability: 0
 --- !u!114 &7628696488050251550
 MonoBehaviour:
@@ -1859,6 +1816,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1961,13 +1919,9 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380848524203187}
   attackConvertersOnHit: []
@@ -1998,13 +1952,9 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380848965055385}
   attackConvertersOnHit: []
@@ -2307,8 +2257,6 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls:
@@ -2323,8 +2271,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380849248469450}
   attackConvertersOnHit: []
@@ -2563,8 +2509,6 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls:
@@ -2579,8 +2523,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380849465762216}
   attackConvertersOnHit: []
@@ -2831,8 +2773,6 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls:
@@ -2847,8 +2787,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380849515846548}
   attackConvertersOnHit: []
@@ -3014,19 +2952,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 20
-    knockBackImpulse: {x: 900, y: -1800}
+    knockBackImpulse: {x: 1200, y: -1800}
     attackCollider: {fileID: 8916380849653747852}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 60
-    knockBackImpulse: {x: 1200, y: -2400}
+    knockBackImpulse: {x: 1200, y: -1800}
     attackCollider: {fileID: 8916380849653747849}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 100
-    knockBackImpulse: {x: 1600, y: -3200}
+    knockBackImpulse: {x: 1200, y: -1800}
     attackCollider: {fileID: 8916380849653747848}
     throughable: 1
     hitstopSpan: 0
@@ -3057,8 +2995,6 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls:
@@ -3073,8 +3009,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380849653747855}
   attackConvertersOnHit: []
@@ -3306,13 +3240,9 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380848524203187}
   attackConvertersOnHit: []
@@ -3343,13 +3273,9 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380850362335011}
   attackConvertersOnHit: []
@@ -3566,8 +3492,6 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls:
@@ -3582,8 +3506,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380850370461322}
   attackConvertersOnHit: []
@@ -3791,13 +3713,9 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate:
   - {fileID: 8916380850513594280}
   attackConvertersOnHit: []
