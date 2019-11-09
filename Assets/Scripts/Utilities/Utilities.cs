@@ -82,4 +82,14 @@ namespace IodoShibaUtil
             static bool IsSuitableForTag(string tag) => !(string.IsNullOrEmpty(tag) || tag == untaggedTag);
         }
     }
+
+    namespace Vector2DUtility
+    {
+        public static class Vector2DUtilityClass
+        {
+            public static Vector3 ModifiedXY(in Vector3 original, in Vector2 vector2) => new Vector3(vector2.x, vector2.y, original.z);
+            public static Vector3 ModifiedX(in Vector3 original, float x) => new Vector3(x, original.y, original.z);
+            public static Vector3 ModifiedY(in Vector3 original, float y) => new Vector3(original.x, y, original.z);
+        }
+    }
 }

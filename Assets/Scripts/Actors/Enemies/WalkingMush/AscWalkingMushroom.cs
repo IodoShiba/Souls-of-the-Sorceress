@@ -31,7 +31,7 @@ namespace ActorWalkingMushroom
 
             protected override void OnInitialize()
             {
-                horizontalMove.Use = true;
+                //horizontalMove.Use = true;
                 ConnectorMush.smallMushAnimator.Play("Move");
             }
             protected override void OnActive()
@@ -45,7 +45,7 @@ namespace ActorWalkingMushroom
             }
             protected override void OnTerminate(bool isNormalTermination)
             {
-                horizontalMove.Use = false;
+                //horizontalMove.Use = false;
             }
         }
 
