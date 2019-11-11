@@ -18,6 +18,7 @@ namespace ActorSarah
 
         [SerializeField] float attackLongPushThreshold;
         [SerializeField] int durabilityCostOnShootMagic;
+        [SerializeField] float proceedImpulseOnAttack;
         [SerializeField, Range(0, 4)] int progressLevel;
         [SerializeField, Range(0, 4)] int reqiredProgressLevelToShootMagic;
         [SerializeField] AwakeMutableShootObject shootObject;
@@ -373,9 +374,9 @@ namespace ActorSarah
                 if ((System.Math.Abs(h = commands.Directional.Evaluation.x)) > 0.3)
                 {
                     //GameObject.transform.position += System.Math.Sign(h) * Vector3.right * proceedDistance;
-                    GameObject.transform.DOMoveX(GameObject.transform.position.x + System.Math.Sign(h) * proceedDistance, proceedSpan).SetEase(Ease.OutExpo);
+                    //GameObject.transform.DOMoveX(GameObject.transform.position.x + System.Math.Sign(h) * proceedDistance, proceedSpan).SetEase(Ease.OutExpo);
 
-                    //ConnectorSarah.SelfRigidbody.AddForce(System.Math.Sign(h) * Vector2.right * proceedDistance, ForceMode2D.Impulse);
+                    ConnectorSarah.SelfRigidbody.AddForce(System.Math.Sign(h) * Vector2.right * connectorSarah.proceedImpulseOnAttack, ForceMode2D.Impulse);
                 }
                 //試験的な部分 ここまで
             }
