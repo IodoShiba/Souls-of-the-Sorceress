@@ -47,7 +47,7 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
                     GameObject.layer = LayerMask.NameToLayer(LayerName.uncrossActor);
                 }
             }
-            if (horizontalMove != null) { horizontalMove.enabled = false; }
+            if (horizontalMove != null) { horizontalMove.Use = false; }
         }
         protected override void OnActive()
         {
@@ -60,7 +60,7 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
                 GameObject.layer = originalLayer;
             }
             clock.Reset();
-            if (horizontalMove != null) { horizontalMove.enabled = true; }
+            if (horizontalMove != null) { horizontalMove.Use = true; }
         }
     }
 

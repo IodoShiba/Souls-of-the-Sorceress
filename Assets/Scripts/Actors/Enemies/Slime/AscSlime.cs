@@ -8,6 +8,7 @@ namespace ActorSlime
     {
         [SerializeField] SlimeAI ai;
 
+        [SerializeField, DisabledField] string _currentStateName;
         [SerializeField] SlimeDefault slimeDefault;
         [SerializeField] Spike spike;
         [SerializeField] SlimeSmashedState smashed;
@@ -24,6 +25,7 @@ namespace ActorSlime
         protected override void BeforeStateUpdate()
         {
             ai.Decide();
+            _currentStateName = Current.GetType().Name;
         }
 
         [System.Serializable]

@@ -34,6 +34,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         protected float MaxHealth { get => target.maxHealth; }
     }
 
+    private const float impulseMultiplyer = 0.025f;
     [SerializeField] protected float health;
     [SerializeField] protected float maxHealth;
     [SerializeField] private  bool isInvulnerable;
@@ -171,8 +172,9 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
             health -= result.damage; //体力を減算する
             selfRigidbody.velocity = Vector2.zero; //Actorの動きを止める
             selfRigidbody.AddForce(
-                result.knockBackImpulse,
-                ForceMode2D.Force); //ノックバックを与える
+                result.knockBackImpulse * impulseMultiplyer,
+                //ForceMode2D.Force); //ノックバックを与える
+                ForceMode2D.Impulse); //ノックバックを与える
 
             //ヒットストップを与える（未実装）
 

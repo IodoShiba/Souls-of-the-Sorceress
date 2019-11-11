@@ -25,7 +25,13 @@ namespace ActorFunction
             bool use;
 
             public bool IsMoving { get => isMoving; private set => isMoving = value; }
-            public bool Use { get => use; set => use = value; }
+            public bool Use { get => use;
+                set
+                {
+                    if (!value) { argSpeedMultiplier = 0; }
+                    use = value;
+                }
+            }
 
             private void Awake()
             {

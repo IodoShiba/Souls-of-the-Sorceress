@@ -11,9 +11,9 @@ public class WalkingMushAI : AI
 
     public int MoveSign { get => moveSign; }
 
-    private void Awake()
+    private void Start()
     {
-        playerTransform = GameObject.FindWithTag("Player").transform;
+        playerTransform = ActorManager.PlayerActor.transform;//GameObject.FindWithTag("Player").transform;
     }
 
     public override void Decide()

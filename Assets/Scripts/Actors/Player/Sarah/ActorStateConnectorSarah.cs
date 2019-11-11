@@ -5,6 +5,7 @@ using ActorStateUtility;
 using ActorCommanderUtility;
 using System;
 using UniRx;
+using DG.Tweening;
 
 namespace ActorSarah
 {
@@ -347,6 +348,9 @@ namespace ActorSarah
             [SerializeField] protected UnityEngine.Events.UnityEvent onInitialize;
             ActorStateConnectorSarah connectorSarah;
 
+            protected float proceedDistance = 1f;
+            protected float proceedSpan = .3f;
+
             protected override bool IsAvailable() => requiredProgressLevel <= ConnectorSarah.progressLevel;
 
             public ActorStateConnectorSarah ConnectorSarah
@@ -360,6 +364,20 @@ namespace ActorSarah
             {
                 onInitialize.Invoke();
                 //Debug.Log("Player:" + this.GetType().Name);
+            }
+
+            protected void ProceedOnAttack()
+            {
+                //試験的な部分 方向キー入力中に斬撃入力で前進しながら攻撃
+                float h;
+                if ((System.Math.Abs(h = commands.Directional.Evaluation.x)) > 0.3)
+                {
+                    //GameObject.transform.position += System.Math.Sign(h) * Vector3.right * proceedDistance;
+                    GameObject.transform.DOMoveX(GameObject.transform.position.x + System.Math.Sign(h) * proceedDistance, proceedSpan).SetEase(Ease.OutExpo);
+
+                    //ConnectorSarah.SelfRigidbody.AddForce(System.Math.Sign(h) * Vector2.right * proceedDistance, ForceMode2D.Impulse);
+                }
+                //試験的な部分 ここまで
             }
         }
 
@@ -382,6 +400,12 @@ namespace ActorSarah
 
                 receptionStartClock.Reset();
                 verticalSlashAttack.Activate();
+
+                //試験的な部分 方向キー入力中に斬撃入力で前進しながら攻撃
+                ConnectorSarah.SelfRigidbody.velocity = Vector2.zero;
+                ProceedOnAttack();
+                //試験的な部分 ここまで
+
                 umbrella.StartMotion("Player"+nameof(VerticalSlash));
                 //Debug.Log(attackLongPushClock.IsLongPushedUp);
                 horizontalMove.ManualUpdate();
@@ -428,6 +452,11 @@ namespace ActorSarah
                 retuenSlashAttack.Activate();
                 ConnectorSarah.SelfRigidbody.velocity = Vector2.zero;
                 ConnectorSarah.SelfRigidbody.AddForce(jumpUpImpulse, ForceMode2D.Impulse);
+
+                //試験的な部分 方向キー入力中に斬撃入力で前進しながら攻撃
+                ProceedOnAttack();
+                //試験的な部分 ここまで
+
                 umbrella.StartMotion("Player" + nameof(ReturnSlash));
                 ConnectorSarah.sarahAnimator.SetTrigger("ReturnSmashTrigger");
             }
@@ -460,6 +489,11 @@ namespace ActorSarah
 
                 ConnectorSarah.SelfRigidbody.velocity = Vector2.up * ConnectorSarah.SelfRigidbody.velocity.y;
                 smashSlashAttack.Activate();
+
+                //試験的な部分 方向キー入力中に斬撃入力で前進しながら攻撃
+                ProceedOnAttack();
+                //試験的な部分 ここまで
+
                 umbrella.StartMotion("Player" + nameof(SmashSlash));
                 ConnectorSarah.sarahAnimator.SetTrigger("SmashSlashTrigger");
             }

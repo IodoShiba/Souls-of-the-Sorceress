@@ -9,6 +9,7 @@ namespace ActorWalkingMushroom
         [SerializeField] WalkingMushAI ai;
         [SerializeField] ActorFunction.Directionable direction;
 
+        [SerializeField, DisabledField] string _currentStateName;
         [SerializeField] MushDefault mushDefault;
         [SerializeField] MushSmashed smashed;
         [SerializeField] Animator smallMushAnimator;
@@ -19,6 +20,7 @@ namespace ActorWalkingMushroom
         protected override void BeforeStateUpdate()
         {
             ai.Decide();
+            _currentStateName = Current.GetType().Name;
         }
 
         [System.Serializable]
@@ -36,12 +38,13 @@ namespace ActorWalkingMushroom
             }
             protected override void OnActive()
             {
-                if(ConnectorMush.ai.MoveSign * (int)ConnectorMush.direction.CurrentDirection < 0)
+                if (ConnectorMush.ai.MoveSign * (int)ConnectorMush.direction.CurrentDirection < 0)
                 {
                     ConnectorMush.direction.ChangeDirection(ConnectorMush.ai.MoveSign);
                 }
+                Debug.Log(GameObject.name + ConnectorMush.ai.MoveSign);
                 horizontalMove.ManualUpdate(ConnectorMush.ai.MoveSign);
-                
+
             }
             protected override void OnTerminate(bool isNormalTermination)
             {
@@ -54,6 +57,11 @@ namespace ActorWalkingMushroom
         {
             AscWalkingMushroom connectorMush;
             AscWalkingMushroom ConnectorMush { get => connectorMush == null ? (connectorMush = Connector as AscWalkingMushroom) : connectorMush; }
+
+            protected override void OnInitialize()
+            {
+                base.OnInitialize();
+            }
 
             protected override void OnActive()
             {

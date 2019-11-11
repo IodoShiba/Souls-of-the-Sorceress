@@ -57,6 +57,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -112,7 +113,6 @@ GameObject:
   - component: {fileID: 145637117333641325}
   - component: {fileID: 6891321230494324967}
   - component: {fileID: 6891321230494324962}
-  - component: {fileID: 6891321230494324963}
   - component: {fileID: 6891321230494324956}
   - component: {fileID: 8268208092763081074}
   - component: {fileID: 6462707158948944647}
@@ -168,6 +168,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -243,22 +244,6 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   maxChaseDistance: 16
   minChaseDistance: 0.3
---- !u!114 &6891321230494324963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6891321230494324964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d902d5b5d9c72641bc3a2ac62dd47c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 4
-  maxPushForceMagnitude: 100
-  maxStopForceMagnitude: 100
-  targetRigidbody: {fileID: 6891321230494324967}
 --- !u!114 &6891321230494324956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,23 +284,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackedCallbacks:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onHealthRecoveredCallbacks:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onInvinsibleTimeOver:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onDestroy:
     m_PersistentCalls:
       m_Calls:
@@ -342,8 +319,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   selfRigidbody: {fileID: 6891321230494324967}
   dealingAttackConverters: []
   dealtAttackConverters: []
@@ -374,6 +349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ai: {fileID: 6891321230494324962}
   direction: {fileID: 5789477729350289480}
+  _currentStateName: 
   mushDefault:
     gameObject: {fileID: 6891321230494324964}
     connector: {fileID: 6462707158948944647}
@@ -392,7 +368,7 @@ MonoBehaviour:
   smashed:
     gameObject: {fileID: 6891321230494324964}
     connector: {fileID: 6462707158948944647}
-    stateSpan: 0.55
+    stateSpan: 0.5
     useInvincibleTime: 0
     invincibleTime: 0
     horizontalMove: {fileID: 2695806798541559436}
@@ -534,12 +510,8 @@ MonoBehaviour:
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: AttackInHitbox+UnityEvent_SubjectMortal, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   attackConvertersOnActivate: []
   attackConvertersOnHit: []
