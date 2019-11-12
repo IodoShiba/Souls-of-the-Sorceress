@@ -36,9 +36,7 @@ public class AttackInHitbox : MonoBehaviour
     public bool IsAttackActive { get => isAttackActive; }
 
     private float realActiveSpan;
-    
     private AttackData convertedAttackData;
-
 
     public void AddConverter(AttackConverter item) { attackConvertersOnActivate.Add(item); }
     public void RemoveConverter(AttackConverter item) { attackConvertersOnActivate.Remove(item); }
