@@ -18,7 +18,7 @@ public class Rewards : MonoBehaviour,Mortal.IDyingCallbackReceiver
                     var enemy = GetComponent<Enemy>();
                     if (ActorManager.PlayerActor.GetComponent<Mortal>() == causeOfDeath.attacker)
                     {
-                        ActorManager.PlayerActor.GetComponent<ActionAwake>().AddAwakeGauge(rd.FloatAmount);
+                        //ActorManager.PlayerActor.GetComponent<ActionAwake>().AddAwakeGauge(rd.FloatAmount);
                     }
                     break;
             }

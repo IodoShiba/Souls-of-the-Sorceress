@@ -38,7 +38,7 @@ public class EffectAnimationManager : MonoBehaviour
     {
         for (int i = 0; i < pool.Length; ++i)
         {
-            if (!pool[nextIndex].gameObject.activeSelf)
+            if (pool[nextIndex] != null && !pool[nextIndex].gameObject.activeSelf)
             {
                 break;
             }
@@ -46,6 +46,7 @@ public class EffectAnimationManager : MonoBehaviour
             
         }
 
+        if(pool[nextIndex] == null) { return; }
         pool[nextIndex].Play(animationClip, position);
 
         nextIndex = (nextIndex + 1) % pool.Length;

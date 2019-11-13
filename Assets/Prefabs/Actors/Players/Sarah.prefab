@@ -409,7 +409,18 @@ MonoBehaviour:
     hitstopSpan: 0
   onAttackSucceeded:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5149332159221903905}
+        m_MethodName: IncrementCombo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls: []
@@ -429,6 +440,7 @@ GameObject:
   - component: {fileID: 8916380848890831846}
   - component: {fileID: 8916380848889061121}
   - component: {fileID: 8916380848889061092}
+  - component: {fileID: 5149332159221903905}
   - component: {fileID: 8916380848889061144}
   - component: {fileID: 8916380848889061139}
   - component: {fileID: 4325353825048437118}
@@ -512,6 +524,9 @@ MonoBehaviour:
   proceedImpulseOnAttack: 10
   progressLevel: 0
   reqiredProgressLevelToShootMagic: 2
+  beforeStateChange:
+    m_PersistentCalls:
+      m_Calls: []
   shootObject:
     target: {fileID: 8916380848889061178}
     ordinary:
@@ -913,6 +928,20 @@ MonoBehaviour:
     invincibleTime: 2
     horizontalMove: {fileID: 3289781965317027910}
     disallowCross: 0
+    onInitialize:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5149332159221903905}
+          m_MethodName: ResetCombo
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   dead:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
@@ -1081,6 +1110,47 @@ MonoBehaviour:
   ascSarah: {fileID: 8916380848890831846}
   isActive: 0
   AwakeEffectAnimator: {fileID: 3177258268889996863}
+--- !u!114 &5149332159221903905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62cdd002ac84bbb4b9a4103bb6e02bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeLimit: 2
+  awakeBonuses:
+  - combo: 0
+    amount: 0.015
+  - combo: 5
+    amount: 0.0225
+  - combo: 12
+    amount: 0.045
+  - combo: 30
+    amount: 0.1
+  awake: {fileID: 8916380848889061092}
+  onComboIncremented:
+    m_PersistentCalls:
+      m_Calls: []
+  onComboIncrementedInt:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5149332159221903905}
+        m_MethodName: AddAwakeGauge
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  comboCount: 0
 --- !u!114 &8916380848889061144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1919,7 +1989,18 @@ MonoBehaviour:
     hitstopSpan: 0
   onAttackSucceeded:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5149332159221903905}
+        m_MethodName: IncrementCombo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls: []
@@ -2257,7 +2338,18 @@ MonoBehaviour:
     hitstopSpan: 0
   onAttackSucceeded:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5149332159221903905}
+        m_MethodName: IncrementCombo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls:
@@ -2509,7 +2601,18 @@ MonoBehaviour:
     hitstopSpan: 0
   onAttackSucceeded:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5149332159221903905}
+        m_MethodName: IncrementCombo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls:
@@ -2773,7 +2876,18 @@ MonoBehaviour:
     hitstopSpan: 0
   onAttackSucceeded:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5149332159221903905}
+        m_MethodName: IncrementCombo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls:
@@ -2995,7 +3109,18 @@ MonoBehaviour:
     hitstopSpan: 0
   onAttackSucceeded:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5149332159221903905}
+        m_MethodName: IncrementCombo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls:
@@ -3492,7 +3617,18 @@ MonoBehaviour:
     hitstopSpan: 0
   onAttackSucceeded:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5149332159221903905}
+        m_MethodName: IncrementCombo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls:
@@ -3713,7 +3849,18 @@ MonoBehaviour:
     hitstopSpan: 0
   onAttackSucceeded:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5149332159221903905}
+        m_MethodName: IncrementCombo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onAttackSucceededMortal:
     m_PersistentCalls:
       m_Calls: []
