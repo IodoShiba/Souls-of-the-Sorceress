@@ -526,7 +526,18 @@ MonoBehaviour:
   reqiredProgressLevelToShootMagic: 2
   beforeStateChange:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5149332159221903905}
+        m_MethodName: ResetCombo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   shootObject:
     target: {fileID: 8916380848889061178}
     ordinary:
@@ -1122,34 +1133,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62cdd002ac84bbb4b9a4103bb6e02bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 2
-  awakeBonuses:
-  - combo: 0
-    amount: 0.015
-  - combo: 5
-    amount: 0.0225
-  - combo: 12
-    amount: 0.045
-  - combo: 30
-    amount: 0.1
+  baseAwakeIncome: 0.2
+  awakeIncomeCoef: 0
   awake: {fileID: 8916380848889061092}
   onComboIncremented:
     m_PersistentCalls:
       m_Calls: []
   onComboIncrementedInt:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5149332159221903905}
-        m_MethodName: AddAwakeGauge
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   comboCount: 0
 --- !u!114 &8916380848889061144
 MonoBehaviour:
