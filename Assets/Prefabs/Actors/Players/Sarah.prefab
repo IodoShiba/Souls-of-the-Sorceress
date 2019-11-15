@@ -507,9 +507,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed4b52c2915e6c64cbc263dc86f3c250, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackLongPushThreshold: 2
+  attackLongPushThreshold: 1
   durabilityCostOnShootMagic: 1
-  proceedImpulseOnAttack: 10
+  proceedImpulseOnAttack: 5
   progressLevel: 0
   reqiredProgressLevelToShootMagic: 2
   shootObject:
@@ -755,8 +755,8 @@ MonoBehaviour:
     onInitialize:
       m_PersistentCalls:
         m_Calls: []
-    distance: 6
-    speed: 18
+    distance: 7
+    speed: 16
     degreeWidthOfGuardArea: 270
     unguardTime: 0.5
     amountConsumeUmbrellaDurability: 2
@@ -848,7 +848,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-    abilityTime: 2
+    abilityTime: 6
     amountConsumeUmbrellaDurability: 2
     attack: {fileID: 8916380849653747854}
     velocityAdjuster:
@@ -910,7 +910,7 @@ MonoBehaviour:
     connector: {fileID: 8916380848890831846}
     stateSpan: 0.5
     useInvincibleTime: 1
-    invincibleTime: 2
+    invincibleTime: 1.5
     horizontalMove: {fileID: 3289781965317027910}
     disallowCross: 0
   dead:
@@ -1876,20 +1876,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
-    damage: 10
-    knockBackImpulse: {x: 1000, y: 200}
+    damage: 5
+    knockBackImpulse: {x: 500, y: 0}
     attackCollider: {fileID: 8916380848965055379}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
-    damage: 15
-    knockBackImpulse: {x: 1400, y: 280}
+    damage: 10
+    knockBackImpulse: {x: 500, y: 0}
     attackCollider: {fileID: 8916380848965055387}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
-    damage: 20
-    knockBackImpulse: {x: 1600, y: 320}
+    damage: 15
+    knockBackImpulse: {x: 500, y: 0}
     attackCollider: {fileID: 8916380848965055386}
     throughable: 1
     hitstopSpan: 0
@@ -2215,19 +2215,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 15
-    knockBackImpulse: {x: 200, y: 100}
+    knockBackImpulse: {x: 40, y: 10}
     attackCollider: {fileID: 8916380849248469455}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 45
-    knockBackImpulse: {x: 200, y: 100}
+    knockBackImpulse: {x: 40, y: 10}
     attackCollider: {fileID: 8916380849248469460}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 75
-    knockBackImpulse: {x: 200, y: 100}
+    knockBackImpulse: {x: 40, y: 10}
     attackCollider: {fileID: 8916380849248469451}
     throughable: 1
     hitstopSpan: 0
@@ -2467,19 +2467,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 5
-    knockBackImpulse: {x: 200, y: 100}
+    knockBackImpulse: {x: 70, y: 10}
     attackCollider: {fileID: 8916380849465762222}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpulse: {x: 200, y: 100}
+    knockBackImpulse: {x: 70, y: 10}
     attackCollider: {fileID: 8916380849465762218}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 25
-    knockBackImpulse: {x: 200, y: 100}
+    knockBackImpulse: {x: 70, y: 10}
     attackCollider: {fileID: 8916380849465762217}
     throughable: 1
     hitstopSpan: 0
@@ -2737,13 +2737,13 @@ MonoBehaviour:
     hitstopSpan: 0
   awakenAttack:
     damage: 30
-    knockBackImpulse: {x: 0, y: -1333}
+    knockBackImpulse: {x: 0, y: -1000}
     attackCollider: {fileID: 8916380849515846550}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 50
-    knockBackImpulse: {x: 0, y: -1666}
+    knockBackImpulse: {x: 0, y: -1000}
     attackCollider: {fileID: 8916380849515846549}
     throughable: 1
     hitstopSpan: 0
@@ -2953,19 +2953,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 20
-    knockBackImpulse: {x: 1200, y: -1800}
+    knockBackImpulse: {x: 300, y: -900}
     attackCollider: {fileID: 8916380849653747852}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 60
-    knockBackImpulse: {x: 1200, y: -1800}
+    knockBackImpulse: {x: 300, y: -900}
     attackCollider: {fileID: 8916380849653747849}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 100
-    knockBackImpulse: {x: 1200, y: -1800}
+    knockBackImpulse: {x: 300, y: -900}
     attackCollider: {fileID: 8916380849653747848}
     throughable: 1
     hitstopSpan: 0
@@ -3450,19 +3450,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpulse: {x: 200, y: 100}
+    knockBackImpulse: {x: 60, y: 10}
     attackCollider: {fileID: 8916380850370461327}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 30
-    knockBackImpulse: {x: 200, y: 100}
+    knockBackImpulse: {x: 60, y: 10}
     attackCollider: {fileID: 8916380850370461332}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 50
-    knockBackImpulse: {x: 200, y: 100}
+    knockBackImpulse: {x: 60, y: 10}
     attackCollider: {fileID: 8916380850370461323}
     throughable: 1
     hitstopSpan: 0
@@ -3671,19 +3671,19 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpulse: {x: 100, y: 1000}
+    knockBackImpulse: {x: 20, y: 700}
     attackCollider: {fileID: 8916380850513594286}
     throughable: 1
     hitstopSpan: 0
   awakenAttack:
     damage: 15
-    knockBackImpulse: {x: 130, y: 1300}
+    knockBackImpulse: {x: 20, y: 700}
     attackCollider: {fileID: 8916380850513594282}
     throughable: 1
     hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
-    knockBackImpulse: {x: 160, y: 1600}
+    knockBackImpulse: {x: 20, y: 700}
     attackCollider: {fileID: 8916380850513594281}
     throughable: 1
     hitstopSpan: 0
