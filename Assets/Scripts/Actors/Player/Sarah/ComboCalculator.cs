@@ -8,44 +8,23 @@ using UniRx;
 /// </summary>
 public class ComboCalculator : MonoBehaviour
 {
-    //[System.Serializable]
-    //class AwakeIncome
-    //{
-    //    public int combo;
-    //    public float amount;
-    //}
 
     [System.Serializable] class UnityEvent_int : UnityEngine.Events.UnityEvent<int> { }
 
-    //[SerializeField] float timeLimit;
-    //[SerializeField] List<AwakeIncome> awakeBonuses;
-    [SerializeField] float baseAwakeIncome;
-    [SerializeField] float awakeIncomeCoef;
+    [SerializeField] AnimationCurve awakeIncomeCurve;
     [SerializeField] ActionAwake awake;
     [SerializeField] UnityEngine.Events.UnityEvent onComboIncremented;
     [SerializeField] UnityEvent_int onComboIncrementedInt;
     [SerializeField,DisabledField] int comboCount = 0;
     float addedAmount;
 
-    //IodoShibaUtil.ManualUpdateClass.ManualClock clock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
     bool IsInCombo { get => comboCount > 0; }
     
     void Awake()
     {
         comboCount = 0;
-        //clock.Reset();
+        addedAmount = 0;
     }
-
-    //private void Update()
-    //{
-    //    if (!IsInCombo) { return; }
-
-    //    clock.Update();
-    //    if(clock.Clock >= timeLimit)
-    //    {
-    //        ResetCombo();
-    //    }
-    //}
 
     private void OnGUI()
     {
@@ -54,9 +33,8 @@ public class ComboCalculator : MonoBehaviour
 
     public void ResetCombo()
     {
-        //Debug.Log("Combo was Reset.");
         comboCount = 0;
-        //clock.Reset();
+        addedAmount = 0;
     }
 
     public void IncrementCombo()
@@ -68,20 +46,21 @@ public class ComboCalculator : MonoBehaviour
         onComboIncrementedInt.Invoke(comboCount);
     }
 
-    float AwakeAddAmount(int combos) => awakeIncomeCoef * combos + baseAwakeIncome;
+    float AwakeAddAmount(int combos)
+    {
+        if(awakeIncomeCurve.length == 0) { return 0; }
+        if (combos < 1) { combos = 1; }
+
+        float maxTime = awakeIncomeCurve.keys[awakeIncomeCurve.length - 1].time;
+        return awakeIncomeCurve.Evaluate(Mathf.Min(combos, maxTime));
+    }
 
     public void AddAwakeGauge(int comboCount)
     {
-        float add = AwakeAddAmount(comboCount - 1);
+        float add = AwakeAddAmount(comboCount);
         float income = add - addedAmount;
         addedAmount = add;
-        //for(int i = awakeBonuses.Count - 1; i >= 0; --i)
-        //{
-        //    if(comboCount >= awakeBonuses[i].combo)
-        //    {
-        //        income = awakeBonuses[i].amount;
-        //    }
-        //}
+        Debug.Log("Awake add:" + add);
         awake.AddAwakeGauge(income);
     }
 }

@@ -1119,6 +1119,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   ascSarah: {fileID: 8916380848890831846}
+  noAdd: 0
   isActive: 0
   AwakeEffectAnimator: {fileID: 3177258268889996863}
 --- !u!114 &5149332159221903905
@@ -1133,15 +1134,86 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62cdd002ac84bbb4b9a4103bb6e02bb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseAwakeIncome: 0.2
-  awakeIncomeCoef: 0
+  baseAwakeIncome: 0.04
+  awakeIncomeCoef: 0.02
+  awakeIncomeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.49246815
+      value: 0.020266032
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.0001183
+      value: 0.02042086
+      inSlope: 0.00062110205
+      outSlope: 0.00062110205
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.23753309
+    - serializedVersion: 3
+      time: 1.9954985
+      value: 0.025903858
+      inSlope: 0.01114864
+      outSlope: 0.01114864
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.35340208
+      outWeight: 0.13723107
+    - serializedVersion: 3
+      time: 3.0063791
+      value: 0.043126486
+      inSlope: 0.016751088
+      outSlope: 0.016751088
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.18313599
+    - serializedVersion: 3
+      time: 4.982637
+      value: 0.0602995
+      inSlope: 0.0007066547
+      outSlope: 0.0007066547
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.21637934
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 5.4951253
+      value: 0.060576536
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   awake: {fileID: 8916380848889061092}
   onComboIncremented:
     m_PersistentCalls:
       m_Calls: []
   onComboIncrementedInt:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5149332159221903905}
+        m_MethodName: AddAwakeGauge
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   comboCount: 0
 --- !u!114 &8916380848889061144
 MonoBehaviour:

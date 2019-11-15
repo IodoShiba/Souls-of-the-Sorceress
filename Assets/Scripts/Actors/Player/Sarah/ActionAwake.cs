@@ -26,6 +26,7 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
     [SerializeField] UnityEngine.Events.UnityEvent onActivate;
     [SerializeField] UnityEngine.Events.UnityEvent onInactivate;
     [SerializeField] ActorSarah.ActorStateConnectorSarah ascSarah;
+    [SerializeField] bool noAdd;
     [SerializeField,DisabledField]private bool isActive = false;
     AwakeLevels awakeLevel = AwakeLevels.ordinary;
     [SerializeField] Animator AwakeEffectAnimator;
@@ -97,7 +98,8 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
     
     public void AddAwakeGauge(float amount)
     {
-        if (!isActive)
+        if(!noAdd)
+        //if (!isActive)
         {
             if(awakeGauge < MaxGauge && awakeGauge + amount >= MaxGauge)
             {
