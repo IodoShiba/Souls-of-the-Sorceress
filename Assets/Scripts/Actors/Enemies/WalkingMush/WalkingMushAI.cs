@@ -13,7 +13,7 @@ public class WalkingMushAI : AI
 
     private void Start()
     {
-        playerTransform = ActorManager.PlayerActor.transform;//GameObject.FindWithTag("Player").transform;
+        playerTransform = GameObject.FindWithTag("Player").transform;
     }
 
     public override void Decide()

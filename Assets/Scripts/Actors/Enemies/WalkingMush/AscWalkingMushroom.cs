@@ -42,7 +42,7 @@ namespace ActorWalkingMushroom
                 {
                     ConnectorMush.direction.ChangeDirection(ConnectorMush.ai.MoveSign);
                 }
-                Debug.Log(GameObject.name + ConnectorMush.ai.MoveSign);
+                //Debug.Log(GameObject.name + ConnectorMush.ai.MoveSign);
                 horizontalMove.ManualUpdate(ConnectorMush.ai.MoveSign);
 
             }

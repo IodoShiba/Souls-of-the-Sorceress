@@ -21,6 +21,7 @@ namespace ActorSarah
         [SerializeField] float proceedImpulseOnAttack;
         [SerializeField, Range(0, 4)] int progressLevel;
         [SerializeField, Range(0, 4)] int reqiredProgressLevelToShootMagic;
+        [SerializeField] UnityEngine.Events.UnityEvent beforeStateChange;
         [SerializeField] AwakeMutableShootObject shootObject;
         [SerializeField] PlayerCommander commands;
         [SerializeField] GroundSensor groundSensor;
@@ -130,6 +131,7 @@ namespace ActorSarah
             {
                 attackLongPushClock.Reset();
             }
+            beforeStateChange.Invoke();
             //Debug.Log($"State has changed:{next.GetType().Name}");
         }
 
@@ -838,12 +840,14 @@ namespace ActorSarah
         [System.Serializable]
         private class SarahSmashed : SmashedState
         {
+            [SerializeField] UnityEngine.Events.UnityEvent onInitialize;
             protected override void OnInitialize()
             {
                 base.OnInitialize();
                 ActorStateConnectorSarah actorStateConnectorSarah = Connector as ActorStateConnectorSarah;
                 actorStateConnectorSarah.sarahAnimator.SetTrigger("SarahSmashedTrigger");
 
+                onInitialize.Invoke();
             }
         }
 
