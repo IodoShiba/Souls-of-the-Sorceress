@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8846357498839132271}
   - component: {fileID: 3266266874406353090}
   - component: {fileID: 9075659024389728264}
+  - component: {fileID: 5700912403174327241}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -74,8 +75,6 @@ MonoBehaviour:
   onVictory:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onDefeated:
     m_PersistentCalls:
       m_Calls:
@@ -90,8 +89,6 @@ MonoBehaviour:
           m_StringArgument: GameOver
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &3266266874406353090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +118,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolSize: 32
   prefab: {fileID: 224757770675119211, guid: 13af3dd4a6ac99f448c86b8b7883065b, type: 3}
-  clips:
-  - {fileID: 7400000, guid: 074fc9e1973157d47bebbb773fe46d74, type: 2}
-  - {fileID: 7400000, guid: b48a6521246ac9843a7f2fdf435c2d6f, type: 2}
+--- !u!114 &5700912403174327241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7457400105786499162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff7f9fef5904f284f85a12dae65fae19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolSize: 128
+  spriteVariations: []
+  prefab: {fileID: 7816563239322998980, guid: e56ce3c4314d5dd44b16e9292c10af95, type: 3}

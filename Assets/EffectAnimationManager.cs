@@ -43,7 +43,6 @@ public class EffectAnimationManager : MonoBehaviour
                 break;
             }
             nextIndex = (nextIndex + 1) % pool.Length;
-            
         }
 
         if(pool[nextIndex] == null) { return; }
