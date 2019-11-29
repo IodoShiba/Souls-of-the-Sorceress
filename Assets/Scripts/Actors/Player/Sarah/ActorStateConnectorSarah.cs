@@ -69,16 +69,6 @@ namespace ActorSarah
         }
         protected override void BuildStateConnection()
         {
-            Func<ActorState> proceedFunc;
-            ConnectStateFromDefault(
-                proceedFunc =
-                (tripleSlashAttackStream = new ChainAttackStream(.4f, true ,new ActorState[] { verticalSlash, returnSlash, smashSlash }))
-                .ProceedsWhen(() => groundSensor.IsOnGround && 
-                                    (commands.Attack.IsDown || (tripleSlashAttackStream.NextIndex() == 0 && attackLongPushClock.FinallyPushedTime > 0)) &&
-                                    !sarahDefault.currentState.Equals(SarahDefault.StateInDefaultNum.IsInAir) && 
-                                    !sarahDefault.currentState.Equals(SarahDefault.StateInDefaultNum.IsOnLanding)
-                             )
-                );
 
             ConnectStateFromDefault(
                 () => !groundSensor.IsOnGround && commands.DownAttackMultiPush.IsDown,
@@ -88,18 +78,29 @@ namespace ActorSarah
                 () => !groundSensor.IsOnGround && (commands.Attack.IsDown || (tripleSlashAttackStream.NextIndex() == 0 && attackLongPushClock.FinallyPushedTime > 0)),
                 aerialSlash);
 
+            Func<ActorState> proceedFunc;
+            ConnectStateFromDefault(
+                proceedFunc =
+                (tripleSlashAttackStream = new ChainAttackStream(.4f, true, new ActorState[] { verticalSlash, returnSlash, smashSlash }))
+                .ProceedsWhen(() => groundSensor.IsOnGround &&
+                                    (commands.Attack.IsDown || (tripleSlashAttackStream.NextIndex() == 0 && attackLongPushClock.FinallyPushedTime > 0)) &&
+                                    !sarahDefault.currentState.Equals(SarahDefault.StateInDefaultNum.IsInAir) &&
+                                    !sarahDefault.currentState.Equals(SarahDefault.StateInDefaultNum.IsOnLanding)
+                             )
+                );
             ConnectState(proceedFunc, verticalSlash);
             ConnectState(tripleSlashAttackStream.ProceedsWhen(
                 () => (groundSensor.IsOnGround || tripleSlashAttackStream.IsRecepting) && commands.Attack.IsDown),
                 returnSlash);
 
             ConnectStateFromDefault(
-                () => groundSensor.IsOnGround && commands.OpenUmbrella.IsDown,
+                () => groundSensor.IsOnGround && commands.OpenUmbrella.Evaluation,
                 guard);
             ConnectState(
                 () => groundSensor.IsOnGround && commands.Attack.IsDown, 
                 guard,
                 tackle);
+            ConnectState(() => !tackle.ContinueCond() && commands.OpenUmbrella.Evaluation, tackle, guard);
             ConnectStateFromDefault(
                 () => !groundSensor.IsOnGround && commands.OpenUmbrella.Evaluation,
                 glide);
@@ -107,6 +108,7 @@ namespace ActorSarah
                 () => !groundSensor.IsOnGround && commands.Attack.IsDown, 
                 glide,
                 risingAttack);
+            ConnectState(() => !risingAttack.ContinueCond() && commands.OpenUmbrella.Evaluation, risingAttack, glide);
 
             sarahDefault.attackLongPushClock = verticalSlash.attackLongPushClock = aerialSlash.attackLongPushClock = attackLongPushClock;
 
@@ -633,8 +635,10 @@ namespace ActorSarah
                 //if(Mathf.Abs(ConnectorSarah.SelfRigidbody.velocity.x ) < Mathf.Epsilon) { return false; }
                 //float x = GameObject.transform.position.x;
                 //return x0 - distance < x && x < x0 + distance;
-                return unguardClock.Clock < unguardTime;
+                return ContinueCond();
             }
+            public bool ContinueCond() => state == 0 || unguardClock.Clock < unguardTime;
+
             protected override void OnInitialize()
             {
                 ConnectorSarah.umbrellaParameters.TryConsumeDurability(amountConsumeUmbrellaDurability);
@@ -680,7 +684,6 @@ namespace ActorSarah
                 unguardClock.Reset();
                 state = 0;
             }
-
 
         }
 
@@ -754,7 +757,8 @@ namespace ActorSarah
             IodoShibaUtil.ManualUpdateClass.ManualClock clock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
             protected override bool IsAvailable() => base.IsAvailable() && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
 
-            protected override bool ShouldCotinue() => clock.Clock < abilityTime;
+            protected override bool ShouldCotinue() => ContinueCond();
+            public bool ContinueCond() => clock.Clock < abilityTime;
             protected override void OnInitialize()
             {
                 attack.Activate();

@@ -121,6 +121,7 @@ public class ComboCalculator : MonoBehaviour
     {
         float add = AwakeAddAmount(comboCount);
         float income = add - addedAmount;
+        addedAmount = add;
 
         for (int i = awakeAddAmounts.Length - 1; i >= 0; --i)
         {
