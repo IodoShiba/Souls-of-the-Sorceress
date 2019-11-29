@@ -140,6 +140,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -225,14 +226,21 @@ MonoBehaviour:
   owner: {fileID: 0}
   onceOnly: 1
   initiallyActivate: 1
+  allowToAttackSelf: 0
   targetTag: Enemy
   activeSpan: 5
   attackDataPrototype:
     damage: 0
-    knockBackImpulse: {x: 0, y: 0}
+    knockBackImpulse: {x: -1500, y: -100}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
+  onAttackSucceeded:
+    m_PersistentCalls:
+      m_Calls: []
+  onAttackSucceededMortal:
+    m_PersistentCalls:
+      m_Calls: []
   attackConvertersOnActivate: []
   attackConvertersOnHit: []
 --- !u!114 &114571549028422716

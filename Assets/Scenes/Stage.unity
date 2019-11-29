@@ -1647,7 +1647,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.77, y: 6.95, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 584196039}
@@ -7301,7 +7301,7 @@ PrefabInstance:
     - target: {fileID: 8916380848889061092, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: awakeGauge
-      value: 0.51
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
@@ -7346,6 +7346,11 @@ PrefabInstance:
     - target: {fileID: 8916380848965055379, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5149332159221903905, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: oneItemSpawnCount
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
