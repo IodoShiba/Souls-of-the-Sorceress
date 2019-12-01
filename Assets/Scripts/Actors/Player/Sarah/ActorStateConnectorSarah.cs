@@ -75,6 +75,10 @@ namespace ActorSarah
                 dropAttack);
 
             ConnectStateFromDefault(
+                () => groundSensor.IsOnGround && commands.UpAttackMultiPush.IsDown,//commands.AnalogueUp.Evaluation && commands.Attack.IsDown,
+                risingAttack);
+
+            ConnectStateFromDefault(
                 () => !groundSensor.IsOnGround && (commands.Attack.IsDown || (tripleSlashAttackStream.NextIndex() == 0 && attackLongPushClock.FinallyPushedTime > 0)),
                 aerialSlash);
 
