@@ -71,7 +71,7 @@ namespace ActorSarah
         {
 
             ConnectStateFromDefault(
-                () => !groundSensor.IsOnGround && commands.DownAttackMultiPush.IsDown,
+                () => !groundSensor.IsOnGround && commands.AnalogueDown.Evaluation && commands.Attack.IsDown,//commands.DownAttackMultiPush.IsDown,
                 dropAttack);
 
             ConnectStateFromDefault(
