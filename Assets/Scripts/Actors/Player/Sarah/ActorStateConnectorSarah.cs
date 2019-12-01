@@ -632,6 +632,7 @@ namespace ActorSarah
             IodoShibaUtil.ManualUpdateClass.ManualClock unguardClock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
             float x0;
             int state = 0;
+            float initialGravity = 0;
 
             protected override bool IsAvailable() => base.IsAvailable() && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
             protected override bool ShouldCotinue()
@@ -651,6 +652,8 @@ namespace ActorSarah
                 velocityAdjuster.Method.enabled = true;
                 int dirSign = (int)direction.CurrentDirection;
                 velocityAdjuster.Fields.Velocity = dirSign * speed * Vector2.right;
+                initialGravity = ConnectorSarah.SelfRigidbody.gravityScale;
+                ConnectorSarah.SelfRigidbody.gravityScale = 0;
                 umbrella.PlayerGuard();
                 onChangeStateCallbacks.Invoke(true);
                 guard.Method.Activated = true;
@@ -681,6 +684,7 @@ namespace ActorSarah
             {
                 attack.Inactivate();
                 //velocityAdjuster.Method.enabled = false;
+                ConnectorSarah.SelfRigidbody.gravityScale = initialGravity;
                 velocityAdjuster.Method.Disable();
                 umbrella.Default();
                 onChangeStateCallbacks.Invoke(false);
