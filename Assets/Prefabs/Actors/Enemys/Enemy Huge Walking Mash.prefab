@@ -436,7 +436,7 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   maxChaseRadius: 16
   minChaseRadius: 0.3
-  summonCycle: 6
+  summonCycle: 3
   maxNearbyEnemyCount: 3
   sensor: {fileID: 4735956752221833305}
 --- !u!114 &4246921619872684889
@@ -601,7 +601,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2, y: -1.3}
+  m_Offset: {x: 3, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -612,5 +612,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 1}
+  m_Size: {x: 7, y: 4}
   m_EdgeRadius: 0
