@@ -50,6 +50,7 @@ namespace ActorSarah
             AnalogueUp.Update();
             AnalogueDown.Update();
             DownAttackMultiPush.Update();
+            UpAttackMultiPush.Update();
         }
     }
 }
