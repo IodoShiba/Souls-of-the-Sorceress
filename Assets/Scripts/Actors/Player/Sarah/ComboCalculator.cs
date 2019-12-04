@@ -66,12 +66,15 @@ public class ComboCalculator : MonoBehaviour
     [SerializeField,DisabledField] int comboCount = 0;
     float addedAmount;
 
+    const int MAX_COMBO = 16;
+    Mortal[] attackedMortals = new Mortal[MAX_COMBO];
+    int attackedMortalsCount;
+
     bool IsInCombo { get => comboCount > 0; }
     
     void Awake()
     {
-        comboCount = 0;
-        addedAmount = 0;
+        ResetCombo();
     }
 
     private void OnGUI()
@@ -83,6 +86,8 @@ public class ComboCalculator : MonoBehaviour
     {
         comboCount = 0;
         addedAmount = 0;
+
+        attackedMortalsCount = 0;
     }
 
     public void IncrementCombo()
@@ -96,8 +101,23 @@ public class ComboCalculator : MonoBehaviour
     public void IncrementCombo(Mortal subject)
     {
         if(!(subject is Enemy)) { return; }
-        IncrementCombo();
+        if (!IsSubjectAttackedFirst(subject)) { return; }
         SummonAwakeAddItems(subject);
+    }
+
+    bool IsSubjectAttackedFirst(Mortal subject)
+    {
+        for (int i = 0; i < attackedMortalsCount; ++i)
+        {
+            if (subject == attackedMortals[i]) { return false; }
+        }
+        if (attackedMortalsCount < attackedMortals.Length)
+        {
+            attackedMortals[attackedMortalsCount] = subject;
+            ++attackedMortalsCount;
+        }
+        
+        return true;
     }
 
     float AwakeAddAmount(int combos)
