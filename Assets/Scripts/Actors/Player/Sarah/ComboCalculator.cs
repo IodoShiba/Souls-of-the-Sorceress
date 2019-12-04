@@ -95,6 +95,7 @@ public class ComboCalculator : MonoBehaviour
 
     public void IncrementCombo(Mortal subject)
     {
+        if(!(subject is Enemy)) { return; }
         IncrementCombo();
         SummonAwakeAddItems(subject);
     }
