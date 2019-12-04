@@ -33,6 +33,7 @@ namespace ActorEnemyElement {
             protected override void OnInitialize()
             {
                 base.OnInitialize();
+                velocityAdjuster.Method.enabled = true;
                 ConnectorElem.elementAnimator.Play("Idle");
             }
             protected override void OnActive()
@@ -51,14 +52,18 @@ namespace ActorEnemyElement {
         [System.Serializable]
         private class ElementSmashed : SmashedState
         {
+            [SerializeField] ActorFunction.VelocityAdjusterFields.Method velocityAdjuster;
+
             AscEnemyElement connectorElem;
             AscEnemyElement ConnectorElem { get => connectorElem == null ? (connectorElem = Connector as AscEnemyElement) : connectorElem; }
 
             protected override void OnInitialize()
             {
+                velocityAdjuster.enabled = false;
                 base.OnInitialize();
                 ConnectorElem.elementAnimator.Play("Smashed");
             }
+
         }
     }
 }
