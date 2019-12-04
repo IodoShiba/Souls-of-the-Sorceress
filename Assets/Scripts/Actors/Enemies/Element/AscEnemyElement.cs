@@ -6,11 +6,15 @@ namespace ActorEnemyElement {
     public class AscEnemyElement : FightActorStateConector
     {
         [SerializeField] float bulletSpeed;
+        [SerializeField] float noAttackTimeAfterSmashed;
         [SerializeField] ElementAI ai;
 
         [SerializeField] ElementDefault elementDefault;
         [SerializeField] ElementSmashed smashed;
+        [SerializeField] AttackInHitbox attack;
         [SerializeField] Animator elementAnimator;
+
+        float attackInterval = 0;
 
         public override ActorState DefaultState => elementDefault;
         public override SmashedState Smashed => smashed;
@@ -18,6 +22,21 @@ namespace ActorEnemyElement {
         protected override void BeforeStateUpdate()
         {
             ai.Decide();
+            if(attackInterval > 0)
+            {
+                attackInterval -= Time.deltaTime;
+                if(attackInterval <= 0)
+                {
+                    attackInterval = 0;
+                    attack.Activate();
+                }
+            }
+        }
+
+        public void StartAttackInterval()
+        {
+            attack.Inactivate();
+            attackInterval = noAttackTimeAfterSmashed;
         }
 
         [System.Serializable]
@@ -61,6 +80,8 @@ namespace ActorEnemyElement {
             {
                 velocityAdjuster.enabled = false;
                 base.OnInitialize();
+                ConnectorElem.StartAttackInterval();
+
                 ConnectorElem.elementAnimator.Play("Smashed");
             }
 
