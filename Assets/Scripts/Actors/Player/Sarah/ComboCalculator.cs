@@ -102,6 +102,7 @@ public class ComboCalculator : MonoBehaviour
     {
         if(!(subject is Enemy)) { return; }
         if (!IsSubjectAttackedFirst(subject)) { return; }
+        IncrementCombo();
         SummonAwakeAddItems(subject);
     }
 
