@@ -38,7 +38,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 56.054, y: 2.543, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8616109328562825894}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -259,6 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 5
+  noAttackTimeAfterSmashed: 0.5
   ai: {fileID: 964724003723573771}
   elementDefault:
     gameObject: {fileID: 964724003723573768}
@@ -280,6 +282,8 @@ MonoBehaviour:
     invincibleTime: 0
     horizontalMove: {fileID: 0}
     disallowCross: 0
+    velocityAdjuster: {fileID: 4887456833946179394}
+  attack: {fileID: 1411910182265437083}
   elementAnimator: {fileID: 6534074606263859062}
 --- !u!114 &4887456833946179394
 MonoBehaviour:
@@ -352,3 +356,93 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootTable: {fileID: 11400000, guid: 468a388555488f14ea66d2086f83d7f5, type: 2}
+--- !u!1 &6892453230369058321
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8616109328562825894}
+  - component: {fileID: 3092064380534640577}
+  - component: {fileID: 1411910182265437083}
+  m_Layer: 21
+  m_Name: Hitbox
+  m_TagString: Enemy Attack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8616109328562825894
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6892453230369058321}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_Children: []
+  m_Father: {fileID: 964724003723573774}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &3092064380534640577
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6892453230369058321}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.2, y: 1.2}
+  m_EdgeRadius: 0
+--- !u!114 &1411910182265437083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6892453230369058321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 365cfb11c8b9ecc4a96ca7cb4916e700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  onceOnly: 0
+  initiallyActivate: 1
+  allowToAttackSelf: 0
+  targetTag: Player
+  activeSpan: Infinity
+  attackDataPrototype:
+    damage: 10
+    knockBackImpulse: {x: 800, y: 200}
+    attackCollider: {fileID: 3092064380534640577}
+    throughable: 1
+    hitstopSpan: 0
+  onAttackSucceeded:
+    m_PersistentCalls:
+      m_Calls: []
+  onAttackSucceededMortal:
+    m_PersistentCalls:
+      m_Calls: []
+  attackConvertersOnActivate: []
+  attackConvertersOnHit: []
