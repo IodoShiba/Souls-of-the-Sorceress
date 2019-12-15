@@ -9,7 +9,7 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
     protected override void Awake()
     {
         base.Awake();
-        GetComponent<Mortal>().OnAttackedCallbacks.AddListener(() => { InterruptWith(Smashed); });
+        GetComponent<Mortal>().OnAttackedCallbacks.AddListener((_) => { InterruptWith(Smashed); });
     }
 
     public abstract SmashedState Smashed { get; }

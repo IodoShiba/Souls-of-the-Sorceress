@@ -34,12 +34,14 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         protected float MaxHealth { get => target.maxHealth; }
     }
 
+    [System.Serializable] public class UnityEvent_Mortal : UnityEngine.Events.UnityEvent<Mortal> { }
+
     private const float impulseMultiplyer = 0.025f;
     [SerializeField] protected float health;
     [SerializeField] protected float maxHealth;
     [SerializeField] private  bool isInvulnerable;
     [SerializeField] UnityEngine.Events.UnityEvent dyingCallbacks;
-    [SerializeField] UnityEngine.Events.UnityEvent onAttackedCallbacks;
+    [SerializeField] public UnityEvent_Mortal onAttackedCallbacks; //Though this field is public, do not refer this field directly because it is just to avoid the UnityEvent Bug.
     [SerializeField] UnityEngine.Events.UnityEvent onHealthRecoveredCallbacks;
     [SerializeField] UnityEngine.Events.UnityEvent onInvinsibleTimeOver;
     [SerializeField] UnityEngine.Events.UnityEvent onDestroy;
@@ -58,7 +60,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     int originalLayer;
 
     public Actor Actor { get => actor == null ? (actor = GetComponent<Actor>()) : actor; }
-    public UnityEngine.Events.UnityEvent OnAttackedCallbacks { get => onAttackedCallbacks; }
+    public UnityEvent_Mortal OnAttackedCallbacks { get => onAttackedCallbacks; }
     public UnityEvent DyingCallbacks { get => dyingCallbacks; }
     public bool IsInvulnerable //{ get => isInvulnerable; set => isInvulnerable = value; }
     {
@@ -178,7 +180,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
 
             //ヒットストップを与える（未実装）
 
-            OnAttackedCallbacks.Invoke();//被攻撃時のコールバック関数を呼び出し
+            OnAttackedCallbacks.Invoke(mainAttackInfo.attacker);//被攻撃時のコールバック関数を呼び出し
             for(int i = 0; i < dealtAttackCount; ++i)
             {
                 if (dealtAttackInfos[i] != null){ dealtAttackInfos[i].onAttackEvaluatedCallback(true,this); }
