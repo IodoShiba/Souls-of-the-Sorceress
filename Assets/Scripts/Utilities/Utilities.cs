@@ -21,6 +21,11 @@ namespace IodoShibaUtil
             {
                 clock = 0;
             }
+
+            public void Shift(float time)
+            {
+                clock += time;
+            }
         }
 
         /// <summary>

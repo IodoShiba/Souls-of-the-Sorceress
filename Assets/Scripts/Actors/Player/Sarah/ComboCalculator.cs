@@ -16,9 +16,10 @@ public class ComboCalculator : MonoBehaviour
         [SerializeField] Color labelColor;
         [SerializeField] float counterSize;
         [SerializeField] Color counterColor;
-        [SerializeField] UnityEngine.UI.Text uiImage;
+        [SerializeField] Vector2 relativeShift;
+        [SerializeField] TMPro.TMP_Text uiImage;
 
-        const string format = "<size={0}><color=#{1}>Multi Hit</color></size> <size={2}><color=#{3}>x{4}</color></size>";
+        const string format = "<size={0}><color=#{1}>Multi Hit</color></size>\n<size={2}><color=#{3}>x{4}</color></size>";
 
         int pastComboCount;
 
@@ -46,7 +47,7 @@ public class ComboCalculator : MonoBehaviour
                     counterSize, 
                     ColorUtility.ToHtmlStringRGB(counterColor), 
                     Target.comboCount);
-                transform.position = Camera.main.WorldToScreenPoint(ActorManager.PlayerActor.transform.position) + new Vector3(100, 100, 0);
+                transform.position = Camera.main.WorldToScreenPoint(ActorManager.PlayerActor.transform.position) + new Vector3(relativeShift.x, relativeShift.y, 0);
             }
 
             pastComboCount = Target.comboCount;

@@ -458,6 +458,7 @@ GameObject:
   - component: {fileID: 8916380848889061151}
   - component: {fileID: 8916380848889061125}
   - component: {fileID: 7396359423064295611}
+  - component: {fileID: 2407926265265643027}
   m_Layer: 20
   m_Name: Sarah
   m_TagString: Player
@@ -991,18 +992,6 @@ MonoBehaviour:
   onAttackedCallbacks:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7396359423064295611}
-        m_MethodName: PlayOneShot
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 8300000, guid: 0b7d82ee74df9314ab20d78e48bbb9ba,
-            type: 3}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 6314495245485655847}
         m_MethodName: Play
         m_Mode: 5
@@ -1012,6 +1001,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: InvinsibleTime
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2407926265265643027}
+        m_MethodName: DoEffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   onHealthRecoveredCallbacks:
@@ -1606,6 +1606,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2407926265265643027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34577006b82be4c49b669e166d467adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 0b7d82ee74df9314ab20d78e48bbb9ba, type: 3}
+  animationClip: {fileID: 7400000, guid: e2f1def336b115d428c804306ae1805f, type: 2}
+  offset: {x: 0, y: 0}
+  positionerMulti: 0.3
+  origin: {fileID: 8916380848889061178}
+  audioSource: {fileID: 7396359423064295611}
 --- !u!1 &8916380848891301890
 GameObject:
   m_ObjectHideFlags: 0
