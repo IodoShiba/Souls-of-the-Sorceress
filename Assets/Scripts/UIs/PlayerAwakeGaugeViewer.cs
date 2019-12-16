@@ -7,6 +7,7 @@ public class PlayerAwakeGaugeViewer : ActionAwake.Viewer
     [SerializeField] float maxFillAmount;
     [SerializeField] UnityEngine.UI.Image _awakeGaugeImage;
     [SerializeField] Animator flameAniamtor;
+    [SerializeField] ParticleSystem waveParticleSys;
 
     static readonly int beatHash = Animator.StringToHash("Beat");
     static readonly int idleHash = Animator.StringToHash("Idle");
@@ -14,6 +15,7 @@ public class PlayerAwakeGaugeViewer : ActionAwake.Viewer
     bool ableToAwake;
     bool AbleToAwake
     {
+        get => ableToAwake;
         set
         {
             if(!ableToAwake && value)
@@ -37,5 +39,14 @@ public class PlayerAwakeGaugeViewer : ActionAwake.Viewer
     {
         _awakeGaugeImage.fillAmount = Mathf.Clamp(AwakeGauge * 2 * maxFillAmount, 0, maxFillAmount);
         AbleToAwake = target.IsAbleToAwake;
+
+        if (AbleToAwake && waveParticleSys.isStopped)
+        {
+            waveParticleSys.Play();
+        }
+        else if(!AbleToAwake && waveParticleSys.isPlaying)
+        {
+            waveParticleSys.Stop();
+        }
     }
 }
