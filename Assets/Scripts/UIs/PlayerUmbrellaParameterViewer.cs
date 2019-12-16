@@ -38,6 +38,7 @@ public class PlayerUmbrellaParameterViewer : UmbrellaParameters.Viewer
 
     private void Start()
     {
+
         gaugeElements.Clear();
         initPos = transform.position;
 
@@ -73,7 +74,7 @@ public class PlayerUmbrellaParameterViewer : UmbrellaParameters.Viewer
             for(int i = gaugeElements.Count; i < target.MaxDurability; ++i)
             {
                 UDPointElement ins = Instantiate(elementPrefab, transform.position + Vector3.right * selfRTrans.sizeDelta.x * 2 * i, Quaternion.identity);
-                ins.transform.parent = transform;
+                ins.transform.SetParent(transform);
                 var rTrans = ins.GetComponent<RectTransform>();
                 ins.SetSize(new Vector2((rTrans.sizeDelta.x / rTrans.sizeDelta.y) * selfRTrans.sizeDelta.y, selfRTrans.sizeDelta.y));
                 ins.SetBlinkCycle(blinkCycleOnBreak);
