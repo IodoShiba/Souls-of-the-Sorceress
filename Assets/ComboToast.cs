@@ -14,7 +14,7 @@ public class ComboToast : MonoBehaviour
     const int jumpCount = 2;
     const float jumpDuration = 0.4f;
     const float extraDuration = 0.5f;
-    const int showBGThreshold = 3;
+    const int showBGThreshold = 4;
     const float textBeatScale = 2f;
     const float textBeatTime = 0.05f;
     const string format = "{0}<color=#BFBFBF><size=12>Hit</size></color>";
