@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UniRx;
+﻿using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// 同時巻き込みで覚醒ゲージ上昇量を増加させる
@@ -12,16 +10,11 @@ public class ComboCalculator : MonoBehaviour
     {
         [SerializeField] private ComboCalculator target;
 
-        [SerializeField] float labelSize;
-        [SerializeField] Color labelColor;
-        [SerializeField] float counterSize;
-        [SerializeField] Color counterColor;
         [SerializeField] Vector2 relativeShift;
-        [SerializeField] TMPro.TMP_Text uiImage;
+        [SerializeField] ComboToast toastPrefab;
 
-        const string format = "<size={0}><color=#{1}>Multi Hit</color></size>\n<size={2}><color=#{3}>x{4}</color></size>";
-
-        int pastComboCount;
+        [SerializeField] ComboToast[] comboToasts;
+        int currentToastIndex = 0;
 
         protected ComboCalculator Target
         {
@@ -31,26 +24,37 @@ public class ComboCalculator : MonoBehaviour
 
         private void Start()
         {
-            pastComboCount = 0;
+            //for(int i=0;i< comboToasts.Length; ++i)
+            //{
+            //    comboToasts[i] = Instantiate(toastPrefab, Vector3.zero, Quaternion.identity);
+            //    comboToasts[i].transform.parent = (transform);
+            //    comboToasts[i].gameObject.SetActive(false);
+            //}
+            Target.onComboIncrementedInt.AddListener(OnComboIncremented);
+            Target.onReset.AddListener(OnReset);
+            transform.localScale = Vector3.one;
         }
 
-        void Update()
+        void OnComboIncremented(int count)
         {
-            uiImage.enabled = Target.comboCount > 1;
+            comboToasts[currentToastIndex]
+                .OnComboIncrement(
+                    ActorManager.PlayerActor.transform.position + new Vector3(relativeShift.x, relativeShift.y, 0),
+                    count);
+        }
 
-            if(Target.comboCount != pastComboCount)
+        void OnReset()
+        {
+            comboToasts[currentToastIndex].EndCombo();
+
+            for (int i = 0; i < comboToasts.Length; ++i)
             {
-                uiImage.text = string.Format(
-                    format, 
-                    labelSize,
-                    ColorUtility.ToHtmlStringRGB(labelColor), 
-                    counterSize, 
-                    ColorUtility.ToHtmlStringRGB(counterColor), 
-                    Target.comboCount);
-                transform.position = Camera.main.WorldToScreenPoint(ActorManager.PlayerActor.transform.position) + new Vector3(relativeShift.x, relativeShift.y, 0);
+                currentToastIndex = (currentToastIndex + 1) % comboToasts.Length;
+                if (comboToasts[currentToastIndex].gameObject.activeSelf)
+                {
+                    break;
+                }
             }
-
-            pastComboCount = Target.comboCount;
         }
     }
 
@@ -60,6 +64,7 @@ public class ComboCalculator : MonoBehaviour
     [SerializeField] ActionAwake awake;
     [SerializeField] UnityEngine.Events.UnityEvent onComboIncremented;
     [SerializeField] UnityEvent_int onComboIncrementedInt;
+    [SerializeField] UnityEngine.Events.UnityEvent onReset;
     [Tooltip("覚醒アイテムの沸き数の大まかな値")]
     [SerializeField] int oneItemSpawnCount;
     [SerializeField,UnityEngine.Serialization.FormerlySerializedAs("amountsOfOneItem")] float[] awakeAddAmounts;
@@ -72,7 +77,9 @@ public class ComboCalculator : MonoBehaviour
     int attackedMortalsCount;
 
     bool IsInCombo { get => comboCount > 0; }
-    
+    private UnityEvent_int OnComboIncrementedInt { get => onComboIncrementedInt; }
+    public UnityEvent OnReset { get => onReset; }
+
     void Awake()
     {
         ResetCombo();
@@ -89,6 +96,8 @@ public class ComboCalculator : MonoBehaviour
         addedAmount = 0;
 
         attackedMortalsCount = 0;
+
+        onReset.Invoke();
     }
 
     public void IncrementCombo()
