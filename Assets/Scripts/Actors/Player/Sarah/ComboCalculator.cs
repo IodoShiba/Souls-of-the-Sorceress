@@ -50,7 +50,7 @@ public class ComboCalculator : MonoBehaviour
             for (int i = 0; i < comboToasts.Length; ++i)
             {
                 currentToastIndex = (currentToastIndex + 1) % comboToasts.Length;
-                if (comboToasts[currentToastIndex].gameObject.activeSelf)
+                if (!comboToasts[currentToastIndex].gameObject.activeSelf)
                 {
                     break;
                 }

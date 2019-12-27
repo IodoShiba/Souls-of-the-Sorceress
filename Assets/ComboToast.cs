@@ -16,7 +16,7 @@ public class ComboToast : MonoBehaviour
     const float extraDuration = 0.5f;
     const int showBGThreshold = 4;
     const float textBeatScale = 2f;
-    const float textBeatTime = 0.05f;
+    const float textBeatTime = .05f;
     const string format = "{0}<color=#BFBFBF><size=12>Hit</size></color>";
 
     [SerializeField] Color[] colors;
@@ -28,6 +28,7 @@ public class ComboToast : MonoBehaviour
     Vector3 textOriginalScale;
 
     Sequence bounceSeq;
+    Sequence beatSeq;
 
     Vector3 dest;
 
@@ -46,7 +47,7 @@ public class ComboToast : MonoBehaviour
         
         if(!IsInCombo && entireDuration == 0)
         {
-            gameObject.SetActive(false);
+            Disable();
         }
     }
 
@@ -69,7 +70,14 @@ public class ComboToast : MonoBehaviour
             bgImage.enabled = comboCount >= showBGThreshold;
 
             text.transform.localScale = textBeatScale * textOriginalScale;
-            text.transform.DOScale(textOriginalScale, textBeatTime);
+            if(beatSeq != null)
+            {
+                beatSeq.Kill();
+                beatSeq = null;
+            }
+            beatSeq = DOTween.Sequence();
+            beatSeq.Append(text.transform.DOScale(textOriginalScale, textBeatTime));
+            beatSeq.Play();
         }
 
     }
@@ -77,7 +85,11 @@ public class ComboToast : MonoBehaviour
     void Begin(in Vector2 initialPosition)
     {
         transform.position = ModifiedXY(transform.position, initialPosition);
-        if(bounceSeq != null) { bounceSeq.Kill(); }
+        if(bounceSeq != null)
+        {
+            bounceSeq.Kill();
+            bounceSeq = null;
+        }
         dest = transform.position + CircleRandom();
         bounceSeq = transform.DOJump(dest, jumpUpHeight, jumpCount, jumpDuration).SetEase(Ease.Linear);
         entireDuration = jumpDuration;
@@ -97,10 +109,21 @@ public class ComboToast : MonoBehaviour
         isInCombo = false;
     }
 
-    private void OnDisable()
+    void Disable()
     {
+        if (bounceSeq != null)
+        {
+            bounceSeq.Kill();
+            bounceSeq = null;
+        }
+        if (beatSeq != null)
+        {
+            beatSeq.Kill();
+            beatSeq = null;
+        }
         comboCount = 0;
         bgImage.enabled = false;
+        gameObject.SetActive(false);
     }
 }
 
