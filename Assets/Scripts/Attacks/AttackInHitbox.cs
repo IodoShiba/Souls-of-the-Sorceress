@@ -71,7 +71,8 @@ public class AttackInHitbox : MonoBehaviour
 
             attackConvertersOnHit.ForEach(acOnHit => acOnHit.Convert(convertedAttackData));
             //mortal.TryAttack(gameObject, this.ParamsConvertedByOwner, result => { HitProcess(); } );
-            mortal.TryAttack(owner, this.ParamsConvertedByOwner, transform.position - hit.gameObject.transform.position,
+            AttackData pco = this.ParamsConvertedByOwner;
+            mortal.TryAttack(owner, pco, transform.position - hit.gameObject.transform.position,
                 (isSuccess,subjectMortal)=> 
                 {
                     if (isSuccess) {
@@ -86,14 +87,7 @@ public class AttackInHitbox : MonoBehaviour
     {
         if (!this.Throughable)
         {
-            if (onceOnly)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                Inactivate();
-            }
+            End();
         }
     }
 
@@ -116,7 +110,7 @@ public class AttackInHitbox : MonoBehaviour
 
         SetDependentsEnable(true);
 
-        if (!(activeSpan<=0||float.IsInfinity(activeSpan)))
+        if (!(activeSpan <= 0 || float.IsInfinity(activeSpan))) 
         {
             StartCoroutine(Clock());
         }
@@ -139,7 +133,19 @@ public class AttackInHitbox : MonoBehaviour
             t += Time.deltaTime;
             yield return null;
         }
-        
+
+        End();
+    }
+
+    public static AttackInHitbox InstantiateThis(AttackInHitbox original, Vector3 position, Quaternion rotation, Mortal owner)
+    {
+        AttackInHitbox ins = Instantiate(original, position, rotation);
+        ins.owner = owner;
+        return ins;
+    }
+
+    void End()
+    {
         if (onceOnly)
         {
             Destroy(gameObject);
@@ -148,13 +154,6 @@ public class AttackInHitbox : MonoBehaviour
         {
             Inactivate();
         }
-    }
-
-    public static AttackInHitbox InstantiateThis(AttackInHitbox original, Vector3 position, Quaternion rotation, Mortal owner)
-    {
-        AttackInHitbox ins = Instantiate(original, position, rotation);
-        ins.owner = owner;
-        return ins;
     }
 }
 
