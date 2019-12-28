@@ -459,6 +459,7 @@ GameObject:
   - component: {fileID: 8916380848889061125}
   - component: {fileID: 7396359423064295611}
   - component: {fileID: 2407926265265643027}
+  - component: {fileID: 7789024607807329371}
   m_Layer: 20
   m_Name: Sarah
   m_TagString: Player
@@ -1014,6 +1015,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onHitstopGiven:
+    m_PersistentCalls:
+      m_Calls: []
   onHealthRecoveredCallbacks:
     m_PersistentCalls:
       m_Calls:
@@ -1209,6 +1213,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onComboIncrementedInt:
+    m_PersistentCalls:
+      m_Calls: []
+  onReset:
     m_PersistentCalls:
       m_Calls: []
   oneItemSpawnCount: 4
@@ -1624,6 +1631,19 @@ MonoBehaviour:
   positionerMulti: 0.3
   origin: {fileID: 8916380848889061178}
   audioSource: {fileID: 7396359423064295611}
+--- !u!114 &7789024607807329371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb81837d4e304fa47bbd6f19b8af1be5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6314495245485655847}
 --- !u!1 &8916380848891301890
 GameObject:
   m_ObjectHideFlags: 0
@@ -2665,7 +2685,7 @@ MonoBehaviour:
     knockBackImpulse: {x: 80, y: 10}
     attackCollider: {fileID: 8916380849465762222}
     throughable: 1
-    hitstopSpan: 0
+    hitstopSpan: 0.03
   awakenAttack:
     damage: 30
     knockBackImpulse: {x: 80, y: 10}

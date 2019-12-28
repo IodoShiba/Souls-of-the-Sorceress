@@ -9,7 +9,9 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
     protected override void Awake()
     {
         base.Awake();
-        GetComponent<Mortal>().OnAttackedCallbacks.AddListener((_) => { InterruptWith(Smashed); });
+        Mortal selfMortal = GetComponent<Mortal>();
+        selfMortal.OnAttackedCallbacks.AddListener((_) => { InterruptWith(Smashed); });
+        selfMortal.OnHitstopGiven.AddListener(Smashed.SetHitstopTime);
     }
 
     public abstract SmashedState Smashed { get; }
@@ -28,11 +30,12 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
 
         IodoShibaUtil.ManualUpdateClass.ManualClock clock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
         int originalLayer;
+        float hitstopSpan = 0;
 
         Mortal selfMortal = null;
         Mortal SelfMortal { get => selfMortal == null ? (selfMortal = GameObject.GetComponent<Mortal>()) : selfMortal; }
 
-        protected override bool ShouldCotinue() => clock.Clock < stateSpan;
+        protected override bool ShouldCotinue() => clock.Clock < stateSpan + hitstopSpan;
         protected override void OnInitialize()
         {
             if (!disallowCross)
@@ -61,6 +64,10 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
             }
             clock.Reset();
             if (horizontalMove != null) { horizontalMove.Use = true; }
+        }
+        public void SetHitstopTime(float time)
+        {
+            hitstopSpan = time;
         }
     }
 

@@ -36,6 +36,7 @@ public class AttackInHitbox : MonoBehaviour
     public bool IsAttackActive { get => isAttackActive; }
 
     private float realActiveSpan;
+    private float extraSpan = 0;
     private AttackData convertedAttackData;
 
     public void AddConverter(AttackConverter item) { attackConvertersOnActivate.Add(item); }
@@ -76,6 +77,8 @@ public class AttackInHitbox : MonoBehaviour
                 (isSuccess,subjectMortal)=> 
                 {
                     if (isSuccess) {
+                        SetExtraSpan(pco.hitstopSpan);
+                        if (owner != null) { owner.GiveHitstop(pco.hitstopSpan); }
                         onAttackSucceeded.Invoke();
                         onAttackSucceededMortal.Invoke(subjectMortal);
                     }
@@ -127,14 +130,24 @@ public class AttackInHitbox : MonoBehaviour
     
     IEnumerator Clock()
     {
-        float t = 0;
         realActiveSpan = activeSpan;
-        while (t < realActiveSpan) {
-            t += Time.deltaTime;
+        float t = realActiveSpan;
+        while (0 < t) {
+            extraSpan -= Time.deltaTime;
+            if (extraSpan < 0)
+            {
+                t += extraSpan;
+                extraSpan = 0;
+            }
             yield return null;
         }
 
         End();
+    }
+
+    void SetExtraSpan(float time)
+    {
+        extraSpan = time;
     }
 
     public static AttackInHitbox InstantiateThis(AttackInHitbox original, Vector3 position, Quaternion rotation, Mortal owner)
