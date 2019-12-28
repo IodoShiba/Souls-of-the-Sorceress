@@ -458,9 +458,10 @@ namespace ActorSarah
             {
                 base.OnInitialize();
 
-                retuenSlashAttack.Activate();
                 ConnectorSarah.SelfRigidbody.velocity = Vector2.zero;
                 ConnectorSarah.SelfRigidbody.AddForce(jumpUpImpulse, ForceMode2D.Impulse);
+
+                retuenSlashAttack.Activate();
 
                 //試験的な部分 方向キー入力中に斬撃入力で前進しながら攻撃
                 ProceedOnAttack();

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 2676481591472195364}
   - component: {fileID: 6534074606263859062}
   - component: {fileID: 578741768302634357}
+  - component: {fileID: 7419161819138681816}
   m_Layer: 24
   m_Name: Enemy Element
   m_TagString: Enemy
@@ -180,6 +181,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   onAttackedCallbacks:
+    m_PersistentCalls:
+      m_Calls: []
+  onHitstopGiven:
     m_PersistentCalls:
       m_Calls: []
   onHealthRecoveredCallbacks:
@@ -356,6 +360,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootTable: {fileID: 11400000, guid: 468a388555488f14ea66d2086f83d7f5, type: 2}
+--- !u!114 &7419161819138681816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964724003723573768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb81837d4e304fa47bbd6f19b8af1be5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6534074606263859062}
 --- !u!1 &6892453230369058321
 GameObject:
   m_ObjectHideFlags: 0

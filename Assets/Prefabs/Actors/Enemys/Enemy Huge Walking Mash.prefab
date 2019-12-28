@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 8247132018131030470}
   - component: {fileID: 4246921619872684887}
   - component: {fileID: 4246921619872684886}
+  - component: {fileID: 8853671297280105418}
   m_Layer: 24
   m_Name: Enemy Huge Walking Mash
   m_TagString: Enemy
@@ -371,6 +372,9 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   onAttackedCallbacks:
+    m_PersistentCalls:
+      m_Calls: []
+  onHitstopGiven:
     m_PersistentCalls:
       m_Calls: []
   onHealthRecoveredCallbacks:
@@ -539,6 +543,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootTable: {fileID: 11400000, guid: 2ccc71dcf3b6649489326ecc83161bab, type: 2}
+--- !u!114 &8853671297280105418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4246921619872684885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb81837d4e304fa47bbd6f19b8af1be5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5245247685816165197}
 --- !u!1 &8493886523349911965
 GameObject:
   m_ObjectHideFlags: 0

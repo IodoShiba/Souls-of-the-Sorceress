@@ -35,6 +35,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     }
 
     [System.Serializable] public class UnityEvent_Mortal : UnityEngine.Events.UnityEvent<Mortal> { }
+    [System.Serializable] public class UnityEvent_float : UnityEngine.Events.UnityEvent<float> { }
 
     private const float impulseMultiplyer = 0.025f;
     [SerializeField] protected float health;
@@ -42,6 +43,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     [SerializeField] private  bool isInvulnerable;
     [SerializeField] UnityEngine.Events.UnityEvent dyingCallbacks;
     [SerializeField] public UnityEvent_Mortal onAttackedCallbacks; //Though this field is public, do not refer this field directly because it is just to avoid the UnityEvent Bug.
+    [SerializeField] private UnityEvent_float onHitstopGiven;
     [SerializeField] UnityEngine.Events.UnityEvent onHealthRecoveredCallbacks;
     [SerializeField] UnityEngine.Events.UnityEvent onInvinsibleTimeOver;
     [SerializeField] UnityEngine.Events.UnityEvent onDestroy;
@@ -68,6 +70,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         set => isInvulnerable = value;
     }
     public bool IsInvincible { get => invincibleOrderedCount > 0; }
+    public UnityEvent_float OnHitstopGiven { get => onHitstopGiven; }
 
     protected virtual void Awake()
     {
@@ -179,6 +182,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
                 ForceMode2D.Impulse); //ノックバックを与える
 
             //ヒットストップを与える（未実装）
+            GiveHitstop(result.hitstopSpan);
 
             OnAttackedCallbacks.Invoke(mainAttackInfo.attacker);//被攻撃時のコールバック関数を呼び出し
             for(int i = 0; i < dealtAttackCount; ++i)
@@ -214,6 +218,11 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     public void OrderInvincible(float time)
     {
         StartCoroutine(OrderInvincibleImple(time));
+    }
+
+    public void GiveHitstop(float time)
+    {
+        OnHitstopGiven.Invoke(time);
     }
 
     IEnumerator OrderInvincibleImple(float time)
