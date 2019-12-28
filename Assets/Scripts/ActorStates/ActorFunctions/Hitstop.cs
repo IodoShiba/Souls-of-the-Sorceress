@@ -13,7 +13,7 @@ namespace ActorFunction
         float rb2dAngvel;
         [SerializeField] Animator animator;
 
-        int coSemaphore = 0;
+        RigidbodyConstraints2D defaultConstraints;
 
         bool isInHitstop = false;
         public bool IsInHitstop
@@ -57,13 +57,16 @@ namespace ActorFunction
                         {
                             rb2dVel = rb2d.velocity;
                             rb2dAngvel = rb2d.angularVelocity;
+                            defaultConstraints = rb2d.constraints;
+                            rb2d.constraints = defaultConstraints | RigidbodyConstraints2D.FreezePosition;
                         }
                         else
                         {
                             rb2d.velocity = rb2dVel;
                             rb2d.angularVelocity = rb2dAngvel;
+                            rb2d.constraints = defaultConstraints;
                         }
-                        rb2d.simulated = !isA;
+                        //rb2d.simulated = !isA;
                     };
             }
             if (animator != null)

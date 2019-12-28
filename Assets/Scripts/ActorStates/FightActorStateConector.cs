@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 
 [RequireComponent(typeof(Mortal))]
+[RequireComponent(typeof(ActorFunction.Hitstop))]
 public abstract class FightActorStateConector : ActorState.ActorStateConnector
 {
     private bool bearAgainstAttack = false;
