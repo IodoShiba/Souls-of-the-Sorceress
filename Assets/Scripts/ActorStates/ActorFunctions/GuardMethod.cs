@@ -66,7 +66,7 @@ namespace ActorFunction
             /// </summary>
             private void ResetSucceedState() { isAllSucceed = true; }
 
-            public bool GetIsAllSucceedAndReset() { bool ret = isAllSucceed; ResetSucceedState();return ret; }
+            public bool GetIsAllSucceedAndReset() { bool ret = isAllSucceed; ResetSucceedState(); return ret; }
         }
 
     }

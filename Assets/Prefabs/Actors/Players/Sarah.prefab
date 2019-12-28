@@ -459,6 +459,7 @@ GameObject:
   - component: {fileID: 8916380848889061125}
   - component: {fileID: 7396359423064295611}
   - component: {fileID: 2407926265265643027}
+  - component: {fileID: 7789024607807329371}
   m_Layer: 20
   m_Name: Sarah
   m_TagString: Player
@@ -1014,6 +1015,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onHitstopGiven:
+    m_PersistentCalls:
+      m_Calls: []
   onHealthRecoveredCallbacks:
     m_PersistentCalls:
       m_Calls:
@@ -1627,6 +1631,19 @@ MonoBehaviour:
   positionerMulti: 0.3
   origin: {fileID: 8916380848889061178}
   audioSource: {fileID: 7396359423064295611}
+--- !u!114 &7789024607807329371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb81837d4e304fa47bbd6f19b8af1be5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 6314495245485655847}
 --- !u!1 &8916380848891301890
 GameObject:
   m_ObjectHideFlags: 0
@@ -2056,19 +2073,19 @@ MonoBehaviour:
     knockBackImpulse: {x: 500, y: 0}
     attackCollider: {fileID: 8916380848965055379}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0
   awakenAttack:
     damage: 10
     knockBackImpulse: {x: 500, y: 0}
     attackCollider: {fileID: 8916380848965055387}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0
   blueAwakenAttack:
     damage: 15
     knockBackImpulse: {x: 500, y: 0}
     attackCollider: {fileID: 8916380848965055386}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0
 --- !u!114 &8916380848965055384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2405,19 +2422,19 @@ MonoBehaviour:
     knockBackImpulse: {x: 50, y: 10}
     attackCollider: {fileID: 8916380849248469455}
     throughable: 1
-    hitstopSpan: 1
+    hitstopSpan: 0.05
   awakenAttack:
     damage: 30
     knockBackImpulse: {x: 50, y: 10}
     attackCollider: {fileID: 8916380849248469460}
     throughable: 1
-    hitstopSpan: 0.5
+    hitstopSpan: 0.05
   blueAwakenAttack:
     damage: 30
     knockBackImpulse: {x: 50, y: 10}
     attackCollider: {fileID: 8916380849248469451}
     throughable: 1
-    hitstopSpan: 0.5
+    hitstopSpan: 0.05
 --- !u!114 &8916380849248469449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2668,19 +2685,19 @@ MonoBehaviour:
     knockBackImpulse: {x: 80, y: 10}
     attackCollider: {fileID: 8916380849465762222}
     throughable: 1
-    hitstopSpan: 1
+    hitstopSpan: 0.05
   awakenAttack:
     damage: 30
     knockBackImpulse: {x: 80, y: 10}
     attackCollider: {fileID: 8916380849465762218}
     throughable: 1
-    hitstopSpan: 0.5
+    hitstopSpan: 0.05
   blueAwakenAttack:
     damage: 30
     knockBackImpulse: {x: 80, y: 10}
     attackCollider: {fileID: 8916380849465762217}
     throughable: 1
-    hitstopSpan: 0.5
+    hitstopSpan: 0.05
 --- !u!114 &8916380849465762211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2943,19 +2960,19 @@ MonoBehaviour:
     knockBackImpulse: {x: 0, y: -500}
     attackCollider: {fileID: 8916380849515846537}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0.05
   awakenAttack:
     damage: 30
     knockBackImpulse: {x: 0, y: -500}
     attackCollider: {fileID: 8916380849515846550}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0.05
   blueAwakenAttack:
     damage: 50
     knockBackImpulse: {x: 0, y: -500}
     attackCollider: {fileID: 8916380849515846549}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0.05
 --- !u!114 &8916380849515846539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3684,19 +3701,19 @@ MonoBehaviour:
     knockBackImpulse: {x: 70, y: 10}
     attackCollider: {fileID: 8916380850370461327}
     throughable: 1
-    hitstopSpan: 1
+    hitstopSpan: 0.05
   awakenAttack:
     damage: 30
     knockBackImpulse: {x: 70, y: 10}
     attackCollider: {fileID: 8916380850370461332}
     throughable: 1
-    hitstopSpan: 0.5
+    hitstopSpan: 0.05
   blueAwakenAttack:
     damage: 30
     knockBackImpulse: {x: 70, y: 10}
     attackCollider: {fileID: 8916380850370461323}
     throughable: 1
-    hitstopSpan: 0.5
+    hitstopSpan: 0.05
 --- !u!114 &8916380850370461321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3916,19 +3933,19 @@ MonoBehaviour:
     knockBackImpulse: {x: 20, y: 700}
     attackCollider: {fileID: 8916380850513594286}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0
   awakenAttack:
     damage: 15
     knockBackImpulse: {x: 20, y: 700}
     attackCollider: {fileID: 8916380850513594282}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0
   blueAwakenAttack:
     damage: 20
     knockBackImpulse: {x: 20, y: 700}
     attackCollider: {fileID: 8916380850513594281}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0
 --- !u!114 &8916380850513594275
 MonoBehaviour:
   m_ObjectHideFlags: 0
