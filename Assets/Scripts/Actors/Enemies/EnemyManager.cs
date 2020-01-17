@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 [DisallowMultipleComponent]
 public class EnemyManager : MonoBehaviour {
+
+    public const float ANIMATION_LENGTH = -1f;
 
     private List<Enemy> enemies = new List<Enemy>();
     private int aliveCount;
@@ -45,12 +48,27 @@ public class EnemyManager : MonoBehaviour {
         StartCoroutine( RemoveDead() );
     }
 
-    public Enemy Summon(Enemy target,Vector3 position,Quaternion quaternion)
+    public Enemy Summon(Enemy target,Vector3 position,Quaternion quaternion, AnimationClip summonEffect = null, float summonDelayTime = ANIMATION_LENGTH)
     {
-        var r = Instantiate(target, position, quaternion);
-        r.manager = this;
-        AddNewEnemy(r);
-        return r;
+        if (summonEffect == null)
+        {
+            var r = Instantiate(target, position, quaternion);
+            r.manager = this;
+            AddNewEnemy(r);
+            return r;
+        }
+        else
+        {
+            float realSummonDelayTime = summonDelayTime >= 0 ? summonDelayTime : summonEffect.length;
+            var r = Instantiate(target, position, quaternion);
+            r.manager = this;
+            r.gameObject.SetActive(false);
+            EffectAnimationManager.Play(summonEffect, position);
+            AddNewEnemy(r);
+            UniRx.Observable
+                .Timer(System.TimeSpan.FromSeconds(realSummonDelayTime)).Subscribe(_ => r.gameObject.SetActive(true));
+            return r;
+        }
     }
 
     public void AddNewEnemy(Enemy enemy)

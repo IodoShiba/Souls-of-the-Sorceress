@@ -51,25 +51,9 @@ namespace ActorFunction
                             );
                     summonRelPos = new Vector3(summonRelPos.x * dirSign, summonRelPos.y);
 
-                    float realSummonDelayTime = 0;
-
-                    if (fields.summonEffect != null) 
-                    {
-                        EffectAnimationManager.Play(fields.summonEffect, transform.position);
-                        realSummonDelayTime = fields.useSummonDelay ? fields.summonDelayTime : fields.summonEffect.length;
-                    }
-
-                    if (realSummonDelayTime > 0)
-                    {
-                        Enemy selected = SelectEnemy(fields);
-                        UniRx.Observable
-                            .Timer(System.TimeSpan.FromSeconds(realSummonDelayTime))
-                            .Subscribe(_ => _manager.Summon(selected, transform.position + summonRelPos, Quaternion.identity));
-                    }
-                    else
-                    {
-                        _manager.Summon(SelectEnemy(fields), transform.position + summonRelPos, Quaternion.identity);
-                    }
+                    _manager.Summon(SelectEnemy(fields), transform.position + summonRelPos, Quaternion.identity,
+                        fields.summonEffect, fields.useSummonDelay ? fields.summonDelayTime : EnemyManager.ANIMATION_LENGTH);
+                    
                 }
             }
 
