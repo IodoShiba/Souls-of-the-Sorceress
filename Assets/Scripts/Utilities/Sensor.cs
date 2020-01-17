@@ -83,14 +83,7 @@ public class Sensor : MonoBehaviour,ISerializationCallbackReceiver
 
     public void ForceUpdate()
     {
-        foreach(var c in detected)
-        {
-            if(c == null)
-            {
-                detected.Remove(c);
-                detectCount = detected.Count;
-            }
-        }
+        detected.RemoveWhere(c => c == null); 
         //string log = "ForceUpdate\n";
 
         //Collider2D collider = this.collider;
