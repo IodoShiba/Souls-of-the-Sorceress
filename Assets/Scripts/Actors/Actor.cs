@@ -11,6 +11,7 @@ using UnityEngine.Events;
 public class Actor : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdate
 {
     //[SerializeField] UnityEngine.Events.UnityEvent onAttacked;
+    [SerializeField] bool ignoreActiveReign;
 
     private ActorManager manager;
 
@@ -41,6 +42,7 @@ public class Actor : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdate
 
     //public UnityEvent OnAttacked { get => onAttacked; }
     public int DirSign { get => dirSign; }
+    public bool IgnoreActiveReign { get => ignoreActiveReign; }
 
     private void Start()
     {
