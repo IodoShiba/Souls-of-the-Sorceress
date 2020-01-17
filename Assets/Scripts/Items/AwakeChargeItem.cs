@@ -7,6 +7,7 @@ public class AwakeChargeItem : ItemBase
 {
     [SerializeField] float amount;
     [SerializeField] float approachingForce;
+    [SerializeField] float drag;
     [SerializeField] float startApproachTime;
     [SerializeField] SpriteRenderer renderer;
     [SerializeField] Rigidbody2D rigidbody;
@@ -25,7 +26,7 @@ public class AwakeChargeItem : ItemBase
         }
         if(lifeTime > startApproachTime && ActorManager.PlayerActor != null && approachingForce != 0)
         {
-            rigidbody.AddForce(approachingForce * ((Vector2)(ActorManager.PlayerActor.transform.position - transform.position)).normalized);
+            rigidbody.AddForce(approachingForce * ((Vector2)(ActorManager.PlayerActor.transform.position - transform.position)).normalized - drag * rigidbody.velocity);
         }
         lifeTime += Time.fixedDeltaTime;
     }
