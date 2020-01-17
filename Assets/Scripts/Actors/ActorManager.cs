@@ -7,6 +7,8 @@ public class ActorManager : MonoBehaviour
 {
     const float REIGN_MARGIN = 0.2f;
 
+    [SerializeField] bool keepInvisibleActorActive;
+
     HashSet<Actor> actors = new HashSet<Actor>();
 
     static ActorManager instance;
@@ -53,7 +55,7 @@ public class ActorManager : MonoBehaviour
                     a.ManualUpdate();
                 }
 
-                if (a.IgnoreActiveReign) { continue; }
+                if (keepInvisibleActorActive || a.IgnoreActiveReign) { continue; }
 
                 bool isToBeActivated = activeReign.Contains(a.transform.position);
                 if (a.gameObject.activeSelf != isToBeActivated)

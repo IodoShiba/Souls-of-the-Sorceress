@@ -815,6 +815,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1107197504}
+        m_MethodName: EliminateAllEnemies
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onAttackedCallbacks:
     m_PersistentCalls:
       m_Calls: []
@@ -1208,6 +1219,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7457400105786499165, guid: ed6649e14a4e53345afeb85aed4f4e98,
+        type: 3}
+      propertyPath: keepInvisibleActorActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8846357498839132271, guid: ed6649e14a4e53345afeb85aed4f4e98,
         type: 3}
@@ -3218,6 +3234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d4c1c480dfcd2b489bfa7155b61bbc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreActiveReign: 0
 --- !u!50 &1200558863
 Rigidbody2D:
   serializedVersion: 4
@@ -5204,6 +5221,9 @@ MonoBehaviour:
         randomRange: {x: 16, y: 3}
       - position: {x: 0, y: 1.5}
         randomRange: {x: 16, y: 3}
+      summonEffect: {fileID: 0}
+      useSummonDelay: 0
+      summonDelayTime: 0
       directionable: {fileID: 0}
 --- !u!114 &1311982144
 MonoBehaviour:

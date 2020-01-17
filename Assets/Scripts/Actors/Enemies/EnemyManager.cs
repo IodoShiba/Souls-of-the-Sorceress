@@ -91,5 +91,13 @@ public class EnemyManager : MonoBehaviour {
             f();
         }
     }
+
+    public void EliminateAllEnemies()
+    {
+        for(int i = enemies.Count - 1; i >= 0; --i)
+        {
+            enemies[i].Suicide();
+        }
+    }
     
 }

@@ -225,6 +225,13 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         OnHitstopGiven.Invoke(time);
     }
 
+    public void Suicide()
+    {
+        health = 0;
+        dyingCallbacks.Invoke();
+        OnDying(new DealtAttackInfo(this,new AttackData(), Vector2.zero, (_,_0)=> { }));
+    }
+
     IEnumerator OrderInvincibleImple(float time)
     {
         if(invincibleOrderedCount == 0)
