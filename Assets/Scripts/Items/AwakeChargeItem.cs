@@ -32,7 +32,6 @@ public class AwakeChargeItem : ItemBase
 
     public void Activate(in Vector2 position,in Vector2 velocity, float chargeAmount)
     {
-        Debug.Log(velocity);
         transform.position = Vector2DUtilityClass.ModifiedXY(transform.position, position);
         float size = GetSize(chargeAmount);
         transform.localScale = new Vector3(size, size, 1);

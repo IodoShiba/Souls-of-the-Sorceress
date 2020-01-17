@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
 
 namespace ActorFunction
 {
@@ -23,6 +24,9 @@ namespace ActorFunction
 
         [SerializeField] List<SubjectAndWeight> targets;
         [SerializeField] List<SummonPositionParameter> summonPositions;
+        [SerializeField] AnimationClip summonEffect;
+        [SerializeField] bool useSummonDelay;
+        [SerializeField] float summonDelayTime;
         [SerializeField] ActorFunction.Directionable directionable;
 
 
@@ -47,9 +51,25 @@ namespace ActorFunction
                             );
                     summonRelPos = new Vector3(summonRelPos.x * dirSign, summonRelPos.y);
 
-                    _manager.Summon(SelectEnemy(fields),//fields.targetPrefab,
-                        transform.position + summonRelPos,
-                        Quaternion.identity);
+                    float realSummonDelayTime = 0;
+
+                    if (fields.summonEffect != null) 
+                    {
+                        EffectAnimationManager.Play(fields.summonEffect, transform.position);
+                        realSummonDelayTime = fields.useSummonDelay ? fields.summonDelayTime : fields.summonEffect.length;
+                    }
+
+                    if (realSummonDelayTime > 0)
+                    {
+                        Enemy selected = SelectEnemy(fields);
+                        UniRx.Observable
+                            .Timer(System.TimeSpan.FromSeconds(realSummonDelayTime))
+                            .Subscribe(_ => _manager.Summon(selected, transform.position + summonRelPos, Quaternion.identity));
+                    }
+                    else
+                    {
+                        _manager.Summon(SelectEnemy(fields), transform.position + summonRelPos, Quaternion.identity);
+                    }
                 }
             }
 
