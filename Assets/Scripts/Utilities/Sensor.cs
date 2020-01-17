@@ -84,32 +84,5 @@ public class Sensor : MonoBehaviour,ISerializationCallbackReceiver
     public void ForceUpdate()
     {
         detected.RemoveWhere(c => c == null); 
-        //string log = "ForceUpdate\n";
-
-        //Collider2D collider = this.collider;
-        //Collider2D[] overlapRes = new Collider2D[MAX_DETECT];
-        //for (int i = 0; i < overlapRes.Length; ++i)
-        //{
-        //    overlapRes[i] = null;
-        //}
-        //ContactFilter2D contactFilter = new ContactFilter2D();
-        //contactFilter.layerMask.value = LayerMask.NameToLayer("Enemys");
-        //contactFilter.useTriggers = true;
-
-        //log += "overlap:";
-
-        //detectCount = UnityEngine.Physics2D.OverlapCollider(collider, contactFilter, overlapRes);
-        //Debug.Log(detectCount);
-        //for (int i = 0; i < overlapRes.Length; ++i)
-        //{
-        //    if (overlapRes[i] != null && IsTarget(overlapRes[i]))
-        //    {
-        //        log += overlapRes[i].name + ',';
-        //        Debug.Log(detectCount);
-        //        overlapRes[i] = null;
-        //    }
-        //}
-
-        //Debug.Log(log);
     }
 }
