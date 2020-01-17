@@ -448,7 +448,6 @@ namespace ActorSarah
         {
             [SerializeField] AttackInHitbox retuenSlashAttack;
             [SerializeField] float receptionStartTime;
-            [SerializeField] Vector2 jumpUpImpulse;
             [SerializeField] Rigidbody2D selfRigidBody;
             [SerializeField] Umbrella umbrella;
             IodoShibaUtil.ManualUpdateClass.ManualClock receptionStartClock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
@@ -459,7 +458,6 @@ namespace ActorSarah
                 base.OnInitialize();
 
                 ConnectorSarah.SelfRigidbody.velocity = Vector2.zero;
-                ConnectorSarah.SelfRigidbody.AddForce(jumpUpImpulse, ForceMode2D.Impulse);
 
                 retuenSlashAttack.Activate();
 
