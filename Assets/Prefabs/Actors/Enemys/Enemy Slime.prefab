@@ -178,7 +178,7 @@ MonoBehaviour:
   activeSpan: Infinity
   attackDataPrototype:
     damage: 10
-    knockBackImpulse: {x: 300, y: 20}
+    knockBackImpulse: {x: 600, y: 200}
     attackCollider: {fileID: 2495217448542571004}
     throughable: 1
     hitstopSpan: 0
@@ -347,6 +347,9 @@ MonoBehaviour:
   onAttackedCallbacks:
     m_PersistentCalls:
       m_Calls: []
+  onHitstopGiven:
+    m_PersistentCalls:
+      m_Calls: []
   onHealthRecoveredCallbacks:
     m_PersistentCalls:
       m_Calls: []
@@ -448,6 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ai: {fileID: 2495217448702265939}
+  _currentStateName: 
   slimeDefault:
     gameObject: {fileID: 2495217448702265942}
     connector: {fileID: 5953425717815938300}
