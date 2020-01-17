@@ -5,6 +5,8 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class ActorManager : MonoBehaviour
 {
+    const float REIGN_MARGIN = 0.2f;
+
     HashSet<Actor> actors = new HashSet<Actor>();
 
     static ActorManager instance;
@@ -36,11 +38,29 @@ public class ActorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach(var a in actors)
+        Camera mainCam = Camera.main;
+        Vector2 mainCamPos = mainCam.transform.position;
+        Vector2 size = new Vector2(mainCam.orthographicSize * mainCam.aspect * (1 + REIGN_MARGIN), mainCam.orthographicSize * (1 + REIGN_MARGIN));
+        Rect activeReign = new Rect(mainCamPos.x - size.x, mainCamPos.y - size.y, 2 * size.x, 2 * size.y);
+
+        foreach (var a in actors)
         {
             if (a == null) { continue; }
-            a.ManualUpdate();
-            
+            else
+            {
+                if (a.gameObject.activeSelf && a.enabled)
+                {
+                    a.ManualUpdate();
+                }
+
+                if (a.IgnoreActiveReign) { continue; }
+
+                bool isToBeActivated = activeReign.Contains(a.transform.position);
+                if (a.gameObject.activeSelf != isToBeActivated)
+                {
+                    a.gameObject.SetActive(isToBeActivated);
+                }
+            }
         }
     }
 
