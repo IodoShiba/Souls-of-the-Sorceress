@@ -71,11 +71,11 @@ namespace ActorSarah
         {
 
             ConnectStateFromDefault(
-                () => !groundSensor.IsOnGround && commands.AnalogueDown.Evaluation && commands.Attack.IsDown,//commands.DownAttackMultiPush.IsDown,
+                () => !groundSensor.IsOnGround && commands.AnalogueDown.Evaluation && commands.Attack.IsDown,
                 dropAttack);
 
             ConnectStateFromDefault(
-                () => groundSensor.IsOnGround && commands.UpAttackMultiPush.IsDown,//commands.AnalogueUp.Evaluation && commands.Attack.IsDown,
+                () => groundSensor.IsOnGround && commands.UpAttackMultiPush.IsDown,
                 risingAttack);
 
             ConnectStateFromDefault(
@@ -86,7 +86,7 @@ namespace ActorSarah
             ConnectStateFromDefault(
                 proceedFunc =
                 (tripleSlashAttackStream = new ChainAttackStream(.4f, true, new ActorState[] { verticalSlash, returnSlash, smashSlash }))
-                .ProceedsWhen(() => groundSensor.IsOnGround &&
+                .ProceedsWhen(() => groundSensor.IsOnGround && !actionAwake.IsActive &&
                                     (commands.Attack.IsDown || (tripleSlashAttackStream.NextIndex() == 0 && attackLongPushClock.FinallyPushedTime > 0)) &&
                                     !sarahDefault.currentState.Equals(SarahDefault.StateInDefaultNum.IsInAir) &&
                                     !sarahDefault.currentState.Equals(SarahDefault.StateInDefaultNum.IsOnLanding)
@@ -96,6 +96,7 @@ namespace ActorSarah
             ConnectState(tripleSlashAttackStream.ProceedsWhen(
                 () => (groundSensor.IsOnGround || tripleSlashAttackStream.IsRecepting) && commands.Attack.IsDown),
                 returnSlash);
+            ConnectStateFromDefault(() => groundSensor.IsOnGround && actionAwake.IsActive && commands.Attack.IsDown, smashSlash);
 
             ConnectStateFromDefault(
                 () => groundSensor.IsOnGround && commands.OpenUmbrella.Evaluation,
