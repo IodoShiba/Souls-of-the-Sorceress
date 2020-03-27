@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3203779314170762677
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 964724003723573768, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_Name
+      value: Enemy Element Vertical
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573774, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 41.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573774, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573774, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573774, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573774, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573774, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573774, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573774, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573774, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573774, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573774, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: maxChaseGap.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: maxChaseGap.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: minChaseGap.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: minChaseGap.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573775, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573775, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573775, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3400861851107116815, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: elementDefault.velocityAdjuster.fields.velocity.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3400861851107116815, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: elementDefault.velocityAdjuster.fields.velocity.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3400861851107116815, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: elementDefault.velocityAdjuster.fields.maxForce.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3400861851107116815, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: elementDefault.velocityAdjuster.fields.maxForce.y
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3400861851107116815, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: elementDefault.moveSpeedX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3400861851107116815, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: elementDefault.moveSpeedY
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}

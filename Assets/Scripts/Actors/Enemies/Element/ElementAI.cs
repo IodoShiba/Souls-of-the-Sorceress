@@ -4,8 +4,8 @@ using static System.Math;
 public class ElementAI : AI
 {
     [SerializeField] float shootCycle;
-    [SerializeField] float maxChaseGap;
-    [SerializeField] float minChaseGap;
+    [SerializeField] Vector2 maxChaseGap;
+    [SerializeField] Vector2 minChaseGap;
     [SerializeField] Player player;
     [SerializeField] ShootBullet _shootBullet;
     float t = 0;
@@ -14,14 +14,14 @@ public class ElementAI : AI
     //ShootBullet shootBullet;
 
     int moveSign = 0;
+    Vector2Int moveSigns;
     Vector2 shoot = Vector2.zero;
 
-    public int MoveSign { get => moveSign; }
+    public Vector2Int MoveSigns { get => moveSigns; }
     public Vector2 ShootDirection { get => shoot;  }
 
     private void Awake()
     {
-
         ResetOutputs();
     }
 
@@ -30,9 +30,11 @@ public class ElementAI : AI
         Vector2 d = player.transform.position - transform.position;
         ResetOutputs();
 
-        if (minChaseGap < Abs(d.x) && Abs(d.x) < maxChaseGap) 
+        if (minChaseGap.x < Abs(d.x) && Abs(d.x) < maxChaseGap.x && minChaseGap.y < Abs(d.y) && Abs(d.y) < maxChaseGap.y) 
         {
             moveSign = System.Math.Sign(d.x);
+            moveSigns = new Vector2Int(System.Math.Sign(d.x), System.Math.Sign(d.y));
+
             if(t > shootCycle)
             {
                 shoot = d.normalized;
@@ -47,6 +49,7 @@ public class ElementAI : AI
     void ResetOutputs()
     {
         moveSign = 0;
+        moveSigns = Vector2Int.zero;
         shoot = Vector2.zero;
     }
 }
