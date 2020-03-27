@@ -21,12 +21,12 @@ public class PlayerHealthViewer : Player.Viewer
         {
             if(value && !isInDanger)
             {
-                dangerImage.gameObject.SetActive(true);
-                audioSource.PlayOneShot(dangerClip);
+                if(dangerImage != null) dangerImage.gameObject.SetActive(true);
+                if (audioSource != null) audioSource.PlayOneShot(dangerClip);
             }
             if(!value && isInDanger)
             {
-                dangerImage.gameObject.SetActive(false);
+                if (dangerImage != null) dangerImage.gameObject.SetActive(false); // ワイへ コンポーネントを濫用すんな ワイより
             }
             isInDanger = value;
         }
