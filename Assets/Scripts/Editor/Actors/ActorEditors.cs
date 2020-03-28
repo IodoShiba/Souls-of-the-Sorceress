@@ -38,3 +38,8 @@ public class AscSlimeEditor : ActorStateConectorEditor
 public class AscBossTitanEditor : ActorStateConectorEditor
 {
 }
+
+[UnityEditor.CustomEditor(typeof(ActorBomb.AscBomb))]
+public class AscBombEditor : ActorStateConectorEditor
+{
+}

@@ -43,6 +43,7 @@ namespace ActorEnemyElement {
         private class ElementDefault : DefaultState
         {
             [SerializeField] float moveSpeedX;
+            [SerializeField] float moveSpeedY;
             [SerializeField] ActorFunction.VelocityAdjuster velocityAdjuster;
             [SerializeField] ShootBullet shootBullet;
 
@@ -57,7 +58,8 @@ namespace ActorEnemyElement {
             }
             protected override void OnActive()
             {
-                velocityAdjuster.Fields.Velocity = ConnectorElem.ai.MoveSign * moveSpeedX * Vector2.right;
+                Vector2Int ms = ConnectorElem.ai.MoveSigns;
+                velocityAdjuster.Fields.Velocity = new Vector2( ms.x * moveSpeedX, ms.y * moveSpeedY);
                 velocityAdjuster.ManualUpdate();
 
                 Vector2 shootDirection = ConnectorElem.ai.ShootDirection;
