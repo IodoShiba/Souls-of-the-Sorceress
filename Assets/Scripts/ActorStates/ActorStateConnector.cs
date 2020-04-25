@@ -87,6 +87,8 @@ public class ActorState
         public bool InterruptWith(ActorState actorState)
         {
             if (current.IsResistibleTo(actorState.GetType())) { return false; }
+            actorState.connector = this;
+            actorState.gameObject = gameObject;
             ChangeState(actorState,false);
             return true;
         }
