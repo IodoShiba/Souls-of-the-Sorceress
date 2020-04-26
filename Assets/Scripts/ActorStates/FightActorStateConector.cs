@@ -11,7 +11,7 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
     {
         base.Awake();
         Mortal selfMortal = GetComponent<Mortal>();
-        selfMortal.OnAttackedCallbacks.AddListener((_) => { InterruptWith(Smashed); });
+        //selfMortal.OnAttackedCallbacks.AddListener((_) => { InterruptWith(Smashed); });
         selfMortal.OnHitstopGiven.AddListener(Smashed.SetHitstopTime);
     }
 

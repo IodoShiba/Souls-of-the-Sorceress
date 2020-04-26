@@ -81,6 +81,8 @@ public class AttackInHitbox : MonoBehaviour
                         if (owner != null) { owner.GiveHitstop(pco.hitstopSpan); }
                         onAttackSucceeded.Invoke();
                         onAttackSucceededMortal.Invoke(subjectMortal);
+                        var fasc = subjectMortal.Actor.FightAsc;
+                        fasc.InterruptWith(fasc.Smashed);
                     }
                 });
             HitProcess();

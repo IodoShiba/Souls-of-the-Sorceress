@@ -17,6 +17,8 @@ public class Actor : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdate
 
     System.Action stateConnectorUpdate;
     System.Action mortalUpdate;
+    FightActorStateConector _fasc;
+    Mortal _mortal;
 
     int dirSign = 1;
 
@@ -43,12 +45,14 @@ public class Actor : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdate
     //public UnityEvent OnAttacked { get => onAttacked; }
     public int DirSign { get => dirSign; }
     public bool IgnoreActiveReign { get => ignoreActiveReign; }
+    public Mortal Mortal { get => _mortal; }
+    public FightActorStateConector FightAsc { get => _fasc; }
 
     private void Start()
     {
         Manager.RegisterActor(this);
-        stateConnectorUpdate = GetComponent<ActorState.ActorStateConnector>().ManualUpdate;
-        mortalUpdate = GetComponent<Mortal>().ManualUpdate;
+        stateConnectorUpdate = (_fasc = GetComponent<FightActorStateConector>()).ManualUpdate;
+        mortalUpdate = (_mortal = GetComponent<Mortal>()).ManualUpdate;
     }
 
     public void ManualUpdate()
