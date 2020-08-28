@@ -62,6 +62,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     int originalLayer;
 
     public Actor Actor { get => actor == null ? (actor = GetComponent<Actor>()) : actor; }
+    public bool TryGetActor(out Actor actor) => (actor = Actor) != null;
     public UnityEvent_Mortal OnAttackedCallbacks { get => onAttackedCallbacks; }
     public UnityEvent DyingCallbacks { get => dyingCallbacks; }
     public bool IsInvulnerable //{ get => isInvulnerable; set => isInvulnerable = value; }
