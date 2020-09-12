@@ -697,7 +697,6 @@ MonoBehaviour:
           m_CallState: 2
     retuenSlashAttack: {fileID: 8916380850370461321}
     receptionStartTime: 0.13
-    jumpUpImpulse: {x: 0, y: 15}
     selfRigidBody: {fileID: 8916380848889061125}
     umbrella: {fileID: 8916380848891301901}
   smashSlash:
@@ -759,7 +758,7 @@ MonoBehaviour:
     guard:
       method: {fileID: 2312274154079463536}
       fields:
-        multiplier: 0.5
+        multiplier: 0.05
         degreeRangeStart: -90
         degreeRangeWidth: 180
     extraCollider: {fileID: 8916380848889061124}
