@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Linq;
 using static ActorState;
 
-[CustomEditor(typeof(ActorStateConnector))]
+[CustomEditor(typeof(ActorStateConnector), true)]
 public class ActorStateConectorEditor : Editor
 {
     ActorStateConnector _target;
