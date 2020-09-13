@@ -22,27 +22,32 @@ public class Cannon
         return summoned;
     }
 
-    public Actor Launch(Actor subject) => Launch(subject, launchSpeed, launchDegree);
-    public Actor Launch() => Launch(subject, LaunchSpeed, LaunchDegree);
+    public Actor Launch(Actor subject) => Launch(subject, launchSpeed, GetDegree());
+    public Actor Launch() => Launch(subject, LaunchSpeed, GetDegree());
+
+    float GetDegree() => launchDegree;
 }
 
 public class AscCannon : FightActorStateConector
 {
-    [SerializeField] CannonDefaultState defaultState;
+    [SerializeField] CannonDefaultState cannonDefault;
     [SerializeField] SmashedState smashed;
 
-    public override ActorState DefaultState => defaultState;
+    public override ActorState DefaultState => cannonDefault;
 
     public override SmashedState Smashed => smashed;
-    
+
+    protected override void BeforeStateUpdate()
+    {
+        base.BeforeStateUpdate();
+    }
 
     [System.Serializable]
-    class CannonDefaultState : ActorState 
+    class CannonDefaultState : DefaultState 
     {
         [SerializeField] float launchInterval;
         [SerializeField] Vector2 degreeRange;
         [SerializeField] Cannon cannon;
-        [SerializeField] Actor launchedOriginal;
 
         float t = 0;
 
@@ -54,13 +59,17 @@ public class AscCannon : FightActorStateConector
 
         protected override void OnActive()
         {
+            base.OnActive();
+
+            Debug.Log("Cannon Running");
             t -= Time.deltaTime;
             if(t < 0)
             {
                 cannon.LaunchDegree = Random.Range(degreeRange.x, degreeRange.y);
-                cannon.Launch(launchedOriginal);
+                cannon.Launch();
                 t = launchInterval;
             }
         }
+
     }
 }

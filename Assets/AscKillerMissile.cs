@@ -50,8 +50,7 @@ public class AscKillerMissile : FightActorStateConector
         {
             base.OnInitialize();
             dir = (ActorManager.PlayerActor.transform.position - GameObject.transform.position).normalized;
-            Vector2 v = dir * rigidbody.velocity.magnitude;
-            rigidbody.velocity = v;
+            rigidbody.velocity = Vector2.zero;
         }
 
         protected override void OnActive()
@@ -59,6 +58,8 @@ public class AscKillerMissile : FightActorStateConector
             base.OnActive();
             rigidbody.AddForce(dir*(accel*rigidbody.mass));
         }
+
+        protected override bool ShouldCotinue() => true;
     }
 
     [System.Serializable]

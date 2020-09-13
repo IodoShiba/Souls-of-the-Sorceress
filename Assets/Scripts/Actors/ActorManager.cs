@@ -73,6 +73,8 @@ public class ActorManager : MonoBehaviour
         {
             playerActor = actor;
         }
+
+        Debug.Log($"registered Actor '{actor.name}'");
     }
 
     public void RemoveActor(Actor actor)
