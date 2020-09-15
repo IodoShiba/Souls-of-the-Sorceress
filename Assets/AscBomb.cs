@@ -9,7 +9,7 @@ namespace ActorBomb
         // *** 状態 *** 
 
         [SerializeField] BombDefault bombDefault;
-        [SerializeField] BombBlasting blasting;
+        [SerializeField] CommonActorState.Explosion blasting;
         [SerializeField] BombSmashed smashed;
         [SerializeField] BombDead dead;
 
@@ -56,34 +56,6 @@ namespace ActorBomb
                 {
                     ConnectorBomb.Ignite();
                 }
-            }
-        }
-
-        [System.Serializable]
-        class BombBlasting : ActorState
-        {
-            [SerializeField] float timeSpan;
-            [SerializeField] AttackInHitbox explosion;
-            float t = 0;
-
-            public bool Complete { get => t > timeSpan; }
-
-            protected override bool ShouldCotinue() => true;
-
-            protected override void OnInitialize()
-            {
-                t = 0;
-                explosion.Activate();
-            }
-
-            protected override void OnActive()
-            {
-                t += Time.deltaTime;
-            }
-
-            public override bool IsResistibleTo(System.Type actorStateType)
-            {
-                return typeof(SmashedState).IsAssignableFrom(actorStateType);
             }
         }
 

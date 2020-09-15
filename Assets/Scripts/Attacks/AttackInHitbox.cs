@@ -179,11 +179,18 @@ public class AttackInHitbox : MonoBehaviour
 [System.Serializable]
 public class AttackData
 {
+    [System.Flags]
+    public enum AttrFlags : int
+    {
+        detached = 0x0000_0001,
+    }
+
     public float damage;
     [UnityEngine.Serialization.FormerlySerializedAs("knockBackImpact")] public Vector2 knockBackImpulse;
     public Collider2D attackCollider;
     public bool throughable;
     public float hitstopSpan;
+    [FlagField(typeof(AttrFlags))] public AttrFlags attrFlags;
 
     public AttackData() { damage = 0; knockBackImpulse = Vector2.zero; attackCollider = null; throughable = false; hitstopSpan = 0; }
 

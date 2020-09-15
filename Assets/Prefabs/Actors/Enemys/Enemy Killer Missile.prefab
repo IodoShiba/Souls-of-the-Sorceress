@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1775799677600867767}
   - component: {fileID: 1775799677600867766}
   - component: {fileID: 1775799677600868936}
+  - component: {fileID: 2514788186563038017}
   m_Layer: 24
   m_Name: Enemy Killer Missile
   m_TagString: Enemy
@@ -202,6 +203,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2514788186563038017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775799677600867761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 475d2d84bb4331f4dad1fd60cba78a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monitoredTagName: 
+  useTargetGameObject: 0
+  targetGameObjects: []
+  useCountUpdateCycle: 0
+  countUpdateCycle: 0
+  detectCount: 0
 --- !u!1001 &1775799676771466074
 PrefabInstance:
   m_ObjectHideFlags: 0

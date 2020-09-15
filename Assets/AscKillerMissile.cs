@@ -2,76 +2,93 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AscKillerMissile : FightActorStateConector
+namespace ActorKillerMissile
 {
-    [SerializeField] MissileDefault missileDefault;
-    [SerializeField] Detecting detecting;
-    [SerializeField] MisileSmashed smashed;
-
-    public override SmashedState Smashed => smashed;
-
-    public override ActorState DefaultState => missileDefault;
-
-    protected override void BuildStateConnection()
+    public class AscKillerMissile : FightActorStateConector
     {
-        base.BuildStateConnection();
-        ConnectStateFromDefault(()=>missileDefault.DidStaightDistancePass(), detecting);
-    }
+        [SerializeField] MissileDefault missileDefault;
+        [SerializeField] Detecting detecting;
+        [SerializeField] CommonActorState.Explosion exploding;
+        [SerializeField] MisileSmashed smashed;
 
+        public override SmashedState Smashed => smashed;
 
-    [System.Serializable]
-    class MissileDefault : DefaultState
-    {
-        [SerializeField] Rigidbody2D rigidbody;
-        [SerializeField] float distanceGoStraight;
-        Vector2 initPos;
+        public override ActorState DefaultState => missileDefault;
 
-        public bool DidStaightDistancePass() => Vector2.Distance(initPos, GameObject.transform.position) >= distanceGoStraight;
-
-        AscKillerMissile connectorMissile;
-        AscKillerMissile ConnectorMissile 
+        protected override void BuildStateConnection()
         {
-            get => connectorMissile == null ? (connectorMissile = (AscKillerMissile)Connector) : connectorMissile;
+            base.BuildStateConnection();
+            ConnectStateFromDefault(()=>missileDefault.DidStaightDistancePass(), detecting);
         }
 
-        protected override void OnInitialize()
+        void OnTriggerEnter2D(Collider2D other)
         {
-            initPos = GameObject.transform.position;
-        }
-    }
-
-    [System.Serializable]
-    class Detecting : ActorState
-    {
-        [SerializeField] Rigidbody2D rigidbody;
-        [SerializeField] float accel;
-        Vector2 dir;
-        protected override void OnInitialize()
-        {
-            base.OnInitialize();
-            dir = (ActorManager.PlayerActor.transform.position - GameObject.transform.position).normalized;
-            rigidbody.velocity = Vector2.zero;
+            // if(other.CompareTag(TagName.attack) && other.transform.parent != null && other.transform.parent.CompareTag(TagName.player))
+            // {
+            //     // InterruptWith(smashed);
+            // }
+            //else
+            if(other.CompareTag(TagName.player))
+            {
+                InterruptWith(exploding);
+            }
         }
 
-        protected override void OnActive()
+        [System.Serializable]
+        class MissileDefault : DefaultState
         {
-            base.OnActive();
-            rigidbody.AddForce(dir*(accel*rigidbody.mass));
+            [SerializeField] Rigidbody2D rigidbody;
+            [SerializeField] float distanceGoStraight;
+            Vector2 initPos;
+
+            public bool DidStaightDistancePass() => Vector2.Distance(initPos, GameObject.transform.position) >= distanceGoStraight;
+
+            AscKillerMissile connectorMissile;
+            AscKillerMissile ConnectorMissile 
+            {
+                get => connectorMissile == null ? (connectorMissile = (AscKillerMissile)Connector) : connectorMissile;
+            }
+
+            protected override void OnInitialize()
+            {
+                initPos = GameObject.transform.position;
+            }
         }
 
-        protected override bool ShouldCotinue() => true;
-    }
-
-    [System.Serializable]
-    class MisileSmashed : SmashedState 
-    {
-        [SerializeField] Rigidbody2D rigidbody;
-        [SerializeField] float gravityScale;
-
-        protected override void OnInitialize()
+        [System.Serializable]
+        class Detecting : ActorState
         {
-            base.OnInitialize();
-            rigidbody.gravityScale = gravityScale;
+            [SerializeField] Rigidbody2D rigidbody;
+            [SerializeField] float accel;
+            Vector2 dir;
+            protected override void OnInitialize()
+            {
+                base.OnInitialize();
+                dir = (ActorManager.PlayerActor.transform.position - GameObject.transform.position).normalized;
+                rigidbody.velocity = Vector2.zero;
+            }
+
+            protected override void OnActive()
+            {
+                base.OnActive();
+                rigidbody.AddForce(dir*(accel*rigidbody.mass));
+            }
+
+            protected override bool ShouldCotinue() => true;
+        }
+
+
+        [System.Serializable]
+        class MisileSmashed : SmashedState 
+        {
+            [SerializeField] Rigidbody2D rigidbody;
+            [SerializeField] float gravityScale;
+
+            protected override void OnInitialize()
+            {
+                base.OnInitialize();
+                rigidbody.gravityScale = gravityScale;
+            }
         }
     }
 }

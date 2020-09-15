@@ -8,6 +8,7 @@ namespace ActorFunction
     [Serializable]
     public class GuardFields : ActorFunctionFields
     {
+
         [SerializeField] float multiplier;
         [SerializeField] float degreeRangeStart;
         [SerializeField] float degreeRangeWidth;
@@ -17,7 +18,9 @@ namespace ActorFunction
 
         public class Method : ActorFunctionMethod<GuardFields>
         {
+            [System.Serializable] public class UnityEvent_Mortal_AttackData : UnityEngine.Events.UnityEvent<Mortal, AttackData> {}
             [SerializeField] bool activated;
+            [SerializeField] public UnityEvent_Mortal_AttackData onGuarded; // カスが代
 
             GuardFields fields;
             bool isAllSucceed = true;
@@ -39,19 +42,21 @@ namespace ActorFunction
             /// </summary>
             /// <param name="dealt"></param>
             /// <param name="relativePosition"></param>
-            public void TryGuard(AttackData dealt, in Vector2 relativePosition)
+            public bool TryGuard(Mortal attacker, AttackData dealt, in Vector2 relativePosition)
             {
-                if (fields == null || !Activated) { return; }
-                bool c = GuardCondition(relativePosition);
+                if (fields == null || !Activated) { return false; }
+                bool c = ShouldBeGuarded(relativePosition);
                 isAllSucceed = isAllSucceed && c;
                 if (c)
                 {
                     dealt.damage *= fields.multiplier;
                     dealt.knockBackImpulse *= fields.multiplier;
+                    onGuarded.Invoke(attacker, dealt);
                 }
+                return c;
             }
 
-            private bool GuardCondition(in Vector2 relativePosition)
+            public bool ShouldBeGuarded(in Vector2 relativePosition)
             {
                 float da0to360 =
                     Mathf.DeltaAngle(

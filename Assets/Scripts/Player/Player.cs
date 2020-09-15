@@ -96,7 +96,7 @@ public class Player : Mortal, SaveData.IPlayerHealthCareer
         base.OnTriedAttack(attacker, dealt, relativePosition);
         if (guard.Activated)
         {
-            guard.TryGuard(dealt, relativePosition);
+            guard.TryGuard(attacker, dealt, relativePosition);
         }
     }
 

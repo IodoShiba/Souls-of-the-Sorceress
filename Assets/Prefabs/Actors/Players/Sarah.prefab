@@ -460,6 +460,7 @@ GameObject:
   - component: {fileID: 7396359423064295611}
   - component: {fileID: 2407926265265643027}
   - component: {fileID: 7789024607807329371}
+  - component: {fileID: 1018323502459469627}
   m_Layer: 20
   m_Name: Sarah
   m_TagString: Player
@@ -1360,6 +1361,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activated: 0
+  onGuarded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1018323502459469627}
+        m_MethodName: OnGuarded
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4249487242134317880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1644,6 +1659,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 6314495245485655847}
+--- !u!114 &1018323502459469627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2c18c788818ef24ebdc1ab28374210e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defender: {fileID: 8916380848889061121}
+  baseData:
+    damage: 0
+    knockBackImpulse: {x: 0, y: 0}
+    attackCollider: {fileID: 0}
+    throughable: 0
+    hitstopSpan: 0
+  attackConverters:
+  - {fileID: 8916380850362335011}
+  onAttackSucceeded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5149332159221903905}
+        m_MethodName: IncrementCombo
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2407926265265643027}
+        m_MethodName: DoEffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8916380848891301890
 GameObject:
   m_ObjectHideFlags: 0

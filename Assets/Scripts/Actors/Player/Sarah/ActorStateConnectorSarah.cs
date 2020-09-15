@@ -56,7 +56,7 @@ namespace ActorSarah
         public override DeadState Dead => dead;
         public bool isGuard { get => guard.IsCurrent; }
 
-        
+
         protected Rigidbody2D selfRigidbody;
         protected Rigidbody2D SelfRigidbody { get => selfRigidbody == null ? (selfRigidbody = GetComponent<Rigidbody2D>()) : selfRigidbody; }
         public int ProgressLevel { get => progressLevel; }
@@ -608,7 +608,10 @@ namespace ActorSarah
 
                 return guardAllSucceed && typeof(SmashedState).IsAssignableFrom(actorStateType);
             }
+
+            public bool ShouldBeGuarded(in Vector2 relativePosition) => guard.Method.ShouldBeGuarded(relativePosition);
         }
+        public bool MaybeGuarded(in Vector2 relativePosition) => guard.ShouldBeGuarded(relativePosition);
 
         [System.Serializable]
         private class Tackle : SarahState

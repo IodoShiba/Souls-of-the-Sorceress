@@ -36,6 +36,7 @@ public static class SceneName
 public static class TagName
 {
     public const string player = "Player";
+    public const string attack = "Attack";
 }
 
 public static class LayerName
