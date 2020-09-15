@@ -128,6 +128,8 @@ public class ActorState
     public ActorStateConnector Connector { get => connector; }
     public bool IsCurrent { get => isCurrent; set => isCurrent = value; }
 
+    public const ActorState continueCurrentState = null;
+
 
     //public string Name { get => name; set => name = value; }
 

@@ -37,6 +37,7 @@ public static class TagName
 {
     public const string player = "Player";
     public const string attack = "Attack";
+    public const string ground = "Ground";
 }
 
 public static class LayerName

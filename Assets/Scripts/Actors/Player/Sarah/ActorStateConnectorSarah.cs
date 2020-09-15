@@ -611,7 +611,7 @@ namespace ActorSarah
 
             public bool ShouldBeGuarded(in Vector2 relativePosition) => guard.Method.ShouldBeGuarded(relativePosition);
         }
-        public bool MaybeGuarded(in Vector2 relativePosition) => guard.ShouldBeGuarded(relativePosition);
+        public bool ShouldbeGuarded(in Vector2 relativePosition) => guard.ShouldBeGuarded(relativePosition);
 
         [System.Serializable]
         private class Tackle : SarahState

@@ -206,11 +206,7 @@ public class AttackData
     //コピーコンストラクタ
     public AttackData(AttackData original)
     {
-        this.damage = original.damage;
-        this.knockBackImpulse = original.knockBackImpulse;
-        this.attackCollider = original.attackCollider;
-        this.throughable = original.throughable;
-        this.hitstopSpan = original.hitstopSpan;
+        Copy(this, original);
     }
 
     public static AttackData Copy(AttackData target,AttackData original)
@@ -220,6 +216,7 @@ public class AttackData
         target.attackCollider = original.attackCollider;
         target.throughable = original.throughable;
         target.hitstopSpan = original.hitstopSpan;
+        target.attrFlags = original.attrFlags;
         return target;
     }
 }

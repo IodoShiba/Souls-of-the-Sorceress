@@ -19,19 +19,22 @@ public class GuardSendBackAttack : MonoBehaviour
         {
             attackConverters[i].Convert(buf);
         }
-        attacker.TryAttack(
-            defender, buf, transform.position - attacker.transform.position, 
-            (isSuccess, subjectMortal)=> 
-            {
-                if (isSuccess) {
-                    onAttackSucceeded.Invoke(subjectMortal);
-                    Actor actor;
-                    if(subjectMortal != null && subjectMortal.TryGetActor(out actor))
-                    {
-                        var fasc = actor.FightAsc;
-                        fasc.InterruptWith(fasc.Smashed);
+        if(!dealt.attrFlags.HasFlag(AttackData.AttrFlags.detached))
+        {
+            attacker.TryAttack(
+                defender, buf, transform.position - attacker.transform.position, 
+                (isSuccess, subjectMortal)=> 
+                {
+                    if (isSuccess) {
+                        onAttackSucceeded.Invoke(subjectMortal);
+                        Actor actor;
+                        if(subjectMortal != null && subjectMortal.TryGetActor(out actor))
+                        {
+                            var fasc = actor.FightAsc;
+                            fasc.InterruptWith(fasc.Smashed);
+                        }
                     }
-                }
-            });
+                });
+        }
     }
 }

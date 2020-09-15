@@ -10,28 +10,41 @@ namespace ActorKillerMissile
         [SerializeField] Detecting detecting;
         [SerializeField] CommonActorState.Explosion exploding;
         [SerializeField] MisileSmashed smashed;
+        [SerializeField] DeadState dead;
 
         public override SmashedState Smashed => smashed;
 
         public override ActorState DefaultState => missileDefault;
+        public override DeadState Dead => dead;
 
         protected override void BuildStateConnection()
         {
             base.BuildStateConnection();
             ConnectStateFromDefault(()=>missileDefault.DidStaightDistancePass(), detecting);
+            ConnectState(()=>exploding.Complete, exploding, Dead);
+            ConnectState(()=>DetectingBranch(), detecting);
         }
 
         void OnTriggerEnter2D(Collider2D other)
         {
-            // if(other.CompareTag(TagName.attack) && other.transform.parent != null && other.transform.parent.CompareTag(TagName.player))
-            // {
-            //     // InterruptWith(smashed);
-            // }
-            //else
-            if(other.CompareTag(TagName.player))
+            if(other.CompareTag(TagName.player) || other.CompareTag(TagName.ground))
             {
-                InterruptWith(exploding);
+                finalContacted = other;
             }
+        }
+        Collider2D finalContacted = null;
+        ActorState DetectingBranch()
+        {
+            if(finalContacted == null) {return ActorState.continueCurrentState;}
+            if(finalContacted.CompareTag(TagName.ground)){return exploding;}
+            if(finalContacted.CompareTag(TagName.player))
+            {
+                var ascSarah = (ActorSarah.ActorStateConnectorSarah)ActorManager.PlayerActor.FightAsc;
+                bool c = ascSarah.isGuard && ascSarah.ShouldbeGuarded(transform.position - finalContacted.transform.position);
+                finalContacted = null;
+                return c ? (ActorState)smashed : (ActorState)exploding;
+            }
+            return ActorState.continueCurrentState;
         }
 
         [System.Serializable]
@@ -74,6 +87,11 @@ namespace ActorKillerMissile
                 rigidbody.AddForce(dir*(accel*rigidbody.mass));
             }
 
+            protected override void OnTerminate(bool isNormal)
+            {
+                rigidbody.velocity = Vector2.zero;
+            }
+
             protected override bool ShouldCotinue() => true;
         }
 
@@ -88,6 +106,7 @@ namespace ActorKillerMissile
             {
                 base.OnInitialize();
                 rigidbody.gravityScale = gravityScale;
+                rigidbody.velocity = Vector2.zero;
             }
         }
     }

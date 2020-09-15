@@ -65,6 +65,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -177,23 +178,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onAttackedCallbacks:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  onHitstopGiven:
+    m_PersistentCalls:
+      m_Calls: []
   onHealthRecoveredCallbacks:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
   onInvinsibleTimeOver:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  onDestroy:
+    m_PersistentCalls:
+      m_Calls: []
   selfRigidbody: {fileID: 1904868358951468108}
   dealingAttackConverters: []
   dealtAttackConverters: []
@@ -221,11 +220,13 @@ MonoBehaviour:
     attackCollider: {fileID: 9004923433284265342}
     throughable: 0
     hitstopSpan: 0
+    attrFlags: -1
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+  onAttackSucceededMortal:
+    m_PersistentCalls:
+      m_Calls: []
   attackConvertersOnActivate: []
   attackConvertersOnHit: []
 --- !u!114 &7340004956999325703
