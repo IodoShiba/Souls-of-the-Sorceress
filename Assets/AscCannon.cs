@@ -7,6 +7,7 @@ public class Cannon
 {
     [SerializeField] Actor subject;
     [SerializeField] float launchSpeed;
+    [SerializeField] float offsetRadius;
     [SerializeField] float launchDegree;
     [SerializeField] Spawner2 spawner;
 
@@ -16,9 +17,10 @@ public class Cannon
     public Actor Launch(Actor subject, float speed, float degree)
     {
         float theta = Mathf.Deg2Rad * degree;
-        var summoned = spawner.Summon(subject, spawner.transform.position);
+        Vector2 dir = new Vector2(Mathf.Cos(theta), Mathf.Sin(theta));
+        var summoned = spawner.Summon(subject, (Vector2)spawner.transform.position + dir * offsetRadius);
         var rigidbody = summoned.GetComponent<Rigidbody2D>();
-        rigidbody.velocity = new Vector2(Mathf.Cos(theta), Mathf.Sin(theta)) * speed;
+        rigidbody.velocity = dir * speed;
         return summoned;
     }
 

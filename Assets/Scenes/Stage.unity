@@ -449,6 +449,7 @@ MonoBehaviour:
     attackCollider: {fileID: 82714565}
     throughable: 1
     hitstopSpan: 0
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
@@ -10623,10 +10624,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7767129985183012985, guid: 48160b25e4d4a0d44bc974d3a301d499,
         type: 3}
-      propertyPath: cannonDefault.cannon.subject
-      value: 
-      objectReference: {fileID: 1775799677600867764, guid: 1aa215ad8145c634d97d04e14757828c,
+      propertyPath: cannonDefault.degreeRange.x
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 7767129985183012985, guid: 48160b25e4d4a0d44bc974d3a301d499,
         type: 3}
+      propertyPath: cannonDefault.degreeRange.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 7767129985183012986, guid: 48160b25e4d4a0d44bc974d3a301d499,
         type: 3}
       propertyPath: manager

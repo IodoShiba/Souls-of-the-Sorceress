@@ -25,23 +25,32 @@ namespace ActorKillerMissile
             ConnectState(()=>DetectingBranch(), detecting);
         }
 
+        enum DetectedType {player, ground, others}
         void OnTriggerEnter2D(Collider2D other)
         {
-            if(other.CompareTag(TagName.player) || other.CompareTag(TagName.ground))
+            if(other.CompareTag(TagName.player))
             {
+                detectedType = DetectedType.player;
+                finalContacted = other;
+            }
+            else if(other.CompareTag(TagName.ground))
+            {
+                detectedType = DetectedType.ground;
                 finalContacted = other;
             }
         }
         Collider2D finalContacted = null;
+        DetectedType detectedType = DetectedType.others;
         ActorState DetectingBranch()
         {
             if(finalContacted == null) {return ActorState.continueCurrentState;}
-            if(finalContacted.CompareTag(TagName.ground)){return exploding;}
-            if(finalContacted.CompareTag(TagName.player))
+            if(detectedType == DetectedType.ground){return exploding;}
+            if(detectedType == DetectedType.player)
             {
                 var ascSarah = (ActorSarah.ActorStateConnectorSarah)ActorManager.PlayerActor.FightAsc;
                 bool c = ascSarah.isGuard && ascSarah.ShouldbeGuarded(transform.position - finalContacted.transform.position);
                 finalContacted = null;
+                detectedType = DetectedType.others;
                 return c ? (ActorState)smashed : (ActorState)exploding;
             }
             return ActorState.continueCurrentState;
