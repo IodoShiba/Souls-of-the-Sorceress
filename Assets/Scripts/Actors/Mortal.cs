@@ -141,7 +141,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         if (dealtAttackCount == 0) { return; }
 
         float rxsum = 0;
-        AttackData result = new AttackData();
+        AttackData result = new AttackData(); // TODO: new 無しの実装にする
         DealtAttackInfo mainAttackInfo = dealtAttackInfos[0];//主な攻撃（攻撃力が最も高く、主な死因となりうる攻撃）
 
         for (int i = 0; i < dealtAttackCount; ++i) //1フレームの間に与えられた複数の攻撃と相対座標を統合する
