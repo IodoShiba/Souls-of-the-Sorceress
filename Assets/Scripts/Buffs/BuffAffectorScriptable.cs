@@ -6,7 +6,7 @@ namespace Buffs
     {
         public abstract BuffTypeID buffTypeID { get; }
 
-        public abstract void Affect(BuffDestination destination);
+        public abstract void Affect(BuffFunctor functor);
     }
 
 }

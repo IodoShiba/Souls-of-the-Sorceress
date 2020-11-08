@@ -8,25 +8,25 @@ public class BuffReceiver
 {
     [SerializeField] BuffCompatibleList compatibleList;
 
-    BuffDestination[] destinations = new BuffDestination[(int)BuffTypeID.MAX];
+    BuffFunctor[] buffFunctors = new BuffFunctor[(int)BuffTypeID.MAX];
 
-    public void Initialize(Mortal owner)
+    public void Initialize(Actor owner)
     {
-        compatibleList.InitializeDestinationsArray(destinations, owner);
+        compatibleList.InitializeFunctorsArray(buffFunctors, owner);
     }
 
     public void Update()
     {
-        for(int i=0; i<destinations.Length; ++i)
+        for(int i=0; i<buffFunctors.Length; ++i)
         {
-            if(destinations[i] != null){ destinations[i].Update(); }
+            if(buffFunctors[i] != null){ buffFunctors[i].Update(); }
         }
     }
 
     public void Receive(IBuffAffector item)
     {
-        if((int)item.buffTypeID >= destinations.Length){ return; }
+        if((int)item.buffTypeID >= buffFunctors.Length){ return; }
 
-        item.Affect(destinations[(int)item.buffTypeID]);
+        item.Affect(buffFunctors[(int)item.buffTypeID]);
     }
 }

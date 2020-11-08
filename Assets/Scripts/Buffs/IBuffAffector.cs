@@ -4,7 +4,7 @@ namespace Buffs
     {
         BuffTypeID buffTypeID { get; }
 
-        void Affect(BuffDestination destination);
+        void Affect(BuffFunctor destination);
     }
 
 }
