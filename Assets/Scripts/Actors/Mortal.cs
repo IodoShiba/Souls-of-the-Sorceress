@@ -13,6 +13,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
 
     public class DealtAttackInfo
     {
+
         public Mortal attacker;
         public AttackData attackData;
         public Vector2 relativePosition;
