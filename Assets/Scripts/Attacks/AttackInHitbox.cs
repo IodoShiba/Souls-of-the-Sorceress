@@ -7,7 +7,7 @@ using UnityEditor;
 #endif
 
 [System.Serializable]
-public class AttackInHitbox : MonoBehaviour
+public class AttackInHitbox : MonoBehaviour, IOnAttackEvaluatedAction
 {
     [System.Serializable] class UnityEvent_SubjectMortal : UnityEngine.Events.UnityEvent<Mortal> { }
 
@@ -73,25 +73,28 @@ public class AttackInHitbox : MonoBehaviour
             attackConvertersOnHit.ForEach(acOnHit => acOnHit.Convert(convertedAttackData));
             //mortal.TryAttack(gameObject, this.ParamsConvertedByOwner, result => { HitProcess(); } );
             AttackData pco = this.ParamsConvertedByOwner;
-            mortal.TryAttack(owner, pco, transform.position - hit.gameObject.transform.position,
-                (isSuccess,subjectMortal)=> 
-                {
-                    if (isSuccess) {
-                        SetExtraSpan(pco.hitstopSpan);
-                        if (owner != null) { owner.GiveHitstop(pco.hitstopSpan); }
-                        onAttackSucceeded.Invoke();
-                        onAttackSucceededMortal.Invoke(subjectMortal);
-                        Actor actor;
-                        if(subjectMortal != null && subjectMortal.TryGetActor(out actor))
-                        {
-                            var fasc = actor.FightAsc;
-                            fasc.InterruptWith(fasc.Smashed);
-                        }
-                    }
-                });
+            mortal.TryAttack(owner, pco, transform.position - hit.gameObject.transform.position, this
+                );
             HitProcess();
         }
     }
+    public void OnAttackEvaluated(bool isSuccess, Mortal subjectMortal, AttackData finallyGiven)
+    {
+        if (isSuccess) 
+        {
+            SetExtraSpan(finallyGiven.hitstopSpan);
+            if (owner != null) { owner.GiveHitstop(finallyGiven.hitstopSpan); }
+            onAttackSucceeded.Invoke();
+            onAttackSucceededMortal.Invoke(subjectMortal);
+            Actor actor;
+            if(subjectMortal != null && subjectMortal.TryGetActor(out actor))
+            {
+                var fasc = actor.FightAsc;
+                fasc.InterruptWith(fasc.Smashed);
+            }
+        }
+    }
+
     public void HitProcess()
     {
         if (!this.Throughable)
@@ -174,6 +177,7 @@ public class AttackInHitbox : MonoBehaviour
             Inactivate();
         }
     }
+
 }
 
 [System.Serializable]

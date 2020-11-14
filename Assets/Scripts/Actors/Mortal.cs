@@ -17,9 +17,9 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         public Mortal attacker;
         public AttackData attackData;
         public Vector2 relativePosition;
-        public System.Action<bool,Mortal> onAttackEvaluatedCallback;
+        public IOnAttackEvaluatedAction onAttackEvaluatedCallback;
 
-        public DealtAttackInfo(Mortal attacker, AttackData attackData,Vector2 relativePosition, System.Action<bool,Mortal> onAttackEvaluatedCallback)
+        public DealtAttackInfo(Mortal attacker, AttackData attackData,Vector2 relativePosition, IOnAttackEvaluatedAction onAttackEvaluatedCallback)
         {
             this.attacker = attacker;
             this.attackData = attackData;
@@ -113,7 +113,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         AttackData.Copy(this.argAttackData, argAttackData);
         this.argSucceedCallback = succeedCallback;
     }
-    public void TryAttack(Mortal attacker, AttackData argAttackData,in Vector2 relativePosition,System.Action<bool,Mortal> onAttackEvaluatedCallback)
+    public void TryAttack(Mortal attacker, AttackData argAttackData,in Vector2 relativePosition,IOnAttackEvaluatedAction onAttackEvaluatedCallback)
     {
         OnTriedAttack(attacker, argAttackData, relativePosition);
 
@@ -189,7 +189,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
             OnAttackedCallbacks.Invoke(mainAttackInfo.attacker);//被攻撃時のコールバック関数を呼び出し
             for(int i = 0; i < dealtAttackCount; ++i)
             {
-                if (dealtAttackInfos[i] != null){ dealtAttackInfos[i].onAttackEvaluatedCallback(true,this); }
+                if (dealtAttackInfos[i] != null){ dealtAttackInfos[i].onAttackEvaluatedCallback.OnAttackEvaluated(true, this, result); }
             }
             if (health <= 0 && originalHealth > 0)
             {
@@ -202,7 +202,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         {
             for (int i = 0; i < dealtAttackCount; ++i)
             {
-                if (dealtAttackInfos[i] != null) { dealtAttackInfos[i].onAttackEvaluatedCallback(false,this); }
+                if (dealtAttackInfos[i] != null) { dealtAttackInfos[i].onAttackEvaluatedCallback.OnAttackEvaluated(false, this, result); }
             }
         }
         dealtAttackCount = 0;//攻撃を全て統合したのでカウンターを0にし、与えられた攻撃を忘却する
@@ -231,7 +231,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     {
         health = 0;
         dyingCallbacks.Invoke();
-        OnDying(new DealtAttackInfo(this,new AttackData(), Vector2.zero, (_,_0)=> { }));
+        OnDying(new DealtAttackInfo(this,new AttackData(), Vector2.zero, AttackEvaluatedActionDoNothing.Instance));
     }
 
     IEnumerator OrderInvincibleImple(float time)
