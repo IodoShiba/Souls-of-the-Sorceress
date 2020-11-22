@@ -9300,7 +9300,7 @@ MonoBehaviour:
     horizontalMove:
       method: {fileID: 1966155927}
       fields:
-        maxSpeed: 1
+        maxSpeed: 0.5
         pushForceMagnitude: 100
         stopForceMagnitude: 100
         curve:
@@ -9869,6 +9869,16 @@ PrefabInstance:
       propertyPath: owner
       value: 
       objectReference: {fileID: 1966155918}
+    - target: {fileID: 5641229665059161529, guid: 4e703afc759205248a97bc16ab22bbb8,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5641229665059161529, guid: 4e703afc759205248a97bc16ab22bbb8,
+        type: 3}
+      propertyPath: m_Radius
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e703afc759205248a97bc16ab22bbb8, type: 3}
 --- !u!1001 &6457742630198015513
