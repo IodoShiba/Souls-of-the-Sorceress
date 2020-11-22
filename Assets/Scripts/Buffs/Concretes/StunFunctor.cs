@@ -73,22 +73,17 @@ namespace Buffs
 
             protected override bool ShouldCotinue()
             {
-                return base.ShouldCotinue() || functor.IsActive;
+                return functor.IsActive;
             }
 
             protected override void OnInitialize()
             {
-                base.OnInitialize();
-            }
-
-            protected override void OnActive()
-            {
-                base.OnActive();
+                smashed._OnInitialize();
             }
 
             protected override void OnTerminate(bool isNormal)
             {
-                base.OnTerminate(isNormal);
+                smashed._OnTerminate(isNormal);
                 functor.Reset();
             }
         }
