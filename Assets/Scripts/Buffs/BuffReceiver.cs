@@ -3,30 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using Buffs;
 
-[System.Serializable]
-public class BuffReceiver
-{
-    [SerializeField] BuffCompatibleList compatibleList;
-
-    BuffFunctor[] buffFunctors = new BuffFunctor[(int)BuffTypeID.MAX];
-
-    public void Initialize(Actor owner)
+namespace Buffs{
+    [System.Serializable]
+    public class BuffReceiver
     {
-        compatibleList.InitializeFunctorsArray(buffFunctors, owner);
-    }
+        [SerializeField] BuffCompatibleList compatibleList;
 
-    public void Update()
-    {
-        for(int i=0; i<buffFunctors.Length; ++i)
+        BuffFunctor[] buffFunctors;
+
+        public void Initialize(Actor owner)
         {
-            if(buffFunctors[i] != null){ buffFunctors[i].Update(); }
+            buffFunctors = new BuffFunctor[(int)BuffTypeID.MAX];
+            BuffCompatibleList.InitializeFunctors(compatibleList, buffFunctors, owner);
         }
-    }
 
-    public void Receive(IBuffAffector item)
-    {
-        if((int)item.buffTypeID >= buffFunctors.Length){ return; }
+        public void Update()
+        {
+            for(int i=0; i<buffFunctors.Length; ++i)
+            {
+                if(buffFunctors[i] != null)
+                {
+                    buffFunctors[i].Update(); 
+                }
+            }
+        }
 
-        item.Affect(buffFunctors[(int)item.buffTypeID]);
+        public void Receive(IBuffAffector item)
+        {
+            if(item == null || (int)item.buffTypeID >= buffFunctors.Length){ return; }
+            BuffFunctor func = buffFunctors[(int)item.buffTypeID];
+            if(func == null){ return; }
+            item.Affect(buffFunctors[(int)item.buffTypeID]);
+        }
+
+        public bool IsActive(BuffTypeID typeID)
+        {
+            int i = (int)typeID;
+            return i < buffFunctors.Length && buffFunctors[i] != null && buffFunctors[i].IsActive;
+        }
+
+        public void GetView(BuffTypeID typeID, out BuffView view)
+        {
+            int i = (int)typeID;
+            if(buffFunctors[i] == null || i >= buffFunctors.Length)
+            {
+                view = default(BuffView);
+                return;
+            }
+            buffFunctors[i].GetView(out view);
+        }
     }
 }

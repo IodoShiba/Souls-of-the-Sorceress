@@ -27,6 +27,12 @@ namespace Buffs
         protected abstract void UpdateSpecify();
         protected virtual void OnActivate(){}
         protected virtual void OnInactivate(){}
+        
+        public virtual void GetView(out BuffView view)
+        {
+            view = default(BuffView); 
+            view.buffTypeID = buffTypeID; 
+        }
 
         /// <summary>
         /// 中断し、初期化する

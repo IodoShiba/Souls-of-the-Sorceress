@@ -4,34 +4,39 @@ using UnityEngine;
 
 namespace Buffs
 {
-    class StunFunctor : BuffFunctor
+    public class StunFunctor : BuffFunctor
     {
         public override BuffTypeID buffTypeID => BuffTypeID.Stun;
 
-        public override bool IsActive => t > 0;
+        public override bool IsActive => timeLeft > 0;
 
-        float t = 0;
+        public float TimeLeft { get => timeLeft; }
+
+        float timeLeft = 0;
 
         Actor owner;
+
+        StunState stunState;
 
         public StunFunctor(Actor owner)
         {
             this.owner = owner;
+            stunState = new StunState(this, owner.FightAsc.Smashed);
         }
 
         public override void Reset()
         {
-            t = 0;
+            timeLeft = 0;
         }
 
         protected override void UpdateSpecify()
         {
-            t = Mathf.Max(t - Time.deltaTime, 0);
+            timeLeft = Mathf.Max(timeLeft - Time.deltaTime, 0);
         }
 
         protected override void OnActivate()
         {
-            base.OnActivate();
+            owner.FightAsc.InterruptWith(stunState);
         }
 
         protected override void OnInactivate()
@@ -39,9 +44,53 @@ namespace Buffs
             base.OnInactivate();
         }
 
+        public override void GetView(out BuffView view)
+        {
+            base.GetView(out view);
+            view.param1 = timeLeft;
+        }
+
         public void Extend(float sec)
         {
-            t += sec;
+            timeLeft += sec;
+        }
+
+        public void SwitchActivate(float sec)
+        {
+            timeLeft = IsActive ? 0 : sec;
+        }
+
+        class StunState : FightActorStateConector.SmashedState
+        {
+            StunFunctor functor;
+            FightActorStateConector.SmashedState smashed;
+
+            public StunState(StunFunctor functor, FightActorStateConector.SmashedState smashed)
+            {
+                this.functor = functor;
+                this.smashed = smashed;
+            }
+
+            protected override bool ShouldCotinue()
+            {
+                return base.ShouldCotinue() || functor.IsActive;
+            }
+
+            protected override void OnInitialize()
+            {
+                base.OnInitialize();
+            }
+
+            protected override void OnActive()
+            {
+                base.OnActive();
+            }
+
+            protected override void OnTerminate(bool isNormal)
+            {
+                base.OnTerminate(isNormal);
+                functor.Reset();
+            }
         }
     }
 }

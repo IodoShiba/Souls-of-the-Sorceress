@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Buffs
 {
+    [CreateAssetMenu(menuName = "Buffs/Affectors/StunAffector")]
     public class StunAffector : BuffAffectorScriptable
     {
         [SerializeField] float time;
@@ -10,7 +11,7 @@ namespace Buffs
 
         public override void Affect(BuffFunctor functor)
         {
-            ((StunFunctor)functor).Extend(time);
+            ((StunFunctor)functor).SwitchActivate(time);
         }
     }
 }

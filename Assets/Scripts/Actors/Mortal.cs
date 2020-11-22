@@ -189,7 +189,11 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
             OnAttackedCallbacks.Invoke(mainAttackInfo.attacker);//被攻撃時のコールバック関数を呼び出し
             for(int i = 0; i < dealtAttackCount; ++i)
             {
-                if (dealtAttackInfos[i] != null){ dealtAttackInfos[i].onAttackEvaluatedCallback.OnAttackEvaluated(true, this, result); }
+                if (dealtAttackInfos[i] != null)
+                {
+                    dealtAttackInfos[i].onAttackEvaluatedCallback.OnAttackEvaluated(true, this, result);
+                    Actor.BuffReceiver.Receive(dealtAttackInfos[i].attackData.Buff);
+                }
             }
             if (health <= 0 && originalHealth > 0)
             {
