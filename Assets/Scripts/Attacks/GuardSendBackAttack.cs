@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GuardSendBackAttack : MonoBehaviour
+public class GuardSendBackAttack : MonoBehaviour, IOnAttackEvaluatedAction
 {
     [System.Serializable] public class UnityEvent_Mortal : UnityEngine.Events.UnityEvent<Mortal> { }
 
@@ -22,19 +22,21 @@ public class GuardSendBackAttack : MonoBehaviour
         if(!dealt.attrFlags.HasFlag(AttackData.AttrFlags.detached))
         {
             attacker.TryAttack(
-                defender, buf, transform.position - attacker.transform.position, 
-                (isSuccess, subjectMortal)=> 
-                {
-                    if (isSuccess) {
-                        onAttackSucceeded.Invoke(subjectMortal);
-                        Actor actor;
-                        if(subjectMortal != null && subjectMortal.TryGetActor(out actor))
-                        {
-                            var fasc = actor.FightAsc;
-                            fasc.InterruptWith(fasc.Smashed);
-                        }
-                    }
-                });
+                defender, buf, transform.position - attacker.transform.position, this
+            );
+        }
+    }
+
+    public void OnAttackEvaluated(bool isSuccess, Mortal subjectMortal, AttackData finallyGiven)
+    {
+        if (isSuccess) {
+            onAttackSucceeded.Invoke(subjectMortal);
+            Actor actor;
+            if(subjectMortal != null && subjectMortal.TryGetActor(out actor))
+            {
+                var fasc = actor.FightAsc;
+                fasc.InterruptWith(fasc.Smashed);
+            }
         }
     }
 }

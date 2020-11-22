@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Buffs;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,6 +13,7 @@ public class Actor : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdate
 {
     //[SerializeField] UnityEngine.Events.UnityEvent onAttacked;
     [SerializeField] bool ignoreActiveReign;
+    [SerializeField] Buffs.BuffReceiver buffReceiver;
 
     private ActorManager manager;
 
@@ -47,18 +49,21 @@ public class Actor : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdate
     public bool IgnoreActiveReign { get => ignoreActiveReign; }
     public Mortal Mortal { get => _mortal; }
     public FightActorStateConector FightAsc { get => _fasc; }
+    public BuffReceiver BuffReceiver { get => buffReceiver; }
 
     private void Start()
     {
         Manager.RegisterActor(this);
         stateConnectorUpdate = (_fasc = GetComponent<FightActorStateConector>()).ManualUpdate;
         mortalUpdate = (_mortal = GetComponent<Mortal>()).ManualUpdate;
+        buffReceiver.Initialize(this);
     }
 
     public void ManualUpdate()
     {
         stateConnectorUpdate();
         mortalUpdate();
+        BuffReceiver.Update();
     }
 
     private void OnDestroy()
