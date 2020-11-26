@@ -192,7 +192,12 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
                 if (dealtAttackInfos[i] != null)
                 {
                     dealtAttackInfos[i].onAttackEvaluatedCallback.OnAttackEvaluated(true, this, result);
-                    Actor.BuffReceiver.Receive(dealtAttackInfos[i].attackData.Buff);
+                    
+                    Actor actor;
+                    if(TryGetActor(out actor))
+                    {
+                        actor.BuffReceiver.Receive(dealtAttackInfos[i].attackData.Buff);
+                    };
                 }
             }
             if (health <= 0 && originalHealth > 0)
