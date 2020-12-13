@@ -566,6 +566,7 @@ namespace ActorSarah
             {
                 //DecideNextStateInDefaultState
                 ConnectorSarah.sarahAnimator.SetBool("InterruptToInAir",!groundSensor.IsOnGround);
+                ConnectorSarah.sarahAnimator_Anima2D.SetBool("InterruptToInAir", !groundSensor.IsOnGround);
                 umbrella.Default();
                 aerialSlashAttack.Inactivate();
             }
