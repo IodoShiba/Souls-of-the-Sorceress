@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody2D)),DisallowMultipleComponent]
 public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdate
@@ -9,6 +10,11 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     public interface IDyingCallbackReceiver : UnityEngine.EventSystems.IEventSystemHandler
     {
         void OnSelfDying(DealtAttackInfo causeOfDeath);
+    }
+
+    public interface IOnTriedAttackCallbackReceiver : UnityEngine.EventSystems.IEventSystemHandler
+    {
+        void OnTriedAttack(Mortal attacker, AttackData dealt, in Vector2 relativePosition);
     }
 
     public class DealtAttackInfo
@@ -61,6 +67,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     Actor actor;
     int invincibleOrderedCount = 0;
     int originalLayer;
+    IOnTriedAttackCallbackReceiver[] onTriedAttackCallbackReceivers;
 
     public Actor Actor { get => actor == null ? (actor = GetComponent<Actor>()) : actor; }
     public bool TryGetActor(out Actor actor) => (actor = Actor) != null;
@@ -78,12 +85,16 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     {
         //dyingCallbacks.AddListener(OnDying);
         invincibleOrderedCount = 0;
+        onTriedAttackCallbackReceivers = GetComponents<IOnTriedAttackCallbackReceiver>();
     }
     protected virtual void OnAttacked(GameObject attackObj,AttackData attack) { }
 
     protected virtual void OnTriedAttack(Mortal attacker, AttackData dealt, in Vector2 relativePosition)
     {
-
+        for(int i=0; i<onTriedAttackCallbackReceivers.Length; ++i)
+        {
+            onTriedAttackCallbackReceivers[i].OnTriedAttack(attacker, dealt, relativePosition);
+        }
     }
 
     public virtual void OnDying(DealtAttackInfo causeOfDeath)

@@ -16,7 +16,7 @@ namespace ActorFunction
         public float DegreeRangeStart { get => degreeRangeStart; set => degreeRangeStart = value; }
         public float DegreeRangeWidth { get => degreeRangeWidth; set => degreeRangeWidth = value; }
 
-        public class Method : ActorFunctionMethod<GuardFields>
+        public class Method : ActorFunctionMethod<GuardFields>, Mortal.IOnTriedAttackCallbackReceiver
         {
             [System.Serializable] public class UnityEvent_Mortal_AttackData : UnityEngine.Events.UnityEvent<Mortal, AttackData> {}
             [SerializeField] bool activated;
@@ -72,6 +72,12 @@ namespace ActorFunction
             private void ResetSucceedState() { isAllSucceed = true; }
 
             public bool GetIsAllSucceedAndReset() { bool ret = isAllSucceed; ResetSucceedState(); return ret; }
+
+            public void OnTriedAttack(Mortal attacker, AttackData dealt, in Vector2 relativePosition)
+            {
+                if(!Activated){ return; }
+                TryGuard(attacker, dealt, relativePosition);
+            }
         }
 
     }

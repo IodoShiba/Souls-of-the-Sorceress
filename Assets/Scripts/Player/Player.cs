@@ -94,10 +94,6 @@ public class Player : Mortal, SaveData.IPlayerHealthCareer
     protected override void OnTriedAttack(Mortal attacker, AttackData dealt, in Vector2 relativePosition)
     {
         base.OnTriedAttack(attacker, dealt, relativePosition);
-        if (guard.Activated)
-        {
-            guard.TryGuard(attacker, dealt, relativePosition);
-        }
     }
 
     public override void OnDying(DealtAttackInfo causeOfDeath) //体力がなくなると呼ばれる関数　今はガバ実装

@@ -221,9 +221,16 @@ MonoBehaviour:
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
   m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
     m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
   m_CustomBlends: {fileID: 0}
   m_CameraCutEvent:
     m_PersistentCalls:
@@ -335,6 +342,8 @@ MonoBehaviour:
     attackCollider: {fileID: 189919881}
     throughable: 1
     hitstopSpan: 0
+    buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
@@ -394,6 +403,8 @@ MonoBehaviour:
     attackCollider: {fileID: 189919881}
     throughable: 1
     hitstopSpan: 0
+    buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
@@ -603,6 +614,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 464670549}
   health: 0
+  dangerThreshold: 0
+  dangerImage: {fileID: 0}
+  dangerClip: {fileID: 0}
+  audioSource: {fileID: 0}
   healthGaugeImage: {fileID: 1627772812}
 --- !u!1 &353786994
 GameObject:
@@ -1647,6 +1662,7 @@ MonoBehaviour:
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
   m_Priority: 10
+  m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
@@ -1655,6 +1671,14 @@ MonoBehaviour:
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
+    LensShift: {x: 0, y: 0}
+  m_Transitions:
+    m_BlendHint: 0
+    m_InheritPosition: 0
+    m_OnCameraLive:
+      m_PersistentCalls:
+        m_Calls: []
+  m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 1450252547}
 --- !u!4 &839676418
 Transform:
@@ -1682,16 +1706,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sarah
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: enemyManager
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: _debugText
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
@@ -1747,6 +1761,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: enemyManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: _debugText
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061092, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
@@ -1866,6 +1890,8 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 1
     hitstopSpan: 0
+    buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
@@ -3163,7 +3189,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1200558866}
   - component: {fileID: 1200558864}
-  - component: {fileID: 1200558875}
   - component: {fileID: 1200558863}
   - component: {fileID: 1200558861}
   - component: {fileID: 1200558862}
@@ -3178,6 +3203,9 @@ GameObject:
   - component: {fileID: 1200558876}
   - component: {fileID: 1200558865}
   - component: {fileID: 1200558877}
+  - component: {fileID: 1200558879}
+  - component: {fileID: 1200558878}
+  - component: {fileID: 1200558880}
   m_Layer: 23
   m_Name: Boss1
   m_TagString: Enemy
@@ -3199,7 +3227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 250
   maxHealth: 250
-  isInvulnerable: 1
+  isInvulnerable: 0
   dyingCallbacks:
     m_PersistentCalls:
       m_Calls: []
@@ -3220,7 +3248,8 @@ MonoBehaviour:
       m_Calls: []
   selfRigidbody: {fileID: 1200558863}
   dealingAttackConverters: []
-  dealtAttackConverters: []
+  dealtAttackConverters:
+  - {fileID: 1200558880}
   manager: {fileID: 1107197504}
 --- !u!114 &1200558862
 MonoBehaviour:
@@ -3235,6 +3264,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ignoreActiveReign: 0
+  buffReceiver:
+    compatibleList: {fileID: 0}
 --- !u!50 &1200558863
 Rigidbody2D:
   serializedVersion: 4
@@ -3267,7 +3298,7 @@ BoxCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.2, y: -0.4}
   m_SpriteTilingProperty:
@@ -3405,6 +3436,12 @@ MonoBehaviour:
         jumpHeight: 3.1
         jumpForce: 100000
         jumpUpSpeed: 18
+    guard:
+      method: {fileID: 1200558879}
+      fields:
+        multiplier: 0
+        degreeRangeStart: 0
+        degreeRangeWidth: 360
     passPlatform: {fileID: 1200558870}
     attackDifferencer: {fileID: 1200558874}
     dashClip: {fileID: 8300000, guid: b39deccf8b06e734193b273e836bd230, type: 3}
@@ -3444,6 +3481,7 @@ MonoBehaviour:
     directionable: {fileID: 1200558872}
     hitboxCollider: {fileID: 189919881}
     weakPoint: {fileID: 464670549}
+    guardMethod: {fileID: 1200558879}
   smashed:
     gameObject: {fileID: 1200558860}
     connector: {fileID: 1200558867}
@@ -3611,31 +3649,16 @@ MonoBehaviour:
     attackCollider: {fileID: 189919881}
     throughable: 1
     hitstopSpan: 0
+    buff: {fileID: 0}
+    attrFlags: 0
   - damage: 25
     knockBackImpulse: {x: 1000, y: 2500}
     attackCollider: {fileID: 189919881}
     throughable: 1
     hitstopSpan: 0
+    buff: {fileID: 0}
+    attrFlags: 0
   useIndex: 0
---- !u!251 &1200558875
-PlatformEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1200558860}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 256
-  m_RotationalOffset: 0
-  m_UseOneWay: 0
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
-  m_UseSideFriction: 0
-  m_UseSideBounce: 0
-  m_SideArc: 1
 --- !u!82 &1200558876
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3745,6 +3768,69 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 493745335}
+--- !u!114 &1200558878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200558860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b33df6df73c761c4cb23bb47d2e1ce58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 14a396b1562834718b2d52b9c4639264, type: 3}
+  animationClip: {fileID: 7400000, guid: b48a6521246ac9843a7f2fdf435c2d6f, type: 2}
+  barrierRange:
+    serializedVersion: 2
+    x: 0
+    y: -0.4
+    width: 3.5
+    height: 2
+  audioSource: {fileID: 1200558876}
+--- !u!114 &1200558879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200558860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca2fa5ccee2f5448ae9c52292080d73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activated: 0
+  onGuarded:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1200558878}
+        m_MethodName: DoEffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1200558880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200558860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a735277207513534eafea43685442d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  implement:
+    damageMultiplier: 0
+    knockbackMultiplier: 0
 --- !u!1 &1223263613
 GameObject:
   m_ObjectHideFlags: 0
@@ -5402,9 +5488,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 10
+  m_LookaheadIgnoreY: 0
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
+  m_TargetMovementOnly: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_CameraDistance: 10
@@ -5416,6 +5504,7 @@ MonoBehaviour:
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
   m_BiasY: 0
+  m_CenterOnActivate: 1
   m_GroupFramingMode: 2
   m_AdjustmentMode: 2
   m_GroupFramingSize: 0.8
