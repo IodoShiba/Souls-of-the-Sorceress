@@ -84,6 +84,7 @@ namespace ActorBossTitan
             [SerializeField] ActorFunction.Jump jump0Step;
             [SerializeField] ActorFunction.Jump jump1Step;
             [SerializeField] ActorFunction.Jump jump2Step;
+            [SerializeField] ActorFunction.Guard guard;
             [SerializeField] PassPlatform passPlatform;
             [SerializeField] AttackDifferencer attackDifferencer;
             [SerializeField] AudioClip dashClip;
@@ -117,6 +118,7 @@ namespace ActorBossTitan
                 titanAI.titanAnimator.SetTrigger("DefaultTrigger");
                 horizontalMove.Use = true;
                 weakPoint.IsInvulnerable = true;
+                guard.Method.Activated = true;
             }
 
             protected override void OnActive()
@@ -147,6 +149,8 @@ namespace ActorBossTitan
                 attackDifferencer.UseIndex = titanAI.MoveDirection == 0 ? 0 : 1;
 
                 IsRunning = jump0Step.Method.Activatable && horizontalMove.Method.IsMoving;
+
+                guard.ManualUpdate();
             }
 
             protected override void OnTerminate(bool isNormal)
@@ -155,6 +159,7 @@ namespace ActorBossTitan
                 horizontalMove.ManualUpdate(0);
                 horizontalMove.Use = false;
                 IsRunning = false;
+                guard.Method.Activated = false;
             }
         }
 
@@ -222,6 +227,7 @@ namespace ActorBossTitan
             [SerializeField] ActorFunction.Directionable directionable;
             [SerializeField] Collider2D hitboxCollider;
             [SerializeField] Mortal weakPoint;
+            [SerializeField] ActorFunction.GuardMethod guardMethod;
 
             IodoShibaUtil.ManualUpdateClass.ManualClock manualClock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
 
@@ -230,6 +236,7 @@ namespace ActorBossTitan
             protected override void OnInitialize()
             {
                 manualClock.Reset();
+                guardMethod.Activated = true;
                 titanAI.titanAnimator.SetTrigger("RecoverTrigger");
             }
 
