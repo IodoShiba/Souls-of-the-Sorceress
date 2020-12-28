@@ -20,8 +20,8 @@ public class SceneChanger : MonoBehaviour
 
     public void ChangeScene(string destinationSceneName, System.Action<UnityEngine.SceneManagement.Scene> sceneInitializer)
     {
-        TransitionEffect.InWipeEffet = inWipeEffet;
-        TransitionEffect.OutWipeEffet = outWipeEffet;
+        TransitionEffect.InWipeEffect = inWipeEffet;
+        TransitionEffect.OutWipeEffect = outWipeEffet;
         SceneTransitionManager.TransScene(destinationSceneName, sceneInitializer);
     }
     public void ChngeSceneTimed(float time)
