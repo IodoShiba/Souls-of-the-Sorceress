@@ -36,7 +36,7 @@ namespace SotS
         const int initialRemaining = 2;
 
         static int remaining;
-        static string targetSceneName = "stage0";
+        static string targetSceneName;
         static Subject<int> remainingCountListener = new Subject<int>();
         static ReviveSuspensor suspensor = new ReviveSuspensor();
 

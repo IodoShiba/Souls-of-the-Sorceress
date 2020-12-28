@@ -14,7 +14,7 @@ public class SceneTransitionManager : MonoBehaviour
     static System.Action<Scene> sceneInitializer = null;
     static bool targetSceneLoaded;
 
-    const string transitionSceneName = "TransitionAddScene";
+    public const string transitionSceneName = "TransitionAddScene";
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void RuntimeInitializeOnLoad()

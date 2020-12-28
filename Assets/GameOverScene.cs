@@ -62,7 +62,7 @@ public class GameOverScene : MonoBehaviour
         Camera.main.transform
             .DOMove(
                 (Vector3)(Vector2)playerDeadAnimation.transform.position -
-                    Camera.main.ViewportToWorldPoint((Vector3)(playerFinalOffset + Vector2.one)/2) +
+                    (Vector3)(Vector2)Camera.main.ViewportToWorldPoint((Vector3)(playerFinalOffset + Vector2.one)/2) +
                     Vector3.forward * Camera.main.transform.position.z,
                 cameraMoveSpan)
             .SetEase(Ease.OutExpo);
