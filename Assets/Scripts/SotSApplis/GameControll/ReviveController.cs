@@ -57,11 +57,11 @@ namespace SotS
             targetSceneName = sceneName;
         }
 
-        public static void Add(int amount)
+        public static void AddRemainingCount(int amount)
         {
             if(amount < 0){ throw new System.ArgumentException($"Negative 'amount' is not allowed. given: {amount}"); }
 
-            remainingCountListener.Publish(remaining += amount);
+            remainingCountListener.OnNext(remaining += amount);
         }
 
         public static IDisposable GetReviveSuspensor()

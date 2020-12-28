@@ -462,6 +462,7 @@ GameObject:
   - component: {fileID: 2754574714993579308}
   - component: {fileID: 2687985479622013432}
   - component: {fileID: 1825525797977242965}
+  - component: {fileID: 1936156233546906936}
   - component: {fileID: 8916380848889061124}
   - component: {fileID: 8916380848889061151}
   - component: {fileID: 8916380848889061125}
@@ -1487,6 +1488,18 @@ MonoBehaviour:
   onReceivedItem:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1936156233546906936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f261368c7fbdcf549812912d714fa1b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!70 &8916380848889061124
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
