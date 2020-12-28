@@ -2,29 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using SotS;
 
 public class GameOverScene : MonoBehaviour
 {
+    [SerializeField] Vector2 playerFinalOffset;
     [SerializeField] float flashSpan;
     [SerializeField] float deadAnimationSpan;
     [SerializeField] float cameraMoveSpan;
     [SerializeField] float gameOverTextAppearSpan;
-    [SerializeField] float pressAttackButtonTextAppearSpan;
+    [SerializeField, UnityEngine.Serialization.FormerlySerializedAs("pressAttackButtonTextAppearSpan")] float buttonAppearSpan;
     [SerializeField] float blackOutSpan;
+    [SerializeField] float reviveWaitSpan;
     [SerializeField] UnityEngine.UI.Image gameOverTextImage;
     [SerializeField] Transform playerDeadAnimation;
-    [SerializeField] UnityEngine.UI.Image pressAttackButtonImage;
+    [SerializeField] UnityEngine.UI.Button giveUpButton;
+    [SerializeField] UnityEngine.UI.Button reviveButton;
+    [SerializeField] TMPro.TMP_Text remainingCount;
     [SerializeField] UnityEngine.UI.Image flashImage;
     [SerializeField] string nextSceneName;
     [SerializeField] WipeEffet noWipe;
     [SerializeField] WipeEffet outWipe;
-    [SerializeField] InputToFireEvent inputToFireEvent;
     [SerializeField] AudioSource audioSource;
     [SerializeField] Animator gameOverAnimatorSarah;
 
     Vector3 playerScreenCoordinate;
     float orthoCamSize;
 
+    ButtonProcessor giveUpButtonProcessor;
+    ButtonProcessor reviveButtonProcessor;
 
     public void SetInitializeData(float orthoCamSize, Vector3 playerScreenCoordinate, int playerDir)
     {
@@ -37,6 +43,8 @@ public class GameOverScene : MonoBehaviour
 
     private void Start()
     {
+        giveUpButtonProcessor = new ButtonProcessor(giveUpButton);
+        reviveButtonProcessor = new ButtonProcessor(reviveButton);
         StartCoroutine(StartCo());
     }
 
@@ -53,7 +61,9 @@ public class GameOverScene : MonoBehaviour
 
         Camera.main.transform
             .DOMove(
-                (Vector3)(Vector2)playerDeadAnimation.transform.position + Vector3.forward * Camera.main.transform.position.z,
+                (Vector3)(Vector2)playerDeadAnimation.transform.position -
+                    (Vector3)(Vector2)Camera.main.ViewportToWorldPoint((Vector3)(playerFinalOffset + Vector2.one)/2) +
+                    Vector3.forward * Camera.main.transform.position.z,
                 cameraMoveSpan)
             .SetEase(Ease.OutExpo);
 
@@ -61,28 +71,98 @@ public class GameOverScene : MonoBehaviour
 
         gameOverTextImage.DOFade(1, gameOverTextAppearSpan);
         audioSource.Play();
-        inputToFireEvent.enabled = true;
+        //inputToFireEvent.enabled = true;
 
         yield return new WaitForSeconds(1);
 
-        pressAttackButtonImage.DOFade(1, pressAttackButtonTextAppearSpan);
+        reviveButtonProcessor.Appear(buttonAppearSpan);
+        giveUpButtonProcessor.Appear(buttonAppearSpan);
+        remainingCount.DOFade(1, buttonAppearSpan);
+
+        giveUpButtonProcessor.EnableButton(true);
+        if(SotS.ReviveController.IsRevivable)
+        {
+            reviveButtonProcessor.EnableButton(true);
+            reviveButtonProcessor.SetAsSelected();
+        }
+        else
+        {
+            giveUpButtonProcessor.SetAsSelected();
+        }
 
     }
 
-    public void GoNext()
+    public void LockButtons()
     {
-        StartCoroutine(GoNextCo());
+        giveUpButtonProcessor.EnableButton(false);
+        reviveButtonProcessor.EnableButton(false);
     }
 
-    IEnumerator GoNextCo()
+    public void GiveUp()
+    {
+        StartCoroutine(GiveUpCo());
+    }
+
+    IEnumerator GiveUpCo()
     {
         flashImage.color = Color.clear;
         flashImage.DOFade(1, blackOutSpan);
         yield return new WaitForSeconds(blackOutSpan);
 
-        TransitionEffect.InWipeEffet = noWipe;
-        TransitionEffect.OutWipeEffet = outWipe;
+        TransitionEffect.InWipeEffect = noWipe;
+        TransitionEffect.OutWipeEffect = outWipe;
         SceneTransitionManager.TransScene(nextSceneName, null);
-        
+    }
+
+    public void Revive()
+    {
+        StartCoroutine(ReviveCo());
+    }
+
+    public IEnumerator ReviveCo()
+    {
+        using(System.IDisposable reviveSuspensor = ReviveController.GetReviveSuspensor())
+        {
+            if(reviveSuspensor == null){ yield break; }
+
+            yield return new WaitForSeconds(reviveWaitSpan);
+
+            flashImage.color = Color.clear;
+            flashImage.DOFade(1, blackOutSpan);
+            yield return new WaitForSeconds(blackOutSpan);
+
+            TransitionEffect.InWipeEffect = noWipe;
+            TransitionEffect.OutWipeEffect = outWipe;
+        }
+    }
+
+    class ButtonProcessor
+    {
+        UnityEngine.UI.Button button;
+        UnityEngine.UI.Image image;
+        TMPro.TMP_Text text;
+
+        public ButtonProcessor(UnityEngine.UI.Button button)
+        {
+            this.button = button;
+            this.image = button.GetComponent<UnityEngine.UI.Image>();
+            this.text = button.GetComponentInChildren<TMPro.TMP_Text>();
+        }
+
+        public void Appear(float duration = 1f)
+        {
+            image.DOFade(1, duration);
+            text.DOFade(1, duration);
+        }
+
+        public void EnableButton(bool does)
+        {
+            button.interactable = does;
+        }
+
+        public void SetAsSelected()
+        {
+            UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(button.gameObject);
+        }
     }
 }

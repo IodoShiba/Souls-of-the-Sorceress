@@ -31,6 +31,8 @@ public static class SceneName
     public const string stage1Tutorial = "stage1_tutorial";
     public const string stage1 = "stage1";
     public const string boss1 = "1-boss";
+    public const string gameOver = "GameOver";
+    public const string transitionAdd = SceneTransitionManager.transitionSceneName;
 }
 
 public static class TagName

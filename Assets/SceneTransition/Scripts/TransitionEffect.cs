@@ -17,8 +17,8 @@ public class TransitionEffect : MonoBehaviour
     static WipeEffet inWipeEffet;
     static WipeEffet outWipeEffet;
     public static WipeEffet WipeEffet { set => inWipeEffet = outWipeEffet = value; }
-    public static WipeEffet InWipeEffet { get => inWipeEffet; set => inWipeEffet = value; }
-    public static WipeEffet OutWipeEffet { get => outWipeEffet; set => outWipeEffet = value; }
+    public static WipeEffet InWipeEffect { get => inWipeEffet; set => inWipeEffet = value; }
+    public static WipeEffet OutWipeEffect { get => outWipeEffet; set => outWipeEffet = value; }
 
     public bool IsOnEffect { get => isOnEffect; }
 
