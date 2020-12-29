@@ -75,10 +75,6 @@ public class GameOverScene : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        reviveButtonProcessor.Appear(buttonAppearSpan);
-        giveUpButtonProcessor.Appear(buttonAppearSpan);
-        remainingCount.DOFade(1, buttonAppearSpan);
-
         giveUpButtonProcessor.EnableButton(true);
         if(SotS.ReviveController.IsRevivable)
         {
@@ -87,9 +83,13 @@ public class GameOverScene : MonoBehaviour
         }
         else
         {
+            reviveButtonProcessor.ActivateObject(false);
             giveUpButtonProcessor.SetAsSelected();
         }
 
+        reviveButtonProcessor.Appear(buttonAppearSpan);
+        giveUpButtonProcessor.Appear(buttonAppearSpan);
+        remainingCount.DOFade(1, buttonAppearSpan);
     }
 
     public void LockButtons()
@@ -151,8 +151,15 @@ public class GameOverScene : MonoBehaviour
 
         public void Appear(float duration = 1f)
         {
+            if(!button.gameObject.activeSelf){return;}
+
             image.DOFade(1, duration);
             text.DOFade(1, duration);
+        }
+
+        public void ActivateObject(bool does)
+        {
+            button.gameObject.SetActive(does);
         }
 
         public void EnableButton(bool does)
