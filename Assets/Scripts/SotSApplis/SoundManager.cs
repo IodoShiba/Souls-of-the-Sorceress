@@ -1,57 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
-
-public class SoundManager : MonoBehaviour
+public class SoundManager : SoundManagerScriptable.Mono
 {
-    [SerializeField] AudioSource audioSource;
+    const string addressableAddress = "Assets/Prefabs/Essentials/SoundManager.prefab";
+
     static SoundManager instance;
-    static SoundManager Instance { get => instance; }
 
-    public void Initialize()
+    public static SoundManager Instance { get => instance; }
+
+    protected override void Awake()
     {
-
+        base.Awake();
+        instance = this;
     }
 
-    public void PlayOneShot(AudioClip audioClip) => audioSource.PlayOneShot(audioClip);
-    public void PlayOneShot(AudioClip audioClip, float volumeScale) => audioSource.PlayOneShot(audioClip, volumeScale);
-
-    public void OnBeforeSerialize()
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void RuntimeInitializeOnLoad()
     {
-        throw new System.NotImplementedException();
+        Addressables.InstantiateAsync(addressableAddress);
     }
 
-    public void OnAfterDeserialize()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public class Scriptable : ScriptableObject
-    {
-        [SerializeField] protected SoundManager prefab;
-        static protected SoundManager sPrefab;
-
-        [Space(16)]
-        [SerializeField] AudioClip submit;
-        [SerializeField] AudioClip cancel;
-        [SerializeField] AudioClip moveCursor;
-        [SerializeField] AudioClip attack;
-        [SerializeField] AudioClip stageClear;
-        [SerializeField] AudioClip stageReleased;
-
-        
-        [RuntimeInitializeOnLoadMethod]
-        static void RuntimeInitializeOnLoad(SoundManager prefab)
-        {
-            DontDestroyOnLoad(SoundManager.instance = Instantiate(prefab, Vector3.zero, Quaternion.identity));
-            Instance.Initialize();
-        }
-
-        public void PlayOneShot(AudioClip audioClip) => Instance.PlayOneShot(audioClip);
-        public void PlayOneShot(AudioClip audioClip, float volumeScale) => Instance.PlayOneShot(audioClip, volumeScale);
-
-
-    }
 }
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UniRx;
 using System;
+using UnityEngine.AddressableAssets;
 
 namespace SotS
 {
@@ -39,6 +40,7 @@ namespace SotS
         static string targetSceneName;
         static Subject<int> remainingCountListener = new Subject<int>();
         static ReviveSuspensor suspensor = new ReviveSuspensor();
+        static SoundCollection systemSoundCollection;
 
         public static int Remaining { get => remaining; }
         
@@ -50,6 +52,8 @@ namespace SotS
         static void RuntimeInitialize()
         {
             remaining = initialRemaining;
+            Addressables.LoadAssetAsync<SoundCollection>(AddressableAddresses.soundCollections + "SystemSounds.asset")
+                .Completed += (op) => {systemSoundCollection = op.Result;};
         }
 
         public static void SetTargetSceneName(string sceneName)
@@ -62,6 +66,7 @@ namespace SotS
             if(amount < 0){ throw new System.ArgumentException($"Negative 'amount' is not allowed. given: {amount}"); }
 
             remainingCountListener.OnNext(remaining += amount);
+            SoundManager.Instance.PlayOneShot(systemSoundCollection["1Up"]);
         }
 
         public static IDisposable GetReviveSuspensor()

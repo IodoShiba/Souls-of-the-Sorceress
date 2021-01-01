@@ -4,15 +4,33 @@ using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "ScriptableObject/SoundManager")]
-public class SoundManagerScriptable : SoundManager.Scriptable, ISerializationCallbackReceiver
+public class SoundManagerScriptable : ScriptableObject
 {
-    public void OnBeforeSerialize()
-    {
+    Mono instantiated;
 
-    }
+    [Space(16)]
+    [SerializeField] AudioClip submit;
+    [SerializeField] AudioClip cancel;
+    [SerializeField] AudioClip moveCursor;
+    [SerializeField] AudioClip attack;
+    [SerializeField] AudioClip stageClear;
+    [SerializeField] AudioClip stageReleased;
 
-    public void OnAfterDeserialize()
+    public void PlayOneShot(AudioClip audioClip) => instantiated.PlayOneShot(audioClip);
+    public void PlayOneShot(AudioClip audioClip, float volumeScale) => instantiated.PlayOneShot(audioClip, volumeScale);
+
+    public class Mono : MonoBehaviour
     {
-        sPrefab = prefab;
+        [SerializeField] SoundManagerScriptable scriptable;
+        [SerializeField] AudioSource audioSource;
+
+        protected virtual void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+            scriptable.instantiated = this;
+        }
+            
+        public void PlayOneShot(AudioClip audioClip) => audioSource.PlayOneShot(audioClip);
+        public void PlayOneShot(AudioClip audioClip, float volumeScale) => audioSource.PlayOneShot(audioClip, volumeScale);
     }
 }
