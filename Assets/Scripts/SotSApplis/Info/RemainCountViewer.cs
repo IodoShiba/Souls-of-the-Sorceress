@@ -6,7 +6,7 @@ using UniRx;
 
 public class RemainCountViewer : MonoBehaviour
 {
-    const string format = "@x{0}";
+    const string format = "<sprite name=\"sarah\">x{0}";
 
     [SerializeField] TMPro.TMP_Text text;
 
