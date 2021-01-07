@@ -48,3 +48,8 @@ public static class LayerName
     public const string invincibleActor = "Invincible Actor";
     public const string uncrossActor = "Uncross Actor";
 }
+
+public static class AddressableAddresses
+{
+    public static string soundCollections = "Assets/Soundcollections/";
+}

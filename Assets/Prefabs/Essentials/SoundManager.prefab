@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665395263c0e0434c93100d34bd76fbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scriptable: {fileID: 11400000, guid: df51f3d83367d994b89827220198ac54, type: 2}
+  audioSource: {fileID: 6403425774507222986}
 --- !u!82 &6403425774507222986
 AudioSource:
   m_ObjectHideFlags: 0
@@ -58,7 +60,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
