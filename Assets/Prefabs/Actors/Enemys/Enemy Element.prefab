@@ -235,6 +235,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ignoreActiveReign: 0
+  buffReceiver:
+    compatibleList: {fileID: 0}
 --- !u!114 &964724003723573771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootCycle: 2
-  maxChaseGap: {x: 10, y: Infinity}
+  maxChaseGap: {x: 16, y: Infinity}
   minChaseGap: {x: 1, y: 0}
   player: {fileID: 0}
   _shootBullet: {fileID: 964724003723573808}
@@ -270,7 +272,7 @@ MonoBehaviour:
   elementDefault:
     gameObject: {fileID: 964724003723573768}
     connector: {fileID: 3400861851107116815}
-    moveSpeedX: 2
+    moveSpeedX: 1.5
     moveSpeedY: 0
     velocityAdjuster:
       method: {fileID: 4887456833946179394}
@@ -457,6 +459,8 @@ MonoBehaviour:
     attackCollider: {fileID: 3092064380534640577}
     throughable: 1
     hitstopSpan: 0
+    buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []

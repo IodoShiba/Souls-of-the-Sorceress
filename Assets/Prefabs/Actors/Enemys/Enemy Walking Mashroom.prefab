@@ -339,6 +339,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d4c1c480dfcd2b489bfa7155b61bbc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreActiveReign: 0
+  buffReceiver:
+    compatibleList: {fileID: 0}
 --- !u!114 &6462707158948944647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,6 +527,8 @@ MonoBehaviour:
     attackCollider: {fileID: 6891321231477494684}
     throughable: 1
     hitstopSpan: 0
+    buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
