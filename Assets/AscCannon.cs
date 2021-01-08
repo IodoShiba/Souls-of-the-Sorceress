@@ -63,7 +63,7 @@ public class AscCannon : FightActorStateConector
         {
             base.OnActive();
 
-            Debug.Log("Cannon Running");
+//            Debug.Log("Cannon Running");
             t -= Time.deltaTime;
             if(t < 0)
             {
