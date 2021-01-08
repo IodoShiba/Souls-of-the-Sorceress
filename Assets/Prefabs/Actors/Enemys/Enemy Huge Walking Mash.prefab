@@ -182,6 +182,8 @@ MonoBehaviour:
     attackCollider: {fileID: 4246921619655179260}
     throughable: 1
     hitstopSpan: 0
+    buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
@@ -426,6 +428,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ignoreActiveReign: 0
+  buffReceiver:
+    compatibleList: {fileID: 0}
 --- !u!114 &4246921619872684890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,7 +445,7 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   maxChaseRadius: 16
   minChaseRadius: 0.3
-  summonCycle: 4
+  summonCycle: 3
   maxNearbyEnemyCount: 3
   sensor: {fileID: 4735956752221833305}
 --- !u!114 &4246921619872684889
