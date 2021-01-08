@@ -10,17 +10,17 @@ public class SoundManager : SoundManagerScriptable.Mono
     static SoundManager instance;
 
     public static SoundManager Instance { get => instance; }
-
-    protected override void Awake()
-    {
-        base.Awake();
-        instance = this;
-    }
+    
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void RuntimeInitializeOnLoad()
     {
-        Addressables.InstantiateAsync(addressableAddress);
+        Addressables.InstantiateAsync(addressableAddress).Completed += 
+            asyncop => 
+            { 
+                instance = asyncop.Result.GetComponent<SoundManager>();
+                instance.SetInstantiated();
+            };
     }
 
 }

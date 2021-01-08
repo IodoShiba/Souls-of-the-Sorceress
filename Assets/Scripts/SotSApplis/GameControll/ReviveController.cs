@@ -66,7 +66,7 @@ namespace SotS
             if(amount < 0){ throw new System.ArgumentException($"Negative 'amount' is not allowed. given: {amount}"); }
 
             remainingCountListener.OnNext(remaining += amount);
-            SoundManager.Instance.PlayOneShot(systemSoundCollection["1Up"]);
+            SoundManager.Instance.PlaySE(systemSoundCollection["1Up"]);
         }
 
         public static IDisposable GetReviveSuspensor()

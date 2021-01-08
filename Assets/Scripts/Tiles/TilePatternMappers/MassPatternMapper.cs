@@ -16,7 +16,7 @@ public class MassPatternMapper : TilePatternMapperRegionPathsIntShape,ISerializa
 
     protected override void ReleaseAtEndOfSearch()
     {
-        Debug.Log(unresolvedInners.Count);
+//        Debug.Log(unresolvedInners.Count);
         outForRegionPaths = null;
         unresolvedInners = null;
     }
