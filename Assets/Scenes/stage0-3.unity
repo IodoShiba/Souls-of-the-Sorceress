@@ -3587,6 +3587,62 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4033456170830702560, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033456170589653322, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033456170589653322, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033456170589653322, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033456170589653322, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033456170990609747, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033456170990609747, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033456170990609747, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033456170990609747, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033456169252425466, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 3021854520875155348, guid: 8af6e3aab6eb6bb4ebc6fb6e1d857000,
+        type: 2}
+    - target: {fileID: 4033456169252425466, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ed340671a640f14cb55b40640e1db20, type: 3}
 --- !u!224 &1838449763 stripped
@@ -3606,6 +3662,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Sarah
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: _debugText
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
@@ -3661,11 +3722,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: _debugText
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061092, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
@@ -4413,8 +4469,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6538dbbf9b68e0c40ae8351bab7485f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instruction: 
-  description: 
+  instruction: "\u899A\u9192(\u30B2\u30FC\u30B8\u6E80\u30BF\u30F3\u6642\u306E\u307F)\n<sprite
+    name=key_l>"
+  description: "\u899A\u9192\u4E2D\u306F\u653B\u6483\u529B\u3068\u7BC4\u56F2\u304C\u5927\u304D\u304F\u5F37\u5316\u3000\u3082\u3046\u4E00\u5EA6\u62BC\u3059\u3068\u30AD\u30E3\u30F3\u30BB\u30EB"
 --- !u!4 &7616812954321855227
 Transform:
   m_ObjectHideFlags: 0

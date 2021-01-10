@@ -5524,11 +5524,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Walking Mashroom (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5589,6 +5584,11 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 142936187}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71f7c0f754800a240b655b4103b6dbdd, type: 3}
 --- !u!1 &926918646
@@ -6672,11 +6672,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Walking Mashroom (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6737,6 +6732,11 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 142936187}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71f7c0f754800a240b655b4103b6dbdd, type: 3}
 --- !u!1 &1829037838
@@ -7708,8 +7708,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6538dbbf9b68e0c40ae8351bab7485f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instruction: 
-  description: 
+  instruction: "\u843D\u4E0B\u653B\u6483\n<sprite name=\"key_down\">\u62BC\u3057\u306A\u304C\u3089<sprite
+    name=\"key_h\">(\u7A7A\u4E2D\u306E\u307F)"
+  description: "\u4E0B\u65B9\u5411\u306B\u653B\u6483\u3067\u304D\u3001\u6575\u3092\u5927\u304D\u304F\u7A81\u304D\u98DB\u3070\u3059"
 --- !u!4 &2868674909657470151
 Transform:
   m_ObjectHideFlags: 0
