@@ -52,8 +52,9 @@ namespace SotS
         static void RuntimeInitialize()
         {
             Reset();
-            Addressables.LoadAssetAsync<SoundCollection>(AddressableAddresses.soundCollections + "SystemSounds.asset")
-                .Completed += (op) => {systemSoundCollection = op.Result;};
+            // Addressables.LoadAssetAsync<SoundCollection>(AddressableAddresses.soundCollections + "SystemSounds.asset")
+            //    .Completed += (op) => {systemSoundCollection = op.Result;};
+            systemSoundCollection=Resources.Load<SoundCollection>("SoundCollections/SystemSounds");
         }
 
         public static void SetTargetSceneName(string sceneName)
