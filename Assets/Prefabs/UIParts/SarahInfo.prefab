@@ -901,10 +901,10 @@ MonoBehaviour:
   elementPrefab: {fileID: 4857543497856399092, guid: 5fa463a7cbb384e4ea76ff9d2676eeed,
     type: 3}
   shakeRPositionsOnBreak:
-  - {x: 3, y: 3}
-  - {x: -3, y: 3}
-  - {x: 3, y: -3}
-  - {x: -3, y: -3}
+  - {x: 0.06, y: 0.06}
+  - {x: -0.06, y: 0.06}
+  - {x: 0.06, y: -0.06}
+  - {x: -0.06, y: -0.06}
   shakeCycleOnBreak: 0.3
   blinkCycleOnBreak: 1
 --- !u!114 &8521098998384894953
@@ -6343,6 +6343,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3759206532810366066}
     m_Modifications:
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_Name
+      value: ComboToast3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6878493209649639839, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6448,16 +6458,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_Name
-      value: ComboToast3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6878493209671511971, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -6505,6 +6505,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3759206532810366066}
     m_Modifications:
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_Name
+      value: ComboToast5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6878493209649639839, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6610,16 +6620,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_Name
-      value: ComboToast5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6878493209671511971, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -6667,6 +6667,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3759206532810366066}
     m_Modifications:
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_Name
+      value: ComboToast2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6878493209649639839, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6771,16 +6781,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_Name
-      value: ComboToast2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6878493209671511971, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
@@ -6829,6 +6829,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3759206532810366066}
     m_Modifications:
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_Name
+      value: ComboToast1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6878493209649639839, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6934,16 +6944,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_Name
-      value: ComboToast1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6878493209671511971, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -6991,6 +6991,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3759206532810366066}
     m_Modifications:
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_Name
+      value: ComboToast7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6878493209649639839, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7096,16 +7106,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_Name
-      value: ComboToast7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6878493209671511971, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -7153,6 +7153,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3759206532810366066}
     m_Modifications:
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_Name
+      value: ComboToast8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6878493209649639839, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7258,16 +7268,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_Name
-      value: ComboToast8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6878493209671511971, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -7315,6 +7315,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3759206532810366066}
     m_Modifications:
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_Name
+      value: ComboToast4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6878493209649639839, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7420,16 +7430,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_Name
-      value: ComboToast4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6878493209671511971, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -7477,6 +7477,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3759206532810366066}
     m_Modifications:
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_Name
+      value: ComboToast6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6878493209649639839, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7581,16 +7591,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_Name
-      value: ComboToast6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6878493209649639838, guid: 965bdccc86ca82e41b07d3a8b30d6459,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6878493209671511971, guid: 965bdccc86ca82e41b07d3a8b30d6459,
         type: 3}
