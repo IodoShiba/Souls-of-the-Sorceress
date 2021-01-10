@@ -45,6 +45,7 @@ public class SoundManagerScriptable : ScriptableObject
         {
             DontDestroyOnLoad(gameObject);
             scriptable.instantiated = this;
+            Debug.Log("set instantiated");
         }
             
         public void PlaySE(AudioClip audioClip) => seAudioSource.PlayOneShot(audioClip);

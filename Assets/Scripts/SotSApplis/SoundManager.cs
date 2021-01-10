@@ -15,12 +15,14 @@ public class SoundManager : SoundManagerScriptable.Mono
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void RuntimeInitializeOnLoad()
     {
-        Addressables.InstantiateAsync(addressableAddress).Completed += 
-            asyncop => 
-            { 
-                instance = asyncop.Result.GetComponent<SoundManager>();
-                instance.SetInstantiated();
-            };
+        // Addressables.InstantiateAsync(addressableAddress).Completed += 
+        //     asyncop => 
+        //     { 
+        //         instance = asyncop.Result.GetComponent<SoundManager>();
+        //         instance.SetInstantiated();
+        //     };
+        instance = GameObject.Instantiate(Resources.Load<GameObject>("SoundManager")).GetComponent<SoundManager>();
+        instance.SetInstantiated();
     }
 
 }
