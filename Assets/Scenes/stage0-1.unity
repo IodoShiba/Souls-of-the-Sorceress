@@ -1005,10 +1005,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6538dbbf9b68e0c40ae8351bab7485f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instruction: ADSW<sprite name="key_k"><sprite name="key_h"><sprite name="key_l"><sprite
-    name="key_right"><sprite name="key_left"><sprite name="key_up"><sprite name="key_down"><sprite
-    name="key_space">ADSW
-  description: qwertyuiop
+  instruction: "\u79FB\u52D5\u3000\u3000\u3000\u30B8\u30E3\u30F3\u30D7 \n<sprite name=\"key_left\"><sprite
+    name=\"key_right>\u3000\u3000\u3000<sprite name=\"key_space\">"
+  description: "\u79FB\u52D5\u306FWASD\u3067\u3082\u3067\u304D\u308B"
 --- !u!1 &808357741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,7 +1052,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 808357741}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
