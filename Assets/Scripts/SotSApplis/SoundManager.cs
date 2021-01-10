@@ -21,7 +21,7 @@ public class SoundManager : SoundManagerScriptable.Mono
         //         instance = asyncop.Result.GetComponent<SoundManager>();
         //         instance.SetInstantiated();
         //     };
-        instance = Resources.Load<GameObject>("SoundManager").GetComponent<SoundManager>();
+        instance = GameObject.Instantiate(Resources.Load<GameObject>("SoundManager")).GetComponent<SoundManager>();
         instance.SetInstantiated();
     }
 
