@@ -51,7 +51,7 @@ namespace SotS
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         static void RuntimeInitialize()
         {
-            remaining = initialRemaining;
+            Reset();
             Addressables.LoadAssetAsync<SoundCollection>(AddressableAddresses.soundCollections + "SystemSounds.asset")
                 .Completed += (op) => {systemSoundCollection = op.Result;};
         }
@@ -81,5 +81,9 @@ namespace SotS
             return suspensor.Reuse(targetSceneName);
         }
         
+        public static void Reset()
+        {
+            remaining = initialRemaining;
+        }
     }
 }
