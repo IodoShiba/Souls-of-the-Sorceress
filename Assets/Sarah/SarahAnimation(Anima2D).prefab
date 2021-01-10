@@ -49,7 +49,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 024a88e54db51504ba32da9962e81bed, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9263178, g: 0.9339623, b: 0.039649326, a: 1}
-  m_Length: 1.0779481
+  m_Length: 1.0779488
   m_ChildTransform: {fileID: 6183043309601622491}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043309656964319
@@ -862,7 +862,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
-  m_Length: 0.5698662
+  m_Length: 0.56986606
   m_ChildTransform: {fileID: 6183043310525071385}
   m_AttachedIK: {fileID: 6183043311372880608}
 --- !u!1 &6183043309842009141
@@ -910,7 +910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
-  m_Length: 0.47886202
+  m_Length: 0.47886255
   m_ChildTransform: {fileID: 6183043310812981079}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043309852835712
@@ -990,7 +990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.039215688, g: 0.10588236, b: 0.9333334, a: 1}
-  m_Length: 0.6841424
+  m_Length: 0.6841427
   m_ChildTransform: {fileID: 6183043310488575211}
   m_AttachedIK: {fileID: 6183043309970541891}
 --- !u!1 &6183043309892440346
@@ -1038,7 +1038,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8584906, g: 0.11743506, b: 0.527096, a: 1}
-  m_Length: 0.22479007
+  m_Length: 0.22479035
   m_ChildTransform: {fileID: 6183043311431336410}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043309916988108
@@ -1240,28 +1240,28 @@ MonoBehaviour:
     m_RootBoneTransform: {fileID: 6183043309869675647}
     m_SolverPoses:
     - m_BoneTransform: {fileID: 6183043309869675647}
-      solverPosition: {x: -0.0000009408503, y: -0.00000020508242, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.9974483, w: 0.07139253}
+      solverPosition: {x: -0.0000014103375, y: 0.0000009613392, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.999051, w: 0.04355812}
       defaultLocalRotation: {x: 0, y: 0, z: -0.9965621, w: 0.08284885}
     - m_BoneTransform: {fileID: 6183043310488575211}
-      solverPosition: {x: 0.6839606, y: -0.015721673, z: 0}
-      solverRotation: {x: 0, y: 0, z: 0.10601038, w: 0.9943651}
+      solverPosition: {x: 0.68202305, y: -0.053817175, z: 0}
+      solverRotation: {x: 0, y: 0, z: 0.06739153, w: 0.9977266}
       defaultLocalRotation: {x: 0, y: 0, z: 0.12639895, w: 0.99197954}
     - m_BoneTransform: {fileID: 6183043310270526341}
-      solverPosition: {x: 1.3578172, y: 0.11348177, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.030065244, w: 0.9995479}
+      solverPosition: {x: 1.3670726, y: -0.015316166, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.090850726, w: 0.9958646}
       defaultLocalRotation: {x: 0, y: 0, z: -0.0064100195, w: 0.9999795}
     - m_BoneTransform: {fileID: 6183043311557741458}
-      solverPosition: {x: 1.9817775, y: 0.19461252, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.05675073, w: 0.9983884}
+      solverPosition: {x: 1.9913125, y: -0.09427109, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.15170485, w: 0.98842585}
       defaultLocalRotation: {x: 0, y: 0, z: -0.034037925, w: 0.9994206}
     - m_BoneTransform: {fileID: 6183043310254689875}
-      solverPosition: {x: 2.7034092, y: 0.20596936, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.067893445, w: 0.9976926}
+      solverPosition: {x: 2.6472127, y: -0.39539465, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.2104256, w: 0.97761}
       defaultLocalRotation: {x: 0, y: 0, z: -0.06941604, w: 0.99758786}
     m_Weight: 1
     m_RestoreDefaultPose: 1
-    targetPosition: {x: 4.81945, y: -1.4659842, z: 0}
+    targetPosition: {x: 4.7078905, y: -1.4138509, z: 0}
     iterations: 10
     damping: 0.8
 --- !u!1 &6183043310005927435
@@ -1356,7 +1356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.039215684, g: 0.10547174, b: 0.93333334, a: 1}
-  m_Length: 0.61124843
+  m_Length: 0.61124825
   m_ChildTransform: {fileID: 6183043310743325681}
   m_AttachedIK: {fileID: 6183043311601560580}
 --- !u!1 &6183043310047892985
@@ -1404,7 +1404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9263178, g: 0.9339623, b: 0.039649326, a: 1}
-  m_Length: 2.359313
+  m_Length: 2.3593125
   m_ChildTransform: {fileID: 6183043311442876556}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043310076671533
@@ -1600,7 +1600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.14117646, g: 0.90588236, b: 0.6511956, a: 1}
-  m_Length: 0.6373701
+  m_Length: 0.63736886
   m_ChildTransform: {fileID: 6183043310571693500}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043310234011349
@@ -1648,7 +1648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.14117646, g: 0.90588236, b: 0.6511956, a: 1}
-  m_Length: 0.6598827
+  m_Length: 0.6598829
   m_ChildTransform: {fileID: 6183043310334659808}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043310242983603
@@ -1790,7 +1790,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.039215688, g: 0.10588236, b: 0.9333334, a: 1}
-  m_Length: 0.6292132
+  m_Length: 0.62921256
   m_ChildTransform: {fileID: 6183043311557741458}
   m_AttachedIK: {fileID: 6183043309970541891}
 --- !u!1 &6183043310276566585
@@ -1958,7 +1958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.37848833, g: 0.9622642, b: 0.06808472, a: 1}
-  m_Length: 0.62257344
+  m_Length: 0.62257355
   m_ChildTransform: {fileID: 6183043311438330037}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043310334659809
@@ -2464,7 +2464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.19501291, g: 0.14097545, b: 0.9056604, a: 1}
-  m_Length: 0.7610696
+  m_Length: 0.76106966
   m_ChildTransform: {fileID: 6183043310407642243}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043310440969422
@@ -2779,7 +2779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.039215688, g: 0.10588236, b: 0.9333334, a: 1}
-  m_Length: 0.68613183
+  m_Length: 0.6861318
   m_ChildTransform: {fileID: 6183043310270526341}
   m_AttachedIK: {fileID: 6183043309970541891}
 --- !u!1 &6183043310525071382
@@ -2827,7 +2827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
-  m_Length: 0.99999976
+  m_Length: 0.9999995
   m_ChildTransform: {fileID: 6183043310795336425}
   m_AttachedIK: {fileID: 6183043311372880608}
 --- !u!1 &6183043310566330170
@@ -3075,7 +3075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9263178, g: 0.9339623, b: 0.039649326, a: 1}
-  m_Length: 1.5817182
+  m_Length: 1.5817186
   m_ChildTransform: {fileID: 6183043309604252667}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043310646423582
@@ -3123,7 +3123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
-  m_Length: 0.49075016
+  m_Length: 0.4907494
   m_ChildTransform: {fileID: 6183043311309159167}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043310665288411
@@ -3220,7 +3220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.7207031, g: 0.17332679, b: 0.8962264, a: 1}
-  m_Length: 1.5613948
+  m_Length: 1.561395
   m_ChildTransform: {fileID: 6183043311670977347}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043310743325678
@@ -3268,7 +3268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.039215688, g: 0.10588236, b: 0.9333334, a: 1}
-  m_Length: 0.6468666
+  m_Length: 0.6468658
   m_ChildTransform: {fileID: 6183043311574463584}
   m_AttachedIK: {fileID: 6183043311601560580}
 --- !u!1 &6183043310769160890
@@ -3363,7 +3363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
-  m_Length: 1.0549792
+  m_Length: 1.0549794
   m_ChildTransform: {fileID: 6183043311067701279}
   m_AttachedIK: {fileID: 6183043311372880608}
 --- !u!1 &6183043310812981076
@@ -3411,7 +3411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
-  m_Length: 0.49074912
+  m_Length: 0.49074972
   m_ChildTransform: {fileID: 6183043311279301635}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043310836188852
@@ -3921,7 +3921,7 @@ SkinnedMeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -2
+  m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -4391,7 +4391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.19501291, g: 0.14097545, b: 0.9056604, a: 1}
-  m_Length: 0.7610693
+  m_Length: 0.761069
   m_ChildTransform: {fileID: 6183043309916988111}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043311067701276
@@ -4439,7 +4439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
-  m_Length: 0.9773698
+  m_Length: 0.97737044
   m_ChildTransform: {fileID: 6183043310440969425}
   m_AttachedIK: {fileID: 6183043311372880608}
 --- !u!1 &6183043311074368895
@@ -4594,7 +4594,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8117647, g: 0.5625899, b: 0.08627452, a: 1}
-  m_Length: 0.81001604
+  m_Length: 0.8100156
   m_ChildTransform: {fileID: 6183043310769160893}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043311081824480
@@ -5660,7 +5660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8117647, g: 0.5625899, b: 0.08627452, a: 1}
-  m_Length: 0.8189104
+  m_Length: 0.8189097
   m_ChildTransform: {fileID: 6183043311314042634}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043311314042635
@@ -5708,7 +5708,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8117647, g: 0.5625899, b: 0.08627452, a: 1}
-  m_Length: 0.70745456
+  m_Length: 0.70745414
   m_ChildTransform: {fileID: 6183043310005927434}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043311372880609
@@ -5766,28 +5766,28 @@ MonoBehaviour:
     m_RootBoneTransform: {fileID: 6183043309802346214}
     m_SolverPoses:
     - m_BoneTransform: {fileID: 6183043309802346214}
-      solverPosition: {x: 0.0000003821458, y: 0.00000011762964, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.93182546, w: -0.36290666}
+      solverPosition: {x: 0.00000052123045, y: 0.0000006624663, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.91436785, w: -0.4048845}
       defaultLocalRotation: {x: -0, y: -0, z: -0.9282454, w: -0.37196836}
     - m_BoneTransform: {fileID: 6183043310525071385}
-      solverPosition: {x: 0.56975704, y: 0.011103838, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.45186326, w: -0.89208734}
+      solverPosition: {x: 0.5684117, y: -0.040681258, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.41153365, w: -0.9113946}
       defaultLocalRotation: {x: 0, y: 0, z: -0.45966023, w: -0.8880949}
     - m_BoneTransform: {fileID: 6183043310795336425}
-      solverPosition: {x: 1.1455755, y: 0.8286817, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.049381655, w: 0.99878}
+      solverPosition: {x: 1.2815553, y: 0.6603378, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.12621282, w: 0.9920032}
       defaultLocalRotation: {x: 0, y: 0, z: -0.050788417, w: 0.99870944}
     - m_BoneTransform: {fileID: 6183043311067701279}
-      solverPosition: {x: 1.8351712, y: 1.6270794, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.08116648, w: 0.9967005}
+      solverPosition: {x: 2.1951268, y: 1.1879421, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.21342812, w: 0.9769588}
       defaultLocalRotation: {x: 0, y: 0, z: -0.107562155, w: 0.9941984}
     - m_BoneTransform: {fileID: 6183043310440969425}
-      solverPosition: {x: 2.585294, y: 2.2536314, z: 0}
-      solverRotation: {x: 0, y: 0, z: 0.014503495, w: 0.99989486}
+      solverPosition: {x: 3.168221, y: 1.2792507, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.1885455, w: 0.98206437}
       defaultLocalRotation: {x: 0, y: 0, z: -0.03279821, w: 0.999462}
     m_Weight: 1
     m_RestoreDefaultPose: 1
-    targetPosition: {x: 4.3997493, y: -1.5590065, z: 0}
+    targetPosition: {x: 4.256137, y: -1.3331059, z: 0}
     iterations: 10
     damping: 0.8
 --- !u!1 &6183043311380468512
@@ -6055,7 +6055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.7207031, g: 0.17332679, b: 0.8962264, a: 1}
-  m_Length: 1.1581802
+  m_Length: 1.1581777
   m_ChildTransform: {fileID: 6183043311549782347}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043311431336411
@@ -6360,7 +6360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.9263178, g: 0.9339623, b: 0.039649326, a: 1}
-  m_Length: 1.9661536
+  m_Length: 1.9661524
   m_ChildTransform: {fileID: 6183043310047892984}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043311460424902
@@ -6675,7 +6675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.8117647, g: 0.5625899, b: 0.08627452, a: 1}
-  m_Length: 0.8776987
+  m_Length: 0.87769896
   m_ChildTransform: {fileID: 6183043311080732945}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043311539928894
@@ -6985,7 +6985,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
-  m_Length: 0.4557188
+  m_Length: 0.4557183
   m_ChildTransform: {fileID: 6183043310646423777}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043311557741459
@@ -7033,7 +7033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.039215688, g: 0.10588236, b: 0.9333334, a: 1}
-  m_Length: 0.72172034
+  m_Length: 0.72172016
   m_ChildTransform: {fileID: 6183043310254689875}
   m_AttachedIK: {fileID: 6183043309970541891}
 --- !u!1 &6183043311574463585
@@ -7081,7 +7081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.039215688, g: 0.10588236, b: 0.9333334, a: 1}
-  m_Length: 0.6830246
+  m_Length: 0.68302435
   m_ChildTransform: {fileID: 6183043310836188855}
   m_AttachedIK: {fileID: 6183043311601560580}
 --- !u!1 &6183043311601560581
@@ -7139,24 +7139,24 @@ MonoBehaviour:
     m_RootBoneTransform: {fileID: 6183043310047124377}
     m_SolverPoses:
     - m_BoneTransform: {fileID: 6183043310047124377}
-      solverPosition: {x: -0.00000093649123, y: 0.000001230431, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.98265904, w: 0.1854213}
+      solverPosition: {x: -0.0000009745195, y: 0.0000011495147, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.998067, w: 0.06214659}
       defaultLocalRotation: {x: 0, y: 0, z: -0.9759698, w: 0.21790588}
     - m_BoneTransform: {fileID: 6183043310743325681}
-      solverPosition: {x: 0.60990345, y: -0.04051815, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.060729716, w: 0.9981543}
+      solverPosition: {x: 0.5811802, y: -0.18935357, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.21212715, w: 0.9772421}
       defaultLocalRotation: {x: 0, y: 0, z: -0.012619213, w: 0.99992037}
     - m_BoneTransform: {fileID: 6183043311574463584}
-      solverPosition: {x: 1.2453887, y: -0.16133022, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.08637157, w: 0.996263}
+      solverPosition: {x: 1.0577935, y: -0.62670374, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.250776, w: 0.96804523}
       defaultLocalRotation: {x: 0, y: 0, z: -0.012712136, w: 0.99991924}
     - m_BoneTransform: {fileID: 6183043310836188855}
-      solverPosition: {x: 1.8844292, y: -0.4024718, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.2059743, w: 0.9785576}
+      solverPosition: {x: 1.2735361, y: -1.2747607, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.2905256, w: 0.9568673}
       defaultLocalRotation: {x: 0, y: 0, z: -0.101685464, w: 0.9948166}
     m_Weight: 1
     m_RestoreDefaultPose: 1
-    targetPosition: {x: 5.024212, y: -1.3763303, z: 0}
+    targetPosition: {x: 4.743493, y: -1.1318076, z: 0}
     iterations: 10
     damping: 0.8
 --- !u!1 &6183043311608918839
@@ -7359,7 +7359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.7207031, g: 0.17332679, b: 0.8962264, a: 1}
-  m_Length: 1.5035349
+  m_Length: 1.5035343
   m_ChildTransform: {fileID: 6183043311429790844}
   m_AttachedIK: {fileID: 0}
 --- !u!1 &6183043311670977344
@@ -7407,6 +7407,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 0.7207031, g: 0.17332679, b: 0.8962264, a: 1}
-  m_Length: 1.2220467
+  m_Length: 1.2220458
   m_ChildTransform: {fileID: 6183043310845884152}
   m_AttachedIK: {fileID: 0}

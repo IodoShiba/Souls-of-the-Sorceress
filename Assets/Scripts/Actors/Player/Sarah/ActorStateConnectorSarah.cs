@@ -320,6 +320,7 @@ namespace ActorSarah
             StateInDefaultNum JudgeNextStateInDefault()
             {
                 AnimatorStateInfo stateInfo = sarahAnimator.GetCurrentAnimatorStateInfo(0);
+                Debug.Log(stateInfo.normalizedTime);
                 switch (currentState)
                 {
                     case StateInDefaultNum.IsWaiting:
@@ -336,7 +337,7 @@ namespace ActorSarah
                         return StateInDefaultNum.IsRunning;
                     case StateInDefaultNum.IsJumping:
                         //InAir遷移判定
-                        if (stateInfo.normalizedTime > 1 && !jump.Method.IsActive) { return StateInDefaultNum.IsInAir; }
+                        if (/*stateInfo.normalizedTime > 1 && */!jump.Method.IsActive) { return StateInDefaultNum.IsInAir; }
                         return StateInDefaultNum.IsJumping;
                     case StateInDefaultNum.IsInAir:
                         //OnLanding遷移判定
