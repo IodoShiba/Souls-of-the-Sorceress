@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx.Async;
+using DG.Tweening;
 
 [CreateAssetMenu(menuName = "ScriptableObject/SoundManager")]
 public class SoundManagerScriptable : ScriptableObject
@@ -32,6 +33,8 @@ public class SoundManagerScriptable : ScriptableObject
         instantiated.PlayBgm(audioClip, forceReplay);
     }
 
+    public SoundManagerScriptable(float amount) => instantiated.SetBgmVolume(amount);
+
     public class Mono : MonoBehaviour
     {
         [SerializeField] SoundManagerScriptable scriptable;
@@ -56,6 +59,16 @@ public class SoundManagerScriptable : ScriptableObject
             bgmAudioSource.Play();
         }
 
-        public void SetBgmVolume(float amount) => bgmAudioSource.volume = amount;
-    }
+        public void SetBgmVolume(float amount, float fadeDuration = 0)
+        {
+            if(fadeDuration<=0)
+            {
+                bgmAudioSource.volume = amount;
+            }
+            else
+            {
+                bgmAudioSource.DOFade(amount, fadeDuration);
+            }
+        }
+    } 
 }

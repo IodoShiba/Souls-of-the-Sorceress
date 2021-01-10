@@ -10,7 +10,6 @@ public class StageClearEffect : MonoBehaviour
     [SerializeField] float initialScale;
 
     [SerializeField] UnityEngine.UI.Image image;
-    [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip clip;
     
 
@@ -21,14 +20,11 @@ public class StageClearEffect : MonoBehaviour
 
     IEnumerator EffectCo()
     {
-        float initVolume = audioSource.volume;
-        audioSource.DOFade(0, musicFadeOutSpan);
+        SoundManager.Instance.SetBgmVolume(0, musicFadeOutSpan);
 
         yield return new WaitForSeconds(musicFadeOutSpan);
 
-        audioSource.clip = null;
-        audioSource.volume = initVolume;
-        audioSource.PlayOneShot(clip);
+        SoundManager.Instance.PlaySE(clip);
 
         image.transform.localScale = new Vector3(initialScale, initialScale, 1);
         image.DOFade(1, wordFadeInSpan).SetEase(Ease.OutExpo);
