@@ -1240,28 +1240,28 @@ MonoBehaviour:
     m_RootBoneTransform: {fileID: 6183043309869675647}
     m_SolverPoses:
     - m_BoneTransform: {fileID: 6183043309869675647}
-      solverPosition: {x: -0.0000011166735, y: 0.0000005495664, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.99997, w: 0.0077308114}
+      solverPosition: {x: -0.00000018646959, y: -0.00000039182, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.9969544, w: 0.07798644}
       defaultLocalRotation: {x: 0, y: 0, z: -0.9965621, w: 0.08284885}
     - m_BoneTransform: {fileID: 6183043310488575211}
-      solverPosition: {x: 0.6764157, y: -0.10252523, z: 0}
-      solverRotation: {x: 0, y: 0, z: 0.0344309, w: 0.9994072}
+      solverPosition: {x: 0.6841098, y: -0.006674725, z: 0}
+      solverRotation: {x: 0, y: 0, z: 0.11840253, w: 0.99296576}
       defaultLocalRotation: {x: 0, y: 0, z: 0.12639895, w: 0.99197954}
     - m_BoneTransform: {fileID: 6183043310270526341}
-      solverPosition: {x: 1.3602687, y: -0.15841807, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.08307176, w: 0.9965437}
+      solverPosition: {x: 1.3525457, y: 0.14814782, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.019439707, w: 0.999811}
       defaultLocalRotation: {x: 0, y: 0, z: -0.0064100195, w: 0.9999795}
     - m_BoneTransform: {fileID: 6183043311557741458}
-      solverPosition: {x: 1.9702477, y: -0.312799, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.076496735, w: 0.9970699}
+      solverPosition: {x: 1.9705864, y: 0.2661911, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.056663156, w: 0.9983934}
       defaultLocalRotation: {x: 0, y: 0, z: -0.034037925, w: 0.9994206}
     - m_BoneTransform: {fileID: 6183043310254689875}
-      solverPosition: {x: 2.6347055, y: -0.5945342, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.027224438, w: 0.9996294}
+      solverPosition: {x: 2.690261, y: 0.32051075, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.12235444, w: 0.9924865}
       defaultLocalRotation: {x: 0, y: 0, z: -0.06941604, w: 0.99758786}
     m_Weight: 1
     m_RestoreDefaultPose: 1
-    targetPosition: {x: 4.122564, y: -1.5194416, z: 0.0035443325}
+    targetPosition: {x: 4.81945, y: -1.4659842, z: 0}
     iterations: 10
     damping: 0.8
 --- !u!1 &6183043310005927435
@@ -2997,7 +2997,7 @@ SkinnedMeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6183043310580089309}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -4087,6 +4087,7 @@ GameObject:
   - component: {fileID: 6183043311013493450}
   - component: {fileID: 6183043311013493453}
   - component: {fileID: 6183043311013493452}
+  - component: {fileID: 3358551504431772751}
   m_Layer: 0
   m_Name: SarahAnimation(Anima2D)
   m_TagString: Untagged
@@ -4146,6 +4147,47 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3358551504431772751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6183043311013493451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eab7ea9448addc4084c2f6f9a40b988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ordinaryMeshRenderers:
+  - {fileID: 6183043310876198096}
+  - {fileID: 6183043310580089311}
+  - {fileID: 6183043309760146218}
+  - {fileID: 6183043311622045306}
+  - {fileID: 6183043311440013892}
+  - {fileID: 6183043310448742642}
+  - {fileID: 6183043310465073794}
+  - {fileID: 6183043310836946691}
+  - {fileID: 6183043311074368833}
+  - {fileID: 6183043309740764744}
+  - {fileID: 6183043309750011967}
+  - {fileID: 6183043310076671532}
+  - {fileID: 6183043311118239969}
+  awakenMeshRenderers:
+  - {fileID: 6183043311184351321}
+  - {fileID: 6183043311053980495}
+  - {fileID: 6183043310406713968}
+  - {fileID: 6183043311026543953}
+  - {fileID: 6183043311081824482}
+  - {fileID: 6183043309554273807}
+  - {fileID: 6183043310882125737}
+  - {fileID: 6183043311380468514}
+  - {fileID: 6183043310353324424}
+  - {fileID: 6183043311551657752}
+  - {fileID: 6183043310921973068}
+  - {fileID: 6183043311084556289}
+  - {fileID: 6183043311297468550}
+  blueAwakenMeshRenderers: []
 --- !u!1 &6183043311026543951
 GameObject:
   m_ObjectHideFlags: 0
@@ -5778,28 +5820,28 @@ MonoBehaviour:
     m_RootBoneTransform: {fileID: 6183043309802346214}
     m_SolverPoses:
     - m_BoneTransform: {fileID: 6183043309802346214}
-      solverPosition: {x: 0.00000067914556, y: -0.0000007113281, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.9329046, w: -0.3601233}
+      solverPosition: {x: 0.00000020687725, y: -0.0000010798208, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.9263847, w: -0.37657863}
       defaultLocalRotation: {x: -0, y: -0, z: -0.9282454, w: -0.37196836}
     - m_BoneTransform: {fileID: 6183043310525071385}
-      solverPosition: {x: 0.56968176, y: 0.014506285, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.47595066, w: -0.879472}
+      solverPosition: {x: 0.5698385, y: -0.005666798, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.45267925, w: -0.8916734}
       defaultLocalRotation: {x: 0, y: 0, z: -0.45966023, w: -0.8880949}
     - m_BoneTransform: {fileID: 6183043310795336425}
-      solverPosition: {x: 1.0951372, y: 0.86532784, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.019779716, w: 0.99980444}
+      solverPosition: {x: 1.1679978, y: 0.7957096, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.06275172, w: 0.9980293}
       defaultLocalRotation: {x: 0, y: 0, z: -0.050788417, w: 0.99870944}
     - m_BoneTransform: {fileID: 6183043311067701279}
-      solverPosition: {x: 1.6845495, y: 1.7402985, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.04748854, w: 0.9988719}
+      solverPosition: {x: 1.8999708, y: 1.555444, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.12768283, w: 0.99181503}
       defaultLocalRotation: {x: 0, y: 0, z: -0.107562155, w: 0.9941984}
     - m_BoneTransform: {fileID: 6183043310440969425}
-      solverPosition: {x: 2.3050394, y: 2.4954412, z: 0}
-      solverRotation: {x: 0, y: 0, z: 0.11029239, w: 0.9938993}
+      solverPosition: {x: 2.734252, y: 2.064587, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.07779808, w: 0.9969692}
       defaultLocalRotation: {x: 0, y: 0, z: -0.03279821, w: 0.999462}
     m_Weight: 1
     m_RestoreDefaultPose: 1
-    targetPosition: {x: 4.536162, y: -1.5649841, z: -0.00035990693}
+    targetPosition: {x: 4.3997493, y: -1.5590065, z: 0}
     iterations: 10
     damping: 0.8
 --- !u!1 &6183043311380468512
@@ -7151,24 +7193,24 @@ MonoBehaviour:
     m_RootBoneTransform: {fileID: 6183043310047124377}
     m_SolverPoses:
     - m_BoneTransform: {fileID: 6183043310047124377}
-      solverPosition: {x: 0.00000045690606, y: -0.00000014887326, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.9992085, w: 0.039777014}
+      solverPosition: {x: -0.00000072634384, y: -0.00000028430054, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.9782753, w: 0.20731068}
       defaultLocalRotation: {x: 0, y: 0, z: -0.9759698, w: 0.21790588}
     - m_BoneTransform: {fileID: 6183043310743325681}
-      solverPosition: {x: 0.57211787, y: -0.21519066, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.15824176, w: 0.98740023}
+      solverPosition: {x: 0.6111045, y: -0.013255563, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.02973488, w: 0.99955803}
       defaultLocalRotation: {x: 0, y: 0, z: -0.012619213, w: 0.99992037}
     - m_BoneTransform: {fileID: 6183043311574463584}
-      solverPosition: {x: 1.0760857, y: -0.6207176, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.101404, w: 0.9948453}
+      solverPosition: {x: 1.2558422, y: -0.065699555, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.04273779, w: 0.9990864}
       defaultLocalRotation: {x: 0, y: 0, z: -0.012712136, w: 0.99991924}
     - m_BoneTransform: {fileID: 6183043310836188855}
-      solverPosition: {x: 1.5108862, y: -1.1474726, z: 0}
-      solverRotation: {x: 0, y: 0, z: -0.05601754, w: 0.9984298}
+      solverPosition: {x: 1.929402, y: -0.17901118, z: 0}
+      solverRotation: {x: 0, y: 0, z: -0.16561265, w: 0.9861909}
       defaultLocalRotation: {x: 0, y: 0, z: -0.101685464, w: 0.9948166}
     m_Weight: 1
     m_RestoreDefaultPose: 1
-    targetPosition: {x: 3.9591293, y: -1.4956875, z: 0.0052048084}
+    targetPosition: {x: 5.024212, y: -1.3763303, z: 0}
     iterations: 10
     damping: 0.8
 --- !u!1 &6183043311608918839
