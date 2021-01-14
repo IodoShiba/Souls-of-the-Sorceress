@@ -26,7 +26,7 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
     [SerializeField] UnityEngine.Events.UnityEvent onActivate;
     [SerializeField] UnityEngine.Events.UnityEvent onInactivate;
     [SerializeField] ActorSarah.ActorStateConnectorSarah ascSarah;
-    [SerializeField] MeshManagement meshManagement;
+    [SerializeField] SarahAnimationManagement sarahAnimationManagement;
     [SerializeField] bool noAdd;
     [SerializeField,DisabledField]private bool isActive = false;
     AwakeLevels awakeLevel = AwakeLevels.ordinary;
@@ -134,14 +134,17 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
         {
             case AwakeLevels.ordinary:
                 ascSarah.sarahAnimator.SetLayerWeight(0,1);
+                sarahAnimationManagement.particle.SetActive(false);
                 break;
             case AwakeLevels.awaken:
                 ascSarah.sarahAnimator.SetLayerWeight(1,1);
+                sarahAnimationManagement.particle.SetActive(true);
                 break;
             case AwakeLevels.blueAwaken:
                 ascSarah.sarahAnimator.SetLayerWeight(2,1);
                 break;
         }
-        meshManagement.ChangeMesh(mode);
+        sarahAnimationManagement.ChangeMesh(mode);
+
     }
 }

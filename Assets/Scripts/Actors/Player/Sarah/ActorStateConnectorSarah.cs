@@ -320,7 +320,7 @@ namespace ActorSarah
             StateInDefaultNum JudgeNextStateInDefault()
             {
                 AnimatorStateInfo stateInfo = sarahAnimator.GetCurrentAnimatorStateInfo(0);
-                Debug.Log(stateInfo.normalizedTime);
+                //Debug.Log(stateInfo.normalizedTime);
                 switch (currentState)
                 {
                     case StateInDefaultNum.IsWaiting:

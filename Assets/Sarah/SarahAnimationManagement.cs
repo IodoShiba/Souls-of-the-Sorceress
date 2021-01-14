@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeshManagement : MonoBehaviour
+public class SarahAnimationManagement : MonoBehaviour
 {
     [SerializeField]
     List<SkinnedMeshRenderer> ordinaryMeshRenderers,awakenMeshRenderers,blueAwakenMeshRenderers;
+    public GameObject particle;
 
     // Start is called before the first frame update
     void Start()
