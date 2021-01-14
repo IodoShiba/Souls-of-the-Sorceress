@@ -601,6 +601,7 @@ namespace ActorSarah
                 guard.Method.GetIsAllSucceedAndReset();
                 horizontalMove.ManualUpdate();
                 horizontalMove.Method.StopActorOnDisabled(.1f);
+                ConnectorSarah.sarahAnimator_Anima2D.SetTrigger("GuardTrigger");
             }
 
             protected override void OnActive()
@@ -692,6 +693,7 @@ namespace ActorSarah
                 guard.Fields.DegreeRangeWidth = degreeWidthOfGuardArea;
                 unguardClock.Reset();
                 state = 0;
+                ConnectorSarah.sarahAnimator_Anima2D.SetTrigger("TackleTrigger");
             }
             protected override void OnActive()
             {
