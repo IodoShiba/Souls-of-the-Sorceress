@@ -320,7 +320,7 @@ namespace ActorSarah
             StateInDefaultNum JudgeNextStateInDefault()
             {
                 AnimatorStateInfo stateInfo = sarahAnimator.GetCurrentAnimatorStateInfo(0);
-                //Debug.Log(stateInfo.normalizedTime);
+                Debug.Log(stateInfo.normalizedTime);
                 switch (currentState)
                 {
                     case StateInDefaultNum.IsWaiting:
@@ -347,7 +347,7 @@ namespace ActorSarah
                         //割り込みIsJumpingのためのboolをセット
                         if (jump.Method.IsActivated) { IsInterruptJump = true; }
                         //IsWaiting遷移判定
-                        if (stateInfo.normalizedTime > 1) {return StateInDefaultNum.IsWaiting; }
+                        if (stateInfo.normalizedTime > 1f || horizontalMove.Method.IsMoving) {return StateInDefaultNum.IsWaiting; }
                         return StateInDefaultNum.IsOnLanding;
                 }
                 return StateInDefaultNum.IsWaiting;
