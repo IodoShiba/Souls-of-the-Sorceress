@@ -644,7 +644,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -0.2507456, y: 1.3709099, z: -0.0021727607}
+        value: {x: -0.5595903, y: 1.0747474, z: 0}
         inSlope: {x: -4.319999, y: 0, z: 0}
         outSlope: {x: -4.319999, y: 0, z: 0}
         tangentMode: 0
@@ -660,7 +660,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -0.7409172, y: 1.1766315, z: 0.0027913246}
+        value: {x: -0.3449136, y: 1.5563613, z: 0}
         inSlope: {x: -2.0980365, y: 0, z: 0}
         outSlope: {x: -2.0980365, y: 0, z: 0}
         tangentMode: 0
@@ -676,7 +676,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: -0.5191841, y: 0.9987259, z: 0.0024160137}
+        value: {x: -0.17646211, y: 1.3273633, z: 0}
         inSlope: {x: 0.61714286, y: 0, z: 0}
         outSlope: {x: 0.61714286, y: 0, z: 0}
         tangentMode: 0
@@ -1098,7 +1098,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.2507456
+        value: -0.5595903
         inSlope: -4.319999
         outSlope: -4.319999
         tangentMode: 136
@@ -1117,7 +1117,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1.3709099
+        value: 1.0747474
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1136,7 +1136,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.0021727607
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1155,7 +1155,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.7409172
+        value: -0.3449136
         inSlope: -2.0980365
         outSlope: -2.0980365
         tangentMode: 136
@@ -1174,7 +1174,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1.1766315
+        value: 1.5563613
         inSlope: -1.0141017
         outSlope: -1.0141017
         tangentMode: 136
@@ -1193,7 +1193,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.0027913246
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1212,7 +1212,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -0.5191841
+        value: -0.17646211
         inSlope: 0.61714286
         outSlope: 0.61714286
         tangentMode: 136
@@ -1231,7 +1231,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.9987259
+        value: 1.3273633
         inSlope: -1.234285
         outSlope: -1.234285
         tangentMode: 136
@@ -1250,7 +1250,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.0024160137
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -3705,6 +3705,36 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
+    path: bone/b_koshi/b_body01/b_body02/b_body03/b_neck/b_head/b_right_momiage01/b_right_momiage02/b_right_momiage03/b_right_momiage04
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: bone/b_koshi/b_body01/b_body02/b_body03/b_neck/b_head/b_right_momiage01/b_right_momiage02/b_right_momiage03/b_right_momiage04
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: bone/b_koshi/b_body01/b_body02/b_body03/b_neck/b_head/b_right_momiage01/b_right_momiage02/b_right_momiage03/b_right_momiage04
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
     path: bone/b_koshi/b_body01/b_body02/b_body03/b_neck/b_head/b_hair_back01
     classID: 4
     script: {fileID: 0}
@@ -4034,36 +4064,6 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: bone/b_koshi/b_body01/b_body02/b_body03/b_neck/b_head/b_right_momiage01/b_right_momiage02/b_right_momiage03
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: bone/b_koshi/b_body01/b_body02/b_body03/b_neck/b_head/b_right_momiage01/b_right_momiage02/b_right_momiage03
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: bone/b_koshi/b_body01/b_body02/b_body03/b_neck/b_head/b_right_momiage01/b_right_momiage02/b_right_momiage03
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
     path: bone/b_koshi/b_body01/b_body02/b_body03/b_neck/b_head/b_hair_right01/b_hair_right02
     classID: 4
@@ -4095,7 +4095,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: bone/b_koshi/b_body01/b_body02/b_body03/b_neck/b_head/b_right_momiage01/b_right_momiage02/b_right_momiage03/b_right_momiage04
+    path: bone/b_koshi/b_body01/b_body02/b_body03/b_neck/b_head/b_right_momiage01/b_right_momiage02/b_right_momiage03
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -4105,7 +4105,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: bone/b_koshi/b_body01/b_body02/b_body03/b_neck/b_head/b_right_momiage01/b_right_momiage02/b_right_momiage03/b_right_momiage04
+    path: bone/b_koshi/b_body01/b_body02/b_body03/b_neck/b_head/b_right_momiage01/b_right_momiage02/b_right_momiage03
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -4115,7 +4115,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: bone/b_koshi/b_body01/b_body02/b_body03/b_neck/b_head/b_right_momiage01/b_right_momiage02/b_right_momiage03/b_right_momiage04
+    path: bone/b_koshi/b_body01/b_body02/b_body03/b_neck/b_head/b_right_momiage01/b_right_momiage02/b_right_momiage03
     classID: 4
     script: {fileID: 0}
   - curve:
