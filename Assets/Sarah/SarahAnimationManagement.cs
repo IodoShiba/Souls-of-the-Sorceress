@@ -6,11 +6,9 @@ public class SarahAnimationManagement : MonoBehaviour
 {
     [SerializeField]
     List<SkinnedMeshRenderer> ordinaryMeshRenderers,awakenMeshRenderers,blueAwakenMeshRenderers;
-    public GameObject particle,fire;
+    public GameObject particle,fire, trail, trail_awaken;
     [SerializeField]
     TrailRenderer trailRenderer;
-    [SerializeField]
-    Material sword_ordinary, sword_awaken;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +18,8 @@ public class SarahAnimationManagement : MonoBehaviour
 
     public void ChangeMesh(ActionAwake.AwakeLevels mode)
     {
+        trail.SetActive(false);
+        trail_awaken.SetActive(false);
         foreach (SkinnedMeshRenderer r in ordinaryMeshRenderers)
         {
             r.enabled = false;
@@ -39,7 +39,7 @@ public class SarahAnimationManagement : MonoBehaviour
                 {
                     r.enabled = true;
                 }
-                trailRenderer.material = sword_ordinary;
+                trail.SetActive(true);
                 fire.SetActive(false);
                 break;
             case ActionAwake.AwakeLevels.awaken:
@@ -47,7 +47,7 @@ public class SarahAnimationManagement : MonoBehaviour
                 {
                     r.enabled = true;
                 }
-                trailRenderer.material = sword_awaken;
+                trail_awaken.SetActive(true);
                 fire.SetActive(true);
                 break;
             case ActionAwake.AwakeLevels.blueAwaken:
