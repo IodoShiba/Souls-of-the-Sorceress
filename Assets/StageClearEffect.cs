@@ -20,7 +20,7 @@ public class StageClearEffect : MonoBehaviour
 
     IEnumerator EffectCo()
     {
-        SoundManager.Instance.SetBgmVolume(0, musicFadeOutSpan);
+        SoundManager.Instance.FadeOutBgm(musicFadeOutSpan);
 
         yield return new WaitForSeconds(musicFadeOutSpan);
 

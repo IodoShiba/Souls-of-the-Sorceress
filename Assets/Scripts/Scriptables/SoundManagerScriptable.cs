@@ -17,6 +17,8 @@ public class SoundManagerScriptable : ScriptableObject
     [SerializeField] AudioClip stageClear;
     [SerializeField] AudioClip stageReleased;
 
+    float BgmVolume => instantiated.BgmVolume;
+
     public void PlaySE(AudioClip audioClip) => instantiated.PlaySE(audioClip) ;
     public void PlaySE(AudioClip audioClip, float volumeScale) => instantiated.PlaySE(audioClip, volumeScale);
     public async void PlayBgm(AudioClip audioClip) 
@@ -33,7 +35,8 @@ public class SoundManagerScriptable : ScriptableObject
         instantiated.PlayBgm(audioClip, forceReplay);
     }
 
-    public SoundManagerScriptable(float amount) => instantiated.SetBgmVolume(amount);
+    public void StopBgm() {instantiated.StopBgm();}
+    public void FadeOutBgm(float fadeDuration){instantiated.FadeOutBgm(fadeDuration);}
 
     public class Mono : MonoBehaviour
     {
@@ -41,13 +44,29 @@ public class SoundManagerScriptable : ScriptableObject
         [SerializeField] AudioSource seAudioSource;
         [SerializeField] AudioSource bgmAudioSource;
 
+        float cachedBgmVolume;
+
+        public float BgmVolume 
+        {
+            get => bgmAudioSource.volume;
+            set 
+            {
+                bgmAudioSource.volume = cachedBgmVolume = value;
+            }
+        }
+
         protected void SetInstantiated()
         {
             DontDestroyOnLoad(gameObject);
             scriptable.instantiated = this;
-            Debug.Log("set instantiated");
+            Initialize();
         }
             
+        void Initialize()
+        {
+            cachedBgmVolume = bgmAudioSource.volume;
+        }
+
         public void PlaySE(AudioClip audioClip) => seAudioSource.PlayOneShot(audioClip);
         public void PlaySE(AudioClip audioClip, float volumeScale) => seAudioSource.PlayOneShot(audioClip, volumeScale);
 
@@ -57,19 +76,34 @@ public class SoundManagerScriptable : ScriptableObject
             if(!forceReplay && bgmAudioSource.clip == audioClip) { return; }
 
             bgmAudioSource.clip = audioClip; 
+            ResetBgmVolume();
             bgmAudioSource.Play();
         }
 
-        public void SetBgmVolume(float amount, float fadeDuration = 0)
+        public void StopBgm()
         {
-            if(fadeDuration<=0)
+            bgmAudioSource.clip = null;
+        }
+
+        public void FadeOutBgm(float fadeDuration) => FadeOutBgmAsync(fadeDuration).Forget();
+        public async UniTaskVoid FadeOutBgmAsync(float fadeDuration = 0)
+        {
+            if(fadeDuration <= 0){StopBgm(); return;}
+
+            float volume = bgmAudioSource.volume;
+            for(float restTime = fadeDuration; restTime > 0; restTime -= Time.deltaTime)
             {
-                bgmAudioSource.volume = amount;
+                bgmAudioSource.volume = volume * (restTime/fadeDuration);
+                await UniTask.Yield();
             }
-            else
-            {
-                bgmAudioSource.DOFade(amount, fadeDuration);
-            }
+
+            StopBgm();
+            ResetBgmVolume();
+        }
+
+        public void ResetBgmVolume()
+        {
+            bgmAudioSource.volume = cachedBgmVolume;
         }
     } 
 }
