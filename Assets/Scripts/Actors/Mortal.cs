@@ -52,6 +52,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     [SerializeField] public UnityEvent_Mortal onAttackedCallbacks; //Though this field is public, do not refer this field directly because it is just to avoid the UnityEvent Bug.
     [SerializeField] private UnityEvent_float onHitstopGiven;
     [SerializeField] UnityEngine.Events.UnityEvent onHealthRecoveredCallbacks;
+    [SerializeField] UnityEngine.Events.UnityEvent onInvinsibleTimeStart;
     [SerializeField] UnityEngine.Events.UnityEvent onInvinsibleTimeOver;
     [SerializeField] UnityEngine.Events.UnityEvent onDestroy;
     [SerializeField] Rigidbody2D selfRigidbody;
@@ -260,6 +261,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         {
             originalLayer = gameObject.layer;
             gameObject.layer = LayerMask.NameToLayer(LayerName.invincibleActor);
+            onInvinsibleTimeStart.Invoke();
         }
         invincibleOrderedCount++;
 
