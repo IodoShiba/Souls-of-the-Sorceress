@@ -30,7 +30,6 @@ namespace ActorSarah
         [SerializeField] UmbrellaParameters umbrellaParameters;
         [SerializeField, DisabledField] string currentStateName;
         [SerializeField, DisabledField] float lpt;
-        [SerializeField] public Animator sarahAnimator;
         [SerializeField] public Animator sarahAnimator_Anima2D;
 
         [SerializeField] SarahDefault sarahDefault;
@@ -188,7 +187,7 @@ namespace ActorSarah
             public ChainAttackStream attackStream;
             ActorStateConnectorSarah connectorSarah;
             public BoolExpressions.LongPushClock attackLongPushClock;
-            Animator sarahAnimator,sarahAnimator_Anima2D;
+            Animator sarahAnimator_Anima2D;
 
             bool IsInterruptJump;
 
@@ -223,19 +222,11 @@ namespace ActorSarah
                 horizontalMove.Use = true;
                 attackLongPushClock.AllowedToStartCount = true;
                 ConnectorSarah.umbrellaParameters.ChangeDurabilityGradually(umbrellaRecoverCycle, umbrellaRecoverAmount);
-                sarahAnimator = ConnectorSarah.sarahAnimator;
                 sarahAnimator_Anima2D = ConnectorSarah.sarahAnimator_Anima2D;
                 IsInterruptJump = false;
-                sarahAnimator.SetTrigger("DefaultTrigger");
                 sarahAnimator_Anima2D.SetTrigger("DefaultTrigger");
                 ResetDefaultStateTriggers();
                 currentState = StateInDefaultNum.IsWaiting;
-                if (sarahAnimator.GetBool("InterruptToInAir"))
-                {
-                    sarahAnimator.SetBool("InterruptToInAir",false);
-                    currentState = StateInDefaultNum.IsInAir;
-                    sarahAnimator.SetTrigger("InAirTrigger");
-                }
                 if (sarahAnimator_Anima2D.GetBool("InterruptToInAir"))
                 {
                     sarahAnimator_Anima2D.SetBool("InterruptToInAir", false);
@@ -272,7 +263,6 @@ namespace ActorSarah
                 ConnectorSarah.umbrellaParameters.StopChangeDurabilityGradually();
                 passPlatform.Use(false);
                 ResetDefaultStateTriggers();
-                sarahAnimator.ResetTrigger("DefaultTrigger");
                 sarahAnimator_Anima2D.ResetTrigger("DefaultTrigger");
                 IsRunning = false;
             }
@@ -290,27 +280,22 @@ namespace ActorSarah
                     {
                         case StateInDefaultNum.IsWaiting:
                             //Debug.Log("WaitingTrigger");
-                            sarahAnimator.SetTrigger("WaitingTrigger");
                             sarahAnimator_Anima2D.SetTrigger("WaitingTrigger");
                             break;
                         case StateInDefaultNum.IsRunning:
                             //Debug.Log("RunningTrigger");
-                            sarahAnimator.SetTrigger("RunningTrigger");
                             sarahAnimator_Anima2D.SetTrigger("RunningTrigger");
                             break;
                         case StateInDefaultNum.IsJumping:
                             //Debug.Log("JumpingTrigger");
-                            sarahAnimator.SetTrigger("JumpingTrigger");
                             sarahAnimator_Anima2D.SetTrigger("JumpingTrigger");
                             break;
                         case StateInDefaultNum.IsInAir:
                             //Debug.Log("InAirTrigger");
-                            sarahAnimator.SetTrigger("InAirTrigger");
                             sarahAnimator_Anima2D.SetTrigger("InAirTrigger");
                             break;
                         case StateInDefaultNum.IsOnLanding:
                             //Debug.Log("OnLandingTrigger");
-                            sarahAnimator.SetTrigger("OnLandingTrigger");
                             sarahAnimator_Anima2D.SetTrigger("OnLandingTrigger");
                             break;
                     }
@@ -319,7 +304,7 @@ namespace ActorSarah
             }
             StateInDefaultNum JudgeNextStateInDefault()
             {
-                AnimatorStateInfo stateInfo = sarahAnimator.GetCurrentAnimatorStateInfo(0);
+                AnimatorStateInfo stateInfo = sarahAnimator_Anima2D.GetCurrentAnimatorStateInfo(0);
                 //Debug.Log(stateInfo.normalizedTime);
                 switch (currentState)
                 {
@@ -358,7 +343,6 @@ namespace ActorSarah
                 string[] names = {"WaitingTrigger","RunningTrigger","JumpingTrigger","InAirTrigger","OnLandingTrigger"};
                 foreach (string name in names)
                 {
-                    sarahAnimator.ResetTrigger(name);
                     sarahAnimator_Anima2D.ResetTrigger(name);
                 }
             }
@@ -438,11 +422,6 @@ namespace ActorSarah
                 horizontalMove.ManualUpdate();
                 horizontalMove.Method.StopActorOnDisabled(.1f);
                 ConnectorSarah.TryShootMagic();
-                ConnectorSarah.sarahAnimator.SetTrigger("VerticalSlashTrigger");
-                ConnectorSarah.sarahAnimator.ResetTrigger("DefaultTrigger");//これらは本質的でないがAnimatorControllerと内部Stateの同期ズレによるバグを防ぐ
-                ConnectorSarah.sarahAnimator.ResetTrigger("JumpingTrigger");//
-                ConnectorSarah.sarahAnimator.ResetTrigger("ReturnSmashTrigger");//
-                ConnectorSarah.sarahAnimator.ResetTrigger("SmashSlashTrigger");//
 
                 ConnectorSarah.sarahAnimator_Anima2D.SetTrigger("VerticalSlashTrigger");
                 ConnectorSarah.sarahAnimator_Anima2D.ResetTrigger("DefaultTrigger");//これらは本質的でないがAnimatorControllerと内部Stateの同期ズレによるバグを防ぐ
@@ -490,7 +469,6 @@ namespace ActorSarah
                 //試験的な部分 ここまで
 
                 umbrella.StartMotion("Player" + nameof(ReturnSlash));
-                ConnectorSarah.sarahAnimator.SetTrigger("ReturnSmashTrigger"); 
                 ConnectorSarah.sarahAnimator_Anima2D.SetTrigger("ReturnSmashTrigger");
             }
             protected override void OnActive()
@@ -528,7 +506,6 @@ namespace ActorSarah
                 //試験的な部分 ここまで
 
                 umbrella.StartMotion("Player" + nameof(SmashSlash));
-                ConnectorSarah.sarahAnimator.SetTrigger("SmashSlashTrigger");
                 ConnectorSarah.sarahAnimator_Anima2D.SetTrigger("SmashSlashTrigger");
             }
             protected override void OnTerminate(bool isNormal)
@@ -557,8 +534,6 @@ namespace ActorSarah
                 umbrella.StartMotion("Player" + nameof(AerialSlash));
 
                 ConnectorSarah.TryShootMagic();
-                ConnectorSarah.sarahAnimator.SetTrigger("AerialSlashTrigger");
-                ConnectorSarah.sarahAnimator.SetBool("InterruptToInAir",false);
                 ConnectorSarah.sarahAnimator_Anima2D.SetTrigger("AerialSlashTrigger");
                 ConnectorSarah.sarahAnimator_Anima2D.SetBool("InterruptToInAir", false);
             }
@@ -566,7 +541,6 @@ namespace ActorSarah
             protected override void OnTerminate(bool isNormal)
             {
                 //DecideNextStateInDefaultState
-                ConnectorSarah.sarahAnimator.SetBool("InterruptToInAir",!groundSensor.IsOnGround);
                 ConnectorSarah.sarahAnimator_Anima2D.SetBool("InterruptToInAir", !groundSensor.IsOnGround);
                 umbrella.Default();
                 aerialSlashAttack.Inactivate();
@@ -862,7 +836,6 @@ namespace ActorSarah
                 clock.Reset();
                 ConnectorSarah.umbrellaParameters.TryConsumeDurability(amountConsumeUmbrellaDurability);
                 Player.IsInvulnerable = true;
-                ConnectorSarah.sarahAnimator.SetTrigger("DropAttackTrigger");
                 ConnectorSarah.sarahAnimator_Anima2D.SetTrigger("DropAttackTrigger");
             }
 
@@ -891,10 +864,14 @@ namespace ActorSarah
             {
                 base.OnInitialize();
                 ActorStateConnectorSarah actorStateConnectorSarah = Connector as ActorStateConnectorSarah;
-                actorStateConnectorSarah.sarahAnimator.SetTrigger("SarahSmashedTrigger");
                 actorStateConnectorSarah.sarahAnimator_Anima2D.SetTrigger("SarahSmashedTrigger");
-
                 onInitialize.Invoke();
+            }
+
+            protected override void OnTerminate(bool isNormal)
+            {
+                base.OnTerminate(isNormal);
+
             }
         }
 

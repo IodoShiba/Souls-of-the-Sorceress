@@ -6,7 +6,8 @@ public class SarahAnimationManagement : MonoBehaviour
 {
     [SerializeField]
     List<SkinnedMeshRenderer> ordinaryMeshRenderers,awakenMeshRenderers,blueAwakenMeshRenderers;
-    public GameObject particle,fire, trail, trail_awaken;
+    [SerializeField]
+    List<GameObject> gameObject_ordinary, gameObject_awaken;
     [SerializeField]
     TrailRenderer trailRenderer;
 
@@ -16,10 +17,16 @@ public class SarahAnimationManagement : MonoBehaviour
         
     }
 
-    public void ChangeMesh(ActionAwake.AwakeLevels mode)
+    public void ChangeApperance(ActionAwake.AwakeLevels mode)
     {
-        trail.SetActive(false);
-        trail_awaken.SetActive(false);
+        foreach (GameObject gameObject in gameObject_ordinary)
+        {
+            gameObject.SetActive(false);
+        }
+        foreach (GameObject gameObject in gameObject_awaken)
+        {
+            gameObject.SetActive(false);
+        }
         foreach (SkinnedMeshRenderer r in ordinaryMeshRenderers)
         {
             r.enabled = false;
@@ -35,27 +42,35 @@ public class SarahAnimationManagement : MonoBehaviour
         switch (mode)
         {
             case ActionAwake.AwakeLevels.ordinary:
+                foreach (GameObject gameObject in gameObject_ordinary)
+                {
+                    gameObject.SetActive(true);
+                }
                 foreach (SkinnedMeshRenderer r in ordinaryMeshRenderers)
                 {
                     r.enabled = true;
                 }
-                trail.SetActive(true);
-                fire.SetActive(false);
                 break;
             case ActionAwake.AwakeLevels.awaken:
+                foreach (GameObject gameObject in gameObject_awaken)
+                {
+                    gameObject.SetActive(true);
+                }
                 foreach (SkinnedMeshRenderer r in awakenMeshRenderers)
                 {
                     r.enabled = true;
                 }
-                trail_awaken.SetActive(true);
-                fire.SetActive(true);
                 break;
             case ActionAwake.AwakeLevels.blueAwaken:
+                foreach (GameObject gameObject in gameObject_awaken)
+                {
+                    gameObject.SetActive(true);
+                }
                 foreach (SkinnedMeshRenderer r in blueAwakenMeshRenderers)
                 {
                     r.enabled = true;
                 }
-                fire.SetActive(true);
+                
                 break;
         }
     }
