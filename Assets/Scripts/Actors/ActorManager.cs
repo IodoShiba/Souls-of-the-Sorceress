@@ -10,6 +10,7 @@ public class ActorManager : MonoBehaviour
     [SerializeField] bool keepInvisibleActorActive;
 
     HashSet<Actor> actors = new HashSet<Actor>();
+    Camera camera;
 
     static ActorManager instance;
     static Actor playerActor;
@@ -35,15 +36,20 @@ public class ActorManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        camera = Camera.main;
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        Camera mainCam = Camera.main;
+        Camera mainCam = camera;
         Vector2 mainCamPos = mainCam.transform.position;
         Vector2 size = new Vector2(mainCam.orthographicSize * mainCam.aspect * (1 + REIGN_MARGIN), mainCam.orthographicSize * (1 + REIGN_MARGIN));
         Rect activeReign = new Rect(mainCamPos.x - size.x, mainCamPos.y - size.y, 2 * size.x, 2 * size.y);
+
+
+        DrawRect(activeReign);
 
         foreach (var a in actors)
         {
@@ -63,6 +69,18 @@ public class ActorManager : MonoBehaviour
                     a.gameObject.SetActive(isToBeActivated);
                 }
             }
+        }
+
+        void DrawRect(in Rect rect)
+        {
+            Vector3 tr = new Vector3(rect.xMax, rect.yMax, -2);
+            Vector3 tl = new Vector3(rect.xMin, rect.yMax, -2);
+            Vector3 br = new Vector3(rect.xMax, rect.yMin, -2);
+            Vector3 bl = new Vector3(rect.xMin, rect.yMin, -2);
+            Debug.DrawLine(tr, tl, Color.cyan);
+            Debug.DrawLine(br, bl, Color.cyan);
+            Debug.DrawLine(tr, br, Color.cyan);
+            Debug.DrawLine(tl, bl, Color.cyan);
         }
     }
 
