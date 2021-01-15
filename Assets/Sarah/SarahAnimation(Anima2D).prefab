@@ -478,24 +478,33 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.15
+  m_Time: 0.3
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 2.5
+    widthMultiplier: 3
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.004229975
-        value: 0.99074066
+        time: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.33333334
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 0.95637023
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.23596527
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.9959717
+        time: 1
         value: 0
         inSlope: 0
         outSlope: 0
@@ -508,40 +517,40 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.25943398, g: 1, b: 0.5572268, a: 1}
-      key1: {r: 1, g: 0.09362638, b: 0, a: 0.74509805}
-      key2: {r: 1, g: 1, b: 1, a: 0}
+      key0: {r: 1, g: 0.93360305, b: 0.41037738, a: 0}
+      key1: {r: 1, g: 0.09362638, b: 0, a: 1}
+      key2: {r: 1, g: 1, b: 1, a: 1}
       key3: {r: 1, g: 1, b: 1, a: 0}
       key4: {r: 1, g: 1, b: 1, a: 0}
       key5: {r: 1, g: 1, b: 1, a: 0}
       key6: {r: 1, g: 1, b: 1, a: 0}
       key7: {r: 1, g: 1, b: 1, a: 0}
-      ctime0: 0
-      ctime1: 65535
+      ctime0: 16384
+      ctime1: 49151
       ctime2: 65535
       ctime3: 65535
       ctime4: 65535
       ctime5: 65535
       ctime6: 65535
       ctime7: 65535
-      atime0: 32768
-      atime1: 65535
-      atime2: 0
-      atime3: 0
+      atime0: 0
+      atime1: 5204
+      atime2: 32768
+      atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0
       atime7: 0
       m_Mode: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 2
-    numCornerVertices: 0
-    numCapVertices: 0
+      m_NumAlphaKeys: 4
+    numCornerVertices: 6
+    numCapVertices: 6
     alignment: 0
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0.01
   m_Autodestruct: 0
   m_Emitting: 0
 --- !u!1 &5511123090081344269
@@ -12952,16 +12961,16 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.1
+  m_Time: 0.2
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 2.5
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0.004229975
-        value: 0.99074066
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -12970,7 +12979,7 @@ TrailRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -12982,8 +12991,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.22759241, g: 1, b: 0.1745283, a: 1}
-      key1: {r: 0.59607846, g: 0, b: 0.35686275, a: 0.22745098}
+      key0: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 0.31428528, g: 0, b: 1, a: 1}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 1, g: 1, b: 1, a: 0}
       key4: {r: 1, g: 1, b: 1, a: 0}
@@ -12991,16 +13000,16 @@ TrailRenderer:
       key6: {r: 1, g: 1, b: 1, a: 0}
       key7: {r: 1, g: 1, b: 1, a: 0}
       ctime0: 0
-      ctime1: 65535
+      ctime1: 45875
       ctime2: 65535
       ctime3: 65535
       ctime4: 65535
       ctime5: 65535
       ctime6: 65535
       ctime7: 65535
-      atime0: 32768
-      atime1: 65535
-      atime2: 0
+      atime0: 0
+      atime1: 32768
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
@@ -13008,7 +13017,7 @@ TrailRenderer:
       atime7: 0
       m_Mode: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 2
+      m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
