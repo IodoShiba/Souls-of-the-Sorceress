@@ -15,16 +15,24 @@ public class EffectEmitter : MonoBehaviour
 
     public float PositionerMulti { get => positionerMulti; set => positionerMulti = value; }
 
+    public void DoEffect(Mortal attackerMortal, AttackData _)
+    {
+        DoEffect(attackerMortal.transform);
+    }
     public void DoEffect(Mortal attackerMortal)
     {
         DoEffect(attackerMortal.transform);
     }
     public void DoEffect(Transform endPoint)
     {
+        DoEffect(endPoint.position);
+    }
+    public void DoEffect(Vector2 endPoint)
+    {
         AudioClip audC = audioClip;
         AnimationClip animC = animationClip;
         audioSource.PlayOneShot(audC);
-        Vector2 diff = endPoint.position - origin.transform.position;
+        Vector2 diff = endPoint - (Vector2)origin.transform.position;
         EffectAnimationManager.Play(
             animC,
             origin.transform.position + (Vector3)offset + positionerMulti * (Vector3)diff - Z_SHIFT * Vector3.forward
