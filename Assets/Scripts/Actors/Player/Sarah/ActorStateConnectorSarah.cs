@@ -158,6 +158,12 @@ namespace ActorSarah
 
         }
 
+        public void AddProgressLevel()
+        {
+            if(progressLevel >= 4){return;}
+            ++progressLevel;
+        }
+
         public void Restore(int data)
         {
             progressLevel = data;
