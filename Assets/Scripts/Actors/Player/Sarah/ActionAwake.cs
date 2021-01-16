@@ -26,6 +26,7 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
     [SerializeField] UnityEngine.Events.UnityEvent onActivate;
     [SerializeField] UnityEngine.Events.UnityEvent onInactivate;
     [SerializeField] ActorSarah.ActorStateConnectorSarah ascSarah;
+    [SerializeField] SarahAnimationManagement sarahAnimationManagement;
     [SerializeField] bool noAdd;
     [SerializeField,DisabledField]private bool isActive = false;
     AwakeLevels awakeLevel = AwakeLevels.ordinary;
@@ -63,7 +64,7 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
             {
                 isActive = false;
                 awakeLevel = AwakeLevels.ordinary;
-                SetAnimatorLayer(awakeLevel);
+                sarahAnimationManagement.ChangeApperance(awakeLevel);
             }
         }
     }
@@ -75,12 +76,12 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
             if (awakeGauge >= 1) 
             {
                 awakeLevel = AwakeLevels.blueAwaken;
-                SetAnimatorLayer(awakeLevel);
+                sarahAnimationManagement.ChangeApperance(awakeLevel);
             }
             else
             {
                 awakeLevel = AwakeLevels.awaken;
-                SetAnimatorLayer(awakeLevel);
+                sarahAnimationManagement.ChangeApperance(awakeLevel);
 
                 AwakeEffectAnimator.Play("SarahAwakeEffect");
             }
@@ -90,7 +91,7 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
         {
             isActive = false;
             awakeLevel = AwakeLevels.ordinary;
-            SetAnimatorLayer(awakeLevel);
+            sarahAnimationManagement.ChangeApperance(awakeLevel);
 
             onInactivate.Invoke();
         }
@@ -119,26 +120,5 @@ public class ActionAwake : MonoBehaviour,SaveData.IPlayerAwakeCareer
     public void Store(SaveData target, Action<float> setter)
     {
         setter(awakeGauge);
-    }
-
-    void SetAnimatorLayer(AwakeLevels mode)
-    {
-        for(int i = 0; i < 3; i++)
-        {
-            ascSarah.sarahAnimator.SetLayerWeight(i,0);
-        }
-
-        switch (mode)
-        {
-            case AwakeLevels.ordinary:
-                ascSarah.sarahAnimator.SetLayerWeight(0,1);
-                break;
-            case AwakeLevels.awaken:
-                ascSarah.sarahAnimator.SetLayerWeight(1,1);
-                break;
-            case AwakeLevels.blueAwaken:
-                ascSarah.sarahAnimator.SetLayerWeight(2,1);
-                break;
-        }
     }
 }
