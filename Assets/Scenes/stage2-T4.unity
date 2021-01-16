@@ -127,15 +127,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -206,15 +206,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -7854,7 +7854,7 @@ Tilemap:
   - first: {x: 58, y: -5, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 22
+      m_TileSpriteIndex: 21
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -7890,7 +7890,7 @@ Tilemap:
   - first: {x: 62, y: -5, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 22
+      m_TileSpriteIndex: 21
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -8454,10 +8454,19 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 2
       m_ColliderType: 2
-  - first: {x: 59, y: -4, z: 0}
+  - first: {x: 58, y: -4, z: 0}
     second:
       m_TileIndex: 15
       m_TileSpriteIndex: 23
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 2
+      m_ColliderType: 2
+  - first: {x: 59, y: -4, z: 0}
+    second:
+      m_TileIndex: 15
+      m_TileSpriteIndex: 21
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -8473,6 +8482,15 @@ Tilemap:
       m_TileFlags: 2
       m_ColliderType: 2
   - first: {x: 61, y: -4, z: 0}
+    second:
+      m_TileIndex: 15
+      m_TileSpriteIndex: 21
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 2
+      m_ColliderType: 2
+  - first: {x: 62, y: -4, z: 0}
     second:
       m_TileIndex: 15
       m_TileSpriteIndex: 19
@@ -8697,10 +8715,19 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 2
       m_ColliderType: 2
-  - first: {x: 59, y: -3, z: 0}
+  - first: {x: 58, y: -3, z: 0}
     second:
       m_TileIndex: 15
       m_TileSpriteIndex: 23
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 2
+      m_ColliderType: 2
+  - first: {x: 59, y: -3, z: 0}
+    second:
+      m_TileIndex: 15
+      m_TileSpriteIndex: 21
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -8718,7 +8745,16 @@ Tilemap:
   - first: {x: 61, y: -3, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 16
+      m_TileSpriteIndex: 21
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 2
+      m_ColliderType: 2
+  - first: {x: 62, y: -3, z: 0}
+    second:
+      m_TileIndex: 15
+      m_TileSpriteIndex: 19
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -8886,7 +8922,7 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 2
       m_ColliderType: 2
-  - first: {x: 59, y: -2, z: 0}
+  - first: {x: 58, y: -2, z: 0}
     second:
       m_TileIndex: 15
       m_TileSpriteIndex: 17
@@ -8895,7 +8931,34 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 2
       m_ColliderType: 2
+  - first: {x: 59, y: -2, z: 0}
+    second:
+      m_TileIndex: 15
+      m_TileSpriteIndex: 21
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 2
+      m_ColliderType: 2
   - first: {x: 60, y: -2, z: 0}
+    second:
+      m_TileIndex: 15
+      m_TileSpriteIndex: 21
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 2
+      m_ColliderType: 2
+  - first: {x: 61, y: -2, z: 0}
+    second:
+      m_TileIndex: 15
+      m_TileSpriteIndex: 21
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 2
+      m_ColliderType: 2
+  - first: {x: 62, y: -2, z: 0}
     second:
       m_TileIndex: 15
       m_TileSpriteIndex: 16
@@ -9013,6 +9076,33 @@ Tilemap:
       m_TileFlags: 2
       m_ColliderType: 2
   - first: {x: 34, y: -1, z: 0}
+    second:
+      m_TileIndex: 15
+      m_TileSpriteIndex: 19
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 2
+      m_ColliderType: 2
+  - first: {x: 59, y: -1, z: 0}
+    second:
+      m_TileIndex: 15
+      m_TileSpriteIndex: 23
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 2
+      m_ColliderType: 2
+  - first: {x: 60, y: -1, z: 0}
+    second:
+      m_TileIndex: 15
+      m_TileSpriteIndex: 21
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 2
+      m_ColliderType: 2
+  - first: {x: 61, y: -1, z: 0}
     second:
       m_TileIndex: 15
       m_TileSpriteIndex: 19
@@ -9160,6 +9250,33 @@ Tilemap:
     second:
       m_TileIndex: 15
       m_TileSpriteIndex: 30
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 2
+      m_ColliderType: 2
+  - first: {x: 59, y: 0, z: 0}
+    second:
+      m_TileIndex: 15
+      m_TileSpriteIndex: 23
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 2
+      m_ColliderType: 2
+  - first: {x: 60, y: 0, z: 0}
+    second:
+      m_TileIndex: 15
+      m_TileSpriteIndex: 21
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 2
+      m_ColliderType: 2
+  - first: {x: 61, y: 0, z: 0}
+    second:
+      m_TileIndex: 15
+      m_TileSpriteIndex: 16
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -9357,25 +9474,25 @@ Tilemap:
   - first: {x: 51, y: 1, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 21
+      m_TileSpriteIndex: 16
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 2
       m_ColliderType: 2
-  - first: {x: 52, y: 1, z: 0}
+  - first: {x: 59, y: 1, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 24
+      m_TileSpriteIndex: 17
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 2
       m_ColliderType: 2
-  - first: {x: 53, y: 1, z: 0}
+  - first: {x: 60, y: 1, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 30
+      m_TileSpriteIndex: 16
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -9510,33 +9627,6 @@ Tilemap:
   - first: {x: 50, y: 2, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 21
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 2
-      m_ColliderType: 2
-  - first: {x: 51, y: 2, z: 0}
-    second:
-      m_TileIndex: 15
-      m_TileSpriteIndex: 22
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 2
-      m_ColliderType: 2
-  - first: {x: 52, y: 2, z: 0}
-    second:
-      m_TileIndex: 15
-      m_TileSpriteIndex: 22
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 2
-      m_ColliderType: 2
-  - first: {x: 53, y: 2, z: 0}
-    second:
-      m_TileIndex: 15
       m_TileSpriteIndex: 16
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
@@ -9573,7 +9663,7 @@ Tilemap:
   - first: {x: 39, y: 3, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 21
+      m_TileSpriteIndex: 22
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -9582,7 +9672,7 @@ Tilemap:
   - first: {x: 40, y: 3, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 21
+      m_TileSpriteIndex: 22
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -9591,7 +9681,7 @@ Tilemap:
   - first: {x: 41, y: 3, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 21
+      m_TileSpriteIndex: 22
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -9600,7 +9690,7 @@ Tilemap:
   - first: {x: 42, y: 3, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 21
+      m_TileSpriteIndex: 22
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -9609,7 +9699,7 @@ Tilemap:
   - first: {x: 43, y: 3, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 21
+      m_TileSpriteIndex: 22
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -9618,7 +9708,7 @@ Tilemap:
   - first: {x: 44, y: 3, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 21
+      m_TileSpriteIndex: 22
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -9627,7 +9717,7 @@ Tilemap:
   - first: {x: 45, y: 3, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 21
+      m_TileSpriteIndex: 22
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -9636,7 +9726,7 @@ Tilemap:
   - first: {x: 46, y: 3, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 21
+      m_TileSpriteIndex: 22
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_ObjectToInstantiate: {fileID: 0}
@@ -9663,15 +9753,6 @@ Tilemap:
   - first: {x: 49, y: 3, z: 0}
     second:
       m_TileIndex: 15
-      m_TileSpriteIndex: 22
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 2
-      m_ColliderType: 2
-  - first: {x: 50, y: 3, z: 0}
-    second:
-      m_TileIndex: 15
       m_TileSpriteIndex: 16
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
@@ -9696,78 +9777,6 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 0
       m_ColliderType: 0
-  - first: {x: 39, y: 4, z: 0}
-    second:
-      m_TileIndex: 15
-      m_TileSpriteIndex: 17
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 2
-      m_ColliderType: 2
-  - first: {x: 40, y: 4, z: 0}
-    second:
-      m_TileIndex: 15
-      m_TileSpriteIndex: 22
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 2
-      m_ColliderType: 2
-  - first: {x: 41, y: 4, z: 0}
-    second:
-      m_TileIndex: 15
-      m_TileSpriteIndex: 22
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 2
-      m_ColliderType: 2
-  - first: {x: 42, y: 4, z: 0}
-    second:
-      m_TileIndex: 15
-      m_TileSpriteIndex: 22
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 2
-      m_ColliderType: 2
-  - first: {x: 43, y: 4, z: 0}
-    second:
-      m_TileIndex: 15
-      m_TileSpriteIndex: 22
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 2
-      m_ColliderType: 2
-  - first: {x: 44, y: 4, z: 0}
-    second:
-      m_TileIndex: 15
-      m_TileSpriteIndex: 22
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 2
-      m_ColliderType: 2
-  - first: {x: 45, y: 4, z: 0}
-    second:
-      m_TileIndex: 15
-      m_TileSpriteIndex: 22
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 2
-      m_ColliderType: 2
-  - first: {x: 46, y: 4, z: 0}
-    second:
-      m_TileIndex: 15
-      m_TileSpriteIndex: 16
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 2
-      m_ColliderType: 2
   - first: {x: 117, y: 4, z: 0}
     second:
       m_TileIndex: 10
@@ -11717,7 +11726,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: cdf9bfb7c116e2043a15a37938f212bb, type: 2}
   - m_RefCount: 319
     m_Data: {fileID: 11400000, guid: d17bc304b1cdebf4096664adc8bb703e, type: 2}
-  - m_RefCount: 686
+  - m_RefCount: 687
     m_Data: {fileID: 11400000, guid: 7c6cabcccbdff1045853907b3de4877d, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
@@ -11752,23 +11761,23 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 339aa3575ca1bc94cae8fc9e8a43e6a2, type: 3}
   - m_RefCount: 8
     m_Data: {fileID: 21300000, guid: dd43917e9fdb70e4d8bfd3ae7f45b6b5, type: 3}
-  - m_RefCount: 11
+  - m_RefCount: 12
     m_Data: {fileID: 21300000, guid: 5791bd5682082f1429191e1f83833900, type: 3}
   - m_RefCount: 10
     m_Data: {fileID: 21300000, guid: 4c20ad17ca38c574eb1e044a4587f10f, type: 3}
   - m_RefCount: 45
     m_Data: {fileID: 21300000, guid: 405cf5f1033135c408f1c9d8e7fa55aa, type: 3}
-  - m_RefCount: 14
+  - m_RefCount: 16
     m_Data: {fileID: 21300000, guid: cc9986aa551d5b54d941fd15cb2114af, type: 3}
   - m_RefCount: 8
     m_Data: {fileID: 21300000, guid: 6efb650998fb72d44b10a85c8e0c807b, type: 3}
-  - m_RefCount: 397
+  - m_RefCount: 398
     m_Data: {fileID: 21300000, guid: 3939decaafd18bd468263a92edba6485, type: 3}
-  - m_RefCount: 109
+  - m_RefCount: 106
     m_Data: {fileID: 21300000, guid: 2fedc8cb1b112ef4cb69fe24c7b78fe7, type: 3}
-  - m_RefCount: 15
+  - m_RefCount: 17
     m_Data: {fileID: 21300000, guid: 8926ef6f19cf31548a0e0f170eae981b, type: 3}
-  - m_RefCount: 110
+  - m_RefCount: 109
     m_Data: {fileID: 21300000, guid: f05c6014ea22fbf4f896d6072b3c163d, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 21300000, guid: 368d6112efcaca14bbe9ccae52428e67, type: 3}
@@ -11780,14 +11789,14 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 6d68d201df303114da82517110907572, type: 3}
   - m_RefCount: 9
     m_Data: {fileID: 21300000, guid: 7503f427f6c48ef4f892d439909075b2, type: 3}
-  - m_RefCount: 10
+  - m_RefCount: 9
     m_Data: {fileID: 21300000, guid: bfdef6d9b8b03e146baa2f443f92d6d2, type: 3}
   - m_RefCount: 10
     m_Data: {fileID: 21300000, guid: 211a98f803f618e438d0bf84afa4561f, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 21300000, guid: 49127a1e34fc12a46b45e482b14103e9, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 1248
+  - m_RefCount: 1249
     m_Data:
       e00: 1
       e01: 0
@@ -11806,7 +11815,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 1248
+  - m_RefCount: 1249
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   - m_RefCount: 0
     m_Data: {r: 8.788428e-39, g: 8.788428e-39, b: 8.788428e-39, a: 8.788428e-39}
@@ -12086,15 +12095,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -12225,6 +12234,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 189072259}
     - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: manager
@@ -12235,11 +12249,6 @@ PrefabInstance:
       propertyPath: dyingCallbacks.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
       value: 0.45
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 189072259}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
 --- !u!1001 &386017454
@@ -12559,6 +12568,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 189072259}
     - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: manager
@@ -12569,11 +12583,6 @@ PrefabInstance:
       propertyPath: dyingCallbacks.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
       value: 0.45
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 189072259}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
 --- !u!1001 &412830854
@@ -12583,15 +12592,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -12662,15 +12671,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -12943,15 +12952,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -13209,16 +13218,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 189072259}
+    - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
 --- !u!1 &635423977
@@ -13702,15 +13711,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -13781,15 +13790,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -13860,15 +13869,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -14081,16 +14090,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 189072259}
+    - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
 --- !u!1001 &970854263
@@ -14179,15 +14188,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -14266,12 +14275,12 @@ PrefabInstance:
     - target: {fileID: 2495217448702265938, guid: 367854618db714f41a589b934091e787,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 51.71
+      value: 46.39
       objectReference: {fileID: 0}
     - target: {fileID: 2495217448702265938, guid: 367854618db714f41a589b934091e787,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.59
+      value: 4.6
       objectReference: {fileID: 0}
     - target: {fileID: 2495217448702265938, guid: 367854618db714f41a589b934091e787,
         type: 3}
@@ -14387,6 +14396,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 189072259}
     - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: manager
@@ -14397,11 +14411,6 @@ PrefabInstance:
       propertyPath: dyingCallbacks.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_FloatArgument
       value: 0.45
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 189072259}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
 --- !u!1001 &1034587185
@@ -14480,15 +14489,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -14688,16 +14697,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 189072259}
+    - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
 --- !u!1001 &1136501069
@@ -14952,15 +14961,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -15791,15 +15800,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -17858,24 +17867,6 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
-  - first: {x: 51, y: -5, z: 0}
-    second:
-      m_TileIndex: 11
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 52, y: -5, z: 0}
-    second:
-      m_TileIndex: 11
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
   - first: {x: 59, y: -5, z: 0}
     second:
       m_TileIndex: 15
@@ -18066,24 +18057,6 @@ Tilemap:
       m_TileFlags: 1
       m_ColliderType: 1
   - first: {x: 50, y: -4, z: 0}
-    second:
-      m_TileIndex: 11
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 51, y: -4, z: 0}
-    second:
-      m_TileIndex: 11
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 52, y: -4, z: 0}
     second:
       m_TileIndex: 11
       m_TileSpriteIndex: 6
@@ -18290,24 +18263,6 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
-  - first: {x: 51, y: -3, z: 0}
-    second:
-      m_TileIndex: 11
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 52, y: -3, z: 0}
-    second:
-      m_TileIndex: 11
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
   - first: {x: 70, y: -3, z: 0}
     second:
       m_TileIndex: 4
@@ -18452,24 +18407,6 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
-  - first: {x: 51, y: -2, z: 0}
-    second:
-      m_TileIndex: 11
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 52, y: -2, z: 0}
-    second:
-      m_TileIndex: 11
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
   - first: {x: 79, y: -2, z: 0}
     second:
       m_TileIndex: 3
@@ -18588,24 +18525,6 @@ Tilemap:
       m_TileFlags: 1
       m_ColliderType: 1
   - first: {x: 50, y: -1, z: 0}
-    second:
-      m_TileIndex: 11
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 51, y: -1, z: 0}
-    second:
-      m_TileIndex: 11
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 52, y: -1, z: 0}
     second:
       m_TileIndex: 11
       m_TileSpriteIndex: 6
@@ -18740,24 +18659,6 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
-  - first: {x: 51, y: 0, z: 0}
-    second:
-      m_TileIndex: 11
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 52, y: 0, z: 0}
-    second:
-      m_TileIndex: 11
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
   - first: {x: 97, y: 0, z: 0}
     second:
       m_TileIndex: 3
@@ -18866,33 +18767,6 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
-  - first: {x: 50, y: 1, z: 0}
-    second:
-      m_TileIndex: 11
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 51, y: 1, z: 0}
-    second:
-      m_TileIndex: 11
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
-  - first: {x: 52, y: 1, z: 0}
-    second:
-      m_TileIndex: 11
-      m_TileSpriteIndex: 6
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_ObjectToInstantiate: {fileID: 0}
-      m_TileFlags: 1
-      m_ColliderType: 1
   - first: {x: 97, y: 1, z: 0}
     second:
       m_TileIndex: 4
@@ -18944,7 +18818,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: cdf9bfb7c116e2043a15a37938f212bb, type: 2}
   - m_RefCount: 8
     m_Data: {fileID: 11400000, guid: bc3132463fcba8143ba8533ee6b3864d, type: 2}
-  - m_RefCount: 82
+  - m_RefCount: 67
     m_Data: {fileID: 11400000, guid: 5549f587b3bbd0c4c8b2ce6a29ab3172, type: 2}
   - m_RefCount: 7
     m_Data: {fileID: 11400000, guid: 44cf018bb69d7d143974ba025be5a797, type: 2}
@@ -18967,7 +18841,7 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: 11c0bf9e01a19b441935f3c10989285a, type: 3}
   - m_RefCount: 7
     m_Data: {fileID: 21300000, guid: 115f3810ec8d86c42b741c3cbd7e90e3, type: 3}
-  - m_RefCount: 82
+  - m_RefCount: 67
     m_Data: {fileID: 21300000, guid: 7985ee7ed07249f45806d0dca57c0175, type: 3}
   - m_RefCount: 8
     m_Data: {fileID: 21300000, guid: daf45d9d7a66e0240a9bcd83660c1cf1, type: 3}
@@ -19020,7 +18894,7 @@ Tilemap:
   - m_RefCount: 4
     m_Data: {fileID: 21300000, guid: b28d5b1cd2ebc2642ac0e6e10d663719, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 330
+  - m_RefCount: 315
     m_Data:
       e00: 1
       e01: 0
@@ -19039,7 +18913,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 330
+  - m_RefCount: 315
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -19251,12 +19125,12 @@ PrefabInstance:
     - target: {fileID: 2495217448702265938, guid: 367854618db714f41a589b934091e787,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 45.98
+      value: 47.44
       objectReference: {fileID: 0}
     - target: {fileID: 2495217448702265938, guid: 367854618db714f41a589b934091e787,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.57
+      value: 4.62
       objectReference: {fileID: 0}
     - target: {fileID: 2495217448702265938, guid: 367854618db714f41a589b934091e787,
         type: 3}
@@ -19312,15 +19186,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -19391,15 +19265,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -19470,15 +19344,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -19549,15 +19423,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324964, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_Name
       value: Enemy Walking Mashroom (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
@@ -19688,16 +19562,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 189072259}
+    - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
 --- !u!1001 &1803963984
