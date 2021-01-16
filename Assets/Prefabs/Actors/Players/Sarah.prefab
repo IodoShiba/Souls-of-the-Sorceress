@@ -350,24 +350,24 @@ MonoBehaviour:
     attackCollider: {fileID: 8916380848524203196}
     throughable: 1
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   awakenAttack:
     damage: 0
     knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 8916380848524203196}
     throughable: 1
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   blueAwakenAttack:
     damage: 10
     knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 8916380848524203196}
     throughable: 1
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
 --- !u!50 &8916380848524203186
 Rigidbody2D:
   serializedVersion: 4
@@ -413,8 +413,8 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
@@ -1043,6 +1043,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onInvinsibleTimeStart:
+    m_PersistentCalls:
+      m_Calls: []
   onInvinsibleTimeOver:
     m_PersistentCalls:
       m_Calls:
@@ -1256,8 +1259,8 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   owner: {fileID: 0}
   convertMode: 1
   dealingAttackConverters: []
@@ -1280,24 +1283,24 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   awakenAttack:
     damage: 0
     knockBackImpulse: {x: 100, y: 50}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   blueAwakenAttack:
     damage: 0
     knockBackImpulse: {x: 100, y: 50}
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 10
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
 --- !u!114 &4325353825048437118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1711,8 +1714,8 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   attackConverters:
   - {fileID: 8916380850362335011}
   onAttackSucceeded:
@@ -1729,7 +1732,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2407926265265643027}
+      - m_Target: {fileID: 4883813172766547122}
         m_MethodName: DoEffect
         m_Mode: 0
         m_Arguments:
@@ -1932,6 +1935,7 @@ GameObject:
   - component: {fileID: 8916380848965055385}
   - component: {fileID: 8916380848965055384}
   - component: {fileID: 8916380848965055332}
+  - component: {fileID: 3170444324353144797}
   m_Layer: 25
   m_Name: Tackle's Attack Collision
   m_TagString: Attack
@@ -2170,24 +2174,24 @@ MonoBehaviour:
     attackCollider: {fileID: 8916380848965055379}
     throughable: 1
     hitstopSpan: 0.1
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   awakenAttack:
     damage: 100
     knockBackImpulse: {x: 1000, y: 0}
     attackCollider: {fileID: 8916380848965055387}
     throughable: 1
     hitstopSpan: 0.1
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   blueAwakenAttack:
     damage: 15
     knockBackImpulse: {x: 500, y: 0}
     attackCollider: {fileID: 8916380848965055386}
     throughable: 1
     hitstopSpan: 0.1
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
 --- !u!114 &8916380848965055384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2212,8 +2216,8 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
@@ -2258,17 +2262,50 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
   onAttackSucceededMortal:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3170444324353144797}
+        m_MethodName: DoEffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   attackConvertersOnActivate:
   - {fileID: 8916380848965055385}
   attackConvertersOnHit: []
+--- !u!114 &3170444324353144797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848965055376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81457894b1abc63408678dc4317aaa9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipOrdinary: {fileID: 8300000, guid: 84b91e8b195f3154f831dcf44427cda2, type: 3}
+  audioClipAwaken: {fileID: 8300000, guid: 8fafd030dfdef9e45a27b40aca751455, type: 3}
+  animationClipOrdinary: {fileID: 7400000, guid: 074fc9e1973157d47bebbb773fe46d74,
+    type: 2}
+  animationClipAwaken: {fileID: 7400000, guid: b48a6521246ac9843a7f2fdf435c2d6f, type: 2}
+  offset: {x: 0, y: 0}
+  positionerMulti: 0.7
+  owner: {fileID: 8916380848889061121}
+  audioSource: {fileID: 7396359423064295611}
+  actionAwake: {fileID: 8916380848889061092}
 --- !u!1 &8916380849072566236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2529,24 +2566,24 @@ MonoBehaviour:
     attackCollider: {fileID: 8916380849248469455}
     throughable: 1
     hitstopSpan: 0.075
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   awakenAttack:
     damage: 100
     knockBackImpulse: {x: 700, y: 200}
     attackCollider: {fileID: 8916380849248469460}
     throughable: 1
     hitstopSpan: 0.075
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   blueAwakenAttack:
     damage: 30
     knockBackImpulse: {x: 50, y: 10}
     attackCollider: {fileID: 8916380849248469451}
     throughable: 1
     hitstopSpan: 0.075
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
 --- !u!114 &8916380849248469449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2571,8 +2608,8 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
@@ -2800,24 +2837,24 @@ MonoBehaviour:
     attackCollider: {fileID: 8916380849465762222}
     throughable: 1
     hitstopSpan: 0.05
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   awakenAttack:
     damage: 100
     knockBackImpulse: {x: 700, y: 200}
     attackCollider: {fileID: 8916380849465762218}
     throughable: 1
     hitstopSpan: 0.05
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   blueAwakenAttack:
     damage: 30
     knockBackImpulse: {x: 80, y: 10}
     attackCollider: {fileID: 8916380849465762217}
     throughable: 1
     hitstopSpan: 0.05
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
 --- !u!114 &8916380849465762211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2842,8 +2879,8 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
@@ -3083,24 +3120,24 @@ MonoBehaviour:
     attackCollider: {fileID: 8916380849515846537}
     throughable: 1
     hitstopSpan: 0.05
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   awakenAttack:
     damage: 100
     knockBackImpulse: {x: 100, y: -1000}
     attackCollider: {fileID: 8916380849515846550}
     throughable: 1
     hitstopSpan: 0.05
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   blueAwakenAttack:
     damage: 50
     knockBackImpulse: {x: 0, y: -500}
     attackCollider: {fileID: 8916380849515846549}
     throughable: 1
     hitstopSpan: 0.05
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
 --- !u!114 &8916380849515846539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3125,8 +3162,8 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
@@ -3324,24 +3361,24 @@ MonoBehaviour:
     attackCollider: {fileID: 8916380849653747852}
     throughable: 1
     hitstopSpan: 0.1
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   awakenAttack:
     damage: 100
     knockBackImpulse: {x: 300, y: -900}
     attackCollider: {fileID: 8916380849653747849}
     throughable: 1
     hitstopSpan: 0.1
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   blueAwakenAttack:
     damage: 100
     knockBackImpulse: {x: 300, y: -900}
     attackCollider: {fileID: 8916380849653747848}
     throughable: 1
     hitstopSpan: 0.1
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
 --- !u!114 &8916380849653747854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3366,8 +3403,8 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
@@ -3548,6 +3585,7 @@ GameObject:
   - component: {fileID: 8916380850362335011}
   - component: {fileID: 8916380850362335010}
   - component: {fileID: 8916380850362335020}
+  - component: {fileID: 4883813172766547122}
   m_Layer: 25
   m_Name: Guard Data
   m_TagString: Untagged
@@ -3588,24 +3626,24 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 1
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   awakenAttack:
     damage: 0
     knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 0}
     throughable: 1
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   blueAwakenAttack:
     damage: 10
     knockBackImpulse: {x: 200, y: 50}
     attackCollider: {fileID: 0}
     throughable: 1
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
 --- !u!114 &8916380850362335010
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3630,8 +3668,8 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
@@ -3665,8 +3703,8 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
@@ -3676,6 +3714,24 @@ MonoBehaviour:
   attackConvertersOnActivate:
   - {fileID: 8916380850362335011}
   attackConvertersOnHit: []
+--- !u!114 &4883813172766547122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380850362335008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34577006b82be4c49b669e166d467adf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 0f4aafc3b11a59246aae8fb83db57aa6, type: 3}
+  animationClip: {fileID: 7400000, guid: 95eecc5fbb433f2428884f5fae7d9373, type: 2}
+  offset: {x: 2, y: 0}
+  positionerMulti: 0.3
+  origin: {fileID: 8916380848889061178}
+  audioSource: {fileID: 7396359423064295611}
 --- !u!1 &8916380850370461324
 GameObject:
   m_ObjectHideFlags: 0
@@ -3850,24 +3906,24 @@ MonoBehaviour:
     attackCollider: {fileID: 8916380850370461327}
     throughable: 1
     hitstopSpan: 0.05
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   awakenAttack:
     damage: 100
     knockBackImpulse: {x: 700, y: 200}
     attackCollider: {fileID: 8916380850370461332}
     throughable: 1
     hitstopSpan: 0.05
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   blueAwakenAttack:
     damage: 30
     knockBackImpulse: {x: 70, y: 10}
     attackCollider: {fileID: 8916380850370461323}
     throughable: 1
     hitstopSpan: 0.05
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
 --- !u!114 &8916380850370461321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3892,8 +3948,8 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
@@ -4090,24 +4146,24 @@ MonoBehaviour:
     attackCollider: {fileID: 8916380850513594286}
     throughable: 1
     hitstopSpan: 0.1
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   awakenAttack:
     damage: 100
     knockBackImpulse: {x: 20, y: 700}
     attackCollider: {fileID: 8916380850513594282}
     throughable: 1
     hitstopSpan: 0.1
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   blueAwakenAttack:
     damage: 20
     knockBackImpulse: {x: 20, y: 700}
     attackCollider: {fileID: 8916380850513594281}
     throughable: 1
     hitstopSpan: 0.1
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
 --- !u!114 &8916380850513594275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4132,8 +4188,8 @@ MonoBehaviour:
     attackCollider: {fileID: 0}
     throughable: 0
     hitstopSpan: 0
-    attrFlags: 0
     buff: {fileID: 0}
+    attrFlags: 0
   onAttackSucceeded:
     m_PersistentCalls:
       m_Calls: []
