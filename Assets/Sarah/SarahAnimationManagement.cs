@@ -8,6 +8,7 @@ public class SarahAnimationManagement : MonoBehaviour
     List<SkinnedMeshRenderer> ordinaryMeshRenderers,awakenMeshRenderers,blueAwakenMeshRenderers;
     [SerializeField]
     List<GameObject> gameObject_ordinary, gameObject_awaken;
+    [SerializeField] GameObject fire,particle;
     [SerializeField]
     TrailRenderer trailRenderer;
 
@@ -73,5 +74,11 @@ public class SarahAnimationManagement : MonoBehaviour
                 
                 break;
         }
+    }
+
+    public void FireOnOff(bool isON)
+    {
+        fire.SetActive(isON);
+        particle.SetActive(isON);
     }
 }
