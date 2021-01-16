@@ -11,11 +11,26 @@ public class SarahAnimationManagement : MonoBehaviour
     [SerializeField] GameObject fire,particle;
     [SerializeField]
     TrailRenderer trailRenderer;
+    ActionAwake actionAwake;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        actionAwake = GetComponentInParent<ActionAwake>();
+    }
+
+    public void FireON()
+    {
+        if (actionAwake.IsActive)
+        {
+            fire.SetActive(true);
+            particle.SetActive(true);
+        }
+    }
+
+    public void FireOFF()
+    {
+        fire.SetActive(false);
+        particle.SetActive(false);
     }
 
     public void ChangeApperance(ActionAwake.AwakeLevels mode)
@@ -74,11 +89,5 @@ public class SarahAnimationManagement : MonoBehaviour
                 
                 break;
         }
-    }
-
-    public void FireOnOff(bool isON)
-    {
-        fire.SetActive(isON);
-        particle.SetActive(isON);
     }
 }
