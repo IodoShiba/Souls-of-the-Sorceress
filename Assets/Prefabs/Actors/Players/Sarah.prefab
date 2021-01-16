@@ -769,7 +769,7 @@ MonoBehaviour:
     guard:
       method: {fileID: 2312274154079463536}
       fields:
-        multiplier: 0.05
+        multiplier: 0.01
         degreeRangeStart: -90
         degreeRangeWidth: 180
     extraCollider: {fileID: 8916380848889061124}
@@ -794,7 +794,7 @@ MonoBehaviour:
     onInitialize:
       m_PersistentCalls:
         m_Calls: []
-    distance: 8
+    distance: 6
     speed: 32
     degreeWidthOfGuardArea: 360
     unguardTime: 0
@@ -2170,10 +2170,10 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 5
-    knockBackImpulse: {x: 700, y: 0}
+    knockBackImpulse: {x: 800, y: 0}
     attackCollider: {fileID: 8916380848965055379}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0.02
     buff: {fileID: 0}
     attrFlags: 0
   awakenAttack:
@@ -2181,7 +2181,7 @@ MonoBehaviour:
     knockBackImpulse: {x: 1000, y: 0}
     attackCollider: {fileID: 8916380848965055387}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0.02
     buff: {fileID: 0}
     attrFlags: 0
   blueAwakenAttack:
@@ -3728,8 +3728,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: 0f4aafc3b11a59246aae8fb83db57aa6, type: 3}
   animationClip: {fileID: 7400000, guid: 95eecc5fbb433f2428884f5fae7d9373, type: 2}
-  offset: {x: 2, y: 0}
-  positionerMulti: 0.3
+  offset: {x: 0, y: 0}
+  positionerMulti: 0.8
   origin: {fileID: 8916380848889061178}
   audioSource: {fileID: 7396359423064295611}
 --- !u!1 &8916380850370461324
@@ -4411,6 +4411,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183043310876198096, guid: 1192107c2420af94cb0d021834b1c4a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6183043310882125737, guid: 1192107c2420af94cb0d021834b1c4a5,
         type: 3}
