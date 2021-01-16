@@ -51,6 +51,7 @@ public class SaveData : ScriptableObject
     {
         playerHealth = playerMaxHealth;
         playerAwakeGauge = 0;
+        playerProgressLevel = 0;
     }
     public void StorePlayerData(Player player)
     {
