@@ -586,7 +586,7 @@ MonoBehaviour:
   sarahDefault:
     gameObject: {fileID: 8916380848889061178}
     connector: {fileID: 8916380848890831846}
-    umbrellaRecoverCycle: 0.5
+    umbrellaRecoverCycle: 0.1
     umbrellaRecoverAmount: 1
     commands: {fileID: 7184598500640157805}
     horizontalMove:
@@ -1817,7 +1817,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4928ee17be5a6b944bae95ed702ba683, type: 3}
-  m_Color: {r: 0.0528063, g: 0, b: 0.6132076, a: 1}
+  m_Color: {r: 0.0528063, g: 0, b: 0.6132076, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1840,9 +1840,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 8916380848889061121}
-  _colorOrdinary: {r: 0.050980393, g: 0, b: 0.6117647, a: 1}
-  _colorAwaken: {r: 0.6117647, g: 0, b: 0, a: 1}
-  _colorBlueAwaken: {r: 0, g: 0.61176443, b: 0.6117647, a: 1}
+  _colorOrdinary: {r: 0.050980393, g: 0, b: 0.6117647, a: 0}
+  _colorAwaken: {r: 0.6117647, g: 0, b: 0, a: 0}
+  _colorBlueAwaken: {r: 0, g: 0.61176443, b: 0.6117647, a: 0}
 --- !u!114 &8916380848891301902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5061,7 +5061,7 @@ PrefabInstance:
     - target: {fileID: 6183043311084556291, guid: 1192107c2420af94cb0d021834b1c4a5,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6183043310270526341, guid: 1192107c2420af94cb0d021834b1c4a5,
         type: 3}
@@ -5412,6 +5412,66 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Length
       value: 0.97736907
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183043309554273809, guid: 1192107c2420af94cb0d021834b1c4a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183043310353324426, guid: 1192107c2420af94cb0d021834b1c4a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183043310406713970, guid: 1192107c2420af94cb0d021834b1c4a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183043310882125739, guid: 1192107c2420af94cb0d021834b1c4a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183043310921973070, guid: 1192107c2420af94cb0d021834b1c4a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183043311026543955, guid: 1192107c2420af94cb0d021834b1c4a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183043311053980497, guid: 1192107c2420af94cb0d021834b1c4a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183043311081824484, guid: 1192107c2420af94cb0d021834b1c4a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183043311184351323, guid: 1192107c2420af94cb0d021834b1c4a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183043311297468552, guid: 1192107c2420af94cb0d021834b1c4a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183043311380468516, guid: 1192107c2420af94cb0d021834b1c4a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6183043311551657754, guid: 1192107c2420af94cb0d021834b1c4a5,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1192107c2420af94cb0d021834b1c4a5, type: 3}
