@@ -22,7 +22,7 @@ public class PlayerUmbrellaParameterViewer : UmbrellaParameters.Viewer
             {
                 sequence.Restart();
                 sequence.Pause();
-                transform.position = initPos;
+                transform.localPosition = initPos;
             }
             if(umbrellaWorking && !value)
             {
@@ -40,13 +40,13 @@ public class PlayerUmbrellaParameterViewer : UmbrellaParameters.Viewer
     {
 
         gaugeElements.Clear();
-        initPos = transform.position;
+        initPos = transform.localPosition;
 
         sequence = DOTween.Sequence();
-        sequence.OnStart(() => transform.position = initPos);
+        sequence.OnStart(() => transform.localPosition = initPos);
         for(int i=0; i < shakeRPositionsOnBreak.Count; ++i)
         {
-            sequence.Append(gameObject.transform.DOMove(initPos + (Vector3)shakeRPositionsOnBreak[i], shakeCycleOnBreak / shakeRPositionsOnBreak.Count));
+            sequence.Append(gameObject.transform.DOLocalMove(initPos + (Vector3)shakeRPositionsOnBreak[i], shakeCycleOnBreak / shakeRPositionsOnBreak.Count));
         }
         sequence.SetLoops(-1, LoopType.Restart);
 
