@@ -582,6 +582,7 @@ namespace ActorSarah
                 horizontalMove.ManualUpdate();
                 horizontalMove.Method.StopActorOnDisabled(.1f);
                 ConnectorSarah.sarahAnimator_Anima2D.SetTrigger("GuardTrigger");
+                //ConnectorSarah.sarahAnimator_Anima2D.GetComponent<SarahAnimationManagement>().FireOnOff(false);
             }
 
             protected override void OnActive()
@@ -595,6 +596,7 @@ namespace ActorSarah
                 ConnectorSarah.BearAgainstAttack = false;
                 umbrella.Default();
                 guard.Method.Activated = false;
+                //if (ConnectorSarah.actionAwake.IsActive) ConnectorSarah.sarahAnimator_Anima2D.GetComponent<SarahAnimationManagement>().FireOnOff(true);
             }
 
             //MEMO:
@@ -674,6 +676,7 @@ namespace ActorSarah
                 unguardClock.Reset();
                 state = 0;
                 ConnectorSarah.sarahAnimator_Anima2D.SetTrigger("TackleTrigger");
+                //ConnectorSarah.sarahAnimator_Anima2D.GetComponent<SarahAnimationManagement>().FireOnOff(false);
             }
             protected override void OnActive()
             {
@@ -704,8 +707,8 @@ namespace ActorSarah
                 guard.Method.Activated = false;
                 unguardClock.Reset();
                 state = 0;
+                //if (ConnectorSarah.actionAwake.IsActive) ConnectorSarah.sarahAnimator_Anima2D.GetComponent<SarahAnimationManagement>().FireOnOff(true);
             }
-
         }
 
         [System.Serializable]
