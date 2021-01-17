@@ -294,6 +294,9 @@ MonoBehaviour:
   onHealthRecoveredCallbacks:
     m_PersistentCalls:
       m_Calls: []
+  onInvinsibleTimeStart:
+    m_PersistentCalls:
+      m_Calls: []
   onInvinsibleTimeOver:
     m_PersistentCalls:
       m_Calls: []
@@ -375,7 +378,7 @@ MonoBehaviour:
   smashed:
     gameObject: {fileID: 6891321230494324964}
     connector: {fileID: 6462707158948944647}
-    stateSpan: 0.5
+    stateSpan: 0.75
     useInvincibleTime: 0
     invincibleTime: 0
     horizontalMove: {fileID: 2695806798541559436}
