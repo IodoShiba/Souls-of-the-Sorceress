@@ -382,6 +382,9 @@ MonoBehaviour:
   onHealthRecoveredCallbacks:
     m_PersistentCalls:
       m_Calls: []
+  onInvinsibleTimeStart:
+    m_PersistentCalls:
+      m_Calls: []
   onInvinsibleTimeOver:
     m_PersistentCalls:
       m_Calls: []
@@ -445,7 +448,7 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   maxChaseRadius: 16
   minChaseRadius: 0.3
-  summonCycle: 1.5
+  summonCycle: 2
   maxNearbyEnemyCount: 3
   sensor: {fileID: 4735956752221833305}
 --- !u!114 &4246921619872684889
