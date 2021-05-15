@@ -60,7 +60,7 @@ namespace Buffs
             timeLeft = IsActive ? 0 : sec;
         }
 
-        class StunState : FightActorStateConector.SmashedState
+        public class StunState : FightActorStateConector.SmashedState
         {
             StunFunctor functor;
             FightActorStateConector.SmashedState smashed;

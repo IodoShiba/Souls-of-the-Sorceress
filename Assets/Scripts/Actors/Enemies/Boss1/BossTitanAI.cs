@@ -77,7 +77,7 @@ public class BossTitanAI : AI
     {
         //Debug.Log(t);
         AnimatorStateInfo info = titanAnimator.GetCurrentAnimatorStateInfo(0);
-        Debug.Log(info.fullPathHash);
+        //Debug.Log(info.fullPathHash);
 
         if (t < makingDecisionCycle || isActing)
         {
