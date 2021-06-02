@@ -139,7 +139,7 @@ MonoBehaviour:
     gameObject: {fileID: 0}
     connector: {fileID: 0}
     launchInterval: 3
-    degreeRange: {x: 0, y: 45}
+    degreeRange: {x: 45, y: 45}
     cannon:
       subject: {fileID: 1775799677600867764, guid: 1aa215ad8145c634d97d04e14757828c,
         type: 3}
@@ -191,6 +191,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onHealthRecoveredCallbacks:
+    m_PersistentCalls:
+      m_Calls: []
+  onInvinsibleTimeStart:
     m_PersistentCalls:
       m_Calls: []
   onInvinsibleTimeOver:
