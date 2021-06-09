@@ -11,6 +11,7 @@ namespace ActorKillerMissile
         [SerializeField] CommonActorState.Explosion exploding;
         [SerializeField] MisileSmashed smashed;
         [SerializeField] DeadState dead;
+        [SerializeField] GameObject explosionEffect;
 
         public override SmashedState Smashed => smashed;
 
@@ -44,14 +45,23 @@ namespace ActorKillerMissile
         ActorState DetectingBranch()
         {
             if(finalContacted == null) {return ActorState.continueCurrentState;}
-            if(detectedType == DetectedType.ground){return exploding;}
+            if(detectedType == DetectedType.ground)
+            {
+                Instantiate(explosionEffect,transform.position,Quaternion.identity);
+                return exploding;
+            }
             if(detectedType == DetectedType.player)
             {
                 var ascSarah = (ActorSarah.ActorStateConnectorSarah)ActorManager.PlayerActor.FightAsc;
                 bool c = ascSarah.isGuard && ascSarah.ShouldbeGuarded(transform.position - finalContacted.transform.position);
                 finalContacted = null;
                 detectedType = DetectedType.others;
-                return c ? (ActorState)smashed : (ActorState)exploding;
+                if (c){return smashed;}
+                else
+                {
+                    Instantiate(explosionEffect, transform.position, Quaternion.identity);
+                    return exploding;
+                }
             }
             return ActorState.continueCurrentState;
         }
@@ -110,12 +120,14 @@ namespace ActorKillerMissile
         {
             [SerializeField] Rigidbody2D rigidbody;
             [SerializeField] float gravityScale;
+            [SerializeField] Animator animator;
 
             protected override void OnInitialize()
             {
                 base.OnInitialize();
                 rigidbody.gravityScale = gravityScale;
                 rigidbody.velocity = Vector2.zero;
+                animator.Play("damaged_r");
             }
         }
     }
