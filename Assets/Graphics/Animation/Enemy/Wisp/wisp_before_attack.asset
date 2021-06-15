@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0543fe805424df99fe08ce744cbe49, type: 3}
+  m_Name: wisp_before_attack
+  m_EditorClassIdentifier: 
+  m_PoseEntries:
+  - path: bone/wisp_root
+    localPosition: {x: 18.364601, y: -0.077497005, z: 0.000374794}
+    localRotation: {x: 0, y: 0, z: 0.6096265, w: 0.79268885}
+    localScale: {x: 0.47188, y: 0.47188, z: 0.47188}
+  - path: bone/wisp_root/wisp_tip1
+    localPosition: {x: 2.595778, y: -0.156767, z: 21.044895}
+    localRotation: {x: 0, y: 0, z: -0.028802725, w: 0.99958515}
+    localScale: {x: 1.3240447, y: 1.3240447, z: 1.3240445}
+  - path: bone/wisp_root/wisp_tip2
+    localPosition: {x: 2.3476412, y: 1.33385, z: 21.044895}
+    localRotation: {x: 0, y: 0, z: 0.17980665, w: 0.983702}
+    localScale: {x: 0.7525432, y: 0.7525432, z: 0.7525431}
+  - path: bone/wisp_root/wisp_tip3
+    localPosition: {x: 2.2448716, y: -1.3055402, z: 21.044895}
+    localRotation: {x: 0, y: 0, z: -0.2687349, w: 0.9632142}
+    localScale: {x: 0.7525432, y: 0.7525432, z: 0.7525431}

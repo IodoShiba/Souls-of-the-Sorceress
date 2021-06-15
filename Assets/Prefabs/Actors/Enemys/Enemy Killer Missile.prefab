@@ -166,7 +166,30 @@ MonoBehaviour:
       m_Calls: []
   onDestroy:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: e6076f0b4bf42c7429bb6062b33067e7, type: 2}
+        m_MethodName: SetPosition
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1775799677600868939}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 11400000, guid: e6076f0b4bf42c7429bb6062b33067e7, type: 2}
+        m_MethodName: Play
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7400000, guid: 086a848100152154f8103cc747b7f25d,
+            type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AnimationClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   selfRigidbody: {fileID: 1775799677600868938}
   dealingAttackConverters: []
   dealtAttackConverters: []
@@ -421,16 +444,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3936014002297897277, guid: c2ad664f176319d40a4b1c989eba428f,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 3936014002297897277, guid: c2ad664f176319d40a4b1c989eba428f,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3936014003404097654, guid: c2ad664f176319d40a4b1c989eba428f,
         type: 3}
       propertyPath: m_Mesh
@@ -447,6 +460,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3936014003568232293, guid: c2ad664f176319d40a4b1c989eba428f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936014002297897277, guid: c2ad664f176319d40a4b1c989eba428f,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3936014002297897277, guid: c2ad664f176319d40a4b1c989eba428f,
         type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -477,6 +500,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explosion
       objectReference: {fileID: 0}
+    - target: {fileID: 5641229665059161534, guid: 4e703afc759205248a97bc16ab22bbb8,
+        type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 1775799677600867765}
     - target: {fileID: 5641229665059161535, guid: 4e703afc759205248a97bc16ab22bbb8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -532,11 +560,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5641229665059161534, guid: 4e703afc759205248a97bc16ab22bbb8,
-        type: 3}
-      propertyPath: owner
-      value: 
-      objectReference: {fileID: 1775799677600867765}
     - target: {fileID: 5641229665059161529, guid: 4e703afc759205248a97bc16ab22bbb8,
         type: 3}
       propertyPath: m_Enabled

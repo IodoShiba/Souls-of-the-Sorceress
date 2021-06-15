@@ -19,7 +19,7 @@ public class SarahStunAnimation : MonoBehaviour
     void Update()
     {
         //Debug.Log(typeof(SarahStunAnimation).ToString());
-        Debug.Log(asc.Current.GetType());
+        //Debug.Log(asc.Current.GetType());
         if(asc.Current.GetType() == typeof(Buffs.StunFunctor.StunState))
         {
             sr.enabled = true;
