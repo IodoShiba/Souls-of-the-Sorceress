@@ -247,7 +247,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxChaseDistance: 5
   minChaseDistance: 0.5
-  timeToIgnite: 2
+  timeToIgnite: 1.5
   _def: {r: 0.2509804, g: 0.21176471, b: 0.39607844, a: 1}
   _igniting: {r: 1, g: 0.3954733, b: 0, a: 1}
   spriteRenderer: {fileID: 6562791909739401150}
@@ -338,7 +338,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 3
 --- !u!1001 &1538564236031889163
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -419,7 +419,7 @@ PrefabInstance:
     - target: {fileID: 5641229665059161529, guid: 4e703afc759205248a97bc16ab22bbb8,
         type: 3}
       propertyPath: m_Radius
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e703afc759205248a97bc16ab22bbb8, type: 3}
