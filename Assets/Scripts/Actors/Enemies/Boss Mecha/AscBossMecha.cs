@@ -10,6 +10,9 @@ public class AscBossMecha : FightActorStateConector
     [SerializeField] Rect fieldRect;
 
     [SerializeField] BossMechaDefault defaultState;
+    [SerializeField] BombingTackle bombingTackle;
+    [SerializeField] Stamping stamping;
+    [SerializeField] SettingUpBombs settingUpBombs;
     [SerializeField] SmashedState smashed;
     [SerializeField] BossMechaDead dead;
 
@@ -33,7 +36,7 @@ public class AscBossMecha : FightActorStateConector
         
     }
 
-    public void InvokeAllBomb()
+    public void IgniteAllBomb()
     {
 
     }
