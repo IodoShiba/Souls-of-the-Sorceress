@@ -25,9 +25,18 @@ public class AscBossMecha : FightActorStateConector
     public override SmashedState Smashed => smashed;
     public override DeadState Dead => dead;
 
+    CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+    CancellationToken GetCancellationToken() => cancellationTokenSource.Token;
+    void CancelAction() => cancellationTokenSource.Cancel();
+
     Rect fieldRect;
 
     ActorState nextAction = null;
+
+    void OnDestroy()
+    {
+        cancellationTokenSource.Dispose(); // CancellationTokenSource must be Disposed when you no longer use it.
+    }
 
     protected override void BuildStateConnection()
     {
@@ -117,19 +126,18 @@ public class AscBossMecha : FightActorStateConector
         AscBossMecha AscBossMecha {get => ascBossMecha==null?(ascBossMecha = (AscBossMecha)Connector) : ascBossMecha;}
  
         bool ongoing = false;
-        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
 
         protected override bool ShouldCotinue() => ongoing;
         protected override void OnInitialize()
         {
             ongoing = true; 
-            Movement(cancellationTokenSource.Token).Forget();
+            Movement(AscBossMecha.GetCancellationToken()).Forget();
         }
         protected override void OnTerminate(bool isNormal) 
         {
             if(!isNormal && ongoing)
             {
-                cancellationTokenSource.Cancel();
+                AscBossMecha.CancelAction();
             }
         }
         public override bool IsResistibleTo(Type actorStateType) => typeof(SmashedState).IsAssignableFrom(actorStateType);
@@ -200,7 +208,6 @@ public class AscBossMecha : FightActorStateConector
     class Stamping : ActorState
     {
         bool ongoing = false;
-        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         AscBossMecha ascBossMecha = null; AscBossMecha MechaConnector { get => ascBossMecha == null ? (ascBossMecha = Connector as AscBossMecha) : ascBossMecha; }
 
 
@@ -216,13 +223,13 @@ public class AscBossMecha : FightActorStateConector
         protected override void OnInitialize()
         {
             ongoing = true; 
-            Movement(cancellationTokenSource.Token).Forget();
+            Movement(MechaConnector.GetCancellationToken()).Forget();
         }
         protected override void OnTerminate(bool isNormal) 
         {
             if(!isNormal && ongoing)
             {
-                cancellationTokenSource.Cancel();
+                MechaConnector.CancelAction();
             }
         }
         public override bool IsResistibleTo(Type actorStateType) => typeof(SmashedState).IsAssignableFrom(actorStateType);
@@ -264,7 +271,7 @@ public class AscBossMecha : FightActorStateConector
                 if(cancellationToken.IsCancellationRequested){ return true; }
                 float nexty = y0 - 0.5f*dropAccel*t*t;
                 t += Time.deltaTime;
-                
+
                 if(nexty < groundY)
                 {
                     GameObject.transform.position = new Vector3(GameObject.transform.position.x, groundY, GameObject.transform.position.z);
@@ -317,20 +324,19 @@ public class AscBossMecha : FightActorStateConector
         [SerializeField] float bombSetUpGap;
 
         bool ongoing = false;
-        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         AscBossMecha conector = null; AscBossMecha MechaConnector { get => conector == null ? (conector = Connector as AscBossMecha) : conector; }
 
         protected override bool ShouldCotinue() => ongoing;
         protected override void OnInitialize()
         {
             ongoing = true; 
-            Movement(cancellationTokenSource.Token).Forget();
+            Movement(MechaConnector.GetCancellationToken()).Forget();
         }
         protected override void OnTerminate(bool isNormal) 
         {
             if(!isNormal && ongoing)
             {
-                cancellationTokenSource.Cancel();
+                MechaConnector.CancelAction();
             }
         }
         public override bool IsResistibleTo(Type actorStateType) => typeof(SmashedState).IsAssignableFrom(actorStateType);
@@ -481,9 +487,10 @@ public class AscBossMecha : FightActorStateConector
 
     class BossMechaDead : DeadState
     {
+        AscBossMecha conector = null; AscBossMecha MechaConnector { get => conector == null ? (conector = Connector as AscBossMecha) : conector; }
+
         protected override void OnInitialize()
         {
-            
         }
     }
 }

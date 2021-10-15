@@ -12,13 +12,14 @@ namespace ActorBomb
         [SerializeField] Color _def;
         [SerializeField] Color _igniting;
         [SerializeField] SpriteRenderer spriteRenderer;
+        [SerializeField] bool ignitingColorChange;
 
         Actor player;
         Actor Player { get => player == null ? (player = ActorManager.PlayerActor) : player; }
 
-        float detectingTime;
+        float detectingTime = 0;
 
-        bool detectingPlayer;
+        bool detectingPlayer = false;
         bool DetectingPlayer
         { 
             get => detectingPlayer;
@@ -51,7 +52,10 @@ namespace ActorBomb
                 detectingTime += Time.deltaTime;
             }
 
-            spriteRenderer.color = Color.Lerp(_def, _igniting, detectingTime / timeToIgnite);
+            if(spriteRenderer!=null&&ignitingColorChange)
+            {
+                spriteRenderer.color = Color.Lerp(_def, _igniting, detectingTime / timeToIgnite);
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
