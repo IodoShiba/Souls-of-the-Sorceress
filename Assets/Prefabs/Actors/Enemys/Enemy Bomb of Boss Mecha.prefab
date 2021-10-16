@@ -10,14 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8428984197783552279}
   - component: {fileID: 8428984197783552278}
+  - component: {fileID: 9192868017457971482}
+  - component: {fileID: 2514870655666033526}
+  - component: {fileID: 8664762976710468775}
   - component: {fileID: 8428984197783552265}
-  - component: {fileID: 8428984197783552275}
   - component: {fileID: 8428984197783552264}
-  - component: {fileID: 8428984197783552277}
-  - component: {fileID: 8428984197783552276}
-  - component: {fileID: 8428984197783552273}
-  - component: {fileID: 8428984197783552272}
   - component: {fileID: 8428984197783552274}
+  - component: {fileID: 6930968997791007988}
   m_Layer: 24
   m_Name: Enemy Bomb of Boss Mecha
   m_TagString: Enemy
@@ -90,6 +89,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &9192868017457971482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8428984197783552267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d4c1c480dfcd2b489bfa7155b61bbc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ignoreActiveReign: 0
+  buffReceiver:
+    compatibleList: {fileID: 0}
+--- !u!114 &2514870655666033526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8428984197783552267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d2c35d30c43fe1498aad58befe0ba3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody: {fileID: 8428984197783552265}
+  bombDefault:
+    gameObject: {fileID: 8428984197783552267}
+    connector: {fileID: 2514870655666033526}
+    ai: {fileID: 8664762976710468775}
+  blasting:
+    gameObject: {fileID: 8428984197783552267}
+    connector: {fileID: 2514870655666033526}
+    timeSpan: 0
+    explosion: {fileID: 8428984197651383325}
+  smashed:
+    gameObject: {fileID: 8428984197783552267}
+    connector: {fileID: 2514870655666033526}
+    stateSpan: 0.5
+    useInvincibleTime: 0
+    invincibleTime: 0
+    horizontalMove: {fileID: 0}
+    disallowCross: 0
+  dead:
+    gameObject: {fileID: 8428984197783552267}
+    connector: {fileID: 2514870655666033526}
+--- !u!114 &8664762976710468775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8428984197783552267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 504403b62ec636245baf301fcad4dab0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
 --- !u!50 &8428984197783552265
 Rigidbody2D:
   serializedVersion: 4
@@ -111,21 +171,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8428984197783552275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8428984197783552267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d4c1c480dfcd2b489bfa7155b61bbc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ignoreActiveReign: 0
-  buffReceiver:
-    compatibleList: {fileID: 0}
 --- !u!114 &8428984197783552264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,8 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61bce3ae7c4a88440a6ea6326b43c94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
+  health: 1
+  maxHealth: 1
   isInvulnerable: 0
   dyingCallbacks:
     m_PersistentCalls:
@@ -188,95 +233,6 @@ MonoBehaviour:
   dealingAttackConverters: []
   dealtAttackConverters: []
   manager: {fileID: 0}
---- !u!114 &8428984197783552277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8428984197783552267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fca078d13457d0249b29e46c9e96d686, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bombDefault:
-    gameObject: {fileID: 8428984197783552267}
-    connector: {fileID: 8428984197783552277}
-    ai: {fileID: 8428984197783552276}
-    horizontalMove:
-      method: {fileID: 8428984197783552273}
-      fields:
-        maxSpeed: 0.5
-        pushForceMagnitude: 100
-        stopForceMagnitude: 100
-        curve:
-          serializedVersion: 2
-          m_Curve: []
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-    directionable: {fileID: 8428984197783552272}
-  blasting:
-    gameObject: {fileID: 8428984197783552267}
-    connector: {fileID: 8428984197783552277}
-    timeSpan: 0.3
-    explosion: {fileID: 8428984197651383325}
-  smashed:
-    gameObject: {fileID: 8428984197783552267}
-    connector: {fileID: 8428984197783552277}
-    stateSpan: 0.5
-    useInvincibleTime: 0
-    invincibleTime: 0
-    horizontalMove: {fileID: 8428984197783552273}
-    disallowCross: 0
-  dead:
-    gameObject: {fileID: 8428984197783552267}
-    connector: {fileID: 8428984197783552277}
---- !u!114 &8428984197783552276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8428984197783552267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 662e01ddf4250c247b03e45d9f1476da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxChaseDistance: 0
-  minChaseDistance: 0
-  timeToIgnite: 2
-  _def: {r: 0.2509804, g: 0.21176471, b: 0.39607844, a: 1}
-  _igniting: {r: 1, g: 0.3954733, b: 0, a: 1}
-  spriteRenderer: {fileID: 8428984197783552278}
-  ignitingColorChange: 0
---- !u!114 &8428984197783552273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8428984197783552267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cadb6fc697b13c54eb0e3327a63b3926, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8428984197783552272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8428984197783552267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b3db35e113ab9248af73ae37de07636, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initialDirection: -1
 --- !u!58 &8428984197783552274
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -287,12 +243,25 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &6930968997791007988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8428984197783552267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb81837d4e304fa47bbd6f19b8af1be5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &8428984197910634204
 GameObject:
   m_ObjectHideFlags: 0

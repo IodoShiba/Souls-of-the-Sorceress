@@ -10,6 +10,7 @@ public class AscBossMecha : FightActorStateConector
 {
     [SerializeField] Grid fieldGrid;
     [SerializeField] RectInt fieldRange;
+    [SerializeField] Enemy prefabBomb;
 
     [SerializeField] BossMechaDefault defaultState;
     [SerializeField] BombingTackle bombingTackle;
@@ -19,6 +20,10 @@ public class AscBossMecha : FightActorStateConector
     [SerializeField] BossMechaDead dead;
 
     ActorState[] ActionOrder => new ActorState[]{bombingTackle, stamping, settingUpBombs};
+
+    const int MAX_BOMB_PLACED = 32;
+    ActorBomb.AscBombOfBossMecha[] bombsPlaced = new ActorBomb.AscBombOfBossMecha[MAX_BOMB_PLACED];
+    int bombsPlacedCount = 0;
 
 
     public override ActorState DefaultState => defaultState;
@@ -60,21 +65,46 @@ public class AscBossMecha : FightActorStateConector
                 );
 
         ((BossMechaDefault)DefaultState).SetActionOrder(ActionOrder);
+        
+        ResetBombsPlacedArray();
+    }
+
+    ActorBomb.AscBombOfBossMecha GetNewBomb()
+    {
+        var e = EnemyManager.Instance.Summon(prefabBomb, transform.position, Quaternion.identity);
+        return e.GetComponent<ActorBomb.AscBombOfBossMecha>();
+    }
+
+    void ResetBombsPlacedArray()
+    {
+        for(int i=0;i<bombsPlaced.Length; ++i)
+        {
+            bombsPlaced[i] = null;
+        }
+        bombsPlacedCount = 0;
     }
 
     public void DropBomb() 
     {
-
+        GetNewBomb().GravityScale = 1;
     }
 
     public void SetFloatingBomb() 
     {
-        
+        var bomb = GetNewBomb();
+        bomb.GravityScale = 0;
+        bombsPlaced[bombsPlacedCount] = bomb;
+        bombsPlacedCount++;
     }
 
     public void IgniteAllBomb()
     {
+        for(int i=0;i<bombsPlacedCount;++i)
+        {
+            bombsPlaced[i].Ignite();
+        }
 
+        ResetBombsPlacedArray();
     }
 
     void SetNextAction(ActorState actionState)
@@ -121,6 +151,7 @@ public class AscBossMecha : FightActorStateConector
         [SerializeField] float tackleSpeed;
         [SerializeField] float HorizontalRangeMinShift;
         [SerializeField] float HorizontalRangeMaxShift;
+        [SerializeField] float bombSetUpGap;
 
         AscBossMecha ascBossMecha;
         AscBossMecha AscBossMecha {get => ascBossMecha==null?(ascBossMecha = (AscBossMecha)Connector) : ascBossMecha;}
@@ -170,7 +201,14 @@ public class AscBossMecha : FightActorStateConector
                 if(cancellationToken.IsCancellationRequested){ return true; }
                 
                 Vector3 pos = GameObject.transform.position;
-                GameObject.transform.position = new Vector3(Mathf.Lerp(beginx, endx, t/time), bombingMoveHeight, z);
+                float x = pos.x;
+                float nextx = Mathf.Lerp(beginx, endx, t/time);
+                if(Mathf.Floor(nextx-beginx) != Mathf.Floor(x-beginx))
+                {
+                    AscBossMecha.DropBomb();
+                }
+
+                GameObject.transform.position = new Vector3(nextx, bombingMoveHeight, z);
 
                 t += Time.deltaTime;
 
@@ -283,6 +321,9 @@ public class AscBossMecha : FightActorStateConector
                 }
                 await UniTask.Yield();
             }
+
+            MechaConnector.IgniteAllBomb();
+
             await UniTask.Delay(TimeSpan.FromSeconds(dropLockTime), false, PlayerLoopTiming.Update, cancellationToken);
             return false;
         }
@@ -377,6 +418,8 @@ public class AscBossMecha : FightActorStateConector
                 await UniTask.Yield();
             }
 
+            MechaConnector.SetFloatingBomb();
+            
             float rangeLength = range.magnitude;
             Vector2 direction = range/rangeLength;
             float d = 0;
@@ -385,6 +428,10 @@ public class AscBossMecha : FightActorStateConector
                 if(cancellationToken.IsCancellationRequested){ return true; }
                 float nextd = d+bombSetUpSpeed*Time.deltaTime;
 
+                if(d<rangeLength && Mathf.Floor(nextd/bombSetUpGap)!=Mathf.Floor(d/bombSetUpGap))
+                {
+                    MechaConnector.SetFloatingBomb();
+                }
 
                 d = nextd;
                 GameObject.transform.position = origin+direction*d;
