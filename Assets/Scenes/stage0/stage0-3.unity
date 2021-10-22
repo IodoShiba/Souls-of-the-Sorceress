@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322cea529ccc2b84fb15785428db0829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultDestinationSceneName: stgae1-T1
+  defaultDestinationSceneName: stage1-T1
   saveData: {fileID: 11400000, guid: 759077f9a40e083479ac66e312de96c5, type: 2}
   wipeEffet: {fileID: 11400000, guid: cefa33641bbc893438d5e96d4328ed88, type: 2}
 --- !u!114 &614063654 stripped
@@ -3723,11 +3723,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8916380848889061092, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: awakeGauge
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6313214001517641142, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: m_SortingOrder
@@ -4097,6 +4092,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _debugText
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380848889061092, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: awakeGauge
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1018323502459469627, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
