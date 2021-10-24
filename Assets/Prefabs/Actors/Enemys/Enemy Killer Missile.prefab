@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61bce3ae7c4a88440a6ea6326b43c94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
-  maxHealth: 30
+  health: 5
+  maxHealth: 5
   isInvulnerable: 0
   dyingCallbacks:
     m_PersistentCalls:
@@ -157,6 +157,9 @@ MonoBehaviour:
   onHealthRecoveredCallbacks:
     m_PersistentCalls:
       m_Calls: []
+  onInvinsibleTimeStart:
+    m_PersistentCalls:
+      m_Calls: []
   onInvinsibleTimeOver:
     m_PersistentCalls:
       m_Calls: []
@@ -180,6 +183,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ignoreActiveReign: 0
+  buffReceiver:
+    compatibleList: {fileID: 0}
 --- !u!114 &1775799677600867767
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -245,11 +245,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 302733303}
     - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: manager
@@ -270,6 +265,11 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 302733303}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
 --- !u!1001 &42193644
@@ -507,11 +507,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 302733303}
     - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: manager
@@ -532,6 +527,11 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 302733303}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
 --- !u!1 &153401288
@@ -2092,11 +2092,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Walking Mashroom (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2151,6 +2146,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71f7c0f754800a240b655b4103b6dbdd, type: 3}
@@ -2616,11 +2616,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 302733303}
     - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: manager
@@ -2641,6 +2636,11 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 302733303}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
 --- !u!114 &302733303 stripped
@@ -2814,20 +2814,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Slime (6)
       objectReference: {fileID: 0}
-    - target: {fileID: 2495217448702265943, guid: 367854618db714f41a589b934091e787,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2495217448702265938, guid: 367854618db714f41a589b934091e787,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.01
+      value: 33.28
       objectReference: {fileID: 0}
     - target: {fileID: 2495217448702265938, guid: 367854618db714f41a589b934091e787,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.52
+      value: 0.56
       objectReference: {fileID: 0}
     - target: {fileID: 2495217448702265938, guid: 367854618db714f41a589b934091e787,
         type: 3}
@@ -2873,6 +2868,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495217448702265943, guid: 367854618db714f41a589b934091e787,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 367854618db714f41a589b934091e787, type: 3}
@@ -3084,11 +3084,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Walking Mashroom (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3143,6 +3138,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71f7c0f754800a240b655b4103b6dbdd, type: 3}
@@ -3952,11 +3952,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 302733303}
     - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: manager
@@ -3977,6 +3972,11 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 302733303}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
 --- !u!1001 &927323008
@@ -62508,11 +62508,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Slime (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 2495217448702265943, guid: 367854618db714f41a589b934091e787,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2495217448702265938, guid: 367854618db714f41a589b934091e787,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -62567,6 +62562,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495217448702265943, guid: 367854618db714f41a589b934091e787,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 367854618db714f41a589b934091e787, type: 3}
@@ -62951,11 +62951,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 302733303}
     - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: manager
@@ -62976,6 +62971,11 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 302733303}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
 --- !u!1001 &1169943282
@@ -63059,11 +63059,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Slime (10)
       objectReference: {fileID: 0}
-    - target: {fileID: 2495217448702265943, guid: 367854618db714f41a589b934091e787,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2495217448702265938, guid: 367854618db714f41a589b934091e787,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -63118,6 +63113,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2495217448702265943, guid: 367854618db714f41a589b934091e787,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 367854618db714f41a589b934091e787, type: 3}
@@ -76078,11 +76078,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Walking Mashroom (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -76137,6 +76132,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71f7c0f754800a240b655b4103b6dbdd, type: 3}
@@ -76650,11 +76650,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Walking Mashroom (15)
       objectReference: {fileID: 0}
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -76709,6 +76704,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71f7c0f754800a240b655b4103b6dbdd, type: 3}
@@ -77088,112 +77088,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 9196809599060773251, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9196809600116442318, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9196809600192794580, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9196809600537554250, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9196809600546655088, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9196809601075798007, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380848889061092, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: enemyManager
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: progressLevel
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380848889061125, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5612102130977225767, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6313214001517641142, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 9dba604214d2b60478a8ae8f1723f34b,
-        type: 3}
-    - target: {fileID: 8916380849248469455, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380849248469460, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380849248469451, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380849515846537, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380849515846550, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380849515846549, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380849653747852, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380849653747849, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380849653747848, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380850264124302, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9196809599659245918, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: m_LocalRotation.z
@@ -77384,6 +77278,112 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: 0.98618716
       objectReference: {fileID: 0}
+    - target: {fileID: 9196809599060773251, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196809600116442318, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196809600192794580, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196809600537554250, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196809600546655088, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9196809601075798007, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380848889061092, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: enemyManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380848890831846, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: progressLevel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380848889061125, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5612102130977225767, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6313214001517641142, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9dba604214d2b60478a8ae8f1723f34b,
+        type: 3}
+    - target: {fileID: 8916380849248469455, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380849248469460, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380849248469451, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380849515846537, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380849515846550, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380849515846549, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380849653747852, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380849653747849, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380849653747848, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380850264124302, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 004a550fc633f6b48a28890fc9bbc1c7, type: 3}
 --- !u!4 &1902647165 stripped
@@ -77440,11 +77440,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Walking Mashroom (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -77499,6 +77494,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71f7c0f754800a240b655b4103b6dbdd, type: 3}
@@ -77569,11 +77569,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 302733303}
     - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: manager
@@ -77594,6 +77589,11 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 302733303}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
 --- !u!114 &1329377890507982000

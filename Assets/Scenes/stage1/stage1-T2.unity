@@ -4642,16 +4642,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 189072259}
     - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: manager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 189072259}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
 --- !u!1 &493751438
@@ -5524,11 +5524,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Walking Mashroom (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5589,6 +5584,11 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 142936187}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71f7c0f754800a240b655b4103b6dbdd, type: 3}
 --- !u!1 &926918646
@@ -6573,7 +6573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322cea529ccc2b84fb15785428db0829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultDestinationSceneName: stage1-T3
+  defaultDestinationSceneName: stage1-T5
   saveData: {fileID: 11400000, guid: 759077f9a40e083479ac66e312de96c5, type: 2}
   wipeEffet: {fileID: 11400000, guid: cefa33641bbc893438d5e96d4328ed88, type: 2}
 --- !u!1001 &1476913091
@@ -6643,16 +6643,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 189072259}
     - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: manager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 189072259}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
 --- !u!1 &1544621919
@@ -6767,11 +6767,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Walking Mashroom (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6891321230494324966, guid: 71f7c0f754800a240b655b4103b6dbdd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6832,6 +6827,11 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 142936187}
+    - target: {fileID: 6891321230494324956, guid: 71f7c0f754800a240b655b4103b6dbdd,
+        type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71f7c0f754800a240b655b4103b6dbdd, type: 3}
 --- !u!1 &1829037838

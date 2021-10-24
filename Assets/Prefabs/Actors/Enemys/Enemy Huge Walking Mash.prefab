@@ -324,7 +324,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 100
+  m_Mass: 160
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -345,8 +345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61bce3ae7c4a88440a6ea6326b43c94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
+  health: 85
+  maxHealth: 85
   isInvulnerable: 0
   dyingCallbacks:
     m_PersistentCalls:
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
   maxChaseRadius: 16
-  minChaseRadius: 0.3
+  minChaseRadius: 1
   summonCycle: 2
   maxNearbyEnemyCount: 3
   sensor: {fileID: 4735956752221833305}
@@ -472,7 +472,7 @@ MonoBehaviour:
       method: {fileID: 4246921619872684888}
       fields:
         maxSpeed: 0.5
-        pushForceMagnitude: 2000
+        pushForceMagnitude: 1500
         stopForceMagnitude: 100
         curve:
           serializedVersion: 2
@@ -498,7 +498,7 @@ MonoBehaviour:
   smashed:
     gameObject: {fileID: 4246921619872684885}
     connector: {fileID: 4246921619872684889}
-    stateSpan: 0
+    stateSpan: 0.75
     useInvincibleTime: 0
     invincibleTime: 0
     horizontalMove: {fileID: 4246921619872684888}

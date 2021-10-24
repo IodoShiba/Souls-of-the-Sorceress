@@ -138,8 +138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61bce3ae7c4a88440a6ea6326b43c94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 60
-  maxHealth: 60
+  health: 50
+  maxHealth: 50
   isInvulnerable: 0
   dyingCallbacks:
     m_PersistentCalls:
@@ -225,7 +225,7 @@ MonoBehaviour:
   smashed:
     gameObject: {fileID: 6562791909739401123}
     connector: {fileID: 6562791909739401149}
-    stateSpan: 0.5
+    stateSpan: 0.75
     useInvincibleTime: 0
     invincibleTime: 0
     horizontalMove: {fileID: 6562791909739401145}
