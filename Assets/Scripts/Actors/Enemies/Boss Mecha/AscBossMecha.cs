@@ -11,6 +11,7 @@ public class AscBossMecha : FightActorStateConector
     [SerializeField] Grid fieldGrid;
     [SerializeField] RectInt fieldRange;
     [SerializeField] Enemy prefabBomb;
+    [SerializeField] AttackInHitbox attack;
 
     [SerializeField] BossMechaDefault defaultState;
     [SerializeField] BombingTackle bombingTackle;
@@ -29,6 +30,8 @@ public class AscBossMecha : FightActorStateConector
     public override ActorState DefaultState => defaultState;
     public override SmashedState Smashed => smashed;
     public override DeadState Dead => dead;
+
+    public AttackInHitbox Attack { get => attack; }
 
     CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
     CancellationToken GetCancellationToken() => cancellationTokenSource.Token;
@@ -110,6 +113,13 @@ public class AscBossMecha : FightActorStateConector
     void SetNextAction(ActorState actionState)
     {
         nextAction = actionState;
+    }
+
+    public void Die()
+    {
+        //CancelAction();
+        Attack.Inactivate();
+        InterruptWith(dead);
     }
 
     [System.Serializable]
@@ -532,12 +542,14 @@ public class AscBossMecha : FightActorStateConector
         }
     }
 
+    [System.Serializable]
     class BossMechaDead : DeadState
     {
         AscBossMecha conector = null; AscBossMecha MechaConnector { get => conector == null ? (conector = Connector as AscBossMecha) : conector; }
 
         protected override void OnInitialize()
         {
+            Debug.Log("Boss Mecha has dead.");
         }
     }
 }
