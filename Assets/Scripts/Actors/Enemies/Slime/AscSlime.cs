@@ -12,7 +12,14 @@ namespace ActorSlime
         [SerializeField] SlimeDefault slimeDefault;
         [SerializeField] Spike spike;
         [SerializeField] SlimeSmashedState smashed;
-        [SerializeField] Animator slimeAnimator;
+        [SerializeField] Animator slimeAnimatorOld;
+        [SerializeField] Animator slimeAnimatorAnima2D;
+        [SerializeField] bool isHorizontal;
+
+        const string ANIMATION_NAME_MOVE        = "Move";
+        const string ANIMATION_NAME_ATTACK      = "Attack";
+        const string ANIMATION_NAME_ATTACK_BACK = "Attack_Back";
+        const string ANIMATION_NAME_SMASHED     = "Smashed";
 
         public override SmashedState Smashed => smashed;
         public override ActorState DefaultState => slimeDefault;
@@ -37,6 +44,12 @@ namespace ActorSlime
 
             AscSlime ConnectorSlime { get => connectorSlime == null ? (connectorSlime = Connector as AscSlime) : connectorSlime; }
 
+            protected override void OnInitialize()
+            {
+                base.OnInitialize();
+                ConnectorSlime.ManageSlimeAnimation(ANIMATION_NAME_MOVE);
+            }
+
             protected override void OnActive()
             {
                 horizontalMove.ManualUpdate(ConnectorSlime.ai.MoveSign);
@@ -58,7 +71,7 @@ namespace ActorSlime
 
             protected override void OnInitialize()
             {
-                ConnectorSlime.slimeAnimator.Play("Attack");
+                ConnectorSlime.ManageSlimeAnimation(ANIMATION_NAME_ATTACK);
             }
 
             protected override void OnActive()
@@ -72,7 +85,7 @@ namespace ActorSlime
             {
                 spikeAttack.Inactivate();
                 spikeSpriteRenderer.enabled = false;
-                ConnectorSlime.slimeAnimator.Play("Attack_Back");
+                ConnectorSlime.ManageSlimeAnimation(ANIMATION_NAME_ATTACK_BACK);
             }
         }
 
@@ -86,13 +99,38 @@ namespace ActorSlime
             protected override void OnInitialize()
             {
                 base.OnInitialize();
-                ConnectorSlime.slimeAnimator.Play("Smashed");
+                ConnectorSlime.ManageSlimeAnimation(ANIMATION_NAME_SMASHED);
             }
 
             protected override void OnTerminate(bool isNormal)
             {
                 base.OnTerminate(isNormal);
-                ConnectorSlime.slimeAnimator.Play("Move");
+                ConnectorSlime.ManageSlimeAnimation(ANIMATION_NAME_MOVE);
+            }
+        }
+
+        void ManageSlimeAnimation(string stateName)
+        {
+            if (isHorizontal)
+            {
+                if(stateName == ANIMATION_NAME_MOVE)
+                {
+                    slimeAnimatorOld.Play(stateName);
+                    slimeAnimatorOld.gameObject.SetActive(false);
+                    slimeAnimatorAnima2D.gameObject.SetActive(true);
+                    slimeAnimatorAnima2D.Play(stateName);
+                }
+                else
+                {
+                    slimeAnimatorOld.gameObject.SetActive(true);
+                    slimeAnimatorOld.Play(stateName);
+                    slimeAnimatorAnima2D.Play(stateName);
+                    slimeAnimatorAnima2D.gameObject.SetActive(false);
+                }
+            }
+            else
+            {
+                slimeAnimatorOld.Play(stateName);
             }
         }
     }
