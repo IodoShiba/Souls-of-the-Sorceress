@@ -547,9 +547,40 @@ public class AscBossMecha : FightActorStateConector
     {
         AscBossMecha conector = null; AscBossMecha MechaConnector { get => conector == null ? (conector = Connector as AscBossMecha) : conector; }
 
+        [SerializeField] int boomIteration;
+        [SerializeField] float oneBoomLength;
+        [SerializeField] float intervalAfterEffect;
+        [SerializeField] AudioClip boomClip;
+        [SerializeField] AudioClip boom2Clip;
+        [SerializeField] AudioSource audioSource;
+        [SerializeField] AnimationClip boomEffect;
+        [SerializeField] SpriteRenderer spriteRenderer;
+        [SerializeField] UnityEngine.Events.UnityEvent onEffectEnd;
+
         protected override void OnInitialize()
         {
             Debug.Log("Boss Mecha has dead.");
+            DeadEffect().Forget();
+        }
+
+        async UniTaskVoid DeadEffect()
+        {
+            spriteRenderer.DOFade(0.3f, boomIteration * oneBoomLength);
+            for(int i=0; i<boomIteration; ++i)
+            {
+                await CommonEffects.BoomCollapsingEffect.Effect(
+                    new Rect((Vector2)GameObject.transform.position - Vector2.one*2, new Vector2(4,4)),
+                    6, oneBoomLength, boomClip, audioSource, boomEffect
+                    );
+            }
+            spriteRenderer.DOFade(0, boom2Clip.length / 4);
+            await CommonEffects.BoomCollapsingEffect.Effect(
+                new Rect((Vector2)GameObject.transform.position - Vector2.one*2, new Vector2(4,4)),
+                12, .01f, boom2Clip, audioSource, boomEffect
+                );
+            await UniTask.Delay(System.TimeSpan.FromSeconds(boom2Clip.length + intervalAfterEffect));
+            
+            onEffectEnd.Invoke();
         }
     }
 }
