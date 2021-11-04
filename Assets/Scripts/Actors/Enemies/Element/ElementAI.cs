@@ -8,7 +8,9 @@ public class ElementAI : AI
     [SerializeField] Vector2 minChaseGap;
     [SerializeField] Player player;
     [SerializeField] ShootBullet _shootBullet;
+    [SerializeField] WispAnimationSetting wispAnimation;
     float t = 0;
+    bool canPlayBeforeAttack = true;
 
     //HorizontalMove horizontalMove;
     //ShootBullet shootBullet;
@@ -35,10 +37,16 @@ public class ElementAI : AI
             moveSign = System.Math.Sign(d.x);
             moveSigns = new Vector2Int(System.Math.Sign(d.x), System.Math.Sign(d.y));
 
+            if (t > shootCycle - 1 && canPlayBeforeAttack) //1はwispのbefore_attackアニメーションクリップの長さ
+            {
+                wispAnimation.PlayAnimation(WispAnimationSetting.WispState.BeforeLaunch);
+                canPlayBeforeAttack = false;
+            }
             if(t > shootCycle)
             {
                 shoot = d.normalized;
                 t -= shootCycle;
+                canPlayBeforeAttack = true;
             }
 
             t += Time.deltaTime;

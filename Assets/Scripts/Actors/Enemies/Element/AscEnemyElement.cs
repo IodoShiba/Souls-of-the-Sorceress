@@ -12,6 +12,7 @@ namespace ActorEnemyElement {
         [SerializeField] ElementDefault elementDefault;
         [SerializeField] ElementSmashed smashed;
         [SerializeField] AttackInHitbox attack;
+        [SerializeField] WispAnimationSetting wispAnimation;
         [SerializeField] Animator elementAnimator;
 
         float attackInterval = 0;
@@ -54,7 +55,8 @@ namespace ActorEnemyElement {
             {
                 base.OnInitialize();
                 velocityAdjuster.Method.enabled = true;
-                ConnectorElem.elementAnimator.Play("Idle");
+                //ConnectorElem.elementAnimator.Play("Idle");
+                ConnectorElem.wispAnimation.PlayAnimation(WispAnimationSetting.WispState.Waiting);
             }
             protected override void OnActive()
             {
@@ -66,6 +68,7 @@ namespace ActorEnemyElement {
                 if (shootDirection != Vector2.zero)
                 {
                     shootBullet.Use(ConnectorElem.bulletSpeed * shootDirection);
+                    ConnectorElem.wispAnimation.PlayAnimation(WispAnimationSetting.WispState.Attack);
                 }
             }
         }
@@ -84,7 +87,8 @@ namespace ActorEnemyElement {
                 base.OnInitialize();
                 ConnectorElem.StartAttackInterval();
 
-                ConnectorElem.elementAnimator.Play("Smashed");
+                //ConnectorElem.elementAnimator.Play("Smashed");
+                ConnectorElem.wispAnimation.PlayAnimation(WispAnimationSetting.WispState.Damaged);
             }
 
         }

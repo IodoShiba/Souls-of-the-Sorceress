@@ -13,6 +13,7 @@ namespace ActorBomb
         [SerializeField] Color _igniting;
         [SerializeField] SpriteRenderer spriteRenderer;
         [SerializeField] bool ignitingColorChange;
+        [SerializeField] Animator animator;
 
         Actor player;
         Actor Player { get => player == null ? (player = ActorManager.PlayerActor) : player; }
@@ -64,6 +65,7 @@ namespace ActorBomb
             {
                 Debug.Log("Detecting Player...");
                 DetectingPlayer = true;
+                animator.Play("explosion");
             }
         }
 
@@ -72,6 +74,7 @@ namespace ActorBomb
             if(collision.tag == TagName.player)
             {
                 DetectingPlayer = false;
+                animator.Play("bomb_walk");
             }
         }
     }

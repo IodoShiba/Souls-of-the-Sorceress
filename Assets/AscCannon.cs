@@ -50,8 +50,10 @@ public class AscCannon : FightActorStateConector
         [SerializeField] float launchInterval;
         [SerializeField] Vector2 degreeRange;
         [SerializeField] Cannon cannon;
+        [SerializeField] Animator animator;
 
         float t = 0;
+        bool isBeforeFire = true;
 
         protected override void OnInitialize()
         {
@@ -70,6 +72,11 @@ public class AscCannon : FightActorStateConector
                 cannon.LaunchDegree = Random.Range(degreeRange.x, degreeRange.y);
                 cannon.Launch();
                 t = launchInterval;
+                isBeforeFire = true;
+            }else if (t < 1.167f && isBeforeFire)
+            {
+                animator.Play("cannon_fire");
+                isBeforeFire = false;
             }
         }
 

@@ -213,7 +213,7 @@ GameObject:
   - component: {fileID: 6995899179505882570}
   - component: {fileID: 5830117638806471909}
   m_Layer: 24
-  m_Name: Enemy Slime
+  m_Name: Enemy Slime Vertical
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -500,7 +500,9 @@ MonoBehaviour:
     invincibleTime: 0
     horizontalMove: {fileID: 1887466661123618811}
     disallowCross: 0
-  slimeAnimator: {fileID: 3475852781687035367}
+  slimeAnimatorOld: {fileID: 3475852781687035367}
+  slimeAnimatorAnima2D: {fileID: 0}
+  isHorizontal: 0
 --- !u!114 &2495217448702265932
 MonoBehaviour:
   m_ObjectHideFlags: 0
