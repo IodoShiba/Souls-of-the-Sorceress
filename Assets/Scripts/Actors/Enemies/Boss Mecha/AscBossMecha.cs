@@ -110,6 +110,16 @@ public class AscBossMecha : FightActorStateConector
         ResetBombsPlacedArray();
     }
 
+    public void KillAllBomb()
+    {
+        for(int i=0;i<bombsPlacedCount;++i)
+        {
+            bombsPlaced[i].InterruptWith(bombsPlaced[i].Dead);
+        }
+
+        ResetBombsPlacedArray();
+    }
+
     void SetNextAction(ActorState actionState)
     {
         nextAction = actionState;
@@ -560,6 +570,7 @@ public class AscBossMecha : FightActorStateConector
         protected override void OnInitialize()
         {
             Debug.Log("Boss Mecha has dead.");
+            MechaConnector.KillAllBomb();
             DeadEffect().Forget();
         }
 
