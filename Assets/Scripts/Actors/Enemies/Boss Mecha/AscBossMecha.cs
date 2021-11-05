@@ -75,7 +75,9 @@ public class AscBossMecha : FightActorStateConector
     ActorBomb.AscBombOfBossMecha GetNewBomb()
     {
         var e = EnemyManager.Instance.Summon(prefabBomb, transform.position, Quaternion.identity);
-        return e.GetComponent<ActorBomb.AscBombOfBossMecha>();
+        var ascBomb = e.GetComponent<ActorBomb.AscBombOfBossMecha>();
+        ascBomb.OwnerBoss = this;
+        return ascBomb;
     }
 
     void ResetBombsPlacedArray()
@@ -105,16 +107,6 @@ public class AscBossMecha : FightActorStateConector
         for(int i=0;i<bombsPlacedCount;++i)
         {
             bombsPlaced[i].Ignite();
-        }
-
-        ResetBombsPlacedArray();
-    }
-
-    public void KillAllBomb()
-    {
-        for(int i=0;i<bombsPlacedCount;++i)
-        {
-            bombsPlaced[i].InterruptWith(bombsPlaced[i].Dead);
         }
 
         ResetBombsPlacedArray();
@@ -570,7 +562,7 @@ public class AscBossMecha : FightActorStateConector
         protected override void OnInitialize()
         {
             Debug.Log("Boss Mecha has dead.");
-            MechaConnector.KillAllBomb();
+            MechaConnector.ResetBombsPlacedArray();
             DeadEffect().Forget();
         }
 
