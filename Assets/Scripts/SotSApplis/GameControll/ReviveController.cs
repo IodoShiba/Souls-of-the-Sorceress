@@ -24,11 +24,16 @@ namespace SotS
                 SceneTransitionManager.TransScene(targetSceneName, null);
             }
 
+            void Revive()
+            {
+                TransScene();
+            }
+
             public void Dispose()
             {
                 if(disposed) { return; }
 
-                TransScene();
+                Revive();
 
                 disposed = true;
             }
