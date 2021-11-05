@@ -31,9 +31,10 @@ public class Fes_EmergencyReset : MonoBehaviour
         bool allPushed = keys.TrueForAll(k => Input.GetKey(k));
         if(!allPushedm1 && allPushed)
         {
-            SaveData.Instance.Init();
-            SceneTransitionManager.Initialize();
-            UnityEngine.SceneManagement.SceneManager.LoadScene(SceneName.title);
+            // SaveData.Instance.Init();
+            // SceneTransitionManager.Initialize();
+            // UnityEngine.SceneManagement.SceneManager.LoadScene(SceneName.title);
+            SotS.GameCommonInterface.ResetEntireGame();
         }
         allPushedm1 = allPushed;
     }
