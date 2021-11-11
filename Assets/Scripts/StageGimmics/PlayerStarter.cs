@@ -20,11 +20,13 @@ public class PlayerStarter : MonoBehaviour
         switch (startMode)
         {
             case StartMode.UsePlacedPlayer:
-                saveData.RestorePlayer(player);
+                //saveData.RestorePlayer(player);
+                SotS.GameCommonInterface.Player.TryRestorePlayer(player);
                 break;
 
             case StartMode.InstantiateNewPlayer:
-                saveData.RestorePlayer(Instantiate(player, GetStartPoint(player), Quaternion.identity));
+                //saveData.RestorePlayer(Instantiate(player, GetStartPoint(player), Quaternion.identity));
+                SotS.GameCommonInterface.Player.TryRestorePlayer(Instantiate(player, GetStartPoint(player), Quaternion.identity));
                 break;
         }
         

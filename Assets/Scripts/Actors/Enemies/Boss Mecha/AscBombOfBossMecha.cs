@@ -31,6 +31,9 @@ namespace ActorBomb
             }
         }
 
+        AscBossMecha ownerBoss;
+        public AscBossMecha OwnerBoss { get => ownerBoss; set => ownerBoss = value; }
+
         protected override void BuildStateConnection()
         {
             ConnectStateFromDefault(() => ignited, blasting);
@@ -52,6 +55,11 @@ namespace ActorBomb
 
             protected override void OnActive()
             {
+                if(ConnectorBomb!=null && ConnectorBomb.OwnerBoss.IsDead)
+                {
+                    ConnectorBomb.InterruptWith(ConnectorBomb.Dead);
+                }
+
                 ai.Decide();
 
                 if (ai.DetectingPlayer || (ConnectorBomb.GravityScale>0 && ai.HitToGround))

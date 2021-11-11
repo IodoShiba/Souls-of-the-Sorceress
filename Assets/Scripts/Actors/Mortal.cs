@@ -236,6 +236,11 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
         onHealthRecoveredCallbacks.Invoke();
     }
 
+    public void RecoverHealthComplete()
+    {
+        RecoverHealth(maxHealth);
+    }
+
     public void DestroySelf(float time) { Destroy(gameObject, time); }
 
     public void OrderInvincible(float time)
