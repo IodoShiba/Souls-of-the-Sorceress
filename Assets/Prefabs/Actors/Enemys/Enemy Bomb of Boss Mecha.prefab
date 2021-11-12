@@ -240,6 +240,7 @@ MonoBehaviour:
     connector: {fileID: 2514870655666033526}
   explosionEffect: {fileID: 7226108665254582629, guid: bd5d65a97eb88b54db9b88f1793b017c,
     type: 3}
+  explosionClip: {fileID: 7400000, guid: 095e1298d3fc8a9448fb3123c7a10c27, type: 2}
 --- !u!114 &8664762976710468775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,16 +425,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explosion
       objectReference: {fileID: 0}
-    - target: {fileID: 5641229665059161534, guid: 4e703afc759205248a97bc16ab22bbb8,
-        type: 3}
-      propertyPath: owner
-      value: 
-      objectReference: {fileID: 8428984197783552264}
-    - target: {fileID: 5641229665059161534, guid: 4e703afc759205248a97bc16ab22bbb8,
-        type: 3}
-      propertyPath: attackDataPrototype.damage
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 5641229665059161535, guid: 4e703afc759205248a97bc16ab22bbb8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -488,6 +479,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5641229665059161534, guid: 4e703afc759205248a97bc16ab22bbb8,
+        type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 8428984197783552264}
+    - target: {fileID: 5641229665059161534, guid: 4e703afc759205248a97bc16ab22bbb8,
+        type: 3}
+      propertyPath: attackDataPrototype.damage
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5641229665059161529, guid: 4e703afc759205248a97bc16ab22bbb8,
         type: 3}

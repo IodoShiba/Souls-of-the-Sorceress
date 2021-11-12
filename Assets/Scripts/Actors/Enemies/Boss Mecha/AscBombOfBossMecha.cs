@@ -13,7 +13,7 @@ namespace ActorBomb
         [SerializeField] BombSmashed smashed;
         [SerializeField] BombDead dead;
 
-        [SerializeField] GameObject explosionEffect;
+        [SerializeField] AnimationClip explosionClip;
 
         public override SmashedState Smashed => smashed;
 
@@ -45,8 +45,7 @@ namespace ActorBomb
         public void Ignite()
         {
             ignited = true;
-            GameObject obj = Instantiate(explosionEffect, gameObject.transform.position, Quaternion.identity);
-            obj.transform.localScale = new Vector3(0.5f,0.5f,1f);
+            EffectAnimationManager.Play(explosionClip,transform.position, new Vector3(0.5f,0.5f,0.5f));
         }
 
         [System.Serializable]
