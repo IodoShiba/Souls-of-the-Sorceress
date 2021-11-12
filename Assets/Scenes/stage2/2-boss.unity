@@ -2706,6 +2706,7 @@ MonoBehaviour:
     audioSource: {fileID: 407598048}
     boomEffect: {fileID: 7400000, guid: 086a848100152154f8103cc747b7f25d, type: 2}
     spriteRenderer: {fileID: 216686764}
+    collider: {fileID: 349034713}
     onEffectEnd:
       m_PersistentCalls:
         m_Calls:
@@ -3416,7 +3417,6 @@ GameObject:
   - component: {fileID: 941236232}
   - component: {fileID: 941236228}
   - component: {fileID: 941236231}
-  - component: {fileID: 941236230}
   - component: {fileID: 941236229}
   m_Layer: 0
   m_Name: Main Camera (1)
@@ -3502,20 +3502,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &941236230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 941236227}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c70fa34368aa1499993c450a36d45b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1654416765}
-  relativePosition: {x: 0, y: 0}
 --- !u!81 &941236231
 AudioListener:
   m_ObjectHideFlags: 0
@@ -4505,12 +4491,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1516306600}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1654416765 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1516306600}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1654416767 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5149332159221903905, guid: 004a550fc633f6b48a28890fc9bbc1c7,
@@ -4851,7 +4831,7 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 1654416765}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 7

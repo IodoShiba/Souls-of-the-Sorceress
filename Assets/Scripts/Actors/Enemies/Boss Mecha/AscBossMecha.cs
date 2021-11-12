@@ -557,11 +557,13 @@ public class AscBossMecha : FightActorStateConector
         [SerializeField] AudioSource audioSource;
         [SerializeField] AnimationClip boomEffect;
         [SerializeField] SpriteRenderer spriteRenderer;
+        [SerializeField] Collider2D collider;
         [SerializeField] UnityEngine.Events.UnityEvent onEffectEnd;
 
         protected override void OnInitialize()
         {
             Debug.Log("Boss Mecha has dead.");
+            collider.enabled = false;
             MechaConnector.ResetBombsPlacedArray();
             DeadEffect().Forget();
         }
