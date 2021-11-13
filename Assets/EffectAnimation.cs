@@ -52,15 +52,21 @@ public class EffectAnimation : MonoBehaviour
         }
     }
 
-    public void Play(AnimationClip animationClip,Vector3 position)
+    public void Play(AnimationClip animationClip,Vector3 position,Vector3 localscale)
     {
-        if(animationClip == null)
+        if (animationClip == null)
         {
             throw new System.NullReferenceException("Argument 'animationClip' cannot be null.");
         }
         gameObject.SetActive(true);
         transform.position = position;
+        transform.localScale = localscale;
         Clip = animationClip;
+    }
+
+    public void Play(AnimationClip animationClip,Vector3 position)
+    {
+        Play(animationClip,position,Vector3.one);
     }
 
     private void OnDestroy()

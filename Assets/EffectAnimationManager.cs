@@ -34,7 +34,7 @@ public class EffectAnimationManager : MonoBehaviour
 
     }
 
-    void _Play(AnimationClip animationClip,in Vector3 position)
+    void _Play(AnimationClip animationClip, in Vector3 position, in Vector3 localscale)
     {
         for (int i = 0; i < pool.Length; ++i)
         {
@@ -45,10 +45,20 @@ public class EffectAnimationManager : MonoBehaviour
             nextIndex = (nextIndex + 1) % pool.Length;
         }
 
-        if(pool[nextIndex] == null) { return; }
-        pool[nextIndex].Play(animationClip, position);
+        if (pool[nextIndex] == null) { return; }
+        pool[nextIndex].Play(animationClip, position,localscale);
 
         nextIndex = (nextIndex + 1) % pool.Length;
+    }
+
+    void _Play(AnimationClip animationClip,in Vector3 position)
+    {
+        _Play(animationClip, position, Vector3.one);
+    }
+
+    static public void Play(AnimationClip animationClip,in Vector3 position,in Vector3 localscale)
+    {
+        Instance._Play(animationClip,position,localscale);
     }
 
     static public void Play(AnimationClip animationClip,in Vector3 position)

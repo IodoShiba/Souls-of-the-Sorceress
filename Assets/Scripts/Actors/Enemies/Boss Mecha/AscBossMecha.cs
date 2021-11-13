@@ -106,7 +106,7 @@ public class AscBossMecha : FightActorStateConector
     {
         for(int i=0;i<bombsPlacedCount;++i)
         {
-            bombsPlaced[i].Ignite();
+            if(!(bombsPlaced[i] == null)) { bombsPlaced[i].Ignite(); };
         }
 
         ResetBombsPlacedArray();

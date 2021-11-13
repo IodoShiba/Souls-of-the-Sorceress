@@ -13,6 +13,8 @@ namespace ActorBomb
         [SerializeField] BombSmashed smashed;
         [SerializeField] BombDead dead;
 
+        [SerializeField] AnimationClip explosionClip;
+
         public override SmashedState Smashed => smashed;
 
         public override ActorState DefaultState => bombDefault;
@@ -43,6 +45,7 @@ namespace ActorBomb
         public void Ignite()
         {
             ignited = true;
+            EffectAnimationManager.Play(explosionClip,transform.position, new Vector3(0.5f,0.5f,0.5f));
         }
 
         [System.Serializable]

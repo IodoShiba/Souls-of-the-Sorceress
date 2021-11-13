@@ -288,8 +288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61bce3ae7c4a88440a6ea6326b43c94c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
+  health: 60
+  maxHealth: 60
   isInvulnerable: 0
   dyingCallbacks:
     m_PersistentCalls:
@@ -408,6 +408,7 @@ MonoBehaviour:
     connector: {fileID: 5349234954256745479}
   explosionEffect: {fileID: 7226108665254582629, guid: bd5d65a97eb88b54db9b88f1793b017c,
     type: 3}
+  explosionClip: {fileID: 0}
 --- !u!114 &5349234954256745478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,6 +427,7 @@ MonoBehaviour:
   _def: {r: 0.2509804, g: 0.21176471, b: 0.39607844, a: 1}
   _igniting: {r: 1, g: 0.3954733, b: 0, a: 1}
   spriteRenderer: {fileID: 5349234954256745476}
+  ignitingColorChange: 0
   animator: {fileID: 6964841983769776794}
 --- !u!114 &5349234954256745475
 MonoBehaviour:
@@ -480,11 +482,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explosion
       objectReference: {fileID: 0}
-    - target: {fileID: 5641229665059161534, guid: 4e703afc759205248a97bc16ab22bbb8,
-        type: 3}
-      propertyPath: owner
-      value: 
-      objectReference: {fileID: 5349234954256745498}
     - target: {fileID: 5641229665059161535, guid: 4e703afc759205248a97bc16ab22bbb8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -540,6 +537,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5641229665059161534, guid: 4e703afc759205248a97bc16ab22bbb8,
+        type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 5349234954256745498}
     - target: {fileID: 5641229665059161529, guid: 4e703afc759205248a97bc16ab22bbb8,
         type: 3}
       propertyPath: m_Enabled
