@@ -26,6 +26,8 @@ namespace SotS.Cheating
             if(Input.anyKeyDown)
             {
                 string inputString = Input.inputString;
+                if(string.IsNullOrEmpty(inputString)){return;}
+                
                 i = (i < secretCommand.Length && inputString[0] == secretCommand[i]) ? i+1 : 0;
 
                 if(i == secretCommand.Length)

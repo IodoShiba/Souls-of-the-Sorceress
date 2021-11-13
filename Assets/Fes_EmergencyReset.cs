@@ -34,7 +34,7 @@ public class Fes_EmergencyReset : MonoBehaviour
             // SaveData.Instance.Init();
             // SceneTransitionManager.Initialize();
             // UnityEngine.SceneManagement.SceneManager.LoadScene(SceneName.title);
-            SotS.GameCommonInterface.ResetEntireGame();
+            SotS.GameCommonInterface.Instance.ResetEntireGame();
         }
         allPushedm1 = allPushed;
     }
