@@ -635,6 +635,7 @@ namespace ActorSarah
             [SerializeField] float degreeWidthOfGuardArea;
             [SerializeField] float unguardTime;
             [SerializeField] int amountConsumeUmbrellaDurability;
+            [SerializeField] float maxExcessTime = 0.5f;
             [SerializeField] Umbrella umbrella;
             [SerializeField] AttackInHitbox attack;
             [SerializeField] ActorFunction.VelocityAdjuster velocityAdjuster;
@@ -644,6 +645,7 @@ namespace ActorSarah
             [SerializeField] GroundSensor wallSensor;
 
             IodoShibaUtil.ManualUpdateClass.ManualClock unguardClock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
+            IodoShibaUtil.ManualUpdateClass.ManualClock stateClock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
             float x0;
             int state = 0;
             float initialGravity = 0;
@@ -656,7 +658,10 @@ namespace ActorSarah
                 //return x0 - distance < x && x < x0 + distance;
                 return ContinueCond();
             }
-            public bool ContinueCond() => state == 0 || unguardClock.Clock < unguardTime;
+            public bool ContinueCond() => 
+                (state == 0 || unguardClock.Clock < unguardTime) &&
+                (stateClock.Clock < (distance/speed + unguardTime + maxExcessTime));
+                
 
             protected override void OnInitialize()
             {
@@ -674,6 +679,7 @@ namespace ActorSarah
                 guard.Fields.DegreeRangeStart = (dirSign > 0 ? 0 : 180) - degreeWidthOfGuardArea / 2;
                 guard.Fields.DegreeRangeWidth = degreeWidthOfGuardArea;
                 unguardClock.Reset();
+                stateClock.Reset();
                 state = 0;
                 ConnectorSarah.sarahAnimator_Anima2D.SetTrigger("TackleTrigger");
                 //ConnectorSarah.sarahAnimator_Anima2D.GetComponent<SarahAnimationManagement>().FireOnOff(false);
@@ -695,6 +701,7 @@ namespace ActorSarah
                 {
                     unguardClock.Update();
                 }
+                stateClock.Update();
             }
             protected override void OnTerminate(bool isNormal)
             {
@@ -706,6 +713,7 @@ namespace ActorSarah
                 onChangeStateCallbacks.Invoke(false);
                 guard.Method.Activated = false;
                 unguardClock.Reset();
+                stateClock.Reset();
                 state = 0;
                 //if (ConnectorSarah.actionAwake.IsActive) ConnectorSarah.sarahAnimator_Anima2D.GetComponent<SarahAnimationManagement>().FireOnOff(true);
             }
