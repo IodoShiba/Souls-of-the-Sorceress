@@ -21,12 +21,12 @@ public class PlayerStarter : MonoBehaviour
         {
             case StartMode.UsePlacedPlayer:
                 //saveData.RestorePlayer(player);
-                SotS.GameCommonInterface.Player.TryRestorePlayer(player);
+                SotS.GameCommonInterface.Instance.Player.TryRestorePlayer(player);
                 break;
 
             case StartMode.InstantiateNewPlayer:
                 //saveData.RestorePlayer(Instantiate(player, GetStartPoint(player), Quaternion.identity));
-                SotS.GameCommonInterface.Player.TryRestorePlayer(Instantiate(player, GetStartPoint(player), Quaternion.identity));
+                SotS.GameCommonInterface.Instance.Player.TryRestorePlayer(Instantiate(player, GetStartPoint(player), Quaternion.identity));
                 break;
         }
         

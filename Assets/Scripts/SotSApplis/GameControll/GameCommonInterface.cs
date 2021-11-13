@@ -6,17 +6,18 @@ using UnityEngine.EventSystems;
 namespace SotS
 {
 
-    public static class GameCommonInterface
+    public class GameCommonInterface : ScriptableObject
     {
-        public static class Player
+        [System.Serializable]
+        public class CategoryPlayer
         {
-            static bool stored = false;
-            static float playerHealth;
-            static float playerMaxHealth;
-            static float playerAwakeGauge;
-            static int playerProgressLevel;
+            bool stored = false;
+            float playerHealth;
+            float playerMaxHealth;
+            float playerAwakeGauge;
+            int playerProgressLevel;
 
-            public static void Reset()
+            public void Reset()
             {
                 stored = false;
                 playerMaxHealth = 100;
@@ -25,7 +26,7 @@ namespace SotS
                 playerProgressLevel = 0;
             }
 
-            public static void StorePlayerData(global::Player player)
+            public void StorePlayerData(global::Player player)
             {
                 ExecuteEvents.Execute<SaveData.IPlayerHealthCareer>(player.gameObject, null, 
                     (h, _) => h.Store(
@@ -53,7 +54,7 @@ namespace SotS
                 stored = true;
             }
 
-            public static void TryRestorePlayer(global::Player player)
+            public void TryRestorePlayer(global::Player player)
             {
                 if(!stored){return;}
 
@@ -67,7 +68,7 @@ namespace SotS
                 stored = false;
             }
 
-            public static void RecoverHealth(float amount)
+            public void RecoverHealth(float amount)
             {
                 if(ActorManager.PlayerActor?.Mortal is global::Player player)
                 {
@@ -78,7 +79,7 @@ namespace SotS
                     playerHealth = Mathf.Clamp(playerHealth + amount, 0, playerMaxHealth);
                 }
             }
-            public static void RecoverHealthComplete()
+            public void RecoverHealthComplete()
             {
                 if(ActorManager.PlayerActor?.Mortal is global::Player player)
                 {
@@ -93,15 +94,25 @@ namespace SotS
 
         }
 
-
-        static void ResetStorages()
+        static readonly string resourcesPath = "SotsApplis/GameCommonInterface";
+        static GameCommonInterface instance;
+        public static GameCommonInterface Instance 
         {
-            Player.Reset();
+            get => instance == null ? (instance = Resources.Load<GameCommonInterface>(resourcesPath)) : instance;
+        }
+        public CategoryPlayer Player { get => player; set => player = value; }
+
+        [SerializeField] CategoryPlayer player;
+
+
+        public void ResetGameData()
+        {
+            player.Reset();
         }
 
-        public static void ResetEntireGame()
+        public void ResetEntireGame()
         {
-            ResetStorages();
+            ResetGameData();
             SaveData.Instance.Init();
             SceneTransitionManager.Initialize();
             UnityEngine.SceneManagement.SceneManager.LoadScene(SceneName.title);
