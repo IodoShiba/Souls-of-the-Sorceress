@@ -238,8 +238,6 @@ MonoBehaviour:
   dead:
     gameObject: {fileID: 8428984197783552267}
     connector: {fileID: 2514870655666033526}
-  explosionEffect: {fileID: 7226108665254582629, guid: bd5d65a97eb88b54db9b88f1793b017c,
-    type: 3}
   explosionClip: {fileID: 7400000, guid: 095e1298d3fc8a9448fb3123c7a10c27, type: 2}
 --- !u!114 &8664762976710468775
 MonoBehaviour:
@@ -490,15 +488,20 @@ PrefabInstance:
       propertyPath: attackDataPrototype.damage
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 5641229665059161534, guid: 4e703afc759205248a97bc16ab22bbb8,
+        type: 3}
+      propertyPath: attackDataPrototype.knockBackImpulse.x
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5641229665059161529, guid: 4e703afc759205248a97bc16ab22bbb8,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5641229665059161529, guid: 4e703afc759205248a97bc16ab22bbb8,
         type: 3}
       propertyPath: m_Radius
-      value: 2.5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e703afc759205248a97bc16ab22bbb8, type: 3}
