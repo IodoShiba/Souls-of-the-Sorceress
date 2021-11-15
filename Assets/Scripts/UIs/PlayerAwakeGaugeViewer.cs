@@ -7,6 +7,7 @@ public class PlayerAwakeGaugeViewer : ActionAwake.Viewer
     [SerializeField] float maxFillAmount;
     [SerializeField] UnityEngine.UI.Image _awakeGaugeImage;
     [SerializeField] Animator flameAniamtor;
+    [SerializeField] UnityEngine.UI.Image gaugeBeatImage;
     [SerializeField] ParticleSystem waveParticleSys;
 
     static readonly int beatHash = Animator.StringToHash("Beat");
@@ -21,10 +22,12 @@ public class PlayerAwakeGaugeViewer : ActionAwake.Viewer
             if(!ableToAwake && value)
             {
                 flameAniamtor.Play(beatHash);
+                gaugeBeatImage.enabled = true;
             }
             if(ableToAwake && !value)
             {
                 flameAniamtor.Play(idleHash);
+                gaugeBeatImage.enabled = false;
             }
             ableToAwake = value;
         }
@@ -33,6 +36,7 @@ public class PlayerAwakeGaugeViewer : ActionAwake.Viewer
     private void Start()
     {
         flameAniamtor.Play(idleHash);
+        gaugeBeatImage.enabled = false;
     }
     // Update is called once per frame
     private void Update()
@@ -40,13 +44,13 @@ public class PlayerAwakeGaugeViewer : ActionAwake.Viewer
         _awakeGaugeImage.fillAmount = Mathf.Clamp(AwakeGauge * 2 * maxFillAmount, 0, maxFillAmount);
         AbleToAwake = target.IsAbleToAwake;
 
-        if (AbleToAwake && waveParticleSys.isStopped)
-        {
-            waveParticleSys.Play();
-        }
-        else if(!AbleToAwake && waveParticleSys.isPlaying)
-        {
-            waveParticleSys.Stop();
-        }
+        // if (AbleToAwake && waveParticleSys.isStopped)
+        // {
+        //     waveParticleSys.Play();
+        // }
+        // else if(!AbleToAwake && waveParticleSys.isPlaying)
+        // {
+        //     waveParticleSys.Stop();
+        // }
     }
 }
