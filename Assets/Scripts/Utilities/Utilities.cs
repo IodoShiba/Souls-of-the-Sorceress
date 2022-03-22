@@ -97,4 +97,23 @@ namespace IodoShibaUtil
             public static Vector3 ModifiedY(in Vector3 original, float y) => new Vector3(original.x, y, original.z);
         }
     }
+
+    namespace FlagUtility
+    {
+        public static class FlagUtilityClass
+        {
+            public static int SetFlag(this ref int flag_value, int target, bool value)
+            {
+                return flag_value = value ? (flag_value | (int)target) : (flag_value & ~(int)target);
+            }
+            public static bool GetFlagAll(this int flag_value, int target)
+            {
+                return (flag_value & target) == target;
+            }
+            public static bool GetFlagAny(this int flag_value, int target)
+            {
+                return (flag_value & target) != 0;
+            }
+        }
+    }
 }

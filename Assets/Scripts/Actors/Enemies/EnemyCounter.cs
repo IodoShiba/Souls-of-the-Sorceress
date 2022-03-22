@@ -1,24 +1,52 @@
-
+using UnityEngine;
 using System.Collections.Generic;
+using UniRx;
 
-public class EnemyCounter
+public class EnemyCounter : MonoBehaviour
 {
     public int countNative {get; private set;} = 0;
-    public int countAdded {get; private set;} = 0;
+    public int countInstantiated {get; private set;} = 0;
     public int countNativeDefeated {get; private set;} = 0;
-    public int countAddedDefeated {get; private set;} = 0;
+    public int countInstantiatedDefeated {get; private set;} = 0;
 
-    public struct InitArg
+    public void Awake()
     {
-
+        var enemyManager = GetComponent<EnemyManager>();
+        enemyManager.observableOnEnemyAdded.Subscribe(enemy => AddNewEnemy(enemy));
+        enemyManager.observableOnEnemyDead.Subscribe(enemy => OneEnemyDefeated(enemy));
     }
-    void Initialize(InitArg args = new InitArg())
-    {
 
+    public void AddNewEnemy(Enemy enemy)
+    {
+        if(enemy.isInstantiated)
+        {
+            countInstantiated += 1;
+        }
+        else
+        {
+            countNative += 1;
+        }
+    }
+
+    public void OneEnemyDefeated(Enemy enemy)
+    {
+        if(enemy.isInstantiated)
+        {
+            countInstantiatedDefeated += 1;
+        }
+        else
+        {
+            countNativeDefeated += 1;
+        }
     }
 
     public int GetAllEnemyCount()
     {
-        return countNative + countAdded;
+        return countNative + countInstantiated;
+    }
+    
+    public int GetAllDefeatedEnemyCount()
+    {
+        return countNativeDefeated + countInstantiatedDefeated;
     }
 } 
