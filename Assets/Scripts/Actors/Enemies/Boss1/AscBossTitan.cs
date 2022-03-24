@@ -38,10 +38,10 @@ namespace ActorBossTitan
         [SerializeField] Fainted fainted;
         [SerializeField] RecoverFromFaint recoverFromFaint;
         [SerializeField] Boss1Smashed smashed;
-        [SerializeField] Dead dead;
+        [SerializeField] BossDead dead;
 
         public override SmashedState Smashed => smashed;
-
+        public override DeadState Dead => dead;
         public override ActorState DefaultState => boss1Default;
 
         bool isOnGround = false;
@@ -72,7 +72,7 @@ namespace ActorBossTitan
 
         public void OnWeakpointDestroyed()
         {
-            InterruptWith(dead);
+            //InterruptWith(dead);
         }
 
         [System.Serializable]
@@ -255,7 +255,7 @@ namespace ActorBossTitan
         }
 
         [System.Serializable]
-        class Dead : ActorState
+        class BossDead : DeadState
         {
             [SerializeField] int boomCount;
             [SerializeField] float boomLength;
