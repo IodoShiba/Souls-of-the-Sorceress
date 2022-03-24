@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UniRx.Async;
 
 public class SceneTransitionManager : MonoBehaviour
 {
@@ -46,20 +47,23 @@ public class SceneTransitionManager : MonoBehaviour
 
         if (string.IsNullOrEmpty(targetScene)) { return; }
 
-        StartCoroutine(TransCo());
+        TransCo().Forget();
+        //StartCoroutine(TransCo());
     }
 
-    public IEnumerator TransCo()
+    public async UniTask TransCo()
     {
         transitionEffect.StartEffect(true);
-        while (transitionEffect.IsOnEffect) { yield return null; }
+        //while (transitionEffect.IsOnEffect) { yield return null; }
+        await UniTask.WaitWhile(()=>transitionEffect.IsOnEffect);
 
-        SceneManager.UnloadSceneAsync(originScene);
+        await SceneManager.UnloadSceneAsync(originScene);
 
         targetSceneLoaded = false;
         SceneManager.LoadScene(targetScene, LoadSceneMode.Additive);
 
-        while (!targetSceneLoaded) { yield return null; }
+        //while (!targetSceneLoaded) { yield return null; }
+        await UniTask.WaitUntil(()=>targetSceneLoaded);
 
         var targetSceneObj = SceneManager.GetSceneByName(targetScene);
         SceneManager.SetActiveScene(targetSceneObj);
@@ -70,7 +74,8 @@ public class SceneTransitionManager : MonoBehaviour
         }
 
         transitionEffect.StartEffect(false);
-        while (transitionEffect.IsOnEffect) { yield return null; }
+        //while (transitionEffect.IsOnEffect) { yield return null; }
+        await UniTask.WaitWhile(()=>transitionEffect.IsOnEffect);
 
         SceneTransitionManager.targetScene = null;
         SceneTransitionManager.sceneInitializer = null;
@@ -83,7 +88,7 @@ public class SceneTransitionManager : MonoBehaviour
             SceneManager.MoveGameObjectToScene(roots[i], targetSceneObj);
         }
 
-        SceneManager.UnloadSceneAsync(transitionSceneName);
+        await SceneManager.UnloadSceneAsync(transitionSceneName);
     }
 
     public static void TransScene(string targetScene, System.Action<Scene> sceneInitializer)

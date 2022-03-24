@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
+using System;
 
 [DisallowMultipleComponent]
 public class EnemyManager : MonoBehaviour {
@@ -13,10 +14,14 @@ public class EnemyManager : MonoBehaviour {
     static private EnemyManager instance;
 
     private List<System.Action> enemyDyingListeners = new List<System.Action>();
+    private Subject<Enemy> subjectOnEnemyAdded = new Subject<Enemy>();
+    private Subject<Enemy> subjectOnEnemyDead = new Subject<Enemy>();
 
     public static EnemyManager Instance { get => instance; }
+    public IObservable<Enemy> observableOnEnemyAdded { get => subjectOnEnemyAdded; }
+    public IObservable<Enemy> observableOnEnemyDead { get => subjectOnEnemyDead; }
 
-    public EnemyManager() { if (instance == null) instance = this; }
+    //public EnemyManager() { if (instance == null) instance = this; }
     IEnumerator RemoveDead()
     {
         Enemy it;
@@ -35,12 +40,13 @@ public class EnemyManager : MonoBehaviour {
 
     private void Awake()
     {
-        if (instance != null && this != instance) 
-        {
-            Debug.LogError($"{this.GetType().Name} cannot exist double or more in one scene. GameObject '{name}' has been Deleted because it has second {this.GetType().Name}.");
-            //Destroy(gameObject);
-            return;
-        }
+        instance = this;
+        // if (instance != null && this != instance) 
+        // {
+        //     Debug.LogError($"{this.GetType().Name} cannot exist double or more in one scene. GameObject '{name}' has been Deleted because it has second {this.GetType().Name}.");
+        //     //Destroy(gameObject);
+        //     return;
+        // }
     }
 
     private void Start()
@@ -52,7 +58,7 @@ public class EnemyManager : MonoBehaviour {
     {
         if (summonEffect == null)
         {
-            var r = Instantiate(target, position, quaternion);
+            var r = Enemy.InstantiateThis(target, position, quaternion);
             r.manager = this;
             AddNewEnemy(r);
             return r;
@@ -60,7 +66,7 @@ public class EnemyManager : MonoBehaviour {
         else
         {
             float realSummonDelayTime = summonDelayTime >= 0 ? summonDelayTime : summonEffect.length;
-            var r = Instantiate(target, position, quaternion);
+            var r = Enemy.InstantiateThis(target, position, quaternion);
             r.manager = this;
             r.gameObject.SetActive(false);
             EffectAnimationManager.Play(summonEffect, position);
@@ -77,6 +83,8 @@ public class EnemyManager : MonoBehaviour {
 
         aliveCount++;
         enemies.Add(enemy);
+
+        subjectOnEnemyAdded.OnNext(enemy);
     }
 
     public void AddEnemyDyingListener(System.Action listener)
@@ -84,8 +92,9 @@ public class EnemyManager : MonoBehaviour {
         enemyDyingListeners.Add(listener);
     }
 
-    public void EnemyDying()
+    public void EnemyDying(Enemy enemy)
     {
+        subjectOnEnemyDead.OnNext(enemy);
         foreach(var f in enemyDyingListeners)
         {
             f();

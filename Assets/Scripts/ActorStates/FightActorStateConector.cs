@@ -20,6 +20,11 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
     public bool BearAgainstAttack { get => bearAgainstAttack; set => bearAgainstAttack = value; }
     public bool IsDead { get => Current is DeadState; }
 
+    public void GoDead() 
+    {
+        InterruptWith(Dead);
+    }
+
     [System.Serializable]
     public class SmashedState : ActorState
     {
@@ -39,13 +44,13 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
         protected override bool ShouldCotinue() => clock.Clock < stateSpan + hitstopSpan;
         protected override void OnInitialize()
         {
-            Debug.Log("OnInitialize");
+            //Debug.Log("OnInitialize");
             if (!disallowCross)
             {
-                Debug.Log("!disallowCross");
+                //Debug.Log("!disallowCross");
                 if (useInvincibleTime)
                 {
-                    Debug.Log("useInvincibleTime");
+                    //Debug.Log("useInvincibleTime");
                     SelfMortal.OrderInvincible(invincibleTime);
                 }
                 else

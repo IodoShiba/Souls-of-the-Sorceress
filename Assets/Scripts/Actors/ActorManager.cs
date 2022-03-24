@@ -39,10 +39,17 @@ public class ActorManager : MonoBehaviour
         camera = Camera.main;
     }
 
-
     // Update is called once per frame
     void Update()
     {
+        if(camera == null)
+        {
+            camera = Camera.main;
+            if(camera == null)
+            {
+                return;
+            }
+        }
         Camera mainCam = camera;
         Vector2 mainCamPos = mainCam.transform.position;
         Vector2 size = new Vector2(mainCam.orthographicSize * mainCam.aspect * (1 + REIGN_MARGIN), mainCam.orthographicSize * (1 + REIGN_MARGIN));
