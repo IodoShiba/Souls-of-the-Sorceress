@@ -4,29 +4,36 @@ using UniRx;
 
 public class EnemyCounter : MonoBehaviour
 {
-    public int countNative {get; private set;} = 0;
-    public int countInstantiated {get; private set;} = 0;
-    public int countNativeDefeated {get; private set;} = 0;
-    public int countInstantiatedDefeated {get; private set;} = 0;
+    // public static int countNative {get; private set;} = 0;
+    // public static int countInstantiated {get; private set;} = 0;
+    public static int countNativeDefeated {get; private set;} = 0;
+    public static int countInstantiatedDefeated {get; private set;} = 0;
 
-    public void Awake()
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    static void RuntimeInitialize()
+    {
+        GameLifeCycle.observableOnGameOpen.Subscribe(_=>ResetCount());
+    }
+
+    public void Start()
     {
         var enemyManager = GetComponent<EnemyManager>();
-        enemyManager.observableOnEnemyAdded.Subscribe(enemy => AddNewEnemy(enemy));
-        enemyManager.observableOnEnemyDead.Subscribe(enemy => OneEnemyDefeated(enemy));
+        // enemyManager.observableOnEnemyAdded.Subscribe(enemy => AddNewEnemy(enemy));
+        enemyManager.observableOnEnemyDead.Subscribe(enemy => OneEnemyDefeated(enemy)).AddTo(gameObject);
     }
 
-    public void AddNewEnemy(Enemy enemy)
-    {
-        if(enemy.isInstantiated)
-        {
-            countInstantiated += 1;
-        }
-        else
-        {
-            countNative += 1;
-        }
-    }
+
+    // public void AddNewEnemy(Enemy enemy)
+    // {
+    //     if(enemy.isInstantiated)
+    //     {
+    //         countInstantiated += 1;
+    //     }
+    //     else
+    //     {
+    //         countNative += 1;
+    //     }
+    // }
 
     public void OneEnemyDefeated(Enemy enemy)
     {
@@ -40,13 +47,29 @@ public class EnemyCounter : MonoBehaviour
         }
     }
 
-    public int GetAllEnemyCount()
-    {
-        return countNative + countInstantiated;
-    }
+    // public int GetAllEnemyCount()
+    // {
+    //     return countNative + countInstantiated;
+    // }
     
-    public int GetAllDefeatedEnemyCount()
+    public static int GetAllDefeatedEnemyCount()
     {
         return countNativeDefeated + countInstantiatedDefeated;
     }
+
+    static void ResetCount()
+    {
+        countNativeDefeated = 0;
+        countInstantiatedDefeated = 0;
+    }
+
+    // for debug purpose
+    [SerializeField] int _countNativeDefeated;
+    [SerializeField] int _countInstantiatedDefeated;
+    void Update()
+    {
+        _countInstantiatedDefeated = countInstantiatedDefeated;
+        _countNativeDefeated = countNativeDefeated;
+    }
+    
 } 

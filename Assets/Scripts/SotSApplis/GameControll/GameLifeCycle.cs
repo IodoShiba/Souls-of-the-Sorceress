@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 
-static class GameLifeCycle
+public class GameLifeCycle : MonoBehaviour
 {
     static bool isGameOpen = false;
     static bool isInGameScene = false;
@@ -13,6 +13,16 @@ static class GameLifeCycle
 
     public static IObservable<UniRx.Unit> observableOnGameOpen { get => subjectOnGameOpen;}
     public static IObservable<UniRx.Unit> observableOnGameClose { get => subjectOnGameClose;}
+
+    void Awake()
+    {
+        StartGameScene();
+    }
+
+    void OnDestroy()
+    {
+        EndGameScene();
+    }
 
     public static void OpenGame()
     {
@@ -40,8 +50,18 @@ static class GameLifeCycle
     public static void CloseGame()
     {
         if (!isGameOpen){ return; }
+        if (isInGameScene){CloseGame();}
 
         isGameOpen = false;
         subjectOnGameClose.OnNext(new Unit());
+    }
+    
+    // for debug purpose
+    [SerializeField] bool _isGameOpen = false;
+    [SerializeField] bool _isInGameScene = false;
+    void Update()
+    {
+        _isGameOpen = isGameOpen;
+        _isInGameScene = isInGameScene;
     }
 }

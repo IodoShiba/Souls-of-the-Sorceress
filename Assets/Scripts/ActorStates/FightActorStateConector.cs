@@ -39,13 +39,13 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
         protected override bool ShouldCotinue() => clock.Clock < stateSpan + hitstopSpan;
         protected override void OnInitialize()
         {
-            Debug.Log("OnInitialize");
+            //Debug.Log("OnInitialize");
             if (!disallowCross)
             {
-                Debug.Log("!disallowCross");
+                //Debug.Log("!disallowCross");
                 if (useInvincibleTime)
                 {
-                    Debug.Log("useInvincibleTime");
+                    //Debug.Log("useInvincibleTime");
                     SelfMortal.OrderInvincible(invincibleTime);
                 }
                 else

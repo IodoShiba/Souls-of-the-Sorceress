@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UniRx.Async;
 
 public class SceneTransitionManager : MonoBehaviour
 {

@@ -21,7 +21,7 @@ public class EnemyManager : MonoBehaviour {
     public IObservable<Enemy> observableOnEnemyAdded { get => subjectOnEnemyAdded; }
     public IObservable<Enemy> observableOnEnemyDead { get => subjectOnEnemyDead; }
 
-    public EnemyManager() { if (instance == null) instance = this; }
+    //public EnemyManager() { if (instance == null) instance = this; }
     IEnumerator RemoveDead()
     {
         Enemy it;
@@ -40,12 +40,13 @@ public class EnemyManager : MonoBehaviour {
 
     private void Awake()
     {
-        if (instance != null && this != instance) 
-        {
-            Debug.LogError($"{this.GetType().Name} cannot exist double or more in one scene. GameObject '{name}' has been Deleted because it has second {this.GetType().Name}.");
-            //Destroy(gameObject);
-            return;
-        }
+        instance = this;
+        // if (instance != null && this != instance) 
+        // {
+        //     Debug.LogError($"{this.GetType().Name} cannot exist double or more in one scene. GameObject '{name}' has been Deleted because it has second {this.GetType().Name}.");
+        //     //Destroy(gameObject);
+        //     return;
+        // }
     }
 
     private void Start()
