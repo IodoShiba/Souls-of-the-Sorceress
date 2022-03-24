@@ -565,6 +565,7 @@ public class AscBossMecha : FightActorStateConector
             Debug.Log("Boss Mecha has dead.");
             collider.enabled = false;
             MechaConnector.ResetBombsPlacedArray();
+
             DeadEffect().Forget();
         }
 

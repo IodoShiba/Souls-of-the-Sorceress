@@ -20,6 +20,11 @@ public abstract class FightActorStateConector : ActorState.ActorStateConnector
     public bool BearAgainstAttack { get => bearAgainstAttack; set => bearAgainstAttack = value; }
     public bool IsDead { get => Current is DeadState; }
 
+    public void GoDead() 
+    {
+        InterruptWith(Dead);
+    }
+
     [System.Serializable]
     public class SmashedState : ActorState
     {

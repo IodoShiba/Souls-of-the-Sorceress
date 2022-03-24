@@ -10,9 +10,11 @@ public class GameLifeCycle : MonoBehaviour
 
     static UniRx.Subject<UniRx.Unit> subjectOnGameOpen = new UniRx.Subject<UniRx.Unit>();
     static UniRx.Subject<UniRx.Unit> subjectOnGameClose = new UniRx.Subject<UniRx.Unit>();
+    static UniRx.Subject<UniRx.Unit> subjectGameClosed = new UniRx.Subject<UniRx.Unit>();
 
     public static IObservable<UniRx.Unit> observableOnGameOpen { get => subjectOnGameOpen;}
     public static IObservable<UniRx.Unit> observableOnGameClose { get => subjectOnGameClose;}
+    public static IObservable<UniRx.Unit> observableGameClosed { get => subjectOnGameClose;}
 
     void Awake()
     {
@@ -50,10 +52,11 @@ public class GameLifeCycle : MonoBehaviour
     public static void CloseGame()
     {
         if (!isGameOpen){ return; }
-        if (isInGameScene){CloseGame();}
+        if (isInGameScene){EndGameScene();}
 
         isGameOpen = false;
         subjectOnGameClose.OnNext(new Unit());
+        subjectGameClosed.OnNext(new Unit());
     }
     
     // for debug purpose

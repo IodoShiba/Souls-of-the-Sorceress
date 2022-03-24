@@ -9,6 +9,8 @@ public class TimeRecorder : MonoBehaviour
     static float timeSum = 0;
     static float timeStarted;
 
+    public static float timeElapsed {get => timeSum + (Time.unscaledTime - timeStarted);}
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,16 +42,16 @@ public class TimeRecorder : MonoBehaviour
         timeStarted = Time.unscaledTime;
         isRecording = true;
 
-        Debug.Log("timer start");
+        //Debug.Log("timer start");
     }
     public static void StopTimer()
     {
         if(!isRecording){return;}
 
-        timeSum += Time.unscaledTime - timeStarted;
+        timeSum = timeElapsed;
         isRecording = false;
 
-        Debug.Log("timer stop");
+        //Debug.Log("timer stop");
     }
 
     // for debug purpose
@@ -57,11 +59,11 @@ public class TimeRecorder : MonoBehaviour
     void Update()
     {
         if(!isRecording){return;}
-        time = System.TimeSpan.FromSeconds(timeSum + (Time.unscaledTime - timeStarted)).ToString("c");
+        time = System.TimeSpan.FromSeconds(timeElapsed).ToString("c");
     }
 
-    void Awake()
-    {
-        System.Threading.Thread.Sleep(3000);
-    }
+    // void Awake()
+    // {
+    //     System.Threading.Thread.Sleep(3000);
+    // }
 }

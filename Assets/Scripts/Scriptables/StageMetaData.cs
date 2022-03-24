@@ -27,7 +27,7 @@ public class StageMetaData : ScriptableObject
     [System.Serializable]
     public struct SceneEntry
     {
-        public SceneAsset scene;
+        public string scene;
         [DisabledField] public int enemyCount;
     }
 
@@ -56,6 +56,7 @@ public class StageMetaData : ScriptableObject
         bool initialized = false;
         StageMetaData target;
         Vector2 scrpos = Vector2.zero;
+        List<SceneAsset> sceneAssets = new List<SceneAsset>();
 
         async void OnEnable()
         {
@@ -66,6 +67,19 @@ public class StageMetaData : ScriptableObject
             target = t as StageMetaData;
 
             initialized = true;
+
+            sceneAssets = AssetDatabase.FindAssets("t:SceneAsset")
+                .Select(guid=>AssetDatabase.GUIDToAssetPath(guid))
+                .Select(path=>AssetDatabase.LoadAssetAtPath<SceneAsset>(path))
+                .Where(scene=>scene != null)
+                .ToList();
+        }
+
+        SceneAsset GetSceneAsset(string name)
+        {
+            if (string.IsNullOrEmpty(name)){return null;}
+            int idx = sceneAssets.FindIndex(sc=>sc.name == name);
+            return idx >= 0 ? sceneAssets[idx] : null;
         }
 
         public void OnGUI()
@@ -104,7 +118,8 @@ public class StageMetaData : ScriptableObject
                                 
                                 EditorGUILayout.BeginVertical();
                                 
-                                sceneEntry.scene = EditorGUILayout.ObjectField("ScenePath", sceneEntry.scene, typeof(SceneAsset), false) as SceneAsset;
+                                var sceneAsset = EditorGUILayout.ObjectField("ScenePath", GetSceneAsset(sceneEntry.scene), typeof(SceneAsset), false) as SceneAsset;
+                                sceneEntry.scene = sceneAsset?.name;
                                 EditorGUILayout.LabelField("Enemy Count: ", sceneEntry.enemyCount.ToString());
                                 if (GUILayout.Button("Update Meta Data"))
                                 {
@@ -184,7 +199,7 @@ public class StageMetaData : ScriptableObject
 
         void UpdateSceneMetaData(ref SceneEntry sceneEntry)
         {
-            var sceneName = sceneEntry.scene.name;
+            var sceneName = sceneEntry.scene;
 
             if (sceneEntry.scene == null)
             {

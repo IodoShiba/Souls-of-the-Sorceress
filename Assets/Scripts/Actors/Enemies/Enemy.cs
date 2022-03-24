@@ -51,12 +51,12 @@ public class Enemy : Mortal {
 
     public override void OnDying(DealtAttackInfo causeOfDeath)
     {
+        manager.EnemyDying(this);
         UnityEngine.EventSystems.ExecuteEvents.Execute<IDyingCallbackReceiver>(
            gameObject,
            null,
            (dyingCallbackReceiver, disposedEventData) => { dyingCallbackReceiver.OnSelfDying(causeOfDeath); }
         );
-        manager.EnemyDying(this);
     }
     
     public static Enemy InstantiateThis(Enemy target, Vector3 position, Quaternion quaternion)
