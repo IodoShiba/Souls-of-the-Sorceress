@@ -13,9 +13,11 @@ using UnityEditor;
 public class StageMetaData : ScriptableObject
 {
     public const string path = "Assets/Resources/SotSApplis/Stage Meta Data.asset";
+    public const string resourcePath = "SotSApplis/Stage Meta Data";
 
     public enum Stage
     {
+        None = -10000,
         StageEX = -1,
         Stage0 = 0,
         Stage1 = 1,
@@ -46,6 +48,22 @@ public class StageMetaData : ScriptableObject
 
     // [SerializeField] List<SceneEntry> sceneEntry = new List<SceneEntry>();
     [DisabledField, SerializeField] List<StageEntry> stageEntries = new List<StageEntry>();
+
+    public Stage SceneToStage(string scene)
+    {
+        int idx = stageEntries.FindIndex(stageEntry=>stageEntry.sceneEntries.Any(sceneEntry=>sceneEntry.scene == scene));
+        if(idx<0){return Stage.None;}
+
+        return stageEntries[idx].stage;
+    }
+
+    public int GetOneStageEnemyCount(Stage stage)
+    {
+        int idx = stageEntries.FindIndex(se=>se.stage == stage);
+        if(idx < 0){ return -1; }
+
+        return stageEntries[idx].sceneEntries.Select(se=>se.enemyCount).Sum();
+    }
 
 
 
@@ -101,7 +119,12 @@ public class StageMetaData : ScriptableObject
                         
                         EditorGUILayout.BeginVertical();
 
-                        stageEntry.stage = (StageMetaData.Stage)EditorGUILayout.EnumPopup("Stage: ", target.stageEntries[i].stage);
+                        var newEnumStage = (StageMetaData.Stage)EditorGUILayout.EnumPopup("Stage: ", target.stageEntries[i].stage);
+                        if(newEnumStage != stageEntry.stage)
+                        {
+                            stageEntry.stage = newEnumStage;
+                            EditorUtility.SetDirty(target);
+                        }
 
                         if (stageEntry.sceneEntries == null)
                         {
@@ -119,13 +142,26 @@ public class StageMetaData : ScriptableObject
                                 EditorGUILayout.BeginVertical();
                                 
                                 var sceneAsset = EditorGUILayout.ObjectField("ScenePath", GetSceneAsset(sceneEntry.scene), typeof(SceneAsset), false) as SceneAsset;
-                                sceneEntry.scene = sceneAsset?.name;
+                                if(sceneAsset == null)
+                                {
+                                    if(!string.IsNullOrEmpty(sceneEntry.scene))
+                                    {
+                                        sceneEntry.scene = string.Empty;
+                                        EditorUtility.SetDirty(target);
+                                    }
+                                }
+                                else if(sceneAsset.name != sceneEntry.scene)
+                                {
+                                    sceneEntry.scene = sceneAsset.name;
+                                    EditorUtility.SetDirty(target);
+                                }
                                 EditorGUILayout.LabelField("Enemy Count: ", sceneEntry.enemyCount.ToString());
                                 if (GUILayout.Button("Update Meta Data"))
                                 {
                                     var currentOpenScenePath = EditorSceneManager.GetActiveScene().path;
                                     UpdateSceneMetaData(ref sceneEntry);
                                     EditorSceneManager.OpenScene(currentOpenScenePath);
+                                    EditorUtility.SetDirty(target);
                                 }
 
                                 EditorGUILayout.EndVertical();
@@ -133,6 +169,7 @@ public class StageMetaData : ScriptableObject
                                 if(doDeleteScene)
                                 {
                                     stageEntry.sceneEntries.RemoveAt(j);
+                                    EditorUtility.SetDirty(target);
                                     break;
                                 }
                             }
@@ -143,6 +180,7 @@ public class StageMetaData : ScriptableObject
                         if(GUILayout.Button("Add New Scene Entry"))
                         {
                             stageEntry.sceneEntries.Add(default);
+                            EditorUtility.SetDirty(target);
                         }
                         if(GUILayout.Button("Update Meta Data of All Scenes in This Stage"))
                         {
@@ -154,12 +192,14 @@ public class StageMetaData : ScriptableObject
                                 stageEntry.sceneEntries[j] = sceneEntry;
                             }
                             EditorSceneManager.OpenScene(currentOpenScenePath);
+                            EditorUtility.SetDirty(target);
                         }
                         EditorGUILayout.EndVertical();
 
                         if(doDeleteStage)
                         {
                             target.stageEntries.RemoveAt(i);
+                            EditorUtility.SetDirty(target);
                             break;
                         }
 
@@ -176,6 +216,7 @@ public class StageMetaData : ScriptableObject
                         target.stageEntries = new List<StageEntry>();
                     }
                     target.stageEntries.Add(new StageEntry());
+                    EditorUtility.SetDirty(target);
                 }
                 if(GUILayout.Button("Update Meta Data of All Scenes"))
                 {
@@ -191,6 +232,7 @@ public class StageMetaData : ScriptableObject
                         }
                     }
                     EditorSceneManager.OpenScene(currentOpenScenePath);
+                    EditorUtility.SetDirty(target);
                 }
 
                 scrpos = scrscope.scrollPosition;

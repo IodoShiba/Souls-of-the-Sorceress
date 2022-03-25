@@ -29,6 +29,8 @@ public class TimeRecorder : MonoBehaviour
     {
         GameLifeCycle.observableOnGameOpen.Subscribe(_=>ResetTimer());
         GameLifeCycle.observableOnGameClose.Subscribe(_=>StopTimer());
+        GameOverScene.observableGameOver.Subscribe(_=>RewindLastSection());
+        ResetTimer();
     }
 
     public static void ResetTimer()

@@ -8,11 +8,15 @@ public class EnemyCounter : MonoBehaviour
     // public static int countInstantiated {get; private set;} = 0;
     public static int countNativeDefeated {get; private set;} = 0;
     public static int countInstantiatedDefeated {get; private set;} = 0;
+    public static int countNativeDefeatedLastSection {get; private set;} = 0;
+    public static int countInstantiatedDefeatedLastSection {get; private set;} = 0;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void RuntimeInitialize()
     {
         GameLifeCycle.observableOnGameOpen.Subscribe(_=>ResetCount());
+        GameOverScene.observableGameOver.Subscribe(_=>RewindLastSection());
+        ResetCount();
     }
 
     public void Start()
@@ -20,8 +24,9 @@ public class EnemyCounter : MonoBehaviour
         var enemyManager = GetComponent<EnemyManager>();
         // enemyManager.observableOnEnemyAdded.Subscribe(enemy => AddNewEnemy(enemy));
         enemyManager.observableOnEnemyDead.Subscribe(enemy => OneEnemyDefeated(enemy)).AddTo(gameObject);
+        countNativeDefeatedLastSection = 0;
+        countInstantiatedDefeatedLastSection = 0;
     }
-
 
     // public void AddNewEnemy(Enemy enemy)
     // {
@@ -40,10 +45,12 @@ public class EnemyCounter : MonoBehaviour
         if(enemy.isInstantiated)
         {
             countInstantiatedDefeated += 1;
+            countInstantiatedDefeatedLastSection += 1;
         }
         else
         {
             countNativeDefeated += 1;
+            countNativeDefeatedLastSection += 1;
         }
     }
 
@@ -61,15 +68,23 @@ public class EnemyCounter : MonoBehaviour
     {
         countNativeDefeated = 0;
         countInstantiatedDefeated = 0;
+        countNativeDefeatedLastSection = 0;
+        countInstantiatedDefeatedLastSection = 0;
+    }
+
+    public static void RewindLastSection()
+    {
+        countNativeDefeated -= countNativeDefeatedLastSection;
+        countInstantiatedDefeated -= countInstantiatedDefeatedLastSection = 0;
+;
+        countNativeDefeatedLastSection = 0;
+        countInstantiatedDefeatedLastSection = 0;
     }
 
     // for debug purpose
-    [SerializeField] int _countNativeDefeated;
-    [SerializeField] int _countInstantiatedDefeated;
-    void Update()
+    private void OnGUI()
     {
-        _countInstantiatedDefeated = countInstantiatedDefeated;
-        _countNativeDefeated = countNativeDefeated;
+        GUI.Label(new Rect(0, 48, Screen.width, Screen.height), $"Count Native Defeated: {countNativeDefeated}\nCount Instantiated Defeated: {countInstantiatedDefeated}");
     }
     
 } 
