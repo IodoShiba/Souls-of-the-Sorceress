@@ -45,6 +45,9 @@ public class GameOverScene : MonoBehaviour
     {
         giveUpButtonProcessor = new ButtonProcessor(giveUpButton);
         reviveButtonProcessor = new ButtonProcessor(reviveButton);
+
+        TimeRecorder.RewindLastSection();
+
         StartCoroutine(StartCo());
     }
 
