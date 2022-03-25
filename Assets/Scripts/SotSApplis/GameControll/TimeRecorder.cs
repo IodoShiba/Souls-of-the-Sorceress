@@ -7,9 +7,11 @@ public class TimeRecorder : MonoBehaviour
 {
     static bool isRecording = false;
     static float timeSum = 0;
+    static float timeLastSection = 0;
     static float timeStarted;
 
-    public static float timeElapsed {get => timeSum + (Time.unscaledTime - timeStarted);}
+    public static float timeElapsed {get => timeSum + timeThisSection;}
+    public static float timeThisSection {get=> (Time.unscaledTime - timeStarted);}
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,8 @@ public class TimeRecorder : MonoBehaviour
     {
         if(isRecording) {return;}
 
+        timeSum += timeLastSection;
+        timeLastSection = 0;
         timeStarted = Time.unscaledTime;
         isRecording = true;
 
@@ -48,10 +52,15 @@ public class TimeRecorder : MonoBehaviour
     {
         if(!isRecording){return;}
 
-        timeSum = timeElapsed;
+        timeLastSection = timeThisSection;
         isRecording = false;
 
         //Debug.Log("timer stop");
+    }
+    public static void RewindLastSection()
+    {
+        if(isRecording){throw new System.InvalidOperationException("TimeRecorder is running. You must stop TimeRecorder's recording to rewind.");}
+        timeLastSection = 0;
     }
 
     // for debug purpose
