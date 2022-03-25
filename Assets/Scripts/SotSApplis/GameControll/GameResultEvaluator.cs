@@ -13,38 +13,70 @@ public class GameResultEvaluator : MonoBehaviour
 
     static StageMetaData stageMetaData;
 
+    [System.Serializable]
+    public struct CriteriaDefeatedCount
+    {
+        public int thresholdSS;
+        public int thresholdS;
+        public int thresholdA;
+        public int thresholdB;
+
+        public EvaluationRank GetRank(int defeatedCount)
+        {
+            return
+                defeatedCount >= thresholdSS    ?   EvaluationRank.SS :
+                defeatedCount >= thresholdS     ?   EvaluationRank.S :
+                defeatedCount >= thresholdA     ?   EvaluationRank.A :
+                defeatedCount >= thresholdB     ?   EvaluationRank.B :
+                                                    EvaluationRank.C;
+        }
+    }    
+
+    [System.Serializable]
+    public struct CriteriaTimeElapsed
+    {
+        public float thresholdSS;
+        public float thresholdS;
+        public float thresholdA;
+        public float thresholdB;
+
+        public EvaluationRank GetRank(float time)
+        {
+            return
+                time <= thresholdSS    ?    EvaluationRank.SS :
+                time <= thresholdS     ?    EvaluationRank.S :
+                time <= thresholdA     ?    EvaluationRank.A :
+                time <= thresholdB     ?    EvaluationRank.B :
+                                            EvaluationRank.C;
+        }
+    }
+
+    [System.Serializable]
     public struct ResultEvaluation
     {
         public int enemyCountNativeDefeated {get; private set;}
         public float timeElapsed {get; private set;}
         public int continueCount {get; private set;}
 
-        public EvaluationRank criteriaDefeatedCount {get; private set;}
-        public EvaluationRank criteriaTimeElapsed {get; private set;}
+        public EvaluationRank rankDefeatedCount {get; private set;}
+        public EvaluationRank rankTimeElapsed {get; private set;}
         public EvaluationRank totalRank {get; private set;}
 
         public void Evaluate()
         {
             string currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            StageMetaData.Stage currentStage = stageMetaData.SceneToStage(currentSceneName);
             int enemyCountNativeinThisStage = stageMetaData.GetOneStageEnemyCount(stageMetaData.SceneToStage(currentSceneName));
 
-            int gapCount = enemyCountNativeDefeated - enemyCountNativeinThisStage;
-            criteriaDefeatedCount =
-                gapCount == 0       ?   EvaluationRank.SS :
-                gapCount >= -10     ?   EvaluationRank.S :
-                gapCount >= -20     ?   EvaluationRank.A :
-                gapCount >= -30     ?   EvaluationRank.B :
-                                        EvaluationRank.C;
+            CriteriaDefeatedCount criteriaDefeatedCount;
+            stageMetaData.GetCriteriaDefeatedCount(currentStage, out criteriaDefeatedCount);
+            rankDefeatedCount = criteriaDefeatedCount.GetRank(enemyCountNativeDefeated);
 
-            float gapTime = timeElapsed - 600;
-            criteriaTimeElapsed =
-                gapTime <= 0    ?   EvaluationRank.SS :
-                gapTime <= 30   ?   EvaluationRank.S :
-                gapTime <= 60   ?   EvaluationRank.A :
-                gapTime <= 90   ?   EvaluationRank.B :
-                                    EvaluationRank.C;
+            CriteriaTimeElapsed criteriaTimeElapsed;
+            stageMetaData.GetCriteriaTimeElapsed(currentStage, out criteriaTimeElapsed);
+            rankTimeElapsed = criteriaTimeElapsed.GetRank(timeElapsed);
 
-            totalRank = (EvaluationRank)System.Math.Max(((int)criteriaDefeatedCount + (int)criteriaTimeElapsed)/2 - continueCount, 0);
+            totalRank = (EvaluationRank)System.Math.Max(((int)rankDefeatedCount + (int)rankTimeElapsed)/2 - continueCount, 0);
         }
 
         public ResultEvaluation(int enemyCountNativeDefeated, float timeElapsed, int continueCount)
@@ -52,8 +84,8 @@ public class GameResultEvaluator : MonoBehaviour
             this.enemyCountNativeDefeated = enemyCountNativeDefeated;
             this.timeElapsed = timeElapsed;
             this.continueCount = continueCount;
-            this.criteriaDefeatedCount = EvaluationRank.C;
-            this.criteriaTimeElapsed = EvaluationRank.C;
+            this.rankDefeatedCount = EvaluationRank.C;
+            this.rankTimeElapsed = EvaluationRank.C;
             this.totalRank = EvaluationRank.C;
         }
     }
@@ -85,8 +117,8 @@ public class GameResultEvaluator : MonoBehaviour
             ));
         Debug.Log(
             string.Format("Rank\nDefeat: {0}\nTime: {1}\nContinue: {2}\n\nTotal: {3}",
-            resultEvaluation.criteriaDefeatedCount,
-            resultEvaluation.criteriaTimeElapsed,
+            resultEvaluation.rankDefeatedCount,
+            resultEvaluation.rankTimeElapsed,
             resultEvaluation.continueCount > 0 ? (new string('X', resultEvaluation.continueCount)) : "None",
             resultEvaluation.totalRank
             ));

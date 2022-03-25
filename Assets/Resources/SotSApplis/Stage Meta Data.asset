@@ -14,6 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageEntries:
   - stage: 0
+    criteriaDefeatedCount:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
+    criteriaTimeElapsed:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
     sceneEntries:
     - scene: stage0-1
       enemyCount: 0
@@ -22,6 +32,16 @@ MonoBehaviour:
     - scene: stage0-3
       enemyCount: 4
   - stage: 1
+    criteriaDefeatedCount:
+      thresholdSS: 128
+      thresholdS: 118
+      thresholdA: 103
+      thresholdB: 83
+    criteriaTimeElapsed:
+      thresholdSS: 360
+      thresholdS: 420
+      thresholdA: 480
+      thresholdB: 540
     sceneEntries:
     - scene: stage1-T1
       enemyCount: 3
@@ -42,6 +62,16 @@ MonoBehaviour:
     - scene: 1-boss
       enemyCount: 1
   - stage: 2
+    criteriaDefeatedCount:
+      thresholdSS: 167
+      thresholdS: 152
+      thresholdA: 132
+      thresholdB: 102
+    criteriaTimeElapsed:
+      thresholdSS: 420
+      thresholdS: 480
+      thresholdA: 540
+      thresholdB: 600
     sceneEntries:
     - scene: stage2-T1
       enemyCount: 3
@@ -66,10 +96,40 @@ MonoBehaviour:
     - scene: 2-boss
       enemyCount: 1
   - stage: 3
+    criteriaDefeatedCount:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
+    criteriaTimeElapsed:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
     sceneEntries: []
   - stage: 4
+    criteriaDefeatedCount:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
+    criteriaTimeElapsed:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
     sceneEntries: []
   - stage: -1
+    criteriaDefeatedCount:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
+    criteriaTimeElapsed:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
     sceneEntries:
     - scene: stageEX-1
       enemyCount: 0

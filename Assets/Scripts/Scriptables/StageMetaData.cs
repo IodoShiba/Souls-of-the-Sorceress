@@ -37,11 +37,15 @@ public class StageMetaData : ScriptableObject
     public struct StageEntry
     {
         public Stage stage;
+        public GameResultEvaluator.CriteriaDefeatedCount criteriaDefeatedCount;
+        public GameResultEvaluator.CriteriaTimeElapsed criteriaTimeElapsed;
         public List<SceneEntry> sceneEntries;
 
         public StageEntry(Stage stage = default)
         {
             this.stage = stage;
+            criteriaDefeatedCount = default;
+            criteriaTimeElapsed = default;
             sceneEntries = new List<SceneEntry>() {default};
         }
     }
@@ -65,8 +69,24 @@ public class StageMetaData : ScriptableObject
         return stageEntries[idx].sceneEntries.Select(se=>se.enemyCount).Sum();
     }
 
+    public bool GetCriteriaDefeatedCount(Stage stage, out GameResultEvaluator.CriteriaDefeatedCount result)
+    {
+        int idx = stageEntries.FindIndex(stageEntry=>stageEntry.stage == stage);
+        if(idx < 0){result = default; return false;}
 
+        result = stageEntries[idx].criteriaDefeatedCount;
+        return true;
+    }
 
+    public bool GetCriteriaTimeElapsed(Stage stage, out GameResultEvaluator.CriteriaTimeElapsed result)
+    {
+        int idx = stageEntries.FindIndex(stageEntry=>stageEntry.stage == stage);
+        if(idx < 0){result = default; return false;}
+
+        result = stageEntries[idx].criteriaTimeElapsed;
+        return true;
+        
+    }
 
 #if UNITY_EDITOR
     public class StageMetaDataWindowBase : EditorWindow
@@ -126,11 +146,20 @@ public class StageMetaData : ScriptableObject
                             EditorUtility.SetDirty(target);
                         }
 
+                        ShowCriteriaDefeatedCount(ref stageEntry.criteriaDefeatedCount);
+                        EditorGUILayout.Separator();
+                        ShowCriteriaTimeElapsed(ref stageEntry.criteriaTimeElapsed);
+
                         if (stageEntry.sceneEntries == null)
                         {
                             stageEntry.sceneEntries = new List<SceneEntry>();
                         }
 
+                        EditorGUILayout.Space();
+                        EditorGUILayout.LabelField("Total Native Enemy", stageEntry.sceneEntries.Select(se=>se.enemyCount).Sum().ToString());
+
+                        EditorGUILayout.Space();
+                        EditorGUILayout.LabelField("Scene Belongs");
                         for(int j=0;j<stageEntry.sceneEntries.Count;++j)
                         {
                             var sceneEntry = stageEntry.sceneEntries[j];
@@ -236,6 +265,46 @@ public class StageMetaData : ScriptableObject
                 }
 
                 scrpos = scrscope.scrollPosition;
+            }
+        }
+
+        void ShowCriteriaDefeatedCount(ref GameResultEvaluator.CriteriaDefeatedCount criteria)
+        {
+            EditorGUILayout.LabelField("Criteria (Enemy Defeated Count)");
+
+            IntField("Threshold SS", ref criteria.thresholdSS);
+            IntField("Threshold S", ref criteria.thresholdS);
+            IntField("Threshold A", ref criteria.thresholdA);
+            IntField("Threshold B", ref criteria.thresholdB);
+
+            void IntField(string label, ref int value)
+            {
+                int newValue = EditorGUILayout.IntField(label, value);
+                if (newValue != value)
+                {
+                    value = newValue;
+                    EditorUtility.SetDirty(target);
+                }
+            }
+        }
+
+        void ShowCriteriaTimeElapsed(ref GameResultEvaluator.CriteriaTimeElapsed criteria)
+        {
+            EditorGUILayout.LabelField("Criteria (Time Elapsed)");
+
+            FloatField("Threshold SS", ref criteria.thresholdSS);
+            FloatField("Threshold S", ref criteria.thresholdS);
+            FloatField("Threshold A", ref criteria.thresholdA);
+            FloatField("Threshold B", ref criteria.thresholdB);
+
+            void FloatField(string label, ref float value)
+            {
+                float newValue = EditorGUILayout.FloatField(label, value);
+                if (newValue != value)
+                {
+                    value = newValue;
+                    EditorUtility.SetDirty(target);
+                }
             }
         }
 
