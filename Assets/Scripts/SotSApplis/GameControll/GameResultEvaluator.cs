@@ -26,11 +26,9 @@ public class GameResultEvaluator : MonoBehaviour
         public void Evaluate()
         {
             string currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-            Debug.Log($"scene: {currentSceneName}");
             int enemyCountNativeinThisStage = stageMetaData.GetOneStageEnemyCount(stageMetaData.SceneToStage(currentSceneName));
-            Debug.Log($"cnt: {enemyCountNativeinThisStage}");
-            int gapCount = enemyCountNativeDefeated - enemyCountNativeinThisStage;
 
+            int gapCount = enemyCountNativeDefeated - enemyCountNativeinThisStage;
             criteriaDefeatedCount =
                 gapCount == 0       ?   EvaluationRank.SS :
                 gapCount >= -10     ?   EvaluationRank.S :
