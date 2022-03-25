@@ -42,6 +42,7 @@ namespace SotS
         const int initialRemaining = 2;
 
         static int remaining;
+        static int continueCount = 0;
         static string targetSceneName;
         static Subject<int> remainingCountListener = new Subject<int>();
         static ReviveSuspensor suspensor = new ReviveSuspensor();
@@ -51,7 +52,7 @@ namespace SotS
         
         public static bool IsRevivable { get => remaining > 0; }
         public static IObservable<int> RemainingCountListener { get => remainingCountListener; }
-
+        public static int ContinueCount { get => continueCount; }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         static void RuntimeInitialize()
@@ -60,6 +61,7 @@ namespace SotS
             // Addressables.LoadAssetAsync<SoundCollection>(AddressableAddresses.soundCollections + "SystemSounds.asset")
             //    .Completed += (op) => {systemSoundCollection = op.Result;};
             systemSoundCollection=Resources.Load<SoundCollection>("SoundCollections/SystemSounds");
+            GameLifeCycle.observableOnGameClose.Subscribe(_ => continueCount = 0);
         }
 
         public static void SetTargetSceneName(string sceneName)
@@ -83,6 +85,7 @@ namespace SotS
             }
             
             --remaining;
+            ++continueCount;
             remainingCountListener.OnNext(remaining);
             return suspensor.Reuse(targetSceneName);
         }

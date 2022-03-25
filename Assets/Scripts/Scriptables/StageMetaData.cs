@@ -13,9 +13,11 @@ using UnityEditor;
 public class StageMetaData : ScriptableObject
 {
     public const string path = "Assets/Resources/SotSApplis/Stage Meta Data.asset";
+    public const string resourcePath = "SotSApplis/Stage Meta Data";
 
     public enum Stage
     {
+        None = -10000,
         StageEX = -1,
         Stage0 = 0,
         Stage1 = 1,
@@ -35,11 +37,15 @@ public class StageMetaData : ScriptableObject
     public struct StageEntry
     {
         public Stage stage;
+        public GameResultEvaluator.CriteriaDefeatedCount criteriaDefeatedCount;
+        public GameResultEvaluator.CriteriaTimeElapsed criteriaTimeElapsed;
         public List<SceneEntry> sceneEntries;
 
         public StageEntry(Stage stage = default)
         {
             this.stage = stage;
+            criteriaDefeatedCount = default;
+            criteriaTimeElapsed = default;
             sceneEntries = new List<SceneEntry>() {default};
         }
     }
@@ -47,8 +53,40 @@ public class StageMetaData : ScriptableObject
     // [SerializeField] List<SceneEntry> sceneEntry = new List<SceneEntry>();
     [DisabledField, SerializeField] List<StageEntry> stageEntries = new List<StageEntry>();
 
+    public Stage SceneToStage(string scene)
+    {
+        int idx = stageEntries.FindIndex(stageEntry=>stageEntry.sceneEntries.Any(sceneEntry=>sceneEntry.scene == scene));
+        if(idx<0){return Stage.None;}
 
+        return stageEntries[idx].stage;
+    }
 
+    public int GetOneStageEnemyCount(Stage stage)
+    {
+        int idx = stageEntries.FindIndex(se=>se.stage == stage);
+        if(idx < 0){ return -1; }
+
+        return stageEntries[idx].sceneEntries.Select(se=>se.enemyCount).Sum();
+    }
+
+    public bool GetCriteriaDefeatedCount(Stage stage, out GameResultEvaluator.CriteriaDefeatedCount result)
+    {
+        int idx = stageEntries.FindIndex(stageEntry=>stageEntry.stage == stage);
+        if(idx < 0){result = default; return false;}
+
+        result = stageEntries[idx].criteriaDefeatedCount;
+        return true;
+    }
+
+    public bool GetCriteriaTimeElapsed(Stage stage, out GameResultEvaluator.CriteriaTimeElapsed result)
+    {
+        int idx = stageEntries.FindIndex(stageEntry=>stageEntry.stage == stage);
+        if(idx < 0){result = default; return false;}
+
+        result = stageEntries[idx].criteriaTimeElapsed;
+        return true;
+        
+    }
 
 #if UNITY_EDITOR
     public class StageMetaDataWindowBase : EditorWindow
@@ -101,13 +139,27 @@ public class StageMetaData : ScriptableObject
                         
                         EditorGUILayout.BeginVertical();
 
-                        stageEntry.stage = (StageMetaData.Stage)EditorGUILayout.EnumPopup("Stage: ", target.stageEntries[i].stage);
+                        var newEnumStage = (StageMetaData.Stage)EditorGUILayout.EnumPopup("Stage: ", target.stageEntries[i].stage);
+                        if(newEnumStage != stageEntry.stage)
+                        {
+                            stageEntry.stage = newEnumStage;
+                            EditorUtility.SetDirty(target);
+                        }
+
+                        ShowCriteriaDefeatedCount(ref stageEntry.criteriaDefeatedCount);
+                        EditorGUILayout.Separator();
+                        ShowCriteriaTimeElapsed(ref stageEntry.criteriaTimeElapsed);
 
                         if (stageEntry.sceneEntries == null)
                         {
                             stageEntry.sceneEntries = new List<SceneEntry>();
                         }
 
+                        EditorGUILayout.Space();
+                        EditorGUILayout.LabelField("Total Native Enemy", stageEntry.sceneEntries.Select(se=>se.enemyCount).Sum().ToString());
+
+                        EditorGUILayout.Space();
+                        EditorGUILayout.LabelField("Scene Belongs");
                         for(int j=0;j<stageEntry.sceneEntries.Count;++j)
                         {
                             var sceneEntry = stageEntry.sceneEntries[j];
@@ -119,13 +171,26 @@ public class StageMetaData : ScriptableObject
                                 EditorGUILayout.BeginVertical();
                                 
                                 var sceneAsset = EditorGUILayout.ObjectField("ScenePath", GetSceneAsset(sceneEntry.scene), typeof(SceneAsset), false) as SceneAsset;
-                                sceneEntry.scene = sceneAsset?.name;
+                                if(sceneAsset == null)
+                                {
+                                    if(!string.IsNullOrEmpty(sceneEntry.scene))
+                                    {
+                                        sceneEntry.scene = string.Empty;
+                                        EditorUtility.SetDirty(target);
+                                    }
+                                }
+                                else if(sceneAsset.name != sceneEntry.scene)
+                                {
+                                    sceneEntry.scene = sceneAsset.name;
+                                    EditorUtility.SetDirty(target);
+                                }
                                 EditorGUILayout.LabelField("Enemy Count: ", sceneEntry.enemyCount.ToString());
                                 if (GUILayout.Button("Update Meta Data"))
                                 {
                                     var currentOpenScenePath = EditorSceneManager.GetActiveScene().path;
                                     UpdateSceneMetaData(ref sceneEntry);
                                     EditorSceneManager.OpenScene(currentOpenScenePath);
+                                    EditorUtility.SetDirty(target);
                                 }
 
                                 EditorGUILayout.EndVertical();
@@ -133,6 +198,7 @@ public class StageMetaData : ScriptableObject
                                 if(doDeleteScene)
                                 {
                                     stageEntry.sceneEntries.RemoveAt(j);
+                                    EditorUtility.SetDirty(target);
                                     break;
                                 }
                             }
@@ -143,6 +209,7 @@ public class StageMetaData : ScriptableObject
                         if(GUILayout.Button("Add New Scene Entry"))
                         {
                             stageEntry.sceneEntries.Add(default);
+                            EditorUtility.SetDirty(target);
                         }
                         if(GUILayout.Button("Update Meta Data of All Scenes in This Stage"))
                         {
@@ -154,12 +221,14 @@ public class StageMetaData : ScriptableObject
                                 stageEntry.sceneEntries[j] = sceneEntry;
                             }
                             EditorSceneManager.OpenScene(currentOpenScenePath);
+                            EditorUtility.SetDirty(target);
                         }
                         EditorGUILayout.EndVertical();
 
                         if(doDeleteStage)
                         {
                             target.stageEntries.RemoveAt(i);
+                            EditorUtility.SetDirty(target);
                             break;
                         }
 
@@ -176,6 +245,7 @@ public class StageMetaData : ScriptableObject
                         target.stageEntries = new List<StageEntry>();
                     }
                     target.stageEntries.Add(new StageEntry());
+                    EditorUtility.SetDirty(target);
                 }
                 if(GUILayout.Button("Update Meta Data of All Scenes"))
                 {
@@ -191,9 +261,50 @@ public class StageMetaData : ScriptableObject
                         }
                     }
                     EditorSceneManager.OpenScene(currentOpenScenePath);
+                    EditorUtility.SetDirty(target);
                 }
 
                 scrpos = scrscope.scrollPosition;
+            }
+        }
+
+        void ShowCriteriaDefeatedCount(ref GameResultEvaluator.CriteriaDefeatedCount criteria)
+        {
+            EditorGUILayout.LabelField("Criteria (Enemy Defeated Count)");
+
+            IntField("Threshold SS", ref criteria.thresholdSS);
+            IntField("Threshold S", ref criteria.thresholdS);
+            IntField("Threshold A", ref criteria.thresholdA);
+            IntField("Threshold B", ref criteria.thresholdB);
+
+            void IntField(string label, ref int value)
+            {
+                int newValue = EditorGUILayout.IntField(label, value);
+                if (newValue != value)
+                {
+                    value = newValue;
+                    EditorUtility.SetDirty(target);
+                }
+            }
+        }
+
+        void ShowCriteriaTimeElapsed(ref GameResultEvaluator.CriteriaTimeElapsed criteria)
+        {
+            EditorGUILayout.LabelField("Criteria (Time Elapsed)");
+
+            FloatField("Threshold SS", ref criteria.thresholdSS);
+            FloatField("Threshold S", ref criteria.thresholdS);
+            FloatField("Threshold A", ref criteria.thresholdA);
+            FloatField("Threshold B", ref criteria.thresholdB);
+
+            void FloatField(string label, ref float value)
+            {
+                float newValue = EditorGUILayout.FloatField(label, value);
+                if (newValue != value)
+                {
+                    value = newValue;
+                    EditorUtility.SetDirty(target);
+                }
             }
         }
 

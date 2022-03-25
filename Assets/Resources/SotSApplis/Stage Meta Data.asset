@@ -14,62 +14,122 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stageEntries:
   - stage: 0
+    criteriaDefeatedCount:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
+    criteriaTimeElapsed:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
     sceneEntries:
-    - scene: {fileID: 102900000, guid: a5357d31c91a8db4a953fd4b61350c49, type: 3}
+    - scene: stage0-1
       enemyCount: 0
-    - scene: {fileID: 102900000, guid: 9de7c01af1133d941a18405f16dc9c2b, type: 3}
+    - scene: stage0-2
       enemyCount: 3
-    - scene: {fileID: 102900000, guid: ed745f88e0da157468c66353002c2026, type: 3}
+    - scene: stage0-3
       enemyCount: 4
   - stage: 1
+    criteriaDefeatedCount:
+      thresholdSS: 128
+      thresholdS: 118
+      thresholdA: 103
+      thresholdB: 83
+    criteriaTimeElapsed:
+      thresholdSS: 360
+      thresholdS: 420
+      thresholdA: 480
+      thresholdB: 540
     sceneEntries:
-    - scene: {fileID: 102900000, guid: f0008fbc3d6f56141b343b3c909e1168, type: 3}
+    - scene: stage1-T1
       enemyCount: 3
-    - scene: {fileID: 102900000, guid: 8194175650ff2c4479ea0f0423c76b1b, type: 3}
+    - scene: stage1-T2
       enemyCount: 4
-    - scene: {fileID: 102900000, guid: 3de732f1573c7ee46960a008cdc6d66b, type: 3}
+    - scene: stage1-T3
       enemyCount: 10
-    - scene: {fileID: 102900000, guid: cacd5e3c04d263e4bb20fdfe71b3a8c3, type: 3}
+    - scene: stage1-T4
       enemyCount: 25
-    - scene: {fileID: 102900000, guid: 5ee856b8c7ec6384c972717ffb295811, type: 3}
+    - scene: stage1-T5
       enemyCount: 10
-    - scene: {fileID: 102900000, guid: dd29a51b8be0fc34d8bfec71f0944801, type: 3}
+    - scene: stage1-1
       enemyCount: 31
-    - scene: {fileID: 102900000, guid: d5d998c6a73730442aec18db6e0e3478, type: 3}
+    - scene: stage1-2
       enemyCount: 40
-    - scene: {fileID: 102900000, guid: e55416a83e86af74e842b237fa38eb53, type: 3}
+    - scene: stage2-preboss
       enemyCount: 4
-    - scene: {fileID: 102900000, guid: 2cc76b81d8132fb4dbdbeb386bb08970, type: 3}
+    - scene: 1-boss
       enemyCount: 1
   - stage: 2
+    criteriaDefeatedCount:
+      thresholdSS: 167
+      thresholdS: 152
+      thresholdA: 132
+      thresholdB: 102
+    criteriaTimeElapsed:
+      thresholdSS: 420
+      thresholdS: 480
+      thresholdA: 540
+      thresholdB: 600
     sceneEntries:
-    - scene: {fileID: 102900000, guid: 0168002bc5136c24db009413a5de7515, type: 3}
+    - scene: stage2-T1
       enemyCount: 3
-    - scene: {fileID: 102900000, guid: 9ad3804ca2829a14b8f7d947cc6805d3, type: 3}
+    - scene: stage2-T2
       enemyCount: 3
-    - scene: {fileID: 102900000, guid: ab5d0605bb62194468af7fdbd577941a, type: 3}
+    - scene: stage2-T3
       enemyCount: 5
-    - scene: {fileID: 102900000, guid: a9587cb6187b01249891722d84ea4aab, type: 3}
+    - scene: stage1-T4
       enemyCount: 31
-    - scene: {fileID: 102900000, guid: 781e9ddecf3568541b85577ea81dfe2e, type: 3}
+    - scene: stage2-1
       enemyCount: 34
-    - scene: {fileID: 102900000, guid: 2a2fdf2073b48d746b401c341605fefe, type: 3}
+    - scene: stage2-2
       enemyCount: 38
-    - scene: {fileID: 102900000, guid: 3bae7059374f5224d9ac806362a2d16b, type: 3}
+    - scene: stage2-3
       enemyCount: 36
-    - scene: {fileID: 102900000, guid: 7cf17080a62403043a4ec97f7089dd38, type: 3}
+    - scene: stage2-b1
       enemyCount: 12
-    - scene: {fileID: 102900000, guid: 9fd0a6eb2863a1e4e8e4fe40c8918d81, type: 3}
+    - scene: stage2-b2
       enemyCount: 0
-    - scene: {fileID: 102900000, guid: e55416a83e86af74e842b237fa38eb53, type: 3}
+    - scene: stage2-preboss
       enemyCount: 4
-    - scene: {fileID: 102900000, guid: 42e5b3e9fa4bc694fb0a1a38f7b39296, type: 3}
+    - scene: 2-boss
       enemyCount: 1
   - stage: 3
+    criteriaDefeatedCount:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
+    criteriaTimeElapsed:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
     sceneEntries: []
   - stage: 4
+    criteriaDefeatedCount:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
+    criteriaTimeElapsed:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
     sceneEntries: []
   - stage: -1
+    criteriaDefeatedCount:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
+    criteriaTimeElapsed:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
     sceneEntries:
-    - scene: {fileID: 102900000, guid: e23ae3e485263f14e8051eb586c5ada8, type: 3}
+    - scene: stageEX-1
       enemyCount: 0
