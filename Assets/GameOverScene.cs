@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using SotS;
+using UniRx;
 
 public class GameOverScene : MonoBehaviour
 {
@@ -32,6 +33,9 @@ public class GameOverScene : MonoBehaviour
     ButtonProcessor giveUpButtonProcessor;
     ButtonProcessor reviveButtonProcessor;
 
+    static UniRx.Subject<Unit> subjectGameOver = new UniRx.Subject<Unit>();
+    public static System.IObservable<UniRx.Unit> observableGameOver {get => subjectGameOver;}
+
     public void SetInitializeData(float orthoCamSize, Vector3 playerScreenCoordinate, int playerDir)
     {
         this.playerScreenCoordinate = playerScreenCoordinate;
@@ -45,6 +49,9 @@ public class GameOverScene : MonoBehaviour
     {
         giveUpButtonProcessor = new ButtonProcessor(giveUpButton);
         reviveButtonProcessor = new ButtonProcessor(reviveButton);
+
+        subjectGameOver.OnNext(Unit.Default);
+
         StartCoroutine(StartCo());
     }
 
@@ -100,6 +107,7 @@ public class GameOverScene : MonoBehaviour
 
     public void GiveUp()
     {
+        GameLifeCycle.CloseGame();
         StartCoroutine(GiveUpCo());
     }
 
