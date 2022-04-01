@@ -62,6 +62,20 @@ public class GameResultEvaluator : MonoBehaviour
         public EvaluationRank rankTimeElapsed {get; private set;}
         public EvaluationRank totalRank {get; private set;}
 
+        public EvaluationRank GetTotalRank(EvaluationRank rankDefeatedCount, EvaluationRank rankTimeElapsed, int continueCount)
+        {
+            int sum = (int)rankDefeatedCount + (int)rankTimeElapsed;
+            EvaluationRank totalRankBase =
+                sum >= 6    ?   EvaluationRank.SS :
+                sum >= 5    ?   EvaluationRank.S :
+                sum >= 4    ?   EvaluationRank.A :
+                sum >= 2    ?   EvaluationRank.B :
+                                EvaluationRank.C;
+
+            return (EvaluationRank)System.Math.Max((int)totalRankBase - continueCount, 0);
+            // return (EvaluationRank)System.Math.Max(((int)rankDefeatedCount + (int)rankTimeElapsed)/2 - continueCount, 0);
+        }
+
         public void Evaluate()
         {
             string currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
@@ -76,7 +90,7 @@ public class GameResultEvaluator : MonoBehaviour
             stageMetaData.GetCriteriaTimeElapsed(currentStage, out criteriaTimeElapsed);
             rankTimeElapsed = criteriaTimeElapsed.GetRank(timeElapsed);
 
-            totalRank = (EvaluationRank)System.Math.Max(((int)rankDefeatedCount + (int)rankTimeElapsed)/2 - continueCount, 0);
+            totalRank = GetTotalRank(rankDefeatedCount, rankTimeElapsed, continueCount);
         }
 
         public ResultEvaluation(int enemyCountNativeDefeated, float timeElapsed, int continueCount)
