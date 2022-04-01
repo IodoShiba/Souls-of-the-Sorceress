@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StorePlayerAndChangeScene : MonoBehaviour
 {
+    [System.Serializable]
+    class UnityEvent_string : UnityEvent<string> {}
+
+    [SerializeField] UnityEvent_string onStoreAndChangeScene = new UnityEvent_string();
     [SerializeField,UnityEngine.Serialization.FormerlySerializedAs("destinationSceneNameOnTriggerEnter")] string defaultDestinationSceneName;
     [SerializeField] SaveData saveData;
     [SerializeField] WipeEffet wipeEffet;
@@ -47,6 +52,7 @@ public class StorePlayerAndChangeScene : MonoBehaviour
     public void StoreAndChangeSene(Player player,string destinationSceneName)
     {
         //saveData.StorePlayerData(player);
+        onStoreAndChangeScene.Invoke(destinationSceneName);
         SotS.GameCommonInterface.Instance.Player.StorePlayerData(player);
 
         TransitionEffect.WipeEffet = wipeEffet;

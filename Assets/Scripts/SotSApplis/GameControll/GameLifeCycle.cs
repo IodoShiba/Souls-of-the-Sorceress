@@ -67,4 +67,9 @@ public class GameLifeCycle : MonoBehaviour
         _isGameOpen = isGameOpen;
         _isInGameScene = isInGameScene;
     }
+
+    public void _CloseGame() 
+    {
+        CloseGame();
+    }
 }
