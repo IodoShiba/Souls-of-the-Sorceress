@@ -808,8 +808,8 @@ MonoBehaviour:
   dyingCallbacks:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1200558867}
-        m_MethodName: OnWeakpointDestroyed
+      - m_Target: {fileID: 1200558861}
+        m_MethodName: Suicide
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -841,8 +841,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1200558861}
-        m_MethodName: Suicide
+      - m_Target: {fileID: 1200558867}
+        m_MethodName: OnWeakpointDestroyed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1672,16 +1672,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sarah
       objectReference: {fileID: 0}
-    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: enemyManager
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: _debugText
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8916380848889061127, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1736,6 +1726,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: enemyManager
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: _debugText
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9196809600734188392, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
@@ -6533,6 +6533,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322cea529ccc2b84fb15785428db0829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onStoreAndChangeScene:
+    m_PersistentCalls:
+      m_Calls: []
   defaultDestinationSceneName: stage2-T1
   saveData: {fileID: 11400000, guid: 759077f9a40e083479ac66e312de96c5, type: 2}
   wipeEffet: {fileID: 11400000, guid: da31c4079148f6e488168a4e88803ad4, type: 2}
