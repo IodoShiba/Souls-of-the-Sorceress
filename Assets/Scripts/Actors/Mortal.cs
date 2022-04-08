@@ -81,6 +81,8 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
     }
     public bool IsInvincible { get => invincibleOrderedCount > 0; }
     public UnityEvent_float OnHitstopGiven { get => onHitstopGiven; }
+    public bool healthRunOut => health <= 0;
+    public bool deadSequenceCompleted { get; protected set; } = false;
 
     protected virtual void Awake()
     {
@@ -106,6 +108,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
             (dyingCallbackReceiver, disposedEventData) => { dyingCallbackReceiver.OnSelfDying(causeOfDeath); }
             );
         Destroy(gameObject);
+        deadSequenceCompleted = true;
     }
 
     public void ConvertDealingAttack(AttackData dealee)
@@ -212,10 +215,13 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
                     };
                 }
             }
-            if (health <= 0 && originalHealth > 0)
+            if (healthRunOut && originalHealth > 0)
             {
                 health = 0;
                 dyingCallbacks.Invoke();
+
+                Debug.Log($"killed: {gameObject.name}");
+
                 OnDying(mainAttackInfo);
             }
         }
@@ -255,8 +261,13 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
 
     public void Suicide()
     {
+        if(deadSequenceCompleted) {return;}
+
         health = 0;
         dyingCallbacks.Invoke();
+
+        Debug.Log($"suicide: {gameObject.name}");
+
         OnDying(new DealtAttackInfo(this,new AttackData(), Vector2.zero, AttackEvaluatedActionDoNothing.Instance));
     }
 

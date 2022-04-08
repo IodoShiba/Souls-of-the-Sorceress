@@ -51,6 +51,8 @@ public class EnemyCounter : MonoBehaviour
         {
             countNativeDefeated += 1;
             countNativeDefeatedLastSection += 1;
+
+            Debug.Log(enemy.name);
         }
     }
 

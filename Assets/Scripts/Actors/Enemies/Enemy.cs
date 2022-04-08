@@ -57,6 +57,7 @@ public class Enemy : Mortal {
            null,
            (dyingCallbackReceiver, disposedEventData) => { dyingCallbackReceiver.OnSelfDying(causeOfDeath); }
         );
+        deadSequenceCompleted = true;
     }
     
     public static Enemy InstantiateThis(Enemy target, Vector3 position, Quaternion quaternion)
