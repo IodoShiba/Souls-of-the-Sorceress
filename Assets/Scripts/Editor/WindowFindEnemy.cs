@@ -19,7 +19,7 @@ public class WindowFindEnemy : EditorWindow
         window.Show();
     }
 
-    void OnEnable()
+    void Awake()
     {
         activeSceneChangedAction = (sfrom, sto) => {enemyHolders.Clear();};
         EditorSceneManager.activeSceneChanged += activeSceneChangedAction;
