@@ -18,10 +18,10 @@ public class Cannon
     {
         float theta = Mathf.Deg2Rad * degree;
         Vector2 dir = new Vector2(Mathf.Cos(theta), Mathf.Sin(theta));
-        var summoned = spawner.Summon(subject, (Vector2)spawner.transform.position + dir * offsetRadius);
+        var summoned = spawner.SummonEnemy(subject.GetComponent<Enemy>(), (Vector2)spawner.transform.position + dir * offsetRadius);
         var rigidbody = summoned.GetComponent<Rigidbody2D>();
         rigidbody.velocity = dir * speed;
-        return summoned;
+        return summoned.GetComponent<Actor>();
     }
 
     public Actor Launch(Actor subject) => Launch(subject, launchSpeed, GetDegree());

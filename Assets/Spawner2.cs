@@ -10,6 +10,12 @@ public class Spawner2 : MonoBehaviour
     [SerializeField] Vector3 offset;
     [SerializeField] UnityEvent_Actor initializer;
 
+    public Enemy SummonEnemy(Enemy enemy, Vector2 position)
+    {
+        var summoned = EnemyManager.Instance.Summon(enemy, position, Quaternion.identity);
+        return summoned;
+    }
+
     public Actor Summon(Actor actor, Vector3 position)
     {
         var summoned = Instantiate(actor, position, Quaternion.identity);
