@@ -220,7 +220,7 @@ public class Mortal : MonoBehaviour,IodoShibaUtil.ManualUpdateClass.IManualUpdat
                 health = 0;
                 dyingCallbacks.Invoke();
 
-                Debug.Log($"killed: {gameObject.name}");
+                //Debug.Log($"killed: {gameObject.name}");
 
                 OnDying(mainAttackInfo);
             }

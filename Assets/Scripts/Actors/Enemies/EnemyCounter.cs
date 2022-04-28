@@ -24,6 +24,9 @@ public class EnemyCounter : MonoBehaviour
         var enemyManager = GetComponent<EnemyManager>();
         // enemyManager.observableOnEnemyAdded.Subscribe(enemy => AddNewEnemy(enemy));
         enemyManager.observableOnEnemyDead.Subscribe(enemy => OneEnemyDefeated(enemy)).AddTo(gameObject);
+
+        Debug.Log($"count native defeated last section: {countNativeDefeatedLastSection}");
+
         countNativeDefeatedLastSection = 0;
         countInstantiatedDefeatedLastSection = 0;
     }
@@ -52,7 +55,7 @@ public class EnemyCounter : MonoBehaviour
             countNativeDefeated += 1;
             countNativeDefeatedLastSection += 1;
 
-            Debug.Log(enemy.name);
+            // Debug.Log(enemy.name);
         }
     }
 
