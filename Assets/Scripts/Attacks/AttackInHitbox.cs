@@ -187,7 +187,9 @@ public class AttackData
     [System.Flags]
     public enum AttrFlags : int
     {
-        detached = 0x0000_0001,
+        detached = 1 << 0, //0x0000_0001,
+        uhp_attack = 1 << 1,
+        awake_attack = 1 << 2,
     }
 
     public float damage;
