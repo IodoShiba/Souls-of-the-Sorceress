@@ -200,15 +200,16 @@ public class AttackData
 
     public Buffs.BuffAffectorScriptable Buff { get => buff; }
 
-    public AttackData() { damage = 0; knockBackImpulse = Vector2.zero; attackCollider = null; throughable = false; hitstopSpan = 0; buff = null; }
+    public AttackData() { damage = 0; knockBackImpulse = Vector2.zero; attackCollider = null; throughable = false; hitstopSpan = 0; buff = null; attrFlags = 0; }
 
-    public AttackData(float damage, Vector2 knockBackImpact, Collider2D attackCollider = null, bool throughable = false, float hitstopSpan = 0)
+    public AttackData(float damage, Vector2 knockBackImpact, Collider2D attackCollider = null, bool throughable = false, float hitstopSpan = 0, AttrFlags attrFlags = 0)
     {
         this.damage = damage;
         this.knockBackImpulse = knockBackImpact;
         this.attackCollider = attackCollider;
         this.throughable = throughable;
         this.hitstopSpan = hitstopSpan;
+        this.attrFlags = attrFlags;
     }
 
     //コピーコンストラクタ
