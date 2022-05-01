@@ -28,6 +28,7 @@ namespace ActorSarah
         [SerializeField] ActorFunction.Directionable direction;
         [SerializeField] ActionAwake actionAwake;
         [SerializeField] UmbrellaParameters umbrellaParameters;
+        [SerializeField] AttackImmuneTime attackImmuneTime;
         [SerializeField, DisabledField] string currentStateName;
         [SerializeField, DisabledField] float lpt;
         [SerializeField] public Animator sarahAnimator_Anima2D;
@@ -163,6 +164,11 @@ namespace ActorSarah
             if(progressLevel >= 4){return;}
             ++progressLevel;
         }
+
+        public void AddImmuneTackle(Mortal attacker) => attackImmuneTime.Add(attacker, tackle.GetImmuneEndTime());
+        public void AddImmuneDropAttack(Mortal attacker) => attackImmuneTime.Add(attacker, dropAttack.GetImmuneEndTime());
+        public void AddImmuneRisingAttack(Mortal attacker) => attackImmuneTime.Add(attacker, risingAttack.GetImmuneEndTime());
+        
 
         public void Restore(int data)
         {
@@ -636,6 +642,7 @@ namespace ActorSarah
             [SerializeField] float unguardTime;
             [SerializeField] int amountConsumeUmbrellaDurability;
             [SerializeField] float maxExcessTime = 0.5f;
+            [SerializeField] float immuneTimeExtend = 0.75f;
             [SerializeField] Vector2 accelMaxForce;
             [SerializeField] Vector2 brakeMaxForce;
             [SerializeField] Umbrella umbrella;
@@ -651,6 +658,7 @@ namespace ActorSarah
             float x0;
             int state = 0;
             float initialGravity = 0;
+            float startTime = 0;
 
             protected override bool IsAvailable() => base.IsAvailable() && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
             protected override bool ShouldCotinue()
@@ -683,7 +691,10 @@ namespace ActorSarah
                 guard.Fields.DegreeRangeWidth = degreeWidthOfGuardArea;
                 unguardClock.Reset();
                 stateClock.Reset();
+
                 state = 0;
+                startTime = Time.time;
+
                 ConnectorSarah.sarahAnimator_Anima2D.SetTrigger("TackleTrigger");
                 //ConnectorSarah.sarahAnimator_Anima2D.GetComponent<SarahAnimationManagement>().FireOnOff(false);
             }
@@ -722,6 +733,11 @@ namespace ActorSarah
                 stateClock.Reset();
                 state = 0;
                 //if (ConnectorSarah.actionAwake.IsActive) ConnectorSarah.sarahAnimator_Anima2D.GetComponent<SarahAnimationManagement>().FireOnOff(true);
+            }
+
+            public float GetImmuneEndTime()
+            {
+                return startTime + distance / speed + immuneTimeExtend;
             }
         }
 
@@ -786,6 +802,7 @@ namespace ActorSarah
             [SerializeField] float riseHeight;
             [SerializeField] float abilityTime = 0;
             [SerializeField] int amountConsumeUmbrellaDurability;
+            [SerializeField] float immuneTime = 1f;
             [SerializeField] AttackInHitbox attack;
             [SerializeField] ActorFunction.VelocityAdjuster velocityAdjuster;
             [SerializeField] ActorFunction.Guard guard;
@@ -829,6 +846,11 @@ namespace ActorSarah
                 guard.Method.Activated = false;
                 clock.Reset();
             }
+            
+            public float GetImmuneEndTime()
+            {
+                return Time.time + immuneTime;
+            }
         }
 
         [System.Serializable]
@@ -836,6 +858,7 @@ namespace ActorSarah
         {
             [SerializeField] float abilityTime;
             [SerializeField] int amountConsumeUmbrellaDurability;
+            [SerializeField] float immuneTime = 1f;
             [SerializeField] AttackInHitbox attack;
             [SerializeField] ActorFunction.VelocityAdjuster velocityAdjuster;
             [SerializeField] ActorFunction.Guard guard;
@@ -876,6 +899,11 @@ namespace ActorSarah
                 umbrella.Default();
                 clock.Reset();
                 Player.IsInvulnerable = false;
+            }
+
+            public float GetImmuneEndTime()
+            {
+                return Time.time + immuneTime;
             }
         }
 

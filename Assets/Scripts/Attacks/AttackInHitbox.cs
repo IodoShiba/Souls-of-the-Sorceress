@@ -9,7 +9,7 @@ using UnityEditor;
 [System.Serializable]
 public class AttackInHitbox : MonoBehaviour, IOnAttackEvaluatedAction
 {
-    [System.Serializable] class UnityEvent_SubjectMortal : UnityEngine.Events.UnityEvent<Mortal> { }
+    [System.Serializable] public class UnityEvent_SubjectMortal : UnityEngine.Events.UnityEvent<Mortal> { }
 
     //[SerializeField] private Mortal owner;
     [SerializeField,UnityEngine.Serialization.FormerlySerializedAs("_oowner")] private Mortal owner;
@@ -20,7 +20,7 @@ public class AttackInHitbox : MonoBehaviour, IOnAttackEvaluatedAction
     [SerializeField] float activeSpan;
     [SerializeField] private AttackData attackDataPrototype;
     [SerializeField] UnityEngine.Events.UnityEvent onAttackSucceeded;
-    [SerializeField] UnityEvent_SubjectMortal onAttackSucceededMortal;
+    [SerializeField] public UnityEvent_SubjectMortal onAttackSucceededMortal;
     [SerializeField,FormerlySerializedAs("dealingAttackConverters")] private List<AttackConverter> attackConvertersOnActivate;
     [SerializeField] private List<AttackConverter> attackConvertersOnHit;
     bool isAttackActive = false;
