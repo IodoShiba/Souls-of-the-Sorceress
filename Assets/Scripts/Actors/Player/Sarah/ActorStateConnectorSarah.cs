@@ -636,6 +636,8 @@ namespace ActorSarah
             [SerializeField] float unguardTime;
             [SerializeField] int amountConsumeUmbrellaDurability;
             [SerializeField] float maxExcessTime = 0.5f;
+            [SerializeField] Vector2 accelMaxForce;
+            [SerializeField] Vector2 brakeMaxForce;
             [SerializeField] Umbrella umbrella;
             [SerializeField] AttackInHitbox attack;
             [SerializeField] ActorFunction.VelocityAdjuster velocityAdjuster;
@@ -671,6 +673,7 @@ namespace ActorSarah
                 velocityAdjuster.Method.enabled = true;
                 int dirSign = (int)direction.CurrentDirection;
                 velocityAdjuster.Fields.Velocity = dirSign * speed * Vector2.right;
+                velocityAdjuster.Fields.MaxForce = accelMaxForce;
                 initialGravity = ConnectorSarah.SelfRigidbody.gravityScale;
                 ConnectorSarah.SelfRigidbody.gravityScale = 0;
                 umbrella.PlayerGuard();
@@ -696,6 +699,8 @@ namespace ActorSarah
                     state = 1;
                     guard.Method.Activated = false;
                     velocityAdjuster.Fields.Velocity = Vector2.zero;
+                    velocityAdjuster.Fields.MaxForce = brakeMaxForce;
+                    velocityAdjuster.Method.Apply();
                 }
                 if(state == 1)
                 {
@@ -709,6 +714,7 @@ namespace ActorSarah
                 //velocityAdjuster.Method.enabled = false;
                 ConnectorSarah.SelfRigidbody.gravityScale = initialGravity;
                 velocityAdjuster.Method.Disable();
+                //velocityAdjuster.Fields.MaxForce = accelMaxForce;
                 umbrella.Default();
                 onChangeStateCallbacks.Invoke(false);
                 guard.Method.Activated = false;

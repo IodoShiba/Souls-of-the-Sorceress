@@ -797,9 +797,11 @@ MonoBehaviour:
     distance: 5.5
     speed: 32
     degreeWidthOfGuardArea: 360
-    unguardTime: 0
+    unguardTime: 0.1
     amountConsumeUmbrellaDurability: 2
     maxExcessTime: 1
+    accelMaxForce: {x: 600, y: 100}
+    brakeMaxForce: {x: 30000, y: 0}
     umbrella: {fileID: 8916380848891301901}
     attack: {fileID: 8916380848965055332}
     velocityAdjuster:

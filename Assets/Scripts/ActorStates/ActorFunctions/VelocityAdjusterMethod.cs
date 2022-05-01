@@ -27,17 +27,33 @@ namespace ActorFunction
             }
             private void FixedUpdate()
             {
+                Apply();
+            }
+            public void Apply()
+            {
                 //Debug.Log(gameObject.name + ":" + (fields == null));
                 if (fields == null) { return; }
                 if (fields.activeX) { Rigidbody.SetVelocityX(fields.velocity.x, fields.maxForce.x); }
                 if (fields.activeY) { Rigidbody.SetVelocityY(fields.velocity.y, fields.maxForce.y); }
             }
+            public void ForceStop(bool x = true, bool y = true)
+            {
+                Vector2 v = Rigidbody.velocity;
+                Rigidbody.velocity = new Vector2(x ? 0 : v.x, y ? 0 : v.y);
+            }
             public void Disable() { fields = null; enabled = false; }
             public void Enable() { enabled = true; }
+
         }
     }
 
-    public class VelocityAdjusterMethod : VelocityAdjusterFields.Method { }
+    public class VelocityAdjusterMethod : VelocityAdjusterFields.Method
+    { 
+        void OnGUI()
+        {
+            GUI.Label(new Rect(0,200,500,500), "VAM");
+        }
+    }
 
     [System.Serializable]
     public class VelocityAdjuster : ActorFunction<VelocityAdjusterFields, VelocityAdjusterFields.Method> 
