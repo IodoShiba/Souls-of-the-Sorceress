@@ -470,6 +470,7 @@ GameObject:
   - component: {fileID: 2407926265265643027}
   - component: {fileID: 7789024607807329371}
   - component: {fileID: 1018323502459469627}
+  - component: {fileID: 4423820398215116300}
   m_Layer: 20
   m_Name: Sarah
   m_TagString: Player
@@ -580,6 +581,7 @@ MonoBehaviour:
   direction: {fileID: 4249487242134317880}
   actionAwake: {fileID: 8916380848889061092}
   umbrellaParameters: {fileID: 8916380848891301902}
+  attackImmuneTime: {fileID: 4423820398215116300}
   currentStateName: 
   lpt: 0
   sarahAnimator_Anima2D: {fileID: 9196809601139879284}
@@ -797,9 +799,12 @@ MonoBehaviour:
     distance: 5.5
     speed: 32
     degreeWidthOfGuardArea: 360
-    unguardTime: 0
+    unguardTime: 0.1
     amountConsumeUmbrellaDurability: 2
     maxExcessTime: 1
+    immuneTimeExtend: 1
+    accelMaxForce: {x: 600, y: 100}
+    brakeMaxForce: {x: 30000, y: 0}
     umbrella: {fileID: 8916380848891301901}
     attack: {fileID: 8916380848965055332}
     velocityAdjuster:
@@ -853,6 +858,7 @@ MonoBehaviour:
     riseHeight: 6
     abilityTime: 0.6
     amountConsumeUmbrellaDurability: 2
+    immuneTime: 1
     attack: {fileID: 8916380850513594275}
     velocityAdjuster:
       method: {fileID: 4299200908901914630}
@@ -890,6 +896,7 @@ MonoBehaviour:
           m_CallState: 2
     abilityTime: 6
     amountConsumeUmbrellaDurability: 2
+    immuneTime: 1
     attack: {fileID: 8916380849653747854}
     velocityAdjuster:
       method: {fileID: 4299200908901914630}
@@ -1780,6 +1787,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4423820398215116300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380848889061178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baacc5b2a5f8ad844b05d3a4c8c74dba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entryCount: 32
+  onAttackNegated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8916380848891301890
 GameObject:
   m_ObjectHideFlags: 0
@@ -2213,6 +2236,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5149332159221903905}
         m_MethodName: IncrementCombo
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8916380848890831846}
+        m_MethodName: AddImmuneTackle
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3420,6 +3454,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8916380848890831846}
+        m_MethodName: AddImmuneDropAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   attackConvertersOnActivate:
   - {fileID: 8916380849653747855}
   attackConvertersOnHit: []
@@ -4185,6 +4230,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5149332159221903905}
         m_MethodName: IncrementCombo
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8916380848890831846}
+        m_MethodName: AddImmuneRisingAttack
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
