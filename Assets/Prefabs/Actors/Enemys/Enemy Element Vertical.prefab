@@ -67,11 +67,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: manager
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: player
@@ -95,7 +90,42 @@ PrefabInstance:
     - target: {fileID: 964724003723573771, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: minChaseGap.y
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762876833228583377, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762876833228583377, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762876833798056932, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762876833946739833, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762876834945652630, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762876834945652630, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964724003723573809, guid: 587738448bfdcf146b14549aee494410,
+        type: 3}
+      propertyPath: manager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 964724003723573775, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
@@ -140,7 +170,7 @@ PrefabInstance:
     - target: {fileID: 3400861851107116815, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
       propertyPath: elementDefault.moveSpeedY
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3400861851107116815, guid: 587738448bfdcf146b14549aee494410,
         type: 3}
@@ -151,36 +181,6 @@ PrefabInstance:
         type: 3}
       propertyPath: color
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762876833228583377, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762876833228583377, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762876833798056932, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762876833946739833, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762876834945652630, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762876834945652630, guid: 587738448bfdcf146b14549aee494410,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587738448bfdcf146b14549aee494410, type: 3}
