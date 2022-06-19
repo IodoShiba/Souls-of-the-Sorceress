@@ -54,6 +54,7 @@ public class GameResultEvaluator : MonoBehaviour
     [System.Serializable]
     public struct ResultEvaluation
     {
+        public StageMetaData.Stage targetStage {get; private set;}
         public int enemyCountNativeDefeated {get; private set;}
         public float timeElapsed {get; private set;}
         public int continueCount {get; private set;}
@@ -78,23 +79,22 @@ public class GameResultEvaluator : MonoBehaviour
 
         public void Evaluate()
         {
-            string currentSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-            StageMetaData.Stage currentStage = stageMetaData.SceneToStage(currentSceneName);
-            int enemyCountNativeinThisStage = stageMetaData.GetOneStageEnemyCount(stageMetaData.SceneToStage(currentSceneName));
+            // int enemyCountNativeinThisStage = stageMetaData.GetOneStageEnemyCount(targetStage);
 
             CriteriaDefeatedCount criteriaDefeatedCount;
-            stageMetaData.GetCriteriaDefeatedCount(currentStage, out criteriaDefeatedCount);
+            stageMetaData.GetCriteriaDefeatedCount(targetStage, out criteriaDefeatedCount);
             rankDefeatedCount = criteriaDefeatedCount.GetRank(enemyCountNativeDefeated);
 
             CriteriaTimeElapsed criteriaTimeElapsed;
-            stageMetaData.GetCriteriaTimeElapsed(currentStage, out criteriaTimeElapsed);
+            stageMetaData.GetCriteriaTimeElapsed(targetStage, out criteriaTimeElapsed);
             rankTimeElapsed = criteriaTimeElapsed.GetRank(timeElapsed);
 
             totalRank = GetTotalRank(rankDefeatedCount, rankTimeElapsed, continueCount);
         }
 
-        public ResultEvaluation(int enemyCountNativeDefeated, float timeElapsed, int continueCount)
+        public ResultEvaluation(StageMetaData.Stage targetStage, int enemyCountNativeDefeated, float timeElapsed, int continueCount)
         {
+            this.targetStage = targetStage;
             this.enemyCountNativeDefeated = enemyCountNativeDefeated;
             this.timeElapsed = timeElapsed;
             this.continueCount = continueCount;
@@ -116,6 +116,7 @@ public class GameResultEvaluator : MonoBehaviour
     static void MakeEvaluation()
     {
         resultEvaluation = new ResultEvaluation(
+            stageMetaData.SceneToStage(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name),
             EnemyCounter.countNativeDefeated, 
             TimeRecorder.timeElapsed, 
             SotS.ReviveController.ContinueCount

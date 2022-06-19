@@ -37,6 +37,7 @@ public class StageMetaData : ScriptableObject
     public struct StageEntry
     {
         public Stage stage;
+        public StageMisc misc;
         public GameResultEvaluator.CriteriaDefeatedCount criteriaDefeatedCount;
         public GameResultEvaluator.CriteriaTimeElapsed criteriaTimeElapsed;
         public List<SceneEntry> sceneEntries;
@@ -44,6 +45,7 @@ public class StageMetaData : ScriptableObject
         public StageEntry(Stage stage = default)
         {
             this.stage = stage;
+            misc = null;
             criteriaDefeatedCount = default;
             criteriaTimeElapsed = default;
             sceneEntries = new List<SceneEntry>() {default};
@@ -86,6 +88,15 @@ public class StageMetaData : ScriptableObject
         result = stageEntries[idx].criteriaTimeElapsed;
         return true;
         
+    }
+
+    public bool GetStageMisc(Stage stage, out StageMisc result)
+    {
+        int idx = stageEntries.FindIndex(stageEntry=>stageEntry.stage == stage);
+        if(idx < 0){result = default; return false;}
+
+        result = stageEntries[idx].misc;
+        return true;
     }
 
 #if UNITY_EDITOR
@@ -143,6 +154,13 @@ public class StageMetaData : ScriptableObject
                         if(newEnumStage != stageEntry.stage)
                         {
                             stageEntry.stage = newEnumStage;
+                            EditorUtility.SetDirty(target);
+                        }
+
+                        var newMisc = (StageMisc)EditorGUILayout.ObjectField("Stage Misc", stageEntry.misc, typeof(StageMisc), false);
+                        if(newMisc != stageEntry.misc)
+                        {
+                            stageEntry.misc = newMisc;
                             EditorUtility.SetDirty(target);
                         }
 
