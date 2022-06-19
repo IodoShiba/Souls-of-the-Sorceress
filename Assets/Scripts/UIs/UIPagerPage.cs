@@ -12,6 +12,7 @@ namespace SotS.UI
     public class UIPagerPage : MonoBehaviour
     {
         [SerializeField] GameObject initialSelected;
+        [SerializeField] bool rememberFinalSelected;
         GameObject finalSelected = null;
 
         CanvasGroup canvasGroup;
@@ -34,7 +35,10 @@ namespace SotS.UI
         public void Hide() 
         {
             EventSystem currentEventSystem = EventSystem.current;
-            finalSelected = currentEventSystem.currentSelectedGameObject;
+            if(rememberFinalSelected)
+            {
+                finalSelected = currentEventSystem.currentSelectedGameObject;
+            }
 
             canvasGroup.interactable = false;
 
