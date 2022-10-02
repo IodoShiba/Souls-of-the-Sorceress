@@ -572,7 +572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fea050f5aa4e427408413563b7419526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  searchXRange: 3
+  searchXRange: 4
   changeDirectionIntervalRange: {x: 1, y: 3}
 --- !u!114 &3048974835831491114
 MonoBehaviour:
@@ -715,6 +715,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8708186873430170203, guid: 6dd27a62bbd010446b1ef8bba8a78f48,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8708186872781093022, guid: 6dd27a62bbd010446b1ef8bba8a78f48,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8708186873147338381, guid: 6dd27a62bbd010446b1ef8bba8a78f48,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -785,20 +795,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 26060c574fbccbb4195c750664aab9fa, type: 2}
-    - target: {fileID: 8708186873430170203, guid: 6dd27a62bbd010446b1ef8bba8a78f48,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8708186873411314380, guid: 6dd27a62bbd010446b1ef8bba8a78f48,
         type: 3}
       propertyPath: m_Length
       value: 0.9257765
-      objectReference: {fileID: 0}
-    - target: {fileID: 8708186872781093022, guid: 6dd27a62bbd010446b1ef8bba8a78f48,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 618161428982440351, guid: 6dd27a62bbd010446b1ef8bba8a78f48, type: 3}
