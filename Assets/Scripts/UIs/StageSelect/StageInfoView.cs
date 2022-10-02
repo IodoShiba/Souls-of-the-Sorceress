@@ -10,7 +10,11 @@ public class StageInfoView : MonoBehaviour
     [SerializeField] RecordViewer[] recordViewers;
     [SerializeField] StageMetaData stageMetaData;
 
-    public void ReadStageInfo(string stageId) => ReadStageInfo((StageMetaData.Stage)System.Enum.Parse(typeof(StageMetaData.Stage), stageId));
+    // public void ReadStageInfo(string stageId) => ReadStageInfo((StageMetaData.Stage)System.Enum.Parse(typeof(StageMetaData.Stage), stageId));
+    public void ReadStageInfo(string stageId) 
+    {
+        ReadStageInfo((StageMetaData.Stage)System.Enum.Parse(typeof(StageMetaData.Stage), stageId));
+    }
 
     public void ReadStageInfo(int stageId) => ReadStageInfo((StageMetaData.Stage)stageId);
 
