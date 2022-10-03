@@ -18,6 +18,7 @@ public class StageMetaData : ScriptableObject
     public enum Stage
     {
         None = -10000,
+        StageEX2 = -2,
         StageEX = -1,
         Stage0 = 0,
         Stage1 = 1,
