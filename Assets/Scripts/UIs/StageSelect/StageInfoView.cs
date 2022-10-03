@@ -21,14 +21,7 @@ public class StageInfoView : MonoBehaviour
     public void ReadStageInfo(StageMetaData.Stage stageId)
     {
 
-        SetStageTitle(
-            stageId == StageMetaData.Stage.Stage0 ? "Tutorial":
-            stageId == StageMetaData.Stage.Stage1 ? "Stage 1":
-            stageId == StageMetaData.Stage.Stage2 ? "Stage 2":
-            stageId == StageMetaData.Stage.Stage3 ? "Stage 3":
-            stageId == StageMetaData.Stage.Stage4 ? "Stage 4":
-            stageId == StageMetaData.Stage.StageEX ? "Stage EX":
-            ((System.Enum)stageId).ToString());
+        SetStageTitle(StageIdToStageTitle(stageId));
 
         StageMisc misc;
         if(stageMetaData.GetStageMisc(stageId, out misc))
@@ -48,6 +41,15 @@ public class StageInfoView : MonoBehaviour
             SetStageRecord(stageId, i);
         }
     }
+
+    string StageIdToStageTitle(StageMetaData.Stage stageId) => 
+            stageId == StageMetaData.Stage.Stage0 ? "Tutorial":
+            stageId == StageMetaData.Stage.Stage1 ? "Stage 1":
+            stageId == StageMetaData.Stage.Stage2 ? "Stage 2":
+            stageId == StageMetaData.Stage.Stage3 ? "Stage 3":
+            stageId == StageMetaData.Stage.Stage4 ? "Stage 4":
+            stageId == StageMetaData.Stage.StageEX ? "Stage EX":
+            ((System.Enum)stageId).ToString();
 
     void SetStageTitle(string title)
     {
