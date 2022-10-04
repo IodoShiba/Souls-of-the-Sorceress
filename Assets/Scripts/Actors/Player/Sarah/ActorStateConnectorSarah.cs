@@ -711,7 +711,9 @@ namespace ActorSarah
                     guard.Method.Activated = false;
                     velocityAdjuster.Fields.Velocity = Vector2.zero;
                     velocityAdjuster.Fields.MaxForce = brakeMaxForce;
-                    velocityAdjuster.Method.Apply();
+                    // velocityAdjuster.Method.Apply();
+                    velocityAdjuster.Fields.Velocity = Vector2.zero;
+                    velocityAdjuster.Method.ForceStop(true, false);
                 }
                 if(state == 1)
                 {
