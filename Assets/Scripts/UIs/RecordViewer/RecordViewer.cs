@@ -11,6 +11,7 @@ public class RecordViewer : MonoBehaviour
     [SerializeField] UnityEngine.UI.Image rankMarkTime;
     
     [SerializeField] UnityEngine.UI.Image rankMarkSummary;
+    [SerializeField] TMPro.TMP_Text recordContinue;
 
     [SerializeField] StageMetaData stageMetaData;
     [SerializeField] RankMarks rankMarks;
@@ -20,8 +21,13 @@ public class RecordViewer : MonoBehaviour
         var ev = new GameResultEvaluator.ResultEvaluation(stageId, defeatedCount, time, continueCount);
         ev.Evaluate();
 
-        recordDefeated.text = defeatedCount.ToString();
+        recordDefeated.SetText("{0}", (float)defeatedCount);
         recordTime.text = System.TimeSpan.FromSeconds((double)time).ToString("c");
+        if(recordContinue != null)
+        {
+            recordContinue.SetText("{0}", (float)continueCount);
+        }
+        
         SetRankMark(rankMarkDefeated, ev.rankDefeatedCount);
         SetRankMark(rankMarkTime, ev.rankTimeElapsed);
         SetRankMark(rankMarkSummary, ev.totalRank);
