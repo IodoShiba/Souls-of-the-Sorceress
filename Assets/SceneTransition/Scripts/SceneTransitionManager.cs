@@ -57,13 +57,16 @@ public class SceneTransitionManager : MonoBehaviour
         //while (transitionEffect.IsOnEffect) { yield return null; }
         await UniTask.WaitWhile(()=>transitionEffect.IsOnEffect);
 
+        originScene = SceneManager.GetActiveScene().name;
         await SceneManager.UnloadSceneAsync(originScene);
 
         targetSceneLoaded = false;
-        SceneManager.LoadScene(targetScene, LoadSceneMode.Additive);
+        Debug.Log($"Load Start {targetScene}");
+        await SceneManager.LoadSceneAsync(targetScene, LoadSceneMode.Additive);
+        Debug.Log($"Load End {targetScene}");
 
         //while (!targetSceneLoaded) { yield return null; }
-        await UniTask.WaitUntil(()=>targetSceneLoaded);
+        //await UniTask.WaitUntil(()=>targetSceneLoaded);
 
         var targetSceneObj = SceneManager.GetSceneByName(targetScene);
         SceneManager.SetActiveScene(targetSceneObj);

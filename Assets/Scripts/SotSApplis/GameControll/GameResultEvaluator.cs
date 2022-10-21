@@ -54,6 +54,7 @@ public class GameResultEvaluator : MonoBehaviour
     [System.Serializable]
     public struct ResultEvaluation
     {
+        public bool evaluated {get; private set;}
         public StageMetaData.Stage targetStage {get; private set;}
         public int enemyCountNativeDefeated {get; private set;}
         public float timeElapsed {get; private set;}
@@ -90,10 +91,13 @@ public class GameResultEvaluator : MonoBehaviour
             rankTimeElapsed = criteriaTimeElapsed.GetRank(timeElapsed);
 
             totalRank = GetTotalRank(rankDefeatedCount, rankTimeElapsed, continueCount);
+
+            evaluated = true;
         }
 
         public ResultEvaluation(StageMetaData.Stage targetStage, int enemyCountNativeDefeated, float timeElapsed, int continueCount)
         {
+            this.evaluated = false;
             this.targetStage = targetStage;
             this.enemyCountNativeDefeated = enemyCountNativeDefeated;
             this.timeElapsed = timeElapsed;
@@ -116,7 +120,7 @@ public class GameResultEvaluator : MonoBehaviour
     static void MakeEvaluation()
     {
         resultEvaluation = new ResultEvaluation(
-            stageMetaData.SceneToStage(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name),
+            stageMetaData.GetCurrentStage(),
             EnemyCounter.countNativeDefeated, 
             TimeRecorder.timeElapsed, 
             SotS.ReviveController.ContinueCount

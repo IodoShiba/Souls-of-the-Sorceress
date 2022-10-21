@@ -16,16 +16,28 @@ public class RecordViewer : MonoBehaviour
     [SerializeField] StageMetaData stageMetaData;
     [SerializeField] RankMarks rankMarks;
 
+    readonly string time_format = @"hh\:mm\:ss\.fff";
+
     public void SetRecord(StageMetaData.Stage stageId, int defeatedCount, float time, int continueCount)
     {
         var ev = new GameResultEvaluator.ResultEvaluation(stageId, defeatedCount, time, continueCount);
         ev.Evaluate();
 
-        recordDefeated.SetText("{0}", (float)defeatedCount);
-        recordTime.text = System.TimeSpan.FromSeconds((double)time).ToString("c");
+        SetRecord(ev);
+    }
+
+    public void SetRecord(in GameResultEvaluator.ResultEvaluation ev)
+    {
+        if(!ev.evaluated)
+        {
+            return;
+        }
+
+        recordDefeated.SetText("{0}", (float)ev.enemyCountNativeDefeated);
+        recordTime.text = System.TimeSpan.FromSeconds((double)ev.timeElapsed).ToString(time_format);
         if(recordContinue != null)
         {
-            recordContinue.SetText("{0}", (float)continueCount);
+            recordContinue.SetText("{0}", (float)ev.continueCount);
         }
         
         SetRankMark(rankMarkDefeated, ev.rankDefeatedCount);
