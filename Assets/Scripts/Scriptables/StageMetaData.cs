@@ -64,6 +64,11 @@ public class StageMetaData : ScriptableObject
         return stageEntries[idx].stage;
     }
 
+    public Stage GetCurrentStage()
+    {
+        return SceneToStage(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
     public int GetOneStageEnemyCount(Stage stage)
     {
         int idx = stageEntries.FindIndex(se=>se.stage == stage);

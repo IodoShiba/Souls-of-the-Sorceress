@@ -12,6 +12,8 @@ namespace SotS.UI
     public class ShowDialogScene : MonoBehaviour
     {
         [SerializeField] Hertzole.SceneObject dialogScene;
+        [SerializeField] bool dontSubscribeOnModalClosedEvent;
+        [SerializeField] UnityEvent onModalClosed;
 
         public async void Show()
         {
@@ -26,6 +28,11 @@ namespace SotS.UI
             {
                 await SceneManager.UnloadSceneAsync(dialogScene);
                 throw new System.ArgumentException($"Selected scene was not dialog scene. selected: {(string)dialogScene}");
+            }
+
+            if(!dontSubscribeOnModalClosedEvent)
+            {
+                dialogCambasScene.OnModalClose.Subscribe(_=>onModalClosed.Invoke());
             }
             SceneManager.SetActiveScene(dialogSceneInstance);
 
