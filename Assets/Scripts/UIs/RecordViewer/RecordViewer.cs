@@ -38,6 +38,14 @@ public class RecordViewer : MonoBehaviour
         if(recordContinue != null)
         {
             recordContinue.SetText("{0}", (float)ev.continueCount);
+            if(ev.continueCount > 0)
+            {
+                recordContinue.color = Color.red;
+            }
+            else
+            {
+                recordContinue.color = Color.white;
+            }
         }
         
         SetRankMark(rankMarkDefeated, ev.rankDefeatedCount);
