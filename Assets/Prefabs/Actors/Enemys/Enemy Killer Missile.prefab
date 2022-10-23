@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d4c1c480dfcd2b489bfa7155b61bbc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ignoreActiveReign: 0
+  ignoreActiveReign: 1
   buffReceiver:
     compatibleList: {fileID: 0}
 --- !u!114 &1775799677600867767
@@ -500,11 +500,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explosion
       objectReference: {fileID: 0}
-    - target: {fileID: 5641229665059161534, guid: 4e703afc759205248a97bc16ab22bbb8,
-        type: 3}
-      propertyPath: owner
-      value: 
-      objectReference: {fileID: 1775799677600867765}
     - target: {fileID: 5641229665059161535, guid: 4e703afc759205248a97bc16ab22bbb8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -560,6 +555,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5641229665059161534, guid: 4e703afc759205248a97bc16ab22bbb8,
+        type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 1775799677600867765}
     - target: {fileID: 5641229665059161529, guid: 4e703afc759205248a97bc16ab22bbb8,
         type: 3}
       propertyPath: m_Enabled
