@@ -48,7 +48,8 @@ public class StageInfoView : MonoBehaviour
             stageId == StageMetaData.Stage.Stage2 ? "Stage 2":
             stageId == StageMetaData.Stage.Stage3 ? "Stage 3":
             stageId == StageMetaData.Stage.Stage4 ? "Stage 4":
-            stageId == StageMetaData.Stage.StageEX ? "Stage EX":
+            stageId == StageMetaData.Stage.StageEX_1 ? "Stage EX-1":
+            stageId == StageMetaData.Stage.StageEX_2 ? "Stage EX-2":
             ((System.Enum)stageId).ToString();
 
     void SetStageTitle(string title)

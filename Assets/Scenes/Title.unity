@@ -602,6 +602,7 @@ MonoBehaviour:
   recordTime: {fileID: 183952293}
   rankMarkTime: {fileID: 558409472}
   rankMarkSummary: {fileID: 559631695}
+  recordContinue: {fileID: 0}
   stageMetaData: {fileID: 11400000, guid: 1571cf3c88a028442998828ac8df692d, type: 2}
   rankMarks: {fileID: 11400000, guid: 86faf280acd5f974c8bebfe37a41f55b, type: 2}
 --- !u!1 &131530258
@@ -1425,6 +1426,7 @@ MonoBehaviour:
   recordTime: {fileID: 727938757}
   rankMarkTime: {fileID: 1085516720}
   rankMarkSummary: {fileID: 1637597096}
+  recordContinue: {fileID: 0}
   stageMetaData: {fileID: 11400000, guid: 1571cf3c88a028442998828ac8df692d, type: 2}
   rankMarks: {fileID: 11400000, guid: 86faf280acd5f974c8bebfe37a41f55b, type: 2}
 --- !u!1 &303639405
@@ -2087,6 +2089,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogScene:
     m_SceneName: Credits
+  dontSubscribeOnModalClosedEvent: 0
+  onModalClosed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &439055204
 GameObject:
   m_ObjectHideFlags: 0
@@ -4694,6 +4700,7 @@ MonoBehaviour:
   recordTime: {fileID: 1945676066}
   rankMarkTime: {fileID: 1988259837}
   rankMarkSummary: {fileID: 1410600908}
+  recordContinue: {fileID: 0}
   stageMetaData: {fileID: 11400000, guid: 1571cf3c88a028442998828ac8df692d, type: 2}
   rankMarks: {fileID: 11400000, guid: 86faf280acd5f974c8bebfe37a41f55b, type: 2}
 --- !u!1 &1093843245
@@ -6589,7 +6596,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: StageEX-2
+          m_StringArgument: StageEX_2
           m_BoolArgument: 0
         m_CallState: 2
   onDeselected:
@@ -8370,7 +8377,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: StageEX-1
+          m_StringArgument: StageEX_1
           m_BoolArgument: 0
         m_CallState: 2
   onDeselected:
