@@ -50,15 +50,15 @@ MonoBehaviour:
     - scene: stage1-T2
       enemyCount: 4
     - scene: stage1-T3
-      enemyCount: 10
+      enemyCount: 11
     - scene: stage1-T4
-      enemyCount: 25
+      enemyCount: 27
     - scene: stage1-T5
       enemyCount: 10
     - scene: stage1-1
-      enemyCount: 31
+      enemyCount: 32
     - scene: stage1-2
-      enemyCount: 40
+      enemyCount: 44
     - scene: stage1-preboss
       enemyCount: 3
     - scene: 1-boss
@@ -77,7 +77,7 @@ MonoBehaviour:
       thresholdB: 600
     sceneEntries:
     - scene: stage2-T1
-      enemyCount: 3
+      enemyCount: 2
     - scene: stage2-T2
       enemyCount: 3
     - scene: stage2-T3
@@ -85,45 +85,19 @@ MonoBehaviour:
     - scene: stage2-T4
       enemyCount: 31
     - scene: stage2-1
-      enemyCount: 34
+      enemyCount: 36
     - scene: stage2-2
       enemyCount: 39
     - scene: stage2-3
-      enemyCount: 35
+      enemyCount: 41
     - scene: stage2-b1
-      enemyCount: 12
+      enemyCount: 14
     - scene: stage2-b2
       enemyCount: 0
     - scene: stage2-preboss
       enemyCount: 4
     - scene: 2-boss
       enemyCount: 1
-  - stage: 3
-    misc: {fileID: 0}
-    criteriaDefeatedCount:
-      thresholdSS: 0
-      thresholdS: 0
-      thresholdA: 0
-      thresholdB: 0
-    criteriaTimeElapsed:
-      thresholdSS: 0
-      thresholdS: 0
-      thresholdA: 0
-      thresholdB: 0
-    sceneEntries: []
-  - stage: 4
-    misc: {fileID: 0}
-    criteriaDefeatedCount:
-      thresholdSS: 0
-      thresholdS: 0
-      thresholdA: 0
-      thresholdB: 0
-    criteriaTimeElapsed:
-      thresholdSS: 0
-      thresholdS: 0
-      thresholdA: 0
-      thresholdB: 0
-    sceneEntries: []
   - stage: -1
     misc: {fileID: 11400000, guid: b9aa68b9818029d42b38e6e167f360f7, type: 2}
     criteriaDefeatedCount:
@@ -138,4 +112,19 @@ MonoBehaviour:
       thresholdB: 0
     sceneEntries:
     - scene: stageEX-1
-      enemyCount: 0
+      enemyCount: 1
+  - stage: -2
+    misc: {fileID: 11400000, guid: a08799135b41ac5469654f34dedb180b, type: 2}
+    criteriaDefeatedCount:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
+    criteriaTimeElapsed:
+      thresholdSS: 0
+      thresholdS: 0
+      thresholdA: 0
+      thresholdB: 0
+    sceneEntries:
+    - scene: stageEX-2
+      enemyCount: 3
