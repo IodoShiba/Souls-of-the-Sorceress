@@ -85,10 +85,10 @@ public class ComboCalculator : MonoBehaviour
         ResetCombo();
     }
 
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(0, 0, Screen.width, Screen.height), comboCount.ToString());
-    }
+    // private void OnGUI()
+    // {
+    //     GUI.Label(new Rect(0, 0, Screen.width, Screen.height), comboCount.ToString());
+    // }
 
     public void ResetCombo()
     {

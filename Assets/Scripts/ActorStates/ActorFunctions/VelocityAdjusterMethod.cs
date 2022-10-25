@@ -49,10 +49,10 @@ namespace ActorFunction
 
     public class VelocityAdjusterMethod : VelocityAdjusterFields.Method
     { 
-        void OnGUI()
-        {
-            GUI.Label(new Rect(0,200,500,500), "VAM");
-        }
+        // void OnGUI()
+        // {
+        //     GUI.Label(new Rect(0,200,500,500), "VAM");
+        // }
     }
 
     [System.Serializable]

@@ -78,10 +78,10 @@ public class TimeRecorder : MonoBehaviour
         if(!isRecording){return;}
         time = GetTimeString();
     }
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(0, 24, Screen.width, Screen.height), GetTimeString());
-    }
+    // private void OnGUI()
+    // {
+    //     GUI.Label(new Rect(0, 24, Screen.width, Screen.height), GetTimeString());
+    // }
 
     // void Awake()
     // {

@@ -87,9 +87,9 @@ public class EnemyCounter : MonoBehaviour
     }
 
     // for debug purpose
-    private void OnGUI()
-    {
-        GUI.Label(new Rect(0, 48, Screen.width, Screen.height), $"Count Native Defeated: {countNativeDefeated}\nCount Instantiated Defeated: {countInstantiatedDefeated}");
-    }
+    // private void OnGUI()
+    // {
+    //     GUI.Label(new Rect(0, 48, Screen.width, Screen.height), $"Count Native Defeated: {countNativeDefeated}\nCount Instantiated Defeated: {countInstantiatedDefeated}");
+    // }
     
 } 
