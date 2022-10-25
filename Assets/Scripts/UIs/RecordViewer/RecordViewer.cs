@@ -16,7 +16,7 @@ public class RecordViewer : MonoBehaviour
     [SerializeField] StageMetaData stageMetaData;
     [SerializeField] RankMarks rankMarks;
 
-    readonly string time_format = @"hh\:mm\:ss\.fff";
+    readonly string time_format = @"mm\:ss\.ff";
 
     public void SetRecord(StageMetaData.Stage stageId, int defeatedCount, float time, int continueCount)
     {
