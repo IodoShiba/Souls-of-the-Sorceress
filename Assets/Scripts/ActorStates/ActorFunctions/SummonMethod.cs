@@ -51,7 +51,11 @@ namespace ActorFunction
                             );
                     summonRelPos = new Vector3(summonRelPos.x * dirSign, summonRelPos.y);
 
-                    _manager.Summon(SelectEnemy(fields), transform.position + summonRelPos, Quaternion.identity,
+                    Enemy enemySelected = SelectEnemy(fields);
+
+                    if(enemySelected == null){ continue; }
+                    
+                    _manager.Summon(enemySelected, transform.position + summonRelPos, Quaternion.identity,
                         fields.summonEffect, fields.useSummonDelay ? fields.summonDelayTime : EnemyManager.ANIMATION_LENGTH);
                     
                 }

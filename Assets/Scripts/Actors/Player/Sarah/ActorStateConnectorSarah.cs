@@ -750,11 +750,13 @@ namespace ActorSarah
             [SerializeField] int amountConsumeUmbrellaDurabilityOnGuard;
             [SerializeField] private float umbrellaConsumeCycle;
             [SerializeField] private int umbrellaConsumeAmount;
+            [SerializeField] float umbrellaRecoverLockTime;
             [SerializeField] GroundSensor groundSensor;
             [SerializeField] Umbrella umbrella;
             [SerializeField] ActorFunction.VelocityAdjuster velocityAdjuster;
             [SerializeField] ActorFunction.HorizontalMove horizontalMove;
             [SerializeField] ActorFunction.Guard guard;
+            int initialUnbrellaDurability=0;
 
             protected override bool IsAvailable() => base.IsAvailable() && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
             protected override bool ShouldCotinue() => commands.OpenUmbrella.Evaluation && !groundSensor.IsOnGround && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
@@ -766,6 +768,7 @@ namespace ActorSarah
                 guard.Method.Activated = true;
                 guard.Method.GetIsAllSucceedAndReset();
                 ConnectorSarah.umbrellaParameters.ChangeDurabilityGradually(umbrellaConsumeCycle, -umbrellaConsumeAmount);
+                initialUnbrellaDurability = ConnectorSarah.umbrellaParameters.Durability;
             }
 
             protected override void OnActive()
@@ -784,6 +787,11 @@ namespace ActorSarah
                 velocityAdjuster.Method.Disable();
                 horizontalMove.Use = false;
                 ConnectorSarah.umbrellaParameters.StopChangeDurabilityGradually();
+                if(!commands.OpenUmbrella.Evaluation && ConnectorSarah.umbrellaParameters.Durability >= initialUnbrellaDurability)
+                {
+                    ConnectorSarah.umbrellaParameters.TryConsumeDurability(1);
+                }
+                ConnectorSarah.umbrellaParameters.LockRecover(umbrellaRecoverLockTime);
             }
 
             public override bool IsResistibleTo(Type actorStateType)
@@ -802,15 +810,18 @@ namespace ActorSarah
         private class RisingAttack : SarahState
         {
             [SerializeField] float riseHeight;
+            [SerializeField] float riseDrag;
             [SerializeField] float abilityTime = 0;
             [SerializeField] int amountConsumeUmbrellaDurability;
             [SerializeField] float immuneTime = 1f;
+            [SerializeField] float umbrellaRecoverLockTime;
             [SerializeField] AttackInHitbox attack;
             [SerializeField] ActorFunction.VelocityAdjuster velocityAdjuster;
             [SerializeField] ActorFunction.Guard guard;
             [SerializeField] Umbrella umbrella;
 
             float limitHeight;
+            float minHeight;
             IodoShibaUtil.ManualUpdateClass.ManualClock clock = new IodoShibaUtil.ManualUpdateClass.ManualClock();
             protected override bool IsAvailable() => base.IsAvailable() && ConnectorSarah.umbrellaParameters.DoesUmbrellaWork();
 
@@ -819,7 +830,8 @@ namespace ActorSarah
             protected override void OnInitialize()
             {
                 attack.Activate();
-                limitHeight = GameObject.transform.position.y + riseHeight;
+                minHeight = GameObject.transform.position.y;
+                limitHeight = minHeight + riseHeight;
                 velocityAdjuster.Method.enabled = true;
                 umbrella.PlayerRisingAttack();
                 guard.Method.Activated = true;
@@ -828,11 +840,21 @@ namespace ActorSarah
             }
             protected override void OnActive()
             {
-                if(GameObject.transform.position.y > limitHeight && velocityAdjuster.Method.enabled)
+                if(GameObject.transform.position.y < minHeight)
                 {
-                    ConnectorSarah.SelfRigidbody.velocity = Vector2.right * ConnectorSarah.SelfRigidbody.velocity.x;
-                    //velocityAdjuster.Method.enabled = false;
+                    minHeight = GameObject.transform.position.y;
+                    limitHeight = minHeight + riseHeight;
+                }
+
+                if(GameObject.transform.position.y > limitHeight)
+                {
                     velocityAdjuster.Method.Disable();
+                    var v = ConnectorSarah.SelfRigidbody.velocity;
+                    if(v.y > velocityAdjuster.Fields.Velocity.y/4)
+                    {
+                        ConnectorSarah.SelfRigidbody.AddForce(riseDrag*v.y*Vector2.down);
+                    }
+                    //velocityAdjuster.Method.enabled = false;
                 }
                 velocityAdjuster.ManualUpdate();
                 guard.ManualUpdate();
@@ -841,11 +863,13 @@ namespace ActorSarah
             }
             protected override void OnTerminate(bool isNormal)
             {
+                // velocityAdjuster.Method.Apply();
                 attack.Inactivate();
                 //velocityAdjuster.Method.enabled = false;
                 velocityAdjuster.Method.Disable();
                 umbrella.Default();
                 guard.Method.Activated = false;
+                ConnectorSarah.umbrellaParameters.LockRecover(umbrellaRecoverLockTime);
                 clock.Reset();
             }
             

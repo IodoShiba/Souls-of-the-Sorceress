@@ -34,6 +34,7 @@ public class UmbrellaParameters : MonoBehaviour
     [System.NonSerialized] private float t = 0;
     [System.NonSerialized] private float changeCycle = float.PositiveInfinity;
     [System.NonSerialized] private int changeAmount = 0;
+    float recoverLockRestTime = 0;
 
     public int Durability { get => durability; }
     public int MaxDurability { get => maxDurability; }
@@ -57,6 +58,13 @@ public class UmbrellaParameters : MonoBehaviour
         if (DoesUmbrellaWork())
         {
             BreakRestTime = 0;
+
+            if(changeAmount > 0 && recoverLockRestTime > 0)
+            {
+                recoverLockRestTime = Mathf.Max(recoverLockRestTime - Time.deltaTime, 0);
+                return;
+            }
+
             t += Time.deltaTime;
             if (t > changeCycle)
             {
@@ -127,6 +135,12 @@ public class UmbrellaParameters : MonoBehaviour
         int d = durability;
         AddDurability(-amount);
         return d - durability;
+    }
+
+    public float LockRecover(float time)
+    {
+        recoverLockRestTime = Mathf.Max(time, recoverLockRestTime);
+        return recoverLockRestTime;
     }
 
     public void RecoverEntirely() { AddDurability(maxDurability); }

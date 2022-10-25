@@ -8,6 +8,7 @@ public class ActorManager : MonoBehaviour
     const float REIGN_MARGIN = 0.2f;
 
     [SerializeField] bool keepInvisibleActorActive;
+    [SerializeField] Vector2 activeReignExtension;
 
     HashSet<Actor> actors = new HashSet<Actor>();
     Camera camera;
@@ -52,7 +53,7 @@ public class ActorManager : MonoBehaviour
         }
         Camera mainCam = camera;
         Vector2 mainCamPos = mainCam.transform.position;
-        Vector2 size = new Vector2(mainCam.orthographicSize * mainCam.aspect * (1 + REIGN_MARGIN), mainCam.orthographicSize * (1 + REIGN_MARGIN));
+        Vector2 size = new Vector2(mainCam.orthographicSize * mainCam.aspect * (1 + REIGN_MARGIN + activeReignExtension.x), mainCam.orthographicSize * (1 + REIGN_MARGIN + activeReignExtension.y));
         Rect activeReign = new Rect(mainCamPos.x - size.x, mainCamPos.y - size.y, 2 * size.x, 2 * size.y);
 
 

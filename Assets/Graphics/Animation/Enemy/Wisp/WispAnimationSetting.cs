@@ -19,6 +19,11 @@ public class WispAnimationSetting : MonoBehaviour
 
     public void PlayAnimation(WispState state)
     {
+        if(animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
+
         string stateName = "wisp_";
         if(color == WispColor.Purple) { stateName += "p_"; }
         else if (color == WispColor.Green) { stateName += "g_"; }
