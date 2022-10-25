@@ -190,6 +190,7 @@ public class AttackData
         detached = 1 << 0, //0x0000_0001,
         uhp_attack = 1 << 1,
         awake_attack = 1 << 2,
+        // be_guarded = 1 << 3,
     }
 
     public float damage;

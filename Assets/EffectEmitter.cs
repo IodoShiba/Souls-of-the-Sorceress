@@ -17,14 +17,17 @@ public class EffectEmitter : MonoBehaviour
 
     public void DoEffect(Mortal attackerMortal, AttackData _)
     {
+        if(attackerMortal == null){ DoEffect(origin.transform.position); }
         DoEffect(attackerMortal.transform);
     }
     public void DoEffect(Mortal attackerMortal)
     {
+        if(attackerMortal == null){ DoEffect(origin.transform.position); }
         DoEffect(attackerMortal.transform);
     }
     public void DoEffect(Transform endPoint)
     {
+        if(endPoint == null){ DoEffect(origin.transform.position); }
         DoEffect(endPoint.position);
     }
     public void DoEffect(Vector2 endPoint)
