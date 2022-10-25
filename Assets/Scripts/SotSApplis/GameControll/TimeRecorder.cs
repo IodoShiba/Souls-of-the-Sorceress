@@ -36,6 +36,7 @@ public class TimeRecorder : MonoBehaviour
     public static void ResetTimer()
     {
         timeSum = 0;
+        timeLastSection = 0;
 
         isRecording = false;
     }
