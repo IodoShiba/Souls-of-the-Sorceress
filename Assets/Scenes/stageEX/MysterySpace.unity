@@ -707,6 +707,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c706331923d624046be0794309b3ecd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &274474154 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7800838668605457899, guid: ed6649e14a4e53345afeb85aed4f4e98,
+    type: 3}
+  m_PrefabInstance: {fileID: 274474151}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3c375b8b910c4479e1ead1c17d9256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &274474155 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6100062798120581829, guid: ed6649e14a4e53345afeb85aed4f4e98,
+    type: 3}
+  m_PrefabInstance: {fileID: 274474151}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a7e201b630fbdf4da63a340638de5af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &292901672
 GameObject:
   m_ObjectHideFlags: 0
@@ -28570,6 +28594,50 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1142323988}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 274474155}
+        m_MethodName: _ResetCount
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 274474154}
+        m_MethodName: _ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 274474154}
+        m_MethodName: _StartTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1559421152}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:

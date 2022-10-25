@@ -24,6 +24,9 @@ public class TimeRecorder : MonoBehaviour
         StopTimer();
     }
 
+    public void _ResetTimer() { ResetTimer(); }
+    public void _StartTimer() { StartTimer(); }
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void RuntimeInitialize()
     {

@@ -11,6 +11,8 @@ public class EnemyCounter : MonoBehaviour
     public static int countNativeDefeatedLastSection {get; private set;} = 0;
     public static int countInstantiatedDefeatedLastSection {get; private set;} = 0;
 
+    public void _ResetCount() { ResetCount(); }
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void RuntimeInitialize()
     {
