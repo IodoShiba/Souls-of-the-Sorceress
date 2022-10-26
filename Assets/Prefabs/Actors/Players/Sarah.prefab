@@ -855,10 +855,12 @@ MonoBehaviour:
     onInitialize:
       m_PersistentCalls:
         m_Calls: []
-    riseHeight: 6
-    abilityTime: 0.6
+    riseHeight: 3
+    riseDrag: 25
+    abilityTime: 0.5
     amountConsumeUmbrellaDurability: 2
     immuneTime: 1
+    umbrellaRecoverLockTime: 0.1
     attack: {fileID: 8916380850513594275}
     velocityAdjuster:
       method: {fileID: 4299200908901914630}
@@ -925,6 +927,7 @@ MonoBehaviour:
     amountConsumeUmbrellaDurabilityOnGuard: 1
     umbrellaConsumeCycle: 1
     umbrellaConsumeAmount: 1
+    umbrellaRecoverLockTime: 0.4
     groundSensor: {fileID: 8916380849072566239}
     umbrella: {fileID: 8916380848891301901}
     velocityAdjuster:
@@ -4174,15 +4177,15 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpulse: {x: 20, y: 700}
+    knockBackImpulse: {x: 20, y: 350}
     attackCollider: {fileID: 8916380850513594286}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0
     buff: {fileID: 0}
     attrFlags: 2
   awakenAttack:
     damage: 100
-    knockBackImpulse: {x: 20, y: 700}
+    knockBackImpulse: {x: 20, y: 450}
     attackCollider: {fileID: 8916380850513594282}
     throughable: 1
     hitstopSpan: 0.1
@@ -4193,7 +4196,7 @@ MonoBehaviour:
     knockBackImpulse: {x: 20, y: 700}
     attackCollider: {fileID: 8916380850513594281}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0.03
     buff: {fileID: 0}
     attrFlags: 6
 --- !u!114 &8916380850513594275
