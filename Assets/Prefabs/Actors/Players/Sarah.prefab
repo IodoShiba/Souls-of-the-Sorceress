@@ -855,10 +855,12 @@ MonoBehaviour:
     onInitialize:
       m_PersistentCalls:
         m_Calls: []
-    riseHeight: 6
-    abilityTime: 0.6
+    riseHeight: 3
+    riseDrag: 25
+    abilityTime: 0.5
     amountConsumeUmbrellaDurability: 2
     immuneTime: 1
+    umbrellaRecoverLockTime: 0.1
     attack: {fileID: 8916380850513594275}
     velocityAdjuster:
       method: {fileID: 4299200908901914630}
@@ -925,6 +927,7 @@ MonoBehaviour:
     amountConsumeUmbrellaDurabilityOnGuard: 1
     umbrellaConsumeCycle: 1
     umbrellaConsumeAmount: 1
+    umbrellaRecoverLockTime: 0.4
     groundSensor: {fileID: 8916380849072566239}
     umbrella: {fileID: 8916380848891301901}
     velocityAdjuster:
@@ -4051,6 +4054,7 @@ GameObject:
   - component: {fileID: 8916380850513594284}
   - component: {fileID: 8916380850513594280}
   - component: {fileID: 8916380850513594275}
+  - component: {fileID: 1916928534269043351}
   m_Layer: 25
   m_Name: Rising Attack's Attack Collision
   m_TagString: Attack
@@ -4085,7 +4089,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1}
+  m_Offset: {x: 0, y: 1.3}
   serializedVersion: 2
   m_Radius: 0.7
 --- !u!58 &8916380850513594282
@@ -4101,9 +4105,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.7}
+  m_Offset: {x: 0, y: 1.5}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
 --- !u!58 &8916380850513594281
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4117,7 +4121,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.4}
+  m_Offset: {x: 0, y: 0.7}
   serializedVersion: 2
   m_Radius: 1.3
 --- !u!50 &8916380850513594285
@@ -4174,18 +4178,18 @@ MonoBehaviour:
   awakenist: {fileID: 8916380848889061121}
   ordinaryAttack:
     damage: 10
-    knockBackImpulse: {x: 20, y: 700}
+    knockBackImpulse: {x: 20, y: 350}
     attackCollider: {fileID: 8916380850513594286}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0
     buff: {fileID: 0}
     attrFlags: 2
   awakenAttack:
     damage: 100
-    knockBackImpulse: {x: 20, y: 700}
+    knockBackImpulse: {x: 20, y: 450}
     attackCollider: {fileID: 8916380850513594282}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0
     buff: {fileID: 0}
     attrFlags: 6
   blueAwakenAttack:
@@ -4193,7 +4197,7 @@ MonoBehaviour:
     knockBackImpulse: {x: 20, y: 700}
     attackCollider: {fileID: 8916380850513594281}
     throughable: 1
-    hitstopSpan: 0.1
+    hitstopSpan: 0.03
     buff: {fileID: 0}
     attrFlags: 6
 --- !u!114 &8916380850513594275
@@ -4250,9 +4254,42 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1916928534269043351}
+        m_MethodName: DoEffect
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   attackConvertersOnActivate:
   - {fileID: 8916380850513594280}
   attackConvertersOnHit: []
+--- !u!114 &1916928534269043351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8916380850513594274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81457894b1abc63408678dc4317aaa9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipOrdinary: {fileID: 8300000, guid: 84b91e8b195f3154f831dcf44427cda2, type: 3}
+  audioClipAwaken: {fileID: 8300000, guid: 8fafd030dfdef9e45a27b40aca751455, type: 3}
+  animationClipOrdinary: {fileID: 7400000, guid: 074fc9e1973157d47bebbb773fe46d74,
+    type: 2}
+  animationClipAwaken: {fileID: 7400000, guid: b48a6521246ac9843a7f2fdf435c2d6f, type: 2}
+  offset: {x: 0, y: 0}
+  positionerMulti: 0.7
+  owner: {fileID: 8916380848889061121}
+  audioSource: {fileID: 7396359423064295611}
+  actionAwake: {fileID: 8916380848889061092}
 --- !u!1001 &3057720650459797432
 PrefabInstance:
   m_ObjectHideFlags: 0
