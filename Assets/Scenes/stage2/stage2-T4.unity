@@ -271,8 +271,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6538dbbf9b68e0c40ae8351bab7485f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instruction: "\u4E0A\u6607\u653B\u6483\n<sprite name=\"key_k\">\u62BC\u3057\u306A\u304C\u3089<sprite
-    name=\"key_h\">(\u7A7A\u4E2D\u306E\u307F)"
+  instruction: "\u4E0A\u6607\u653B\u6483\n<sprite name=\"KeyR1\">\u62BC\u3057\u306A\u304C\u3089<sprite
+    name=\"KeyAttack\">(\u7A7A\u4E2D\u306E\u307F)"
   description: "\u7A7A\u4E2D\u3067\u4E0A\u6607\u3057\u306A\u304C\u3089\u653B\u6483\u3067\u304D\u308B"
 --- !u!61 &43154692
 BoxCollider2D:
@@ -20234,7 +20234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6538dbbf9b68e0c40ae8351bab7485f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instruction: "\u6ED1\u7A7A\n<sprite name=\"key_k\">(\u7A7A\u4E2D\u306E\u307F)"
+  instruction: "\u6ED1\u7A7A\n<sprite name=\"KeyR1\">(\u7A7A\u4E2D\u306E\u307F)"
   description: "\u7A7A\u4E2D\u3092\u3075\u308F\u3075\u308F\u6D6E\u304D\u306A\u304C\u3089\u79FB\u52D5\u3067\u304D\u308B"
 --- !u!61 &1037732813
 BoxCollider2D:
@@ -21944,6 +21944,12 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_spriteAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e12365bc2fbd4442adbde2d8cd4f6c6,
+        type: 2}
     - target: {fileID: 4033456169252425466, guid: 3ed340671a640f14cb55b40640e1db20,
         type: 3}
       propertyPath: m_textInfo.characterCount

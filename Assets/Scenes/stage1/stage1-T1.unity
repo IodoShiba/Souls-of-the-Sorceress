@@ -4191,6 +4191,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_spriteAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e12365bc2fbd4442adbde2d8cd4f6c6,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ed340671a640f14cb55b40640e1db20, type: 3}
 --- !u!224 &570702507 stripped
@@ -7371,7 +7377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6538dbbf9b68e0c40ae8351bab7485f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instruction: "\u7A7A\u4E2D\u653B\u6483\n<sprite name=\"key_h\">(\u7A7A\u4E2D\u306E\u307F)"
+  instruction: "\u7A7A\u4E2D\u653B\u6483\n\u7A7A\u4E2D\u3067\u3000<sprite name=\"KeyAttack\">\n"
   description: "\u6575\u3092\u4E0B\u306B\u7A81\u304D\u98DB\u3070\u305B\u308B"
 --- !u!1 &3819496833673953044
 GameObject:

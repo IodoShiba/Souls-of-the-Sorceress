@@ -5282,6 +5282,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_spriteAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 3e12365bc2fbd4442adbde2d8cd4f6c6,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ed340671a640f14cb55b40640e1db20, type: 3}
 --- !u!224 &554063935 stripped
@@ -8924,8 +8930,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6538dbbf9b68e0c40ae8351bab7485f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instruction: "\u843D\u4E0B\u653B\u6483\n<sprite name=\"key_down\">\u62BC\u3057\u306A\u304C\u3089<sprite
-    name=\"key_h\">(\u7A7A\u4E2D\u306E\u307F)"
+  instruction: "\u843D\u4E0B\u653B\u6483\n\u7A7A\u4E2D\u3067\u3000<sprite name=\"KeyDown\">\u62BC\u3057\u306A\u304C\u3089\u3000<sprite
+    name=\"KeyAttack\">"
   description: "\u4E0B\u65B9\u5411\u306B\u6575\u3092\u5927\u304D\u304F\u7A81\u304D\u98DB\u3070\u3059\u3000\u843D\u4E0B\u653B\u6483\u5F8C\u3082\u653B\u6483\u3092\u7D9A\u3051\u308B\u3068\u5B89\u5168"
 --- !u!4 &2868674909657470151
 Transform:
