@@ -3,32 +3,84 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using UnityEngine;
 using UniRx.Async;
 
-public abstract class SaveDataInterface<T> : ScriptableObject where T : class
+public abstract class SaveDataFileAccessor<T> : ScriptableObject where T : class, new()
 {
     [SerializeField] string saveDir;
     [SerializeField] string saveName;
 
-    public bool available {get; private set;} = false;
+    public bool available {get; private set;} = true;
 
     const string saltStr = "eSGiFgNkSogHnsF0fREn";
 
     const string keyStr = "MdZ8Ukibmw35AkRH7T9A";
 
-    public async UniTask<UniRx.Unit> SaveAsync(T data)
+    public async UniTask<UniRx.Unit> SaveAsync(T data, CancellationToken cancellationToken = default)
     {
-        return await UniTask.Run<UniRx.Unit>(dat=>{Save((T)dat); return UniRx.Unit.Default;}, data);
+        if(!available){ throw new System.InvalidOperationException();}
+
+        available = false;
+
+        string json = JsonUtility.ToJson(data);
+        string path = SavePath;
+        Directory.CreateDirectory(Path.GetDirectoryName(path));
+
+        if(cancellationToken.IsCancellationRequested) { throw new System.OperationCanceledException(); }
+
+        (byte[] cipherJsonWithToken, byte[] checkTokenPlain, byte[] iv) = Encrypt(json, keyStr);
+
+        if(cancellationToken.IsCancellationRequested) { throw new System.OperationCanceledException(); }
+
+        using(var fs = new FileStream(path, FileMode.Create))
+        using(var bw = new BinaryWriter(fs))
+        {
+            bw.Write(cipherJsonWithToken.Length);
+            bw.Write(checkTokenPlain);
+            bw.Write(cipherJsonWithToken);
+        }
+
+        available = true;
+
+        Debug.Log($"{saveName} was successfully saved in {path}.");
+
+        return UniRx.Unit.Default;
     }
 
-    public async UniTask<UniRx.Unit> LoadAsync(T data)
+    public async UniTask<T> LoadAsync(CancellationToken cancellationToken = default)
     {
-        return await UniTask.Run<UniRx.Unit>(dat=>{Load((T)dat); return UniRx.Unit.Default;}, data);
+        if(!available){ throw new System.InvalidOperationException();}
+
+        string path = SavePath;
+        string maybeJson;
+
+        using(var fs = new FileStream(path, FileMode.Open))
+        using(var br = new BinaryReader(fs))
+        {
+            int cipherLength = br.ReadInt32();
+            System.UInt32 checkTokenPlain = TokenBytesToUInt32(br.ReadBytes(16)); 
+            byte[] cipherMaybeJsonWithToken = br.ReadBytes(cipherLength);
+            
+            if(cancellationToken.IsCancellationRequested) { throw new System.OperationCanceledException(); }
+
+            maybeJson = Decrypt(cipherMaybeJsonWithToken, checkTokenPlain, keyStr);
+        }
+        
+        if(cancellationToken.IsCancellationRequested) { throw new System.OperationCanceledException(); }
+
+        var outdata = JsonUtility.FromJson<T>(maybeJson);
+        
+        Debug.Log($"{saveName} was successfully loaded from {path}.");
+
+        return outdata;
     }
 
     public void Save(in T data)
     {
+        if(!available){ throw new System.InvalidOperationException();}
+
         string json = JsonUtility.ToJson(data);
         string path = SavePath;
         Directory.CreateDirectory(Path.GetDirectoryName(path));
@@ -42,14 +94,21 @@ public abstract class SaveDataInterface<T> : ScriptableObject where T : class
             bw.Write(checkTokenPlain);
             bw.Write(cipherJsonWithToken);
         }
-
-        Debug.Log($"{saveName} was successfully saved in {path}.");
+        
+        // Debug.Log($"{saveName} was successfully saved in {path}.");
     }
 
-    public void Load(T outdata)
+    public T Load(bool createIfNotExist = true)
     {
+        if(!available){ throw new System.InvalidOperationException();}
+
         string path = SavePath;
         string maybeJson;
+
+        if(!File.Exists(path))
+        {
+            Save(new T());
+        }
 
         using(var fs = new FileStream(path, FileMode.Open))
         using(var br = new BinaryReader(fs))
@@ -60,9 +119,11 @@ public abstract class SaveDataInterface<T> : ScriptableObject where T : class
 
             maybeJson = Decrypt(cipherMaybeJsonWithToken, checkTokenPlain, keyStr);
         }
-        JsonUtility.FromJsonOverwrite(maybeJson, outdata);
+        var outdata = JsonUtility.FromJson<T>(maybeJson);
         
-        Debug.Log($"{saveName} was successfully loaded from {path}.");
+        // Debug.Log($"{saveName} was successfully loaded from {path}.");
+
+        return outdata;
     }
 
     public string SavePath {get => Path.Combine(Application.persistentDataPath, saveDir, $"{saveName}.savedata");}
