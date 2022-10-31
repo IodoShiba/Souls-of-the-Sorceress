@@ -40,6 +40,7 @@ public class StageMetaData : ScriptableObject
     {
         public Stage stage;
         public StageMisc misc;
+        public StageRecordAccessor recordAccessor;
         public GameResultEvaluator.CriteriaDefeatedCount criteriaDefeatedCount;
         public GameResultEvaluator.CriteriaTimeElapsed criteriaTimeElapsed;
         public List<SceneEntry> sceneEntries;
@@ -48,6 +49,7 @@ public class StageMetaData : ScriptableObject
         {
             this.stage = stage;
             misc = null;
+            recordAccessor = null;
             criteriaDefeatedCount = default;
             criteriaTimeElapsed = default;
             sceneEntries = new List<SceneEntry>() {default};
@@ -67,7 +69,8 @@ public class StageMetaData : ScriptableObject
 
     public Stage GetCurrentStage()
     {
-        return SceneToStage(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        // return SceneToStage(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        return SceneToStage(ActorManager.PlayerActor.gameObject.scene.name);
     }
 
     public int GetOneStageEnemyCount(Stage stage)
@@ -103,6 +106,15 @@ public class StageMetaData : ScriptableObject
         if(idx < 0){result = default; return false;}
 
         result = stageEntries[idx].misc;
+        return true;
+    }
+
+    public bool GetStageRecordAccessor(Stage stage, out StageRecordAccessor result)
+    {
+        int idx = stageEntries.FindIndex(stageEntry=>stageEntry.stage == stage);
+        if(idx < 0){result = default; return false;}
+        
+        result = stageEntries[idx].recordAccessor;
         return true;
     }
 
@@ -168,6 +180,13 @@ public class StageMetaData : ScriptableObject
                         if(newMisc != stageEntry.misc)
                         {
                             stageEntry.misc = newMisc;
+                            EditorUtility.SetDirty(target);
+                        }
+
+                        var newRa = (StageRecordAccessor)EditorGUILayout.ObjectField("Stage Record Accessor", stageEntry.recordAccessor, typeof(StageRecordAccessor), false);
+                        if(newRa != stageEntry.recordAccessor)
+                        {
+                            stageEntry.recordAccessor = newRa;
                             EditorUtility.SetDirty(target);
                         }
 

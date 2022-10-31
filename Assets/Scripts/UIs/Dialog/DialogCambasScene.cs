@@ -67,7 +67,8 @@ namespace SotS.UI.Dialog
 
             currentEventSystem.SetSelectedGameObject(returnSelectable);
 
-            Scene currentScene = SceneManager.GetActiveScene();
+            Scene currentScene = gameObject.scene;//SceneManager.GetActiveScene();
+            
             SceneManager.UnloadSceneAsync(currentScene);
         }
 
