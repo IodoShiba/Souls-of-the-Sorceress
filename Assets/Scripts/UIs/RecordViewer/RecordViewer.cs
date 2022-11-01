@@ -18,6 +18,34 @@ public class RecordViewer : MonoBehaviour
 
     readonly string time_format = @"mm\:ss\.ff";
 
+    public void SetRecordDisabled()
+    {
+        recordDefeated.SetText("-");
+        recordTime.SetText("--:--.--");
+        if(recordContinue != null)
+        {
+            recordContinue.SetText("-");
+        }
+
+        SetRankMark(rankMarkDefeated, GameResultEvaluator.EvaluationRank.C);
+        SetRankMark(rankMarkTime, GameResultEvaluator.EvaluationRank.C);
+        SetRankMark(rankMarkSummary, GameResultEvaluator.EvaluationRank.C);
+    }
+
+    public void SetRecord(StageMetaData.Stage stageId, StageRecord.Single recordSingle)
+    {
+        if(!recordSingle.isValid)
+        {
+            SetRecordDisabled();
+            return;
+        }
+
+        var ev = new GameResultEvaluator.ResultEvaluation(stageId, recordSingle.defeatedCount, recordSingle.time, recordSingle.continueCount);
+        ev.Evaluate();
+
+        SetRecord(ev);
+    }
+
     public void SetRecord(StageMetaData.Stage stageId, int defeatedCount, float time, int continueCount)
     {
         var ev = new GameResultEvaluator.ResultEvaluation(stageId, defeatedCount, time, continueCount);

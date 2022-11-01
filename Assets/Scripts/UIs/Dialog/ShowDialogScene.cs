@@ -15,8 +15,14 @@ namespace SotS.UI
         [SerializeField] bool dontSubscribeOnModalClosedEvent;
         [SerializeField] UnityEvent onModalClosed;
 
+        bool isModalOpen = false;
+
+        public bool IsModalOpen {get => isModalOpen;}
+
         public async void Show()
         {
+            isModalOpen = true;
+
             var currentEventSystem = UnityEngine.EventSystems.EventSystem.current;
 
             GameObject lastSelected = currentEventSystem.currentSelectedGameObject;
@@ -34,7 +40,8 @@ namespace SotS.UI
             {
                 dialogCambasScene.OnModalClose.Subscribe(_=>onModalClosed.Invoke());
             }
-            SceneManager.SetActiveScene(dialogSceneInstance);
+            dialogCambasScene.OnModalClose.Subscribe(_=>isModalOpen = false);
+            // SceneManager.SetActiveScene(dialogSceneInstance);
 
             // dialogCambasScene.OnModalClose.Subscribe(
             //     _=>
@@ -45,6 +52,16 @@ namespace SotS.UI
             //     );
 
             dialogCambasScene.ShowModal();
+        }
+
+        public void SubscribeOnModalClosed(UnityAction action)
+        {
+            onModalClosed.AddListener(action);
+        }
+        
+        public void UnsubscribeOnModalClosed(UnityAction action)
+        {
+            onModalClosed.RemoveListener(action);
         }
     }
 }
