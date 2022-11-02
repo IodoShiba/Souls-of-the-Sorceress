@@ -31,7 +31,7 @@ public class RecordUpdateModel : MonoBehaviour
         // onInitialize.Invoke();
 
         GameResultEvaluator.ResultEvaluation resultEvaluation = default;
-        Debug.Assert(GameResultEvaluator.TryGetEvaluation(out resultEvaluation));
+        GameResultEvaluator.TryGetEvaluation(out resultEvaluation);
         recordYours = new StageRecord.Single();
         recordYours.Set(resultEvaluation.enemyCountNativeDefeated, resultEvaluation.timeElapsed, resultEvaluation.continueCount);
 
