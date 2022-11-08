@@ -318,7 +318,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_spriteAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 3e12365bc2fbd4442adbde2d8cd4f6c6,
+      objectReference: {fileID: 11400000, guid: fdf94c239b8f5b444a1e944c48c1bcc4,
         type: 2}
     - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
         type: 3}
@@ -1034,9 +1034,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6538dbbf9b68e0c40ae8351bab7485f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instruction: "\u79FB\u52D5\u3000<sprite name=\"KeyLR\">\u3000\u3000\u3000\u30B8\u30E3\u30F3\u30D7\u3000<sprite
+  instruction: "\u79FB\u52D5\u3000<sprite name=\"KeyL\"><sprite name=\"KeyR\">\u3000\u3000\u3000\u30B8\u30E3\u30F3\u30D7\u3000<sprite
     name=\"KeyJump\">"
-  description: "\u79FB\u52D5\u306FL\u30B9\u30C6\u30A3\u30C3\u30AF\u3067\u3082\u3067\u304D\u308B"
+  description: "\u79FB\u52D5\u306FWASD\u3067\u3082\u3067\u304D\u308B"
 --- !u!1 &808357741
 GameObject:
   m_ObjectHideFlags: 0
@@ -3260,11 +3260,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
-        type: 3}
-      propertyPath: _debugText
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 9196809600734188392, guid: 004a550fc633f6b48a28890fc9bbc1c7,
         type: 3}
       propertyPath: m_Mesh
@@ -3574,6 +3569,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SortingOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8916380848889061121, guid: 004a550fc633f6b48a28890fc9bbc1c7,
+        type: 3}
+      propertyPath: _debugText
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 004a550fc633f6b48a28890fc9bbc1c7, type: 3}
