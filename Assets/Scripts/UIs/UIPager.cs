@@ -29,7 +29,7 @@ namespace SotS.UI
 
         void Update()
         {
-            if(Input.GetButtonDown(backButton))
+            if(InputDaemon.WasPressedThisFrame(backButton))
             {
                 PopStackAndReturnPage();
             }

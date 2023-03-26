@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 namespace SotS.Cheating
 {
@@ -19,22 +20,22 @@ namespace SotS.Cheating
             inputField.onEndEdit.AddListener((destinationSceneName)=>{sceneChanger.ChangeScene(destinationSceneName);});
         }
 
-        void Update()
+        void Update() // FIXME: Find altenative way to realize this by InputSystem.
         {
-            if(inputEnabled){return;}
+            // if(inputEnabled){return;}
 
-            if(Input.anyKeyDown)
-            {
-                string inputString = Input.inputString;
-                if(string.IsNullOrEmpty(inputString)){return;}
+            // if(Input.anyKeyDown)
+            // {
+            //     string inputString = Input.inputString;
+            //     if(string.IsNullOrEmpty(inputString)){return;}
                 
-                i = (i < secretCommand.Length && inputString[0] == secretCommand[i]) ? i+1 : 0;
+            //     i = (i < secretCommand.Length && inputString[0] == secretCommand[i]) ? i+1 : 0;
 
-                if(i == secretCommand.Length)
-                {
-                    EnableInput();
-                }
-            }
+            //     if(i == secretCommand.Length)
+            //     {
+            //         EnableInput();
+            //     }
+            // }
         }
 
         void EnableInput()

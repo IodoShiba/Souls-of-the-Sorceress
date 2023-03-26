@@ -39,10 +39,11 @@ public class CharaCursor : MonoBehaviour
     {
         if (locked) { return; }
 
+        var v2 = InputDaemon.GetVector2("Move");
         Vector2Int input
             = new Vector2Int(
-                System.Math.Sign(Input.GetAxisRaw(InputName.Axis.horizontal)),
-                System.Math.Sign(Input.GetAxisRaw(InputName.Axis.vertical))
+                System.Math.Sign(v2.x),
+                System.Math.Sign(v2.y)
                 );
 
         if(input != Vector2Int.zero)
@@ -54,7 +55,7 @@ public class CharaCursor : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown(InputName.Button.attack))
+        if (InputDaemon.WasPressedThisFrame(InputName.Button.attack))
         {
             current.Select();
         }

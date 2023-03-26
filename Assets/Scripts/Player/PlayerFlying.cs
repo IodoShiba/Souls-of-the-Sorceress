@@ -93,7 +93,7 @@ namespace PlayerStates {
                 return GetComponent<PlayerStates.PlayerOnGround>();
             }*/
 
-            if (player.DoesUmbrellaWork()&&Input.GetButton("Open Umbrella"))
+            if (player.DoesUmbrellaWork()&&InputDaemon.IsPressed("Open Umbrella"))
             {
                 //ableToJump = false;
                 if (rb.velocity.y > 0)
@@ -114,7 +114,7 @@ namespace PlayerStates {
                 return GetComponent<PlayerStates.PlayerAerialSlash>();
             }
 
-            if (Input.GetButtonDown("Magical Attack"))
+            if (InputDaemon.WasPressedThisFrame("Magical Attack"))
             {
                 //ableToJump = false;
                 return GetComponent<PlayerStates.PlayerMagicCharging>();

@@ -18,7 +18,7 @@ namespace PlayerStates
             }
             else
             {
-                if (t > nextAttackRestrictedTime && Input.GetButton("Attack"))
+                if (t > nextAttackRestrictedTime && InputDaemon.IsPressed("Attack"))
                 {
                     return GetComponent<PlayerStates.PlayerSmashSlash>();
                 }

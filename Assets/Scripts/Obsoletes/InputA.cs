@@ -15,7 +15,7 @@ public class InputA : MonoBehaviour {
         public bool startingLongDowning = false;
         public System.Func<bool> HisGetButton = null;
         public ButtonTimeRecorder(string name, System.Func<bool> HisGetButton = null) { this.name = name;this.HisGetButton = HisGetButton; }
-        public bool GetButton() { return HisGetButton == null ? Input.GetButton(name) : HisGetButton(); }
+        public bool GetButton() { return HisGetButton == null ? InputDaemon.IsPressed(name) : HisGetButton(); }
     }
     Dictionary<string,ButtonTimeRecorder> buttonTimeRecorders = new Dictionary<string,ButtonTimeRecorder>();
     
@@ -95,7 +95,7 @@ public class InputA : MonoBehaviour {
     
     public bool GetButton(string buttonName)
     {
-        return Input.GetButton(buttonName);
+        return InputDaemon.IsPressed(buttonName);
     }
 
     public bool GetMultiButton(string firstButtonName,params string[] additionalButtonNames)
@@ -170,7 +170,7 @@ public class InputA : MonoBehaviour {
     {
         float most, least;
         var r = buttonTimeRecorders[firstButtonName];
-        bool isAButtonJustDowned = Input.GetButtonDown(firstButtonName);
+        bool isAButtonJustDowned = InputDaemon.WasPressedThisFrame(firstButtonName);
         bool isAnyJustDowned = isAButtonJustDowned;
         if (r.time == 0 && !isAButtonJustDowned) { return false; }
         most = r.time;
@@ -179,7 +179,7 @@ public class InputA : MonoBehaviour {
         for (int i = 0; i < additionalButtonNames.Length; ++i)
         {
             r = buttonTimeRecorders[additionalButtonNames[i]];
-            isAButtonJustDowned = Input.GetButtonDown(additionalButtonNames[i]);
+            isAButtonJustDowned = InputDaemon.WasPressedThisFrame(additionalButtonNames[i]);
             isAnyJustDowned = isAnyJustDowned || isAButtonJustDowned;
             if (r.time == 0 && !isAButtonJustDowned) { return false; }
             float t = r.time;

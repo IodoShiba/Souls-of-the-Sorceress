@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class DialogScroller : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class DialogScroller : MonoBehaviour
 
     void Update()
     {
-        float input = Input.GetAxisRaw("Vertical");
+        // float input = Input.GetAxisRaw("Vertical");
+        float input = InputDaemon.GetVector2("Navigate").y;
 
         if(!scrollRect.verticalScrollbar.IsInteractable())
         {
