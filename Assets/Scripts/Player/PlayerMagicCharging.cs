@@ -16,7 +16,7 @@ namespace PlayerStates
 
         public override State Check()
         {
-            if (!Input.GetButton("Magical Attack"))
+            if (!InputDaemon.IsPressed("Magical Attack"))
             {
                 GameObject magicPrefab;
                 if (chargedTime > strongMagicThresholdTime)

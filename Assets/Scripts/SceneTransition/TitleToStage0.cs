@@ -20,7 +20,7 @@ public class TitleToStage0 : MonoBehaviour
 
     IEnumerator WaitForButtonInput()
     {
-        while (!Input.GetButton(InputName.Button.attack)) { yield return null; } 
+        while (!InputDaemon.IsPressed(InputName.Button.attack)) { yield return null; } 
 
         while (!readyForMoveScene) { yield return null; }
 

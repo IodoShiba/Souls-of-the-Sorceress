@@ -1,14 +1,19 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 using UniRx.Async;
 
 public class SceneTransitionManager : MonoBehaviour
 {
+    [System.Serializable] public class UnityEventLoadingScene : UnityEvent<bool> {}
+
     static SceneTransitionManager instance = null;
 
     [SerializeField] TransitionEffect transitionEffect;
     [SerializeField] GameObject sceneMemberRoot;
+
+    public UnityEventLoadingScene eventIsLoadingScene;
 
     static string targetScene = null;
     static string originScene = null;
@@ -62,7 +67,10 @@ public class SceneTransitionManager : MonoBehaviour
 
         targetSceneLoaded = false;
         Debug.Log($"Load Start {targetScene}");
+        eventIsLoadingScene.Invoke(true);
+        // await UniTask.Delay(System.TimeSpan.FromSeconds(5));
         await SceneManager.LoadSceneAsync(targetScene, LoadSceneMode.Additive);
+        eventIsLoadingScene.Invoke(false);
         Debug.Log($"Load End {targetScene}");
 
         //while (!targetSceneLoaded) { yield return null; }

@@ -103,11 +103,11 @@ namespace PlayerStates
         
         public override State Check()
         {
-            if(!(playerData.DoesUmbrellaWork() && Input.GetButton("Open Umbrella")))
+            if(!(playerData.DoesUmbrellaWork() && InputDaemon.IsPressed("Open Umbrella")))
             {
                 return GetComponent<PlayerStates.PlayerOnGround>();
             }
-            if (Input.GetButtonDown("Attack"))
+            if (InputDaemon.WasPressedThisFrame("Attack"))
             {
                 return GetComponent<PlayerStates.PlayerTackle>();
             }

@@ -35,24 +35,24 @@ namespace PlayerStates
                 return GetComponent<PlayerStates.PlayerFlying>();
             }
 
-            if (jumpInterval < 0 && Input.GetButtonDown("Jump"))
+            if (jumpInterval < 0 && InputDaemon.WasPressedThisFrame("Jump"))
             {
                 //rb.AddForce(new Vector2(sign*jumpForce.x, jumpForce.y));
                 jumpInterval = jumpIntervalDefault;
                 return GetComponent<PlayerFlying>();
             }
 
-            if (Input.GetButtonDown("Attack"))
+            if (InputDaemon.WasPressedThisFrame("Attack"))
             {
                 //return GetComponent<PlayerStates.PlayerVerticalSlash>();
             }
 
-            if(Input.GetButtonDown("Magical Attack"))
+            if (InputDaemon.WasPressedThisFrame("Magical Attack"))
             {
                 return GetComponent<PlayerStates.PlayerMagicCharging>();
             }
 
-            if (player.DoesUmbrellaWork() && Input.GetButton("Open Umbrella")) 
+            if (player.DoesUmbrellaWork() && InputDaemon.IsPressed("Open Umbrella")) 
             {
                 rb.velocity = new Vector2(0, 0);
                 //return GetComponent<PlayerStates.PlayerGuard>();

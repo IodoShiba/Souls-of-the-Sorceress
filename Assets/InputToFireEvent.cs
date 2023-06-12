@@ -17,7 +17,7 @@ public class InputToFireEvent : MonoBehaviour
     {
         for(int i = 0; i < inputEvents.Count; ++i)
         {
-            if (Input.GetButton(inputEvents[i].buttonName))
+            if (InputDaemon.IsPressed(inputEvents[i].buttonName))
             {
                 inputEvents[i].events.Invoke();
             }
