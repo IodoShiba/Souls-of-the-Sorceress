@@ -3256,16 +3256,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1367622817}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: c816b4d3a62bd3240ae901a9ea80642a,
+    type: 3}
+  m_PointAction: {fileID: 0}
+  m_MoveAction: {fileID: 2334406817231871468, guid: c816b4d3a62bd3240ae901a9ea80642a,
+    type: 3}
+  m_SubmitAction: {fileID: 2075367282403314545, guid: c816b4d3a62bd3240ae901a9ea80642a,
+    type: 3}
+  m_CancelAction: {fileID: -1165904332130133224, guid: c816b4d3a62bd3240ae901a9ea80642a,
+    type: 3}
+  m_LeftClickAction: {fileID: 0}
+  m_MiddleClickAction: {fileID: 0}
+  m_RightClickAction: {fileID: 0}
+  m_ScrollWheelAction: {fileID: 0}
+  m_TrackedDevicePositionAction: {fileID: 0}
+  m_TrackedDeviceOrientationAction: {fileID: 0}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
 --- !u!114 &1367622819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3944,28 +3957,8 @@ PrefabInstance:
         type: 3}
       propertyPath: m_spriteAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 3e12365bc2fbd4442adbde2d8cd4f6c6,
+      objectReference: {fileID: 11400000, guid: fdf94c239b8f5b444a1e944c48c1bcc4,
         type: 2}
-    - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
-        type: 3}
-      propertyPath: m_textAlignment
-      value: 65535
-      objectReference: {fileID: 0}
-    - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
-        type: 3}
-      propertyPath: m_TextStyleHashCode
-      value: -1183493901
-      objectReference: {fileID: 0}
-    - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
-        type: 3}
-      propertyPath: m_VerticalAlignment
-      value: 512
-      objectReference: {fileID: 0}
-    - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
-        type: 3}
-      propertyPath: m_HorizontalAlignment
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4033456170830702560, guid: 3ed340671a640f14cb55b40640e1db20,
         type: 3}
       propertyPath: m_IsActive
