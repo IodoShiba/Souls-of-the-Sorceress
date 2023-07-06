@@ -65,13 +65,13 @@ namespace IodoShiba.Rebinder
             if (value.sqrMagnitude >= dead*dead)
             {
                 var device = cc.control.device;
-                if (device is Gamepad && targetControl != "Gamepad")
+                if (device is Gamepad && targetControl != "ゲームパッド")
                 {
-                    TargetControl = "Gamepad";
+                    TargetControl = "ゲームパッド";
                 }
-                else if(device is Keyboard && targetControl != "Keyboard")
+                else if(device is Keyboard && targetControl != "キーボード")
                 {
-                    TargetControl = "Keyboard";
+                    TargetControl = "キーボード";
                 }
                 else
                 {
