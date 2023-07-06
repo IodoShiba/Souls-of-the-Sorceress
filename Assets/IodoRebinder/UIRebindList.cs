@@ -9,6 +9,13 @@ using UnityEngine.Events;
 
 namespace IodoShiba.Rebinder
 {
+    [System.Serializable]
+    struct ActionAliasPair
+    {
+        public InputActionReference inputAction;
+        public string alias;
+    }
+
 
     public class UIRebindList : MonoBehaviour
     {
@@ -33,6 +40,7 @@ namespace IodoShiba.Rebinder
 
         [SerializeField] int uiCacheSize = 32;
         [SerializeField] TargetControlChangedEvent targetControlChangedEvent;
+        [SerializeField] ActionAliasPair[] actionAliases;
 
         // Dependencies
         [SerializeField] InputActionAsset inputActionAsset;
@@ -146,6 +154,12 @@ namespace IodoShiba.Rebinder
                 if (bindingIndex == -1) { continue; }
 
                 rebindUis[i].bindingId = actions[i].bindings[bindingIndex].id.ToString();
+                var alias = actions[i].name;
+                for (int j=0; j<actionAliases.Length; ++j)
+                {
+                    if (actionAliases[j].inputAction.action == actions[i]) { alias = actionAliases[j].alias; break; }
+                }
+                rebindUis[i].actionLabel.text = alias;
             }
         }
 
