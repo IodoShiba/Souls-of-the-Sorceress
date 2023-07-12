@@ -17,6 +17,8 @@ namespace SotS.UI
 
         CanvasGroup canvasGroup;
 
+        public bool IsShown => canvasGroup != null && canvasGroup.alpha != 0;
+
         void Start()
         {
             canvasGroup = GetComponent<CanvasGroup>();
@@ -24,25 +26,36 @@ namespace SotS.UI
 
         public void Show() 
         {
-            EventSystem currentEventSystem = EventSystem.current;
-            currentEventSystem.SetSelectedGameObject(finalSelected == null ? initialSelected : finalSelected);
-            
-            canvasGroup.interactable = true;
-
             EffectIn();
         }
 
         public void Hide() 
         {
+            EffectOut();
+        }
+        public void EnterSelection()
+        {
             EventSystem currentEventSystem = EventSystem.current;
-            if(rememberFinalSelected)
+            currentEventSystem.SetSelectedGameObject(finalSelected == null ? initialSelected : finalSelected);
+
+            canvasGroup.interactable = true;
+
+            if (! IsShown)
+            {
+                Show();
+            }
+        }
+        public void ExitSelection()
+        {
+            EventSystem currentEventSystem = EventSystem.current;
+            if (rememberFinalSelected)
             {
                 finalSelected = currentEventSystem.currentSelectedGameObject;
             }
 
             canvasGroup.interactable = false;
 
-            EffectOut();
+
         }
 
         void EffectIn()

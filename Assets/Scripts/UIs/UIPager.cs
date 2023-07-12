@@ -14,6 +14,7 @@ namespace SotS.UI
         UIPagerPage currentPage;
 
         Stack<UIPagerPage> previousStack = new Stack<UIPagerPage>();
+        Stack<bool> isShownBeforeEnterStack = new Stack<bool>();
 
         void Start()
         {
@@ -39,9 +40,9 @@ namespace SotS.UI
         {
             if(currentPage != null)
             {
-                currentPage.Hide();
+                currentPage.ExitSelection();
             }
-            page.Show();
+            page.EnterSelection();
             currentPage = page;
         }
 
@@ -51,14 +52,22 @@ namespace SotS.UI
             {
                 previousStack.Push(currentPage);
             }
+            isShownBeforeEnterStack.Push(page.IsShown);
             ChangePage(page);
         }
+
 
         public void PopStackAndReturnPage()
         {
             if(previousStack.Count == 0)
             {
                 return;
+            }
+
+            var isShownBeforeEnter = isShownBeforeEnterStack.Pop();
+            if(currentPage != null && !isShownBeforeEnter)
+            {
+                currentPage.Hide();
             }
 
             ChangePage(previousStack.Pop());

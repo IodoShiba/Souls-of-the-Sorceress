@@ -9,6 +9,25 @@ using UnityEngine.Events;
 
 namespace IodoShiba.Rebinder
 {
+    [System.Serializable]
+    struct ActionAliasPair
+    {
+        public InputActionReference inputAction;
+        public string alias;
+    }
+
+    struct BindKey
+    { 
+        public InputActionMap map; public string path;
+
+        public override int GetHashCode()
+        {
+            return map.GetHashCode() ^ path.GetHashCode();
+        }
+    }
+
+    [System.Serializable]
+    public class UnityEventDuplicationUpdated : UnityEvent<bool> { }
 
     public class UIRebindList : MonoBehaviour
     {
@@ -31,8 +50,14 @@ namespace IodoShiba.Rebinder
             }
         }
 
+        const string STR_KEYBOARD = "Keyboard";
+        const string STR_GAMEPAD = "Gamepad";
+
         [SerializeField] int uiCacheSize = 32;
         [SerializeField] TargetControlChangedEvent targetControlChangedEvent;
+        [SerializeField] UnityEventDuplicationUpdated duplicationUpdated;
+        [SerializeField] ActionAliasPair[] actionAliases;
+        [SerializeField] Color colorDuplicationWarning;
 
         // Dependencies
         [SerializeField] InputActionAsset inputActionAsset;
@@ -44,6 +69,7 @@ namespace IodoShiba.Rebinder
         // Caches
         RebindActionUI[] rebindUis;
         InputAction[] actions;
+        Dictionary<BindKey, int> boundIndexes;
 
         // States
         int actionCounts = 0;
@@ -57,13 +83,13 @@ namespace IodoShiba.Rebinder
             if (value.sqrMagnitude >= dead*dead)
             {
                 var device = cc.control.device;
-                if (device is Gamepad && targetControl != "Gamepad")
+                if (device is Gamepad && targetControl != STR_GAMEPAD)
                 {
-                    TargetControl = "Gamepad";
+                    TargetControl = STR_GAMEPAD;
                 }
-                else if(device is Keyboard && targetControl != "Keyboard")
+                else if(device is Keyboard && targetControl != STR_KEYBOARD)
                 {
-                    TargetControl = "Keyboard";
+                    TargetControl = STR_KEYBOARD;
                 }
                 else
                 {
@@ -80,6 +106,7 @@ namespace IodoShiba.Rebinder
         {
             // InputSystem.onEvent -= OnInputSystemEvent;
             inputModule.move.action.performed -= OnMoveAction;
+            FindDuplication();
         }
 
         void Start()
@@ -88,6 +115,7 @@ namespace IodoShiba.Rebinder
 
             rebindUis = new RebindActionUI[uiCacheSize];
             actions = new InputAction[uiCacheSize];
+            boundIndexes = new Dictionary<BindKey, int>(uiCacheSize);
 
             rebindUis[0] = transform.GetChild(0).GetComponentInChildren<RebindActionUI>();
 
@@ -121,6 +149,7 @@ namespace IodoShiba.Rebinder
                 Button buttonPrev = rebindUis[(i + actionCounts - 1)%actionCounts].GetComponentInChildren<Button>();
                 rebindUis[i].startRebindEvent.AddListener((ui, op)=>{allowTargetControlChange = false;});
                 rebindUis[i].stopRebindEvent.AddListener((ui, op)=>{allowTargetControlChange = true;});
+                rebindUis[i].stopRebindEvent.AddListener((ui, op) => FindDuplication(ui, op));
 
                 buttonPrev.navigation = CreateNavigation(buttonPrev.navigation, dn: buttonSelf, r: buttonReset);
                 buttonSelf.navigation = CreateNavigation(buttonSelf.navigation, up: buttonPrev, r: buttonReset);
@@ -146,6 +175,12 @@ namespace IodoShiba.Rebinder
                 if (bindingIndex == -1) { continue; }
 
                 rebindUis[i].bindingId = actions[i].bindings[bindingIndex].id.ToString();
+                var alias = actions[i].name;
+                for (int j=0; j<actionAliases.Length; ++j)
+                {
+                    if (actionAliases[j].inputAction.action == actions[i]) { alias = actionAliases[j].alias; break; }
+                }
+                rebindUis[i].actionLabel.text = alias;
             }
         }
 
@@ -190,6 +225,47 @@ namespace IodoShiba.Rebinder
             navi.selectOnLeft = l != null ? l : original.selectOnLeft;
             navi.selectOnRight = r != null ? r : original.selectOnRight;
             return navi;
+        }
+
+        void FindDuplication(RebindActionUI ui, InputActionRebindingExtensions.RebindingOperation op)
+        {
+            FindDuplication();
+        }
+        void FindDuplication()
+        {
+            for (int i = 0; i < actionCounts; ++i)
+            {
+                rebindUis[i].bindingText.color = Color.white;
+            }
+
+            bool duplicationExist = false;
+            boundIndexes.Clear();
+            for (int i = 0; i < actionCounts; ++i)
+            {
+                var act = actions[i];
+                int bindingIndex = GetBindingIndex(act);
+                if (bindingIndex == -1) { continue; }
+                string path = rebindUis[i].bindingText.text; //act.bindings[bindingIndex].path;
+                int mapIdx = 0;
+                var actionMaps = inputActionAsset.actionMaps;
+                for (;mapIdx < inputActionAsset.actionMaps.Count; ++mapIdx) { if (actionMaps[mapIdx] == act.actionMap) { break; } }
+                int keyIdx = i;
+                BindKey bindKey; bindKey.map = actionMaps[mapIdx]; bindKey.path = path;
+                if(boundIndexes.ContainsKey(bindKey))
+                {
+                    OnDuplicationFound(boundIndexes[bindKey], keyIdx);
+                    duplicationExist = true;
+                }
+
+                boundIndexes[bindKey] = keyIdx;
+            }
+
+            duplicationUpdated.Invoke(duplicationExist);
+        }
+        void OnDuplicationFound(int idxA, int idxB) 
+        {
+            if (rebindUis[idxA].bindingText != null) { rebindUis[idxA].bindingText.color = colorDuplicationWarning; }
+            if (rebindUis[idxB].bindingText != null) { rebindUis[idxB].bindingText.color = colorDuplicationWarning; }
         }
 
         [System.Serializable]
