@@ -57,10 +57,11 @@ namespace IodoShiba.Rebinder
         const string STR_GAMEPAD = "Gamepad";
 
         [SerializeField] int uiCacheSize = 32;
-        [SerializeField] bool disallowUIPageBackWhenRebinding;
         [SerializeField] TargetControlChangedEvent targetControlChangedEvent;
         [SerializeField] UnityEventRebindUIObjectAdded uiAdded;
         [SerializeField] UnityEventDuplicationUpdated duplicationUpdated;
+        [SerializeField] RebindActionUI.InteractiveRebindEvent anyStartRebind;
+        [SerializeField] RebindActionUI.InteractiveRebindEvent anyStopRebind;
         [SerializeField] ActionAliasPair[] actionAliases;
         [SerializeField] Color colorDuplicationWarning;
 
@@ -159,20 +160,14 @@ namespace IodoShiba.Rebinder
                     (ui, op)=>
                     {
                         allowTargetControlChange = false;
-                        if(disallowUIPageBackWhenRebinding)
-                        {
-                            SotS.UI.UIPager.ActiveInstance.AllowBack(false);
-                        }
+                        anyStartRebind.Invoke(ui, op);
                     }
                     );
                 rebindUis[i].stopRebindEvent.AddListener(
                     (ui, op)=>
                     {
                         allowTargetControlChange = true;
-                        if (disallowUIPageBackWhenRebinding)
-                        {
-                            SotS.UI.UIPager.ActiveInstance.AsyncAllowBackDeffered(true);
-                        }
+                        anyStopRebind.Invoke(ui, op);
                     }
                     );
                 rebindUis[i].stopRebindEvent.AddListener((ui, op) => FindDuplication(ui, op));
