@@ -11,6 +11,7 @@ namespace SotS.UI
     [RequireComponent(typeof(UnityEngine.CanvasGroup))]
     public class UIPagerPage : MonoBehaviour
     {
+
         [SerializeField] GameObject initialSelected;
         [SerializeField] bool rememberFinalSelected;
         GameObject finalSelected = null;
