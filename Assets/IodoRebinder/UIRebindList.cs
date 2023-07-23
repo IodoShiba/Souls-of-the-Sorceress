@@ -29,6 +29,9 @@ namespace IodoShiba.Rebinder
     [System.Serializable]
     public class UnityEventDuplicationUpdated : UnityEvent<bool> { }
 
+    [System.Serializable]
+    public class UnityEventRebindUIObjectAdded : UnityEvent<RebindActionUI> { }
+
     public class UIRebindList : MonoBehaviour
     {
         // Options
@@ -54,7 +57,9 @@ namespace IodoShiba.Rebinder
         const string STR_GAMEPAD = "Gamepad";
 
         [SerializeField] int uiCacheSize = 32;
+        [SerializeField] bool disallowUIPageBackWhenRebinding;
         [SerializeField] TargetControlChangedEvent targetControlChangedEvent;
+        [SerializeField] UnityEventRebindUIObjectAdded uiAdded;
         [SerializeField] UnityEventDuplicationUpdated duplicationUpdated;
         [SerializeField] ActionAliasPair[] actionAliases;
         [SerializeField] Color colorDuplicationWarning;
@@ -138,6 +143,9 @@ namespace IodoShiba.Rebinder
 
                 actions[actionCounts] = act;
                 rebindUis[actionCounts++] = ui;
+
+
+                uiAdded.Invoke(ui);
             }
 
             ResetBindingIds();
@@ -147,8 +155,26 @@ namespace IodoShiba.Rebinder
             {
                 Button buttonSelf = rebindUis[i].GetComponentInChildren<Button>();
                 Button buttonPrev = rebindUis[(i + actionCounts - 1)%actionCounts].GetComponentInChildren<Button>();
-                rebindUis[i].startRebindEvent.AddListener((ui, op)=>{allowTargetControlChange = false;});
-                rebindUis[i].stopRebindEvent.AddListener((ui, op)=>{allowTargetControlChange = true;});
+                rebindUis[i].startRebindEvent.AddListener(
+                    (ui, op)=>
+                    {
+                        allowTargetControlChange = false;
+                        if(disallowUIPageBackWhenRebinding)
+                        {
+                            SotS.UI.UIPager.ActiveInstance.AllowBack(false);
+                        }
+                    }
+                    );
+                rebindUis[i].stopRebindEvent.AddListener(
+                    (ui, op)=>
+                    {
+                        allowTargetControlChange = true;
+                        if (disallowUIPageBackWhenRebinding)
+                        {
+                            SotS.UI.UIPager.ActiveInstance.AsyncAllowBackDeffered(true);
+                        }
+                    }
+                    );
                 rebindUis[i].stopRebindEvent.AddListener((ui, op) => FindDuplication(ui, op));
 
                 buttonPrev.navigation = CreateNavigation(buttonPrev.navigation, dn: buttonSelf, r: buttonReset);

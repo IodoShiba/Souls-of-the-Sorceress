@@ -1,20 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UniRx.Async;
 
 namespace SotS.UI
 {
     public class UIPager : MonoBehaviour
     {
+        static UIPager activeInstance;
+
         [SerializeField] UIPagerPage initialPage;
         [SerializeField] bool InitialPageHiddenFirst;
         [SerializeField] string backButton;
 
         UIPagerPage currentPage;
 
+        bool isBackAllowed = true;
         Stack<UIPagerPage> previousStack = new Stack<UIPagerPage>();
         Stack<bool> isShownBeforeEnterStack = new Stack<bool>();
+
+        public static UIPager ActiveInstance { get => activeInstance; }
+
+        private void Awake()
+        {
+            activeInstance = this;
+        }
 
         void Start()
         {
@@ -30,7 +40,7 @@ namespace SotS.UI
 
         void Update()
         {
-            if(InputDaemon.WasPressedThisFrame(backButton))
+            if(isBackAllowed && InputDaemon.WasPressedThisFrame(backButton))
             {
                 PopStackAndReturnPage();
             }
@@ -71,6 +81,17 @@ namespace SotS.UI
             }
 
             ChangePage(previousStack.Pop());
+        }
+
+        public void AllowBack(bool does)
+        {
+            isBackAllowed = does;
+        }
+
+        public async void AsyncAllowBackDeffered(bool does)
+        {
+            await UniTask.Yield();
+            AllowBack(does);
         }
     }
 }
