@@ -90,7 +90,11 @@ namespace SotS.UI
 
         public async void AsyncAllowBackDeffered(bool does)
         {
-            await UniTask.Yield();
+            int wait = 3;
+            for (int i = 0; i < wait; ++i)
+            {
+                await UniTask.Yield();
+            }
             AllowBack(does);
         }
     }
