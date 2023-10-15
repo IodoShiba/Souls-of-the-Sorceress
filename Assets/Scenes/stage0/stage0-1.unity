@@ -285,7 +285,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_spriteAsset
       value: 
-      objectReference: {fileID: 11400000, guid: fdf94c239b8f5b444a1e944c48c1bcc4,
+      objectReference: {fileID: 11400000, guid: 3e12365bc2fbd4442adbde2d8cd4f6c6,
         type: 2}
     - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
         type: 3}
@@ -295,7 +295,17 @@ PrefabInstance:
     - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
         type: 3}
       propertyPath: m_textAlignment
-      value: 514
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
         type: 3}
@@ -311,6 +321,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.wordCount
       value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
+        type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
         type: 3}
@@ -1024,9 +1039,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6538dbbf9b68e0c40ae8351bab7485f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instruction: "\u79FB\u52D5\u3000<sprite name=\"KeyL\"><sprite name=\"KeyR\">\u3000\u3000\u3000\u30B8\u30E3\u30F3\u30D7\u3000<sprite
+  instruction: "\u79FB\u52D5\u3000<sprite name=\"KeyL\">\u3000\u3000\u3000\u30B8\u30E3\u30F3\u30D7\u3000<sprite
     name=\"KeyJump\">"
-  description: "\u79FB\u52D5\u306FWASD\u3067\u3082\u3067\u304D\u308B"
+  description: "\u30DC\u30BF\u30F3\u3092\u9577\u304F\u62BC\u3059\u307B\u3069\u9AD8\u304F\u30B8\u30E3\u30F3\u30D7"
 --- !u!1 &808357741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1071,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 438319594}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
