@@ -621,9 +621,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 155779900}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 20
+  m_WholeNumbers: 1
+  m_Value: 20
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -972,9 +972,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 242358846}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 20
+  m_WholeNumbers: 1
+  m_Value: 20
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -7531,9 +7531,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1699559192}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
-  m_WholeNumbers: 0
-  m_Value: 1
+  m_MaxValue: 20
+  m_WholeNumbers: 1
+  m_Value: 20
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -9177,7 +9177,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559093821}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 0.91
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -9193,14 +9193,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f2dc59fd3ae7744b54cfef83989dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioClipSeVolumeChanged: {fileID: 8300000, guid: b5e2df24400f8fe4a84df0dacd392914,
+    type: 3}
+  iconSpriteVocal: {fileID: 21300000, guid: b77055193f561b94790179ddd39af45b, type: 3}
+  iconSpriteMute: {fileID: 21300000, guid: ffab4928c7e8ec4409bcf24d829df783, type: 3}
   sliderVolumeMaster: {fileID: 65024551}
   sliderVolumeBgm: {fileID: 180000536}
   sliderVolumeSe: {fileID: 1199305005}
+  textValueVolumeMaster: {fileID: 1946063870}
+  textValueVolumeBgm: {fileID: 797215609}
+  textValueVolumeSe: {fileID: 306082978}
+  muteIconVolumeMaster: {fileID: 1067840423}
+  muteIconVolumeBgm: {fileID: 744325887}
+  muteIconVolumeSe: {fileID: 185108575}
   buttonReset: {fileID: 1022838071}
   _audioMixer: {fileID: 24100000, guid: e603a53612b9e7d4a9703c9ffeea58d8, type: 2}
   _audioSource: {fileID: 877296458}
-  audioClipSeVolumeChanged: {fileID: 8300000, guid: b5e2df24400f8fe4a84df0dacd392914,
-    type: 3}
 --- !u!1 &1563406841
 GameObject:
   m_ObjectHideFlags: 0
