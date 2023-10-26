@@ -120,7 +120,6 @@ public class UIAudioConfig : MonoBehaviour
         }
         
         return Mathf.InverseLerp(0.0001f, 1.0f, Mathf.Pow(10, decibel / 20));
-        return CurveInv(Mathf.InverseLerp(-80.0f, 0.0f, decibel));
     }
 
     float CurveInv(float volumeProp) => Exp10(volumeProp);
