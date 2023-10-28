@@ -5,16 +5,18 @@ using UniRx;
 
 public class GameLifeCycle : MonoBehaviour
 {
+    public enum CloseCause { PlayerVictory, GiveUp }
+    
     static bool isGameOpen = false;
     static bool isInGameScene = false;
 
     static UniRx.Subject<UniRx.Unit> subjectOnGameOpen = new UniRx.Subject<UniRx.Unit>();
     static UniRx.Subject<UniRx.Unit> subjectOnGameClose = new UniRx.Subject<UniRx.Unit>();
-    static UniRx.Subject<UniRx.Unit> subjectGameClosed = new UniRx.Subject<UniRx.Unit>();
+    static UniRx.Subject<CloseCause> subjectGameClosed = new UniRx.Subject<CloseCause>();
 
     public static IObservable<UniRx.Unit> observableOnGameOpen { get => subjectOnGameOpen;}
     public static IObservable<UniRx.Unit> observableOnGameClose { get => subjectOnGameClose;}
-    public static IObservable<UniRx.Unit> observableGameClosed { get => subjectOnGameClose;}
+    public static IObservable<CloseCause> observableGameClosed { get => subjectGameClosed;}
 
     void Awake()
     {
@@ -51,12 +53,17 @@ public class GameLifeCycle : MonoBehaviour
 
     public static void CloseGame()
     {
+        CloseGame(CloseCause.PlayerVictory);
+    }
+
+    public static void CloseGame(CloseCause cause)
+    {
         if (!isGameOpen){ return; }
         if (isInGameScene){EndGameScene();}
 
         isGameOpen = false;
         subjectOnGameClose.OnNext(new Unit());
-        subjectGameClosed.OnNext(new Unit());
+        subjectGameClosed.OnNext(cause);
     }
     
     // for debug purpose

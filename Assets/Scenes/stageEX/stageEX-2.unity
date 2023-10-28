@@ -8524,6 +8524,7 @@ GameObject:
   - component: {fileID: 1401489858}
   - component: {fileID: 1401489857}
   - component: {fileID: 1401489856}
+  - component: {fileID: 1401489860}
   - component: {fileID: 1401489855}
   m_Layer: 0
   m_Name: SceneTranser
@@ -8548,8 +8549,7 @@ MonoBehaviour:
   showStageResult: {fileID: 1401489858}
   waitSecond1: 0.3
   showRecordUpdate: {fileID: 1401489857}
-  storePlayerAndChangeScene: {fileID: 1401489856}
-  destinationScene: Greeting
+  _changeSceneToTitle: {fileID: 1401489860}
 --- !u!114 &1401489856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8562,6 +8562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322cea529ccc2b84fb15785428db0829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noTrigger: 0
   onStoreAndChangeScene:
     m_PersistentCalls:
       m_Calls: []
@@ -8618,6 +8619,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1401489860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401489854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47298542a121d554389ae3996788196e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noTrigger: 0
+  changeScene: {fileID: 1401489856}
+  _stackedPageNames:
+  - PRESS SPACE KEY
+  - MainMenu
+  - StageSelect
 --- !u!1001 &1416010805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9240,6 +9259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322cea529ccc2b84fb15785428db0829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noTrigger: 0
   onStoreAndChangeScene:
     m_PersistentCalls:
       m_Calls: []

@@ -65,7 +65,10 @@ public class StorePlayerAndChangeScene : MonoBehaviour
     {
         //saveData.StorePlayerData(player);
         onStoreAndChangeScene.Invoke(destinationSceneName);
-        SotS.GameCommonInterface.Instance.Player.StorePlayerData(player);
+        if(player != null)
+        {
+            SotS.GameCommonInterface.Instance.Player.StorePlayerData(player);
+        }
 
         TransitionEffect.WipeEffet = wipeEffet;
         SceneTransitionManager.TransScene(destinationSceneName, sceneInitializer);

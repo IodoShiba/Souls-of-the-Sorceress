@@ -23,7 +23,25 @@ public class ChangeSceneToTitle : MonoBehaviour
         _initializeScene = scene => { InitializeTitleFunc(scene, _stackedPageNames); };
     }
 
-    void StoreAndChangeScene(Player player)
+    public void ChangeScene()
+    {
+        
+    }
+
+    public void StoreAndChangeScene()
+    {
+        Player player = null;
+
+        Actor actor = ActorManager.PlayerActor;
+        if (actor != null)
+        {
+            player = actor.GetComponent<Player>();
+        }
+        
+        StoreAndChangeScene(player);
+    }
+    
+    public void StoreAndChangeScene(Player player)
     {
         changeScene.StoreAndChangeSene(player, TitleSceneName, _initializeScene);
     }
