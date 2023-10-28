@@ -81,7 +81,15 @@ public class SceneTransitionManager : MonoBehaviour
 
         if (sceneInitializer != null)
         {
-            sceneInitializer(targetSceneObj);
+            try
+            {
+                sceneInitializer(targetSceneObj);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError(ex.Message);
+                return;
+            }
         }
 
         transitionEffect.StartEffect(false);

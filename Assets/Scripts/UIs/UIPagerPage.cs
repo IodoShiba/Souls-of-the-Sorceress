@@ -11,7 +11,7 @@ namespace SotS.UI
     [RequireComponent(typeof(UnityEngine.CanvasGroup))]
     public class UIPagerPage : MonoBehaviour
     {
-
+        [SerializeField] private bool hideWhenExited = false;
         [SerializeField] GameObject initialSelected;
         [SerializeField] bool rememberFinalSelected;
         GameObject finalSelected = null;
@@ -56,7 +56,10 @@ namespace SotS.UI
 
             canvasGroup.interactable = false;
 
-
+            if (hideWhenExited)
+            {
+                Hide();
+            }
         }
 
         void EffectIn()

@@ -485,6 +485,7 @@ GameObject:
   - component: {fileID: 540257247}
   - component: {fileID: 540257245}
   - component: {fileID: 540257248}
+  - component: {fileID: 540257246}
   m_Layer: 0
   m_Name: goal
   m_TagString: Untagged
@@ -518,6 +519,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3, y: 70}
   m_EdgeRadius: 0
+--- !u!114 &540257246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540257244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47298542a121d554389ae3996788196e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noTrigger: 0
+  changeScene: {fileID: 540257248}
+  _stackedPageNames:
+  - PRESS SPACE KEY
+  - MainMenu
+  - StageSelect
 --- !u!4 &540257247
 Transform:
   m_ObjectHideFlags: 0
@@ -544,6 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322cea529ccc2b84fb15785428db0829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noTrigger: 1
   onStoreAndChangeScene:
     m_PersistentCalls:
       m_Calls:
