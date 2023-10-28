@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using UniRx.Async;
 
@@ -11,9 +12,10 @@ namespace SotS.UI
 
         [SerializeField] UIPagerPage initialPage;
         [SerializeField] bool InitialPageHiddenFirst;
+        [SerializeField] bool enterPageInitially;
         [SerializeField] string backButton;
 
-        UIPagerPage currentPage;
+        UIPagerPage currentPage = null;
 
         bool isBackAllowed = true;
         Stack<UIPagerPage> previousStack = new Stack<UIPagerPage>();
@@ -28,13 +30,22 @@ namespace SotS.UI
 
         void Start()
         {
-            if(InitialPageHiddenFirst)
+            Debug.Log("UIPager::Start");
+            Initialize();
+        }
+
+        void Initialize()
+        {
+            if (currentPage == null)
             {
-                ChangePage(initialPage);
-            }
-            else
-            {
-                currentPage = initialPage;
+                if (enterPageInitially)
+                {
+                    ChangePage(initialPage);
+                }
+                else
+                {
+                    currentPage = initialPage;
+                }
             }
         }
 
@@ -48,11 +59,16 @@ namespace SotS.UI
 
         public void ChangePage(UIPagerPage page)
         {
+            ChangePage(page, true);
+        }
+
+        void ChangePage(UIPagerPage page, bool isFinal)
+        {
             if(currentPage != null)
             {
                 currentPage.ExitSelection();
             }
-            page.EnterSelection();
+            page.EnterSelection(isFinal);
             currentPage = page;
         }
 
@@ -63,7 +79,32 @@ namespace SotS.UI
                 previousStack.Push(currentPage);
             }
             isShownBeforeEnterStack.Push(page.IsShown);
+            var prevPage = currentPage;
             ChangePage(page);
+            if (prevPage.HideWhenPushed)
+            {
+                prevPage.Hide();
+            }
+        }
+
+        public void PushMultiplePagesAndChange(IReadOnlyList<UIPagerPage> pages)
+        {
+            for(int i=0; i<pages.Count; ++i)
+            {
+                var page = pages[i];
+                PushStackAndChangePage(page);
+                // if (currentPage != null)
+                // {
+                //     previousStack.Push(currentPage);
+                // }
+                // isShownBeforeEnterStack.Push(page.IsShown);
+                // var prevPage = currentPage;
+                // ChangePage(page, i==pages.Count-1);
+                // if (prevPage.HideWhenPushed)
+                // {
+                //     prevPage.Hide();
+                // }
+            }
         }
 
 

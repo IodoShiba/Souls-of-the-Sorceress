@@ -249,8 +249,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7095a93e9f53b1c4dbf55a6f0067e001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideWhenPushed: 0
   initialSelected: {fileID: 7769771753274594344}
   rememberFinalSelected: 0
+  _referenceEventSystem: {fileID: 1717196084}
 --- !u!225 &9711897
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -497,17 +499,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 21811909}
-        m_MethodName: Hide
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &21811909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,8 +511,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7095a93e9f53b1c4dbf55a6f0067e001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideWhenPushed: 1
   initialSelected: {fileID: 21811900}
   rememberFinalSelected: 0
+  _referenceEventSystem: {fileID: 1717196084}
 --- !u!1 &28108329
 GameObject:
   m_ObjectHideFlags: 0
@@ -3054,17 +3047,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1153040851}
-        m_MethodName: Hide
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &424982236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3332,17 +3314,6 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 1521180695}
           m_ObjectArgumentAssemblyTypeName: SotS.UI.UIPagerPage, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1153040851}
-        m_MethodName: Hide
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4096,6 +4067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialPage: {fileID: 21811909}
   InitialPageHiddenFirst: 0
+  enterPageInitially: 1
   backButton: Cancel
 --- !u!1 &568973838
 GameObject:
@@ -4647,8 +4619,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7095a93e9f53b1c4dbf55a6f0067e001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideWhenPushed: 0
   initialSelected: {fileID: 5474182415620950757}
   rememberFinalSelected: 0
+  _referenceEventSystem: {fileID: 1717196084}
 --- !u!225 &710718256
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -7325,8 +7299,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7095a93e9f53b1c4dbf55a6f0067e001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideWhenPushed: 1
   initialSelected: {fileID: 1852792225}
   rememberFinalSelected: 1
+  _referenceEventSystem: {fileID: 1717196084}
 --- !u!1 &1156560486
 GameObject:
   m_ObjectHideFlags: 0
@@ -9114,8 +9090,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7095a93e9f53b1c4dbf55a6f0067e001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideWhenPushed: 0
   initialSelected: {fileID: 854356459}
   rememberFinalSelected: 0
+  _referenceEventSystem: {fileID: 1717196084}
 --- !u!225 &1521180696
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -9221,8 +9199,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7095a93e9f53b1c4dbf55a6f0067e001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideWhenPushed: 0
   initialSelected: {fileID: 65024550}
   rememberFinalSelected: 0
+  _referenceEventSystem: {fileID: 1717196084}
 --- !u!225 &1559093824
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -10208,7 +10188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 21811900}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1717196085
@@ -10907,17 +10887,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1153040851}
-        m_MethodName: Hide
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1852792228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11579,8 +11548,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7095a93e9f53b1c4dbf55a6f0067e001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hideWhenPushed: 0
   initialSelected: {fileID: 1883921808}
   rememberFinalSelected: 0
+  _referenceEventSystem: {fileID: 0}
 --- !u!225 &1883921812
 CanvasGroup:
   m_ObjectHideFlags: 0
