@@ -10,8 +10,7 @@ public class StageClearSequence : MonoBehaviour
     [SerializeField] SotS.UI.ShowDialogScene showStageResult;
     [SerializeField] float waitSecond1;
     [SerializeField] SotS.UI.ShowDialogScene showRecordUpdate;
-    [SerializeField] StorePlayerAndChangeScene storePlayerAndChangeScene;
-    [SerializeField] string destinationScene;
+    [SerializeField] private ChangeSceneToTitle _changeSceneToTitle;
 
     public void SequenceForget()
     {
@@ -30,7 +29,7 @@ public class StageClearSequence : MonoBehaviour
         showRecordUpdate.Show();
         await UniTask.WaitWhile(()=>showRecordUpdate.IsModalOpen);
 
-        storePlayerAndChangeScene.StoreAndChangeSene(destinationScene);
+        _changeSceneToTitle.StoreAndChangeScene();
         return Unit.Default;
     }
 }

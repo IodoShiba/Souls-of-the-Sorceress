@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class StorePlayerAndChangeScene : MonoBehaviour
 {
     [System.Serializable]
     class UnityEvent_string : UnityEvent<string> {}
 
+    [SerializeField] private bool noTrigger = false;
     [SerializeField] UnityEvent_string onStoreAndChangeScene = new UnityEvent_string();
     [SerializeField,UnityEngine.Serialization.FormerlySerializedAs("destinationSceneNameOnTriggerEnter")] string defaultDestinationSceneName;
     [SerializeField] SaveData saveData;
@@ -15,6 +17,11 @@ public class StorePlayerAndChangeScene : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (noTrigger)
+        {
+            return;
+        }
+        
         if(collision.tag == TagName.player)
         {
             Player player = collision.GetComponent<Player>();
@@ -51,11 +58,19 @@ public class StorePlayerAndChangeScene : MonoBehaviour
 
     public void StoreAndChangeSene(Player player,string destinationSceneName)
     {
+        StoreAndChangeSene(player, destinationSceneName, null);
+    }
+    
+    public void StoreAndChangeSene(Player player,string destinationSceneName, System.Action<Scene> sceneInitializer = null)
+    {
         //saveData.StorePlayerData(player);
         onStoreAndChangeScene.Invoke(destinationSceneName);
-        SotS.GameCommonInterface.Instance.Player.StorePlayerData(player);
+        if(player != null)
+        {
+            SotS.GameCommonInterface.Instance.Player.StorePlayerData(player);
+        }
 
         TransitionEffect.WipeEffet = wipeEffet;
-        SceneTransitionManager.TransScene(destinationSceneName, null);
+        SceneTransitionManager.TransScene(destinationSceneName, sceneInitializer);
     }
 }

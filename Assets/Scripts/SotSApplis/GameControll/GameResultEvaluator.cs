@@ -113,7 +113,13 @@ public class GameResultEvaluator : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void RuntimeInitialize()
     {
-        GameLifeCycle.observableGameClosed.Subscribe(_=>MakeEvaluation());
+        GameLifeCycle.observableGameClosed.Subscribe(cause =>
+        {
+            if (cause == GameLifeCycle.CloseCause.PlayerVictory)
+            {
+                MakeEvaluation();
+            }
+        });
         stageMetaData = Resources.Load(StageMetaData.resourcePath) as StageMetaData;
     }
 

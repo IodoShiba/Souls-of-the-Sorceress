@@ -4482,7 +4482,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30790,6 +30789,7 @@ GameObject:
   - component: {fileID: 1401209227}
   - component: {fileID: 1401209226}
   - component: {fileID: 1401209225}
+  - component: {fileID: 1401209228}
   m_Layer: 0
   m_Name: ExitZone
   m_TagString: Untagged
@@ -30809,6 +30809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322cea529ccc2b84fb15785428db0829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noTrigger: 1
   onStoreAndChangeScene:
     m_PersistentCalls:
       m_Calls: []
@@ -30855,6 +30856,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1401209228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401209224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47298542a121d554389ae3996788196e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noTrigger: 0
+  changeScene: {fileID: 1401209225}
+  _stackedPageNames:
+  - PRESS SPACE KEY
+  - MainMenu
+  - StageSelect
 --- !u!1001 &1427325654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73060,6 +73079,7 @@ GameObject:
   - component: {fileID: 1874664708}
   - component: {fileID: 1874664707}
   - component: {fileID: 1874664706}
+  - component: {fileID: 1874664710}
   - component: {fileID: 1874664705}
   m_Layer: 0
   m_Name: SceneTranser
@@ -73084,8 +73104,7 @@ MonoBehaviour:
   showStageResult: {fileID: 1874664708}
   waitSecond1: 0.3
   showRecordUpdate: {fileID: 1874664707}
-  storePlayerAndChangeScene: {fileID: 1874664706}
-  destinationScene: Greeting
+  _changeSceneToTitle: {fileID: 1874664710}
 --- !u!114 &1874664706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73098,6 +73117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322cea529ccc2b84fb15785428db0829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noTrigger: 0
   onStoreAndChangeScene:
     m_PersistentCalls:
       m_Calls: []
@@ -73154,6 +73174,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 97
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1874664710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1874664704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47298542a121d554389ae3996788196e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noTrigger: 0
+  changeScene: {fileID: 1874664706}
+  _stackedPageNames:
+  - PRESS SPACE KEY
+  - MainMenu
+  - StageSelect
 --- !u!1001 &1889324508
 PrefabInstance:
   m_ObjectHideFlags: 0

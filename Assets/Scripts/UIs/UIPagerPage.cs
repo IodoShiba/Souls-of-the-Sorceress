@@ -11,14 +11,16 @@ namespace SotS.UI
     [RequireComponent(typeof(UnityEngine.CanvasGroup))]
     public class UIPagerPage : MonoBehaviour
     {
-
+        [SerializeField] private bool hideWhenPushed = false;
         [SerializeField] GameObject initialSelected;
         [SerializeField] bool rememberFinalSelected;
+        [SerializeField] private EventSystem _referenceEventSystem;
         GameObject finalSelected = null;
 
         CanvasGroup canvasGroup;
 
         public bool IsShown => canvasGroup != null && canvasGroup.alpha != 0;
+        public bool HideWhenPushed => hideWhenPushed;
 
         void Start()
         {
@@ -34,11 +36,20 @@ namespace SotS.UI
         {
             EffectOut();
         }
-        public void EnterSelection()
-        {
-            EventSystem currentEventSystem = EventSystem.current;
-            currentEventSystem.SetSelectedGameObject(finalSelected == null ? initialSelected : finalSelected);
 
+        EventSystem GetReferenceEventSystem()
+        {
+            return _referenceEventSystem != null ? _referenceEventSystem : EventSystem.current;
+        }
+        
+        public void EnterSelection(bool final)
+        {
+            if(final)
+            {
+                EventSystem referenceEventSystem = GetReferenceEventSystem();
+                referenceEventSystem.SetSelectedGameObject(finalSelected == null ? initialSelected : finalSelected);
+            }
+            
             canvasGroup.interactable = true;
 
             if (! IsShown)
@@ -48,15 +59,14 @@ namespace SotS.UI
         }
         public void ExitSelection()
         {
-            EventSystem currentEventSystem = EventSystem.current;
+            EventSystem eventSystem = GetReferenceEventSystem();
             if (rememberFinalSelected)
             {
-                finalSelected = currentEventSystem.currentSelectedGameObject;
+                var currentSelected = eventSystem.currentSelectedGameObject;
+                finalSelected = currentSelected != null ? currentSelected : initialSelected;
             }
 
             canvasGroup.interactable = false;
-
-
         }
 
         void EffectIn()

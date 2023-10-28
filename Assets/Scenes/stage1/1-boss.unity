@@ -6652,6 +6652,7 @@ GameObject:
   - component: {fileID: 2065726997}
   - component: {fileID: 2065726996}
   - component: {fileID: 2065726995}
+  - component: {fileID: 2065726998}
   - component: {fileID: 2065727000}
   m_Layer: 0
   m_Name: SceneTranser
@@ -6686,6 +6687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322cea529ccc2b84fb15785428db0829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noTrigger: 0
   onStoreAndChangeScene:
     m_PersistentCalls:
       m_Calls: []
@@ -6728,6 +6730,24 @@ MonoBehaviour:
   onModalClosed:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2065726998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2065726993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47298542a121d554389ae3996788196e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noTrigger: 0
+  changeScene: {fileID: 0}
+  _stackedPageNames:
+  - PRESS SPACE KEY
+  - MainMenu
+  - StageSelect
 --- !u!114 &2065727000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6744,8 +6764,7 @@ MonoBehaviour:
   showStageResult: {fileID: 2065726997}
   waitSecond1: 0.3
   showRecordUpdate: {fileID: 2065726996}
-  storePlayerAndChangeScene: {fileID: 2065726995}
-  destinationScene: Greeting
+  _changeSceneToTitle: {fileID: 2065726998}
 --- !u!1 &2086351130
 GameObject:
   m_ObjectHideFlags: 0

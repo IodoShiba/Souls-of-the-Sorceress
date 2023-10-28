@@ -22,6 +22,7 @@ public class GameOverScene : MonoBehaviour
     [SerializeField] TMPro.TMP_Text remainingCount;
     [SerializeField] UnityEngine.UI.Image flashImage;
     [SerializeField] string nextSceneName;
+    [SerializeField] ChangeSceneToTitle _changeSceneToTitle;
     [SerializeField] WipeEffet noWipe;
     [SerializeField] WipeEffet outWipe;
     [SerializeField] AudioSource audioSource;
@@ -107,7 +108,7 @@ public class GameOverScene : MonoBehaviour
 
     public void GiveUp()
     {
-        GameLifeCycle.CloseGame();
+        GameLifeCycle.CloseGame(GameLifeCycle.CloseCause.GiveUp);
         StartCoroutine(GiveUpCo());
     }
 
@@ -116,10 +117,8 @@ public class GameOverScene : MonoBehaviour
         flashImage.color = Color.clear;
         flashImage.DOFade(1, blackOutSpan);
         yield return new WaitForSeconds(blackOutSpan);
-
-        TransitionEffect.InWipeEffect = noWipe;
-        TransitionEffect.OutWipeEffect = outWipe;
-        SceneTransitionManager.TransScene(nextSceneName, null);
+        
+        _changeSceneToTitle.StoreAndChangeScene();
     }
 
     public void Revive()
