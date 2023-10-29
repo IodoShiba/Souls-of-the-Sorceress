@@ -6752,17 +6752,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2065726993}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47298542a121d554389ae3996788196e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   noTrigger: 0
-  changeScene: {fileID: 2065726995}
   _stackedPageNames:
   - PRESS SPACE KEY
   - MainMenu
   - StageSelect
+  changeScene: {fileID: 2065726995}
+  sceneChanger: {fileID: 0}
 --- !u!114 &2065727000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6779,7 +6780,6 @@ MonoBehaviour:
   showStageResult: {fileID: 2065726997}
   waitSecond1: 0.3
   showRecordUpdate: {fileID: 2065726996}
-  _changeSceneToTitle: {fileID: 2065726998}
 --- !u!1 &2086351130
 GameObject:
   m_ObjectHideFlags: 0

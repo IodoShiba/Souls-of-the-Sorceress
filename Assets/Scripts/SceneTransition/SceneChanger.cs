@@ -24,6 +24,7 @@ public class SceneChanger : MonoBehaviour
         TransitionEffect.OutWipeEffect = outWipeEffet;
         SceneTransitionManager.TransScene(destinationSceneName, sceneInitializer);
     }
+    
     public void ChngeSceneTimed(float time)
     {
         StartCoroutine(WaitCo(defaultDestinationSceneName, time));

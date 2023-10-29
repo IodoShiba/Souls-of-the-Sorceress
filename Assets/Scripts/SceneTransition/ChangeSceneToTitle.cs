@@ -6,15 +6,18 @@ using UniRx.Async;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(StorePlayerAndChangeScene))]
+
 public class ChangeSceneToTitle : MonoBehaviour
 {
     private static readonly string TitleSceneName = "Title";
     private static readonly string HelperName = "InitializeHelper";
 
     [SerializeField] private bool noTrigger = false;
-    [SerializeField] private StorePlayerAndChangeScene changeScene;
     [SerializeField] private string[] _stackedPageNames;
+    
+    // Dependencies
+    [SerializeField] private StorePlayerAndChangeScene changeScene;
+    [SerializeField] private SceneChanger sceneChanger;
     
     private Action<Scene> _initializeScene;
 
@@ -25,7 +28,7 @@ public class ChangeSceneToTitle : MonoBehaviour
 
     public void ChangeScene()
     {
-        
+        sceneChanger.ChangeScene(TitleSceneName, _initializeScene);
     }
 
     public void StoreAndChangeScene()

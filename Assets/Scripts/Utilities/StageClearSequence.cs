@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UniRx.Async;
@@ -10,7 +11,13 @@ public class StageClearSequence : MonoBehaviour
     [SerializeField] SotS.UI.ShowDialogScene showStageResult;
     [SerializeField] float waitSecond1;
     [SerializeField] SotS.UI.ShowDialogScene showRecordUpdate;
-    [SerializeField] private ChangeSceneToTitle _changeSceneToTitle;
+    
+    private StorePlayerAndChangeScene storePlayerAndChangeScene;
+
+    private void Start()
+    {
+        storePlayerAndChangeScene = GetComponent<StorePlayerAndChangeScene>();
+    }
 
     public void SequenceForget()
     {
@@ -29,7 +36,7 @@ public class StageClearSequence : MonoBehaviour
         showRecordUpdate.Show();
         await UniTask.WaitWhile(()=>showRecordUpdate.IsModalOpen);
 
-        _changeSceneToTitle.StoreAndChangeScene();
+        storePlayerAndChangeScene.StoreAndChangeSene("Greeting");
         return Unit.Default;
     }
 }

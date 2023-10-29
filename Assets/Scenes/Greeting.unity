@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inWipeEffet: {fileID: 11400000, guid: da31c4079148f6e488168a4e88803ad4, type: 2}
-  outWipeEffet: {fileID: 11400000, guid: d81e06185a9a3b346b8f84c079928f01, type: 2}
+  outWipeEffet: {fileID: 11400000, guid: da31c4079148f6e488168a4e88803ad4, type: 2}
   defaultDestinationSceneName: 
 --- !u!114 &195666378
 MonoBehaviour:
@@ -555,6 +555,7 @@ GameObject:
   - component: {fileID: 2013272752}
   - component: {fileID: 2013272751}
   - component: {fileID: 2013272750}
+  - component: {fileID: 2013272754}
   - component: {fileID: 2013272753}
   m_Layer: 0
   m_Name: GameObject
@@ -576,7 +577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inWipeEffet: {fileID: 11400000, guid: da31c4079148f6e488168a4e88803ad4, type: 2}
-  outWipeEffet: {fileID: 11400000, guid: d81e06185a9a3b346b8f84c079928f01, type: 2}
+  outWipeEffet: {fileID: 11400000, guid: da31c4079148f6e488168a4e88803ad4, type: 2}
   defaultDestinationSceneName: 
 --- !u!114 &2013272751
 MonoBehaviour:
@@ -595,9 +596,9 @@ MonoBehaviour:
     events:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2013272750}
+        - m_Target: {fileID: 2013272754}
           m_MethodName: ChangeScene
-          m_Mode: 5
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -658,3 +659,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &2013272754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013272749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47298542a121d554389ae3996788196e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noTrigger: 0
+  _stackedPageNames:
+  - PRESS SPACE KEY
+  - MainMenu
+  - StageSelect
+  changeScene: {fileID: 0}
+  sceneChanger: {fileID: 2013272750}
