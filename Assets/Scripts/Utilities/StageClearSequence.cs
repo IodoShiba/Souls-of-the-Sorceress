@@ -14,7 +14,7 @@ public class StageClearSequence : MonoBehaviour
 
     public void SequenceForget()
     {
-        Sequence().Forget();
+        Sequence().Forget(Debug.LogError);
     }
 
     public async UniTask<Unit> Sequence()
