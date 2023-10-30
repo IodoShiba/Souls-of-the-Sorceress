@@ -93,17 +93,6 @@ namespace SotS.UI
             {
                 var page = pages[i];
                 PushStackAndChangePage(page);
-                // if (currentPage != null)
-                // {
-                //     previousStack.Push(currentPage);
-                // }
-                // isShownBeforeEnterStack.Push(page.IsShown);
-                // var prevPage = currentPage;
-                // ChangePage(page, i==pages.Count-1);
-                // if (prevPage.HideWhenPushed)
-                // {
-                //     prevPage.Hide();
-                // }
             }
         }
 
