@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
 using DG.Tweening;
+using UnityEngine.Events;
 
 namespace SotS.UI
 {
@@ -15,6 +16,9 @@ namespace SotS.UI
         [SerializeField] GameObject initialSelected;
         [SerializeField] bool rememberFinalSelected;
         [SerializeField] private EventSystem _referenceEventSystem;
+        public UnityEvent onEnter;
+        public UnityEvent onExit;
+        
         GameObject finalSelected = null;
 
         CanvasGroup canvasGroup;
@@ -56,6 +60,8 @@ namespace SotS.UI
             {
                 Show();
             }
+            
+            onEnter.Invoke();
         }
         public void ExitSelection()
         {
@@ -67,6 +73,8 @@ namespace SotS.UI
             }
 
             canvasGroup.interactable = false;
+            
+            onExit.Invoke();
         }
 
         void EffectIn()
