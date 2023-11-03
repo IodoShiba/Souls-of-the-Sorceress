@@ -55,6 +55,7 @@ namespace IodoShiba.Rebinder
 
         const string STR_KEYBOARD = "Keyboard";
         const string STR_GAMEPAD = "Gamepad";
+        const string STR_JOYSTICK = "Joystick";
 
         [SerializeField] int uiCacheSize = 32;
         [SerializeField] TargetControlChangedEvent targetControlChangedEvent;
