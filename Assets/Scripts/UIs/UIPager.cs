@@ -113,6 +113,23 @@ namespace SotS.UI
             ChangePage(previousStack.Pop());
         }
 
+        public void SwitchPageStackTop(UIPagerPage page)
+        {
+            if(previousStack.Count == 0)
+            {
+                return;
+            }
+
+            var isShownBeforeEnter = isShownBeforeEnterStack.Pop();
+            if(currentPage != null && !isShownBeforeEnter)
+            {
+                currentPage.Hide();
+            }
+
+            isShownBeforeEnterStack.Push(page.IsShown);
+            ChangePage(page);
+        }
+        
         public void AllowBack(bool does)
         {
             isBackAllowed = does;
