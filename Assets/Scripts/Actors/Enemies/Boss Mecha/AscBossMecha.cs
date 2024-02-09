@@ -12,6 +12,7 @@ public class AscBossMecha : FightActorStateConector
     [SerializeField] RectInt fieldRange;
     [SerializeField] Enemy prefabBomb;
     [SerializeField] AttackInHitbox attack;
+    [SerializeField] private AudioSource _audioSource;
 
     [SerializeField] BossMechaDefault defaultState;
     [SerializeField] BombingTackle bombingTackle;
@@ -268,6 +269,7 @@ public class AscBossMecha : FightActorStateConector
         [SerializeField] float dropAccel;
         [SerializeField] float dropLockTime;
         [SerializeField] float groundFloorGap;
+        [SerializeField] private AudioClip audioOnGrounded;
 
         protected override bool ShouldCotinue() => ongoing;
         protected override void OnInitialize()
@@ -334,7 +336,7 @@ public class AscBossMecha : FightActorStateConector
                 await UniTask.Yield();
             }
 
-            MechaConnector.IgniteAllBomb();
+            OnGrounded();
 
             await UniTask.Delay(TimeSpan.FromSeconds(dropLockTime), false, PlayerLoopTiming.Update, cancellationToken);
             return false;
@@ -356,6 +358,16 @@ public class AscBossMecha : FightActorStateConector
             }
             seq.Kill();
             return false;
+        }
+
+        void OnGrounded()
+        {
+            if (audioOnGrounded != null)
+            {
+                MechaConnector._audioSource.PlayOneShot(audioOnGrounded);
+            }
+            
+            MechaConnector.IgniteAllBomb();
         }
     }
 
