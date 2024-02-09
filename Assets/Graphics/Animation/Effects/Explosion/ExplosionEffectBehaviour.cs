@@ -4,21 +4,9 @@ using UnityEngine;
 
 public class ExplosionEffectBehaviour: MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void DestroyThis()
     {
+        Debug.Log("ExplosionEffectBehaviour.DestroyThis");
         Destroy(gameObject);
     }
 }

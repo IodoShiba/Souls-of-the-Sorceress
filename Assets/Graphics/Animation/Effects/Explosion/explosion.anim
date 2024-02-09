@@ -73,6 +73,8 @@ AnimationClip:
     - time: 0.18888889
       value: {fileID: -8590846737339631838, guid: 99f9e0eb9b9be4641a686e11e225618b,
         type: 3}
+    - time: 0.2
+      value: {fileID: 0}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -110,12 +112,13 @@ AnimationClip:
     - {fileID: 1467323325375670837, guid: 99f9e0eb9b9be4641a686e11e225618b, type: 3}
     - {fileID: 4542189021846940948, guid: 99f9e0eb9b9be4641a686e11e225618b, type: 3}
     - {fileID: -8590846737339631838, guid: 99f9e0eb9b9be4641a686e11e225618b, type: 3}
+    - {fileID: 0}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.2
+    m_StopTime: 2
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -135,7 +138,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.2
+  - time: 2
     functionName: DestroyThis
     data: 
     objectReferenceParameter: {fileID: 0}

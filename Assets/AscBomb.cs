@@ -36,7 +36,8 @@ namespace ActorBomb
         public void Ignite()
         {
             ignited = true;
-            EffectAnimationManager.Play(explosionClip,transform.position,new Vector3(0.5f,0.5f,0.5f));
+            Instantiate(explosionEffect,transform.position,Quaternion.identity);
+            // EffectAnimationManager.Play(explosionClip,transform.position,new Vector3(0.5f,0.5f,0.5f));
         }
 
         [System.Serializable]
