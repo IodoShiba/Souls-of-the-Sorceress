@@ -532,11 +532,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noTrigger: 0
-  changeScene: {fileID: 540257248}
   _stackedPageNames:
   - PRESS SPACE KEY
   - MainMenu
   - StageSelect
+  changeScene: {fileID: 540257248}
+  sceneChanger: {fileID: 0}
 --- !u!4 &540257247
 Transform:
   m_ObjectHideFlags: 0
@@ -3977,7 +3978,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_spriteAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 3e12365bc2fbd4442adbde2d8cd4f6c6,
+      objectReference: {fileID: 11400000, guid: fdf94c239b8f5b444a1e944c48c1bcc4,
         type: 2}
     - target: {fileID: 4033456170589653325, guid: 3ed340671a640f14cb55b40640e1db20,
         type: 3}

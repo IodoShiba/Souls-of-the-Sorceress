@@ -126,6 +126,11 @@ public abstract class SaveDataFileAccessor<T> : ScriptableObject where T : class
         return outdata;
     }
 
+    public void Delete()
+    {
+        File.Delete(SavePath);
+    }
+
     public string SavePath {get => Path.Combine(Application.persistentDataPath, saveDir, $"{saveName}.savedata");}
 
     (byte[] cipher, byte[] checkTokenPlain, byte[] iv) 
