@@ -11,7 +11,8 @@ public class StageClearEffect : MonoBehaviour
 
     [SerializeField] UnityEngine.UI.Image image;
     [SerializeField] AudioClip clip;
-    
+
+    [SerializeField] private Animation animation;
 
     public void StartEffect()
     {
@@ -20,6 +21,7 @@ public class StageClearEffect : MonoBehaviour
 
     IEnumerator EffectCo()
     {
+        animation.Play();
         SoundManager.Instance.FadeOutBgm(musicFadeOutSpan);
 
         yield return new WaitForSeconds(musicFadeOutSpan);
@@ -29,5 +31,11 @@ public class StageClearEffect : MonoBehaviour
         image.transform.localScale = new Vector3(initialScale, initialScale, 1);
         image.DOFade(1, wordFadeInSpan).SetEase(Ease.OutExpo);
         image.transform.DOScale(Vector3.one, wordFadeInSpan).SetEase(Ease.OutExpo);
+
+        // アニメーション完了待ち
+        while (animation.isPlaying)
+        {
+            yield return 0;
+        }
     }
 }
