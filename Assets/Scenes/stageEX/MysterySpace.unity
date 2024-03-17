@@ -2360,7 +2360,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: 580356497
   m_SortingOrder: 10000
   m_TargetDisplay: 0
 --- !u!224 &560041610
@@ -30869,11 +30869,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noTrigger: 0
-  changeScene: {fileID: 1401209225}
   _stackedPageNames:
   - PRESS SPACE KEY
   - MainMenu
   - StageSelect
+  changeScene: {fileID: 1401209225}
+  sceneChanger: {fileID: 0}
 --- !u!1001 &1427325654
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73104,7 +73105,6 @@ MonoBehaviour:
   showStageResult: {fileID: 1874664708}
   waitSecond1: 0.3
   showRecordUpdate: {fileID: 1874664707}
-  _changeSceneToTitle: {fileID: 1874664710}
 --- !u!114 &1874664706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73187,11 +73187,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noTrigger: 0
-  changeScene: {fileID: 1874664706}
   _stackedPageNames:
   - PRESS SPACE KEY
   - MainMenu
   - StageSelect
+  changeScene: {fileID: 1874664706}
+  sceneChanger: {fileID: 0}
 --- !u!1001 &1889324508
 PrefabInstance:
   m_ObjectHideFlags: 0

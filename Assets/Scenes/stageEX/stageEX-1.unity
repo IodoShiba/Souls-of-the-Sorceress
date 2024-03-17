@@ -519,7 +519,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: 580356497
   m_SortingOrder: 10000
   m_TargetDisplay: 0
 --- !u!1 &116678916
@@ -6636,7 +6636,6 @@ MonoBehaviour:
   showStageResult: {fileID: 1559402869}
   waitSecond1: 0.3
   showRecordUpdate: {fileID: 1559402871}
-  _changeSceneToTitle: {fileID: 1559402872}
 --- !u!114 &1559402871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6668,11 +6667,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   noTrigger: 0
-  changeScene: {fileID: 1559402867}
   _stackedPageNames:
   - PRESS SPACE KEY
   - MainMenu
   - StageSelect
+  changeScene: {fileID: 1559402867}
+  sceneChanger: {fileID: 0}
 --- !u!1 &1584751935
 GameObject:
   m_ObjectHideFlags: 0
